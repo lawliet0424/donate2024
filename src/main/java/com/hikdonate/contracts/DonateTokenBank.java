@@ -1,4 +1,4 @@
-package com.hikdonate.contract;
+package com.hikdonate.contracts;
 
 import java.math.BigInteger;
 import java.util.Arrays;

@@ -1,8 +1,8 @@
 package com.hikdonate.donate;
 
-import com.hikdonate.contract.DonateTokenBank;
-import com.hikdonate.contract.MultiTokenTransfer;
-import com.hikdonate.contract.TokenTransfer;
+import com.hikdonate.contracts.DonateTokenBank;
+import com.hikdonate.contracts.MultiTokenTransfer;
+import com.hikdonate.contracts.TokenTransfer;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
