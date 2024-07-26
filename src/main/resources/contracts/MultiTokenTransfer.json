@@ -1,0 +1,129 @@
+[ {
+  "inputs" : [ {
+    "internalType" : "contract DonateTokenBank",
+    "name" : "_donate_token_bank",
+    "type" : "address"
+  } ],
+  "stateMutability" : "nonpayable",
+  "type" : "constructor"
+}, {
+  "inputs" : [ {
+    "internalType" : "address",
+    "name" : "donator",
+    "type" : "address"
+  }, {
+    "internalType" : "address[]",
+    "name" : "beneficiary_list",
+    "type" : "address[]"
+  }, {
+    "internalType" : "uint256",
+    "name" : "divided_amount",
+    "type" : "uint256"
+  } ],
+  "name" : "MultiTransferTrigger",
+  "outputs" : [ {
+    "internalType" : "bool",
+    "name" : "success",
+    "type" : "bool"
+  } ],
+  "stateMutability" : "nonpayable",
+  "type" : "function"
+}, {
+  "inputs" : [ ],
+  "name" : "donate_token_bank_address",
+  "outputs" : [ {
+    "internalType" : "address",
+    "name" : "",
+    "type" : "address"
+  } ],
+  "stateMutability" : "view",
+  "type" : "function"
+}, {
+  "inputs" : [ ],
+  "name" : "getRevertedList",
+  "outputs" : [ {
+    "internalType" : "address[]",
+    "name" : "",
+    "type" : "address[]"
+  }, {
+    "internalType" : "address[]",
+    "name" : "",
+    "type" : "address[]"
+  } ],
+  "stateMutability" : "view",
+  "type" : "function"
+}, {
+  "inputs" : [ {
+    "internalType" : "uint256",
+    "name" : "",
+    "type" : "uint256"
+  } ],
+  "name" : "reverted_list_1",
+  "outputs" : [ {
+    "internalType" : "address",
+    "name" : "",
+    "type" : "address"
+  } ],
+  "stateMutability" : "view",
+  "type" : "function"
+}, {
+  "inputs" : [ {
+    "internalType" : "uint256",
+    "name" : "",
+    "type" : "uint256"
+  } ],
+  "name" : "reverted_list_2",
+  "outputs" : [ {
+    "internalType" : "address",
+    "name" : "",
+    "type" : "address"
+  } ],
+  "stateMutability" : "view",
+  "type" : "function"
+}, {
+  "inputs" : [ {
+    "internalType" : "address",
+    "name" : "donator",
+    "type" : "address"
+  }, {
+    "internalType" : "address[]",
+    "name" : "beneficiary_list",
+    "type" : "address[]"
+  }, {
+    "internalType" : "uint256",
+    "name" : "divided_amount",
+    "type" : "uint256"
+  } ],
+  "name" : "sendBatchTokensToBenificiary",
+  "outputs" : [ ],
+  "stateMutability" : "nonpayable",
+  "type" : "function"
+}, {
+  "inputs" : [ {
+    "internalType" : "address[]",
+    "name" : "beneficiary_list",
+    "type" : "address[]"
+  }, {
+    "internalType" : "uint256",
+    "name" : "divided_amount",
+    "type" : "uint256"
+  } ],
+  "name" : "sendBatchTokensToDonateBank",
+  "outputs" : [ ],
+  "stateMutability" : "nonpayable",
+  "type" : "function"
+}, {
+  "inputs" : [ {
+    "internalType" : "address",
+    "name" : "donator",
+    "type" : "address"
+  }, {
+    "internalType" : "uint256",
+    "name" : "amount",
+    "type" : "uint256"
+  } ],
+  "name" : "sendTokensToDonator",
+  "outputs" : [ ],
+  "stateMutability" : "nonpayable",
+  "type" : "function"
+} ]
