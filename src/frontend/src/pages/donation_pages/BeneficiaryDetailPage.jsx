@@ -1,6 +1,6 @@
 import "./BeneficiaryDetailPage.css";
 import { useSearchParams } from "react-router-dom";
-import backgroungImage from "../../assets/example.png";
+import backgroungImage from "../../assets/exampleImg.png";
 import beneficiaryImage from "../../assets/basicProfile.png";
 
 const dummyBeneficiaryData = [
