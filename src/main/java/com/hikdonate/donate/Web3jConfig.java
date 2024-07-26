@@ -17,6 +17,7 @@ Written by: 조현지
  */
 @Configuration
 public class Web3jConfig {
+    // AutoWired로 바로 접근 가능
     @Value("${infura.url}")
     private String infuraURL;
 
