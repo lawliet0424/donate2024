@@ -1,31 +1,37 @@
 import ColoredButton from "../../components/ColoredButton";
 import DonationStepsBar from "../../components/DonationStepsBar";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./DonationSecondStep.css";
 
 const DonationSecondStep = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [personnel, setPersonnel] = useState("");
   const [amount, setAmount] = useState("");
 
-  // perPerson 계산
+  if (!location.state || !location.state.fromFirstStep) {
+    window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+    navigate("/");
+    return null;
+  }
+
   const perPerson = personnel && amount ? amount / personnel : 0;
 
-  // Format perPerson to a maximum of 2 decimal places but without trailing zeros
   const formatPerPerson = (value) => {
     if (value % 1 === 0) {
-      return value; // Integer values are returned as is
+      return value;
     }
-    return value.toFixed(2).replace(/\.?0+$/, ""); // Remove trailing zeros
+    return value.toFixed(2).replace(/\.?0+$/, "");
   };
 
   const onNextButtonClicked = () => {
-    nav("/donation/third", { state: { fromSecondStep: true } });
+    navigate("/donation/third", { state: { fromSecondStep: true } });
   };
 
   const onBeforeButtonClicked = () => {
-    nav("/donation", { state: { fromSecondStep: true } });
+    navigate("/donation", { state: { fromSecondStep: true } });
   };
 
   return (
@@ -35,7 +41,7 @@ const DonationSecondStep = () => {
         <input
           className="personnel"
           type="number"
-          min="0" // Ensure only non-negative numbers
+          min="0"
           value={personnel}
           onChange={(e) => setPersonnel(e.target.value)}
         />
@@ -43,7 +49,7 @@ const DonationSecondStep = () => {
         <input
           className="amount"
           type="number"
-          min="0" // Ensure only non-negative numbers
+          min="0"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />

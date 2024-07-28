@@ -35,7 +35,7 @@ const Login = () => {
     <div className="Login">
       <div className="title">로그인</div>
       <input
-        type="text" // type을 text로 변경합니다.
+        type="text"
         placeholder="아이디"
         value={loginId}
         onChange={(e) => setLoginId(e.target.value)}

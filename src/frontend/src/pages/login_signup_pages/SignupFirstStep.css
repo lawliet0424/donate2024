@@ -1,18 +1,18 @@
-.Signup {
+.SignupFirstStep {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.Signup .title {
+.SignupFirstStep .title {
   font-size: 23px;
   font-weight: 600;
-  padding-top: 150px;
+  padding-top: 180px;
   padding-bottom: 20px;
 }
 
-.Signup input {
+.SignupFirstStep input {
   width: 250px;
   height: 30px;
   font-size: 15px;
@@ -21,7 +21,7 @@
   padding: 3px 10px;
 }
 
-.Signup .ColoredButton {
+.SignupFirstStep .ColoredButton {
   width: 270px;
   height: 36px;
   font-size: 15px;

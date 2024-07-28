@@ -8,7 +8,7 @@
 .Login .title {
   font-size: 23px;
   font-weight: 600;
-  padding-top: 150px;
+  padding-top: 180px;
   padding-bottom: 20px;
 }
 
@@ -41,5 +41,5 @@
 }
 
 .Login .ColoredButton_White {
-    margin-top: 25px;
+  margin-top: 25px;
 }

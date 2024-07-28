@@ -2,10 +2,11 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/login_signup_pages/Login";
-import Signup from "./pages/login_signup_pages/Signup";
-import DonationFirstStep from "./pages/donation_pages/DonationFirstStep";
-import DonationSecondStep from "./pages/donation_pages/DonationSecondStep";
-import DonationThirdStep from "./pages/donation_pages/DonationThirdStep";
+import SignupFirstStep from "./pages/login_signup_pages/SignupFirstStep";
+import SignupSecondStep from "./pages/login_signup_pages/SignupSecondStep";
+import DonationFirstStep from "./pages/donation_pages/DonationFirstStep.jsx";
+import DonationSecondStep from "./pages/donation_pages/DonationSecondStep.jsx";
+import DonationThirdStep from "./pages/donation_pages/DonationThirdStep.jsx";
 import DonationPayment from "./pages/donation_pages/DonationPayment.jsx";
 import BeneficiaryDetailPage from "./pages/donation_pages/BeneficiaryDetailPage";
 import MyPage from "./pages/my_pages/MyPage";
@@ -26,7 +27,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<SignupFirstStep />} />
+          <Route path="/signup/second" element={<SignupSecondStep />} />
           <Route
             path="/donation"
             element={<ProtectedRoute element={<DonationFirstStep />} />}

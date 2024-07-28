@@ -8,20 +8,20 @@ import "./DonationThirdStep.css";
 
 const DonationThirdStep = () => {
   const location = useLocation();
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   if (!location.state || !location.state.fromSecondStep) {
-    console.warn("No state or incorrect state from previous step");
-    nav("/", { replace: true });
+    window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+    navigate("/");
     return null;
   }
 
   const onNextButtonClicked = () => {
-    nav("/donation/payment", { state: { fromThirdStep: true } });
+    navigate("/donation/payment", { state: { fromThirdStep: true } });
   };
 
   const onBeforeButtonClicked = () => {
-    nav("/donation/second", { state: { fromThirdStep: true } });
+    navigate("/donation/second", { state: { fromThirdStep: true } });
   };
 
   return (
@@ -34,36 +34,7 @@ const DonationThirdStep = () => {
           tags={["태그1", "태그2"]}
           id={3}
         />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
+        {/* 필요한 만큼 BeneficiaryBox 컴포넌트를 추가 */}
       </div>
       <div className="pageNavigationButtons">
         <ColoredButton text={"이전"} onClick={onBeforeButtonClicked} />
