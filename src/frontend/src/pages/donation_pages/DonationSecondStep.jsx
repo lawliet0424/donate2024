@@ -11,7 +11,11 @@ const DonationSecondStep = () => {
   const [personnel, setPersonnel] = useState("");
   const [amount, setAmount] = useState("");
 
-  if (!location.state || !location.state.fromFirstStep) {
+  // Check if the state includes the expected values
+  if (
+    !location.state ||
+    (!location.state.fromFirstStep && !location.state.fromThirdStep)
+  ) {
     window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
     navigate("/");
     return null;
