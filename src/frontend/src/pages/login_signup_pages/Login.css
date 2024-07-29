@@ -6,19 +6,19 @@
 }
 
 .Login .title {
-  font-size: 23px;
-  font-weight: 600;
   padding-top: 180px;
   padding-bottom: 20px;
+  font-size: 23px;
+  font-weight: 600;
 }
 
 .Login input {
   width: 250px;
   height: 30px;
+  padding: 3px 10px;
   font-size: 15px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
-  padding: 3px 10px;
 }
 
 .Login .userAssistance {
@@ -31,15 +31,34 @@
   color: #878787;
 }
 
+.Login .separator {
+  display: flex;
+  align-items: center;
+  width: 270px;
+  margin: 18px 0px;
+}
+
+.Login .separator .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #d9d9d9;
+}
+
+.Login .separator .text {
+  margin: 0 10px;
+  font-size: 13px;
+  color: #808080;
+}
+
 .Login .ColoredButton {
   width: 270px;
-  height: 36px;
+  height: 37px;
+  margin-top: 10px;
+  padding: 3px 10px;
   font-size: 15px;
   border-radius: 8px;
-  padding: 3px 10px;
-  margin-top: 10px;
 }
 
 .Login .ColoredButton_White {
-  margin-top: 25px;
+  margin-top: 0px;
 }

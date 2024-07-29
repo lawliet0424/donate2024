@@ -8,15 +8,16 @@ import "./Login.css";
 const Login = () => {
   const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const { login } = useAuth(); // AuthContext에서 login 함수를 가져옵니다.
+  const { login } = useAuth();
   const nav = useNavigate();
 
   const onClickLoginButton = () => {
-    // 로그인 로직 (예: 서버와의 통신)
-    // 로그인 성공 시 인증 상태를 업데이트하고 홈 페이지로 이동합니다.
-    login(); // 인증 상태를 true로 변경합니다.
-    window.alert("로그인"); // 로그인 성공 알림 표시
-    nav("/", { replace: true }); // 홈 페이지로 리디렉션합니다.
+    // id, pw 확인 절차 추가
+    console.log("아이디:", loginId);
+    console.log("비밀번호:", loginPassword);
+    login();
+    window.alert("로그인");
+    nav("/", { replace: true });
   };
 
   const onClickToSignupButton = () => {
@@ -24,11 +25,11 @@ const Login = () => {
   };
 
   const onIdSearchingButtonClick = () => {
-    // 아이디 찾기 로직
+    // (선택) 아이디 찾기 로직
   };
 
   const onPwSearchingButtonClick = () => {
-    // 비밀번호 찾기 로직
+    // (선택) 비밀번호 찾기 로직
   };
 
   return (
@@ -59,10 +60,18 @@ const Login = () => {
           onClick={onPwSearchingButtonClick}
         />
       </div>
+
+      <div className="separator">
+        <div className="line"></div>
+        <div className="text">또는</div>
+        <div className="line"></div>
+      </div>
+
       <ColoredButton
         text="회원가입"
         type="White"
         onClick={onClickToSignupButton}
+        className="ColoredButton_White"
       />
     </div>
   );

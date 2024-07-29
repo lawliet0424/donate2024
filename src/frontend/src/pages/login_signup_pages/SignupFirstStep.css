@@ -12,20 +12,29 @@
   padding-bottom: 20px;
 }
 
-.SignupFirstStep input {
-  width: 250px;
-  height: 30px;
+.SignupFirstStep input,
+.SignupFirstStep select {
+  width: 272px;
+  height: 38px;
   font-size: 15px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.SignupFirstStep select {
+  padding-left: 7px;
+  padding-right: 20px;
+  color: #808080;
+  background-color: #fff;
 }
 
 .SignupFirstStep .ColoredButton {
   width: 270px;
-  height: 36px;
+  height: 37px;
   font-size: 15px;
   border-radius: 8px;
   padding: 3px 10px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
