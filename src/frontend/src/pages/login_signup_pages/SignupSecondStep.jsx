@@ -11,7 +11,7 @@ const SignupSecondStep = () => {
   const [signupId, setSignupId] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
 
-  if (!location.state || !location.state.fromSignupFirst) {
+  if (!location.state?.fromSignupFirst) {
     window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
     navigate("/");
     return null;
@@ -30,6 +30,7 @@ const SignupSecondStep = () => {
     });
     navigate("/login");
   };
+
   const onBeforeButtonClicked = () => {
     navigate("/signup");
   };
@@ -38,12 +39,6 @@ const SignupSecondStep = () => {
     console.log("아이디 중복 확인 버튼 클릭");
   };
 
-  const onSignupNicknameChange = (event) =>
-    setSignupNickname(event.target.value);
-  const onSignupIdChange = (event) => setSignupId(event.target.value);
-  const onSignupPasswordChange = (event) =>
-    setSignupPassword(event.target.value);
-
   return (
     <div className="SignupSecondStep">
       <div className="title">회원가입</div>
@@ -51,13 +46,13 @@ const SignupSecondStep = () => {
       <input
         placeholder="닉네임"
         value={signupNickname}
-        onChange={onSignupNicknameChange}
+        onChange={(e) => setSignupNickname(e.target.value)}
       />
       <div className="idForm">
         <input
           placeholder="아이디"
           value={signupId}
-          onChange={onSignupIdChange}
+          onChange={(e) => setSignupId(e.target.value)}
         />
         <button
           className="duplicateCheckButton"
@@ -69,7 +64,7 @@ const SignupSecondStep = () => {
       <input
         placeholder="비밀번호"
         value={signupPassword}
-        onChange={onSignupPasswordChange}
+        onChange={(e) => setSignupPassword(e.target.value)}
         type="password"
       />
 
