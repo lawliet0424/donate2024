@@ -1,0 +1,37 @@
+.BeneficiaryBox {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  padding: 15px 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.BeneficiaryBox img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+}
+
+.BeneficiaryBox .beneficiaryBoxText {
+  flex-grow: 1;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.BeneficiaryBox .beneficiaryBoxText .name {
+  font-size: 16px;
+}
+
+.BeneficiaryBox .beneficiaryBoxText .tagList {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.BeneficiaryBox .TransparentButton {
+  padding: 10px;
+}

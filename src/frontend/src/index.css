@@ -1,0 +1,31 @@
+/* @font-face {
+    font-family: "fontname";
+    src: url();
+}*/
+
+html,
+body {
+  margin: 0px;
+  width: 100%;
+  background-color: #f6f6f6;
+}
+
+#root {
+  background-color: white;
+  width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.content {
+  background-color: beige;
+  width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+}
+/*
+body * {
+    font-family: ;
+} */

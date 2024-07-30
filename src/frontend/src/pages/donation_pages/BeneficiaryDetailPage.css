@@ -1,0 +1,40 @@
+.BeneficiaryDetailPage .backgroungImage {
+  width: 1000px;
+  height: 300px;
+}
+
+.BeneficiaryDetailPage .beneficiaryProfile {
+  display: flex;
+  align-items: center;
+  padding: 30px 50px;
+}
+
+.BeneficiaryDetailPage .beneficiaryProfile .beneficiaryImage {
+  width: 80px;
+  height: 80px;
+}
+
+.BeneficiaryDetailPage .beneficiaryProfile .beneficiaryProfileText {
+  padding-left: 15px;
+}
+
+.BeneficiaryDetailPage
+  .beneficiaryProfile
+  .beneficiaryProfileText
+  .beneficiaryName {
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+
+.BeneficiaryDetailPage
+  .beneficiaryProfile
+  .beneficiaryProfileText
+  .beneficiaryTags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.BeneficiaryDetailPage .beneficiaryInfo {
+  padding: 0 60px;
+}

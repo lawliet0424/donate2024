@@ -1,0 +1,63 @@
+.SignupSecondStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.SignupSecondStep .title {
+  font-size: 23px;
+  font-weight: 600;
+  padding-top: 180px;
+  padding-bottom: 20px;
+}
+
+.SignupSecondStep input {
+  width: 270px;
+  height: 40px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.SignupSecondStep .idForm {
+  position: relative;
+  width: 270px;
+}
+
+.SignupSecondStep .idForm input {
+  width: 100%;
+  padding-right: 90px; /* Adjusted for button width */
+}
+
+.SignupSecondStep .duplicateCheckButton {
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 35px;
+  padding: 0 10px;
+  font-size: 12px;
+  border: none;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #808080;
+}
+
+.SignupSecondStep .pageNavigationButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.SignupSecondStep .pageNavigationButtons .ColoredButton {
+  width: 270px;
+  height: 37px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 10px;
+}

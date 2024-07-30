@@ -1,0 +1,29 @@
+.DonationSteps {
+  display: flex;
+  justify-content: center;
+
+  gap: 8px;
+  font-size: 18px;
+  border-bottom: 3px solid #d9d9d9;
+  width: 320px;
+  padding: 10px 0px;
+}
+
+.DonationSteps.here {
+  border-bottom: 3px solid #fea801;
+}
+
+.DonationSteps.here .num {
+  color: #fea801;
+}
+
+.DonationSteps .num {
+  font-weight: 600;
+}
+
+.DonationStepsBar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 50px;
+}

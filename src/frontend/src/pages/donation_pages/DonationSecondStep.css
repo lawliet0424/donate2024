@@ -1,0 +1,46 @@
+.DonationSecondStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.DonationSecondStep .DonationSecondStepText {
+  display: flex;
+  flex-direction: row;
+  padding-top: 180px;
+  font-size: 18px;
+}
+
+.DonationSecondStep input {
+  height: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+}
+
+.DonationSecondStep .personnel {
+  width: 40px;
+}
+
+.DonationSecondStep .amount {
+  width: 80px;
+  margin-left: 12px;
+}
+
+.DonationSecondStep .explanation {
+  padding-top: 50px;
+  font-size: 18px;
+}
+
+.DonationSecondStep .ColoredButton {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.DonationSecondStep .pageNavigationButtons {
+  display: flex;
+  gap: 10px;
+  padding-top: 140px;
+}
