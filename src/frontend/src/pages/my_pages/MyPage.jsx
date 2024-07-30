@@ -9,7 +9,7 @@ const MyPage = () => {
       <div className="MyPageContent">
         <div className="userInfo">
           <img className={"myProfileImage"} src={profileImage} />
-          <div className="name">홍길동</div>
+          <div className="nickname">닉네임</div>
         </div>
 
         <MyPageMenuBox menuName={"회원정보"} myPageType={"/myinfo"} />

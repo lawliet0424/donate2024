@@ -2,11 +2,15 @@
   font-size: 23px;
   font-weight: 600;
   padding: 50px 0px;
+  width: 100%;
+  text-align: left;
 }
 
 .MyInterest {
   display: flex;
   flex-direction: column;
+  padding: 0px 40px;
+  align-items: center;
 }
 
 .MyInterest .beneficiaryLists {
@@ -14,8 +18,4 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-}
-
-.MyInterest .beneficiaryLists .BeneficiaryBox {
-  width: 450px;
 }
