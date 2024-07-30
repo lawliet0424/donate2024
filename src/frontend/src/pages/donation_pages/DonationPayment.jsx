@@ -18,10 +18,18 @@ const DonationPayment = () => {
         <div className="donationPaymentLeft">
           <div className="donorInfo">
             <div className="donorInfoTitle">기부자 정보</div>
-            <KeyValueInfo keyInfo={"이름"} valueInfo={"기부자"} />
-            <KeyValueInfo keyInfo={"이름"} valueInfo={"기부자"} />
-            <KeyValueInfo keyInfo={"이름"} valueInfo={"기부자"} />
-            <KeyValueInfo keyInfo={"이름"} valueInfo={"기부자"} />
+            <div className="donorInfoContent">
+              <div className="donorInfoLeft">
+                <div>이름</div>
+                <div>전화번호</div>
+                <div>메일</div>
+              </div>
+              <div className="donorInfoRight">
+                <div>기부자</div>
+                <div>010-1234-5678</div>
+                <div>dfhdfjlk@gmail.com</div>
+              </div>
+            </div>
           </div>
           <div className="paymentMethodList">
             <div className="paymentMethodTitle">결제 수단</div>
