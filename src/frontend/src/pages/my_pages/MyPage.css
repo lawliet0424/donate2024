@@ -2,6 +2,7 @@
   font-size: 23px;
   font-weight: 600;
   padding: 50px 0px;
+  width: 100%;
 }
 
 .MyPage img {
@@ -12,10 +13,10 @@
 }
 
 .MyPage .userInfo {
-  padding-left: 35px;
-  padding-right: 10px;
+  padding-right: 15px;
+  padding-left: 10px;
 }
-.MyPage .userInfo .name {
+.MyPage .userInfo .nickname {
   text-align: center;
   font-size: 18px;
   padding-top: 5px;
@@ -23,4 +24,11 @@
 .MyPage .MyPageContent {
   display: flex;
   gap: 25px;
+}
+
+.MyPage {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  align-items: left;
 }

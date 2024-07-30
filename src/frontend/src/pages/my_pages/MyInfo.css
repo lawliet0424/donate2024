@@ -1,5 +1,99 @@
+.MyInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  align-items: center;
+}
+
 .MyInfo .title {
   font-size: 23px;
   font-weight: 600;
-  padding: 50px 0px;
+  padding-top: 50px;
+  width: 100%;
+  text-align: left;
+}
+
+.MyInfo .myProfileInfo,
+.MyInfo .mySubInfo {
+  align-items: flex-start;
+  width: 400px;
+  padding: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  background-color: white;
+  width: 100%;
+  margin-top: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.MyInfo .myProfileInfo .myProfileInfoTitle,
+.MyInfo .mySubInfo .mySubInfoTitle {
+  font-size: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MyInfo .myProfileInfo .myProfileInfoContent,
+.MyInfo .mySubInfo .mySubInfoContent {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  gap: 200px;
+}
+
+.MyInfo .myProfileInfo .myProfileInfoContent .myProfileInfoLeft,
+.MyInfo .myProfileInfo .myProfileInfoContent .myProfileInfoRight,
+.MyInfo .mySubInfo .mySubInfoContent .mySubInfoLeft,
+.MyInfo .mySubInfo .mySubInfoContent .mySubInfoRight {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: left;
+}
+
+.MyInfo img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #d9d9d9;
+}
+
+.MyInfo button {
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  font-size: 16px;
+  border-radius: 8px;
+  width: 60px;
+  height: 35px;
+}
+
+.MyInfo input {
+  width: 250px;
+  height: 30px;
+  padding: 3px 10px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.MyInfo .myProfileInfo .myProfileInfoImg {
+  display: flex;
+  flex-direction: row;
+  gap: 210px;
+  margin-bottom: 30px;
+}
+
+.MyInfo .myProfileInfoContent.editing .myProfileInfoLeft,
+.MyInfo .mySubInfoContent.editing .mySubInfoLeft {
+  margin-top: 3px;
+  gap: 35px;
+}
+
+.idFix {
+  margin-top: 5px;
 }
