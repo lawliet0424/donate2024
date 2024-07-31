@@ -6,6 +6,7 @@ import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 
 /*
 Class name: EtherscanAPI
@@ -15,8 +16,11 @@ Written by: 조현지
 */
 public class EtherscanAPI {
     // [하드코딩]이지만, DB나 클라우드와 연동하기 전까지는 하드코딩이 맞음
-    private static final String apiKey = "QEJBFXZB62T9MVG2YVD2HS4ZG1SZU458XG";
-    private static final String filePath = "src/main/resources/contracts/";
+    @Value("${infura.api-key}")
+    private static final String apiKey = null;
+
+    @Value("${abi.file-path}")
+    private static final String filePath = null;
 
     /*
     Function name: getContractABI

@@ -1,6 +1,5 @@
 package com.hikdonate.donate;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Web3jWrapperGenerator { // web3j의 경로
