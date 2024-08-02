@@ -1,0 +1,11 @@
+.PaymentMethodSelection {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 600px;
+  padding: 0px;
+}
+
+.PaymentMethodSelection .box_section {
+  width: 100%;
+}

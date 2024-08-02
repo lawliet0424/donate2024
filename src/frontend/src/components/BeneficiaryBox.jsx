@@ -1,6 +1,8 @@
-import React from "react";
 import "./BeneficiaryBox.css";
 import TransparentButton from "../components/TransparentButton";
+import React, { useState } from "react";
+import filledHeart from "../assets/filled_heart.png";
+import emptyHeart from "../assets/empty_heart.png";
 
 const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
   const onClickBeneficiaryDetailPageLink = (beneficiaryId, beneficiaryName) => {
@@ -17,11 +19,25 @@ const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
     }
   };
 
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <div className="BeneficiaryBox">
       <img className="profileImage" src={profileImage} alt={name} />
       <div className="beneficiaryBoxText">
-        <div className="name">{name}</div>
+        <div className="beneficiaryFirstLine">
+          <div className="name">{name}</div>
+          <div className="favoriteButton" onClick={toggleFavorite}>
+            <img
+              className="heartButton"
+              src={isFavorite ? filledHeart : emptyHeart}
+            />
+          </div>
+        </div>
         <div className="tagList">
           {tags.map((tag, index) => (
             <div key={index} className="tagItem">

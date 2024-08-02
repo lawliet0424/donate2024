@@ -14,5 +14,5 @@
 }
 
 .PaymentMethod.selected {
-  background-color: #ebebeb;
+  border: 2px solid #fea801;
 }

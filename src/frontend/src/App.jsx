@@ -18,6 +18,7 @@ import Header from "./layouts/Header";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DonationDone from "./pages/donation_pages/DonationDone.jsx";
+// import { Checkout } from "./pages/toss_payments/Checkout.jsx";
 
 function App() {
   return (
@@ -69,6 +70,16 @@ function App() {
             path="/mystatus"
             element={<ProtectedRoute element={<MyStatus />} />}
           />
+          {/* <Route
+            path="/toss"
+            element={
+              <Checkout
+                value={30_000}
+                orderId="fdhklfj4"
+                orderName="주문내용"
+              />
+            }
+          /> */}
           <Route path="*" element={<Notfound />} />
         </Routes>
       </div>

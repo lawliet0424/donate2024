@@ -1,0 +1,22 @@
+.Checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box_section {
+  align-items: center;
+  width: 80%;
+}
+
+.Checkout button {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 15px;
+  background-color: #fea801;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
