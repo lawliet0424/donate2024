@@ -11,8 +11,10 @@ const MyInfo = () => {
 
   const [profileInfo, setProfileInfo] = useState({
     nickname: "닉네임",
-    age: "나이",
-    financialAccount: "금융계좌",
+    age: "", // 나이 기본값 비워둠
+    financialAccount: "", // 금융계좌 기본값 비워둠
+    walletAddress: "https://www.naver.com", // 지갑주소 추가
+    walletAddressText: "네이버", // 하이퍼링크 텍스트 추가
   });
 
   const [subInfo, setSubInfo] = useState({
@@ -92,6 +94,7 @@ const MyInfo = () => {
             <div>닉네임</div>
             <div>나이</div>
             <div>금융계좌</div>
+            <div>지갑주소</div>
           </div>
           <div className="myProfileInfoRight">
             {isEditingProfile ? (
@@ -103,22 +106,49 @@ const MyInfo = () => {
                 />
                 <input
                   type="text"
+                  placeholder="나이를 입력하세요"
                   value={profileInfo.age}
                   onChange={(e) => handleInputChange(e, "profile", "age")}
                 />
                 <input
                   type="text"
+                  placeholder="금융계좌를 입력하세요"
                   value={profileInfo.financialAccount}
                   onChange={(e) =>
                     handleInputChange(e, "profile", "financialAccount")
                   }
                 />
+                <div>
+                  <a
+                    href={profileInfo.walletAddress}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {profileInfo.walletAddressText}
+                  </a>
+                </div>
               </>
             ) : (
               <>
                 <div>{profileInfo.nickname}</div>
-                <div>{profileInfo.age}</div>
-                <div>{profileInfo.financialAccount}</div>
+                <div className={profileInfo.age ? "" : "default-text"}>
+                  {profileInfo.age || "(선택) 나이를 입력하세요"}
+                </div>
+                <div
+                  className={profileInfo.financialAccount ? "" : "default-text"}
+                >
+                  {profileInfo.financialAccount ||
+                    "(선택) 금융 계좌를 입력하세요"}
+                </div>
+                <div>
+                  <a
+                    href={profileInfo.walletAddress}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {profileInfo.walletAddressText}
+                  </a>
+                </div>
               </>
             )}
           </div>

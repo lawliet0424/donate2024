@@ -3,6 +3,7 @@ import PaymentMethod from "../../components/PaymentMethod";
 import PaymentReceipt from "../../components/PaymentReceipt";
 import React, { useState } from "react";
 import KeyValueInfo from "../../components/KeyValueInfo";
+import { PaymentMethodSelection } from "../../components/PaymentMethodSelection";
 
 const DonationPayment = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
@@ -31,7 +32,8 @@ const DonationPayment = () => {
               </div>
             </div>
           </div>
-          <div className="paymentMethodList">
+          <PaymentMethodSelection value={30000} />
+          {/* <div className="paymentMethodList">
             <div className="paymentMethodTitle">결제 수단</div>
             <PaymentMethod
               methodName={"카드결제"}
@@ -48,7 +50,7 @@ const DonationPayment = () => {
               isPaymentMethodSelected={selectedPaymentMethod === "기타결제"} // boolean 값으로 전달
               onClick={() => handlePaymentMethodClick("기타결제")} // onClick 핸들러 전달
             />
-          </div>
+          </div> */}
         </div>
         <div className="donationPaymentRight">
           <PaymentReceipt

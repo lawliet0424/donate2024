@@ -1,7 +1,10 @@
-import "./BeneficiaryDetailPage.css";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import backgroungImage from "../../assets/exampleImg.png";
 import beneficiaryImage from "../../assets/basicProfile.png";
+import "./BeneficiaryDetailPage.css";
+import filledHeart from "../../assets/filled_heart.png";
+import emptyHeart from "../../assets/empty_heart.png";
 
 const dummyBeneficiaryData = [
   {
@@ -20,7 +23,7 @@ const dummyBeneficiaryData = [
     beneficiaryId: 3,
     beneficiaryName: "수혜자3",
     beneficiaryInfo: "수혜자 상세 정보3",
-    beneficiaryTags: ["태그", "태그", "태그"],
+    beneficiaryTags: ["태그", "태그", "태그", "xorm", "태그", "xorm"],
   },
 ];
 
@@ -34,6 +37,11 @@ const BeneficiaryDetailPage = () => {
   const [searchParams] = useSearchParams();
   const urlBeneficiaryId = searchParams.get("beneficiaryId");
   const beneficiaryData = findMatchingData(urlBeneficiaryId);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   if (!beneficiaryData) {
     return <div className="BeneficiaryDetailPage">Beneficiary not found</div>;
@@ -49,8 +57,16 @@ const BeneficiaryDetailPage = () => {
           alt="Beneficiary"
         />
         <div className="beneficiaryProfileText">
-          <div className="beneficiaryName">
-            {beneficiaryData.beneficiaryName}
+          <div className="beneficiaryFirstLine">
+            <div className="beneficiaryName">
+              {beneficiaryData.beneficiaryName}
+            </div>
+            <div className="favoriteButton" onClick={toggleFavorite}>
+              <img
+                className="heartButton"
+                src={isFavorite ? filledHeart : emptyHeart}
+              />
+            </div>
           </div>
           <div className="beneficiaryTags">
             {beneficiaryData.beneficiaryTags.map((tag, index) => (
