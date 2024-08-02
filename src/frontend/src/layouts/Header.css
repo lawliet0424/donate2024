@@ -1,5 +1,5 @@
 .Header {
-  padding: 15px 0px;
+  padding: 15px 0;
   border-bottom: 1px solid #d9d9d9;
 }
 
@@ -19,7 +19,7 @@
   width: 80%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .Header .hearderEntire .headerLeft img {
@@ -36,6 +36,8 @@
 
 .Header .hearderEntire .headerRight .ColoredButton {
   font-weight: 500;
-  height: 50px;
-  width: 120px;
+  height: 46px;
+  width: 110px;
+  border-radius: 10px;
+  font-size: 17px;
 }

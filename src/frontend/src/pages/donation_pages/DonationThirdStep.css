@@ -13,14 +13,14 @@
   padding-top: 80px;
 }
 
-.DonationThirdStep .ColoredButton {
-  width: 120px;
-  height: 50px;
-  border-radius: 5px;
-}
-
 .DonationThirdStep .pageNavigationButtons {
   display: flex;
   gap: 10px;
   padding-top: 80px;
+}
+
+.DonationThirdStep .ColoredButton {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
 }

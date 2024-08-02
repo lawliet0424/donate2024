@@ -1,16 +1,16 @@
-.MyInterest .title {
-  font-size: 23px;
-  font-weight: 600;
-  padding: 50px 0px;
-  width: 100%;
-  text-align: left;
-}
-
 .MyInterest {
   display: flex;
   flex-direction: column;
   padding: 0px 40px;
   align-items: center;
+}
+
+.MyInterest .title {
+  font-size: 23px;
+  font-weight: 600;
+  padding: 50px 0;
+  width: 100%;
+  text-align: left;
 }
 
 .MyInterest .beneficiaryLists {

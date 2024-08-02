@@ -11,10 +11,10 @@ const MyInfo = () => {
 
   const [profileInfo, setProfileInfo] = useState({
     nickname: "닉네임",
-    age: "", // 나이 기본값 비워둠
-    financialAccount: "", // 금융계좌 기본값 비워둠
-    walletAddress: "https://www.naver.com", // 지갑주소 추가
-    walletAddressText: "네이버", // 하이퍼링크 텍스트 추가
+    age: "",
+    financialAccount: "",
+    walletAddress: "https://www.naver.com",
+    walletAddressText: "네이버",
   });
 
   const [subInfo, setSubInfo] = useState({
@@ -43,19 +43,19 @@ const MyInfo = () => {
   };
 
   const handleEditProfileClick = () => {
-    setIsEditingProfile(!isEditingProfile);
+    setIsEditingProfile((prev) => !prev);
   };
 
   const handleEditSubInfoClick = () => {
-    setIsEditingSubInfo(!isEditingSubInfo);
+    setIsEditingSubInfo((prev) => !prev);
   };
 
   const handleInputChange = (e, section, field) => {
     const { value } = e.target;
     if (section === "profile") {
-      setProfileInfo({ ...profileInfo, [field]: value });
+      setProfileInfo((prev) => ({ ...prev, [field]: value }));
     } else {
-      setSubInfo({ ...subInfo, [field]: value });
+      setSubInfo((prev) => ({ ...prev, [field]: value }));
     }
   };
 
@@ -175,11 +175,7 @@ const MyInfo = () => {
           <div className="mySubInfoRight">
             {isEditingSubInfo ? (
               <>
-                <input
-                  type="text"
-                  value={subInfo.id}
-                  onChange={(e) => handleInputChange(e, "sub", "id")}
-                />
+                <div>{subInfo.id}</div> {/* 아이디를 수정할 수 없도록 표시 */}
                 <input
                   type="password"
                   value={subInfo.password}
@@ -203,7 +199,7 @@ const MyInfo = () => {
               </>
             ) : (
               <>
-                <div>{subInfo.id}</div>
+                <div>{subInfo.id}</div> {/* 아이디는 수정할 수 없도록 표시 */}
                 <div>******</div>
                 <div>{subInfo.name}</div>
                 <div>{subInfo.phone}</div>

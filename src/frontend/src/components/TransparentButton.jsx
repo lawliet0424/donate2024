@@ -2,7 +2,7 @@ import "./TransparentButton.css";
 
 const TransparentButton = ({ text, onClick }) => {
   return (
-    <button onClick={onClick} className={"TransparentButton"}>
+    <button className="TransparentButton" onClick={onClick}>
       {text}
     </button>
   );

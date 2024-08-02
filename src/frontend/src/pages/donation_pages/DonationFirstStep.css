@@ -6,7 +6,7 @@
 }
 
 .DonationFirstStep .categorySection {
-  padding: 60px 60px 0px 60px;
+  padding: 60px 60px 0 60px;
 }
 
 .DonationFirstStep .categorySection .categoryName {
@@ -16,7 +16,7 @@
 }
 
 .DonationFirstStep .categorySection .TagBox {
-  margin: 0px 10px 10px 0px;
+  margin: 0 10px 10px 0;
 }
 
 .DonationFirstStep .ColoredButton {

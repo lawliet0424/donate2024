@@ -8,7 +8,7 @@ const MyPage = () => {
       <div className="title">마이페이지</div>
       <div className="MyPageContent">
         <div className="userInfo">
-          <img className={"myProfileImage"} src={profileImage} />
+          <img className="myProfileImage" src={profileImage} alt="Profile" />
           <div className="nickname">닉네임</div>
         </div>
 

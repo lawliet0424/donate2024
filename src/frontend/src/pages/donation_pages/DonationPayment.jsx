@@ -2,7 +2,6 @@ import "./DonationPayment.css";
 import PaymentMethod from "../../components/PaymentMethod";
 import PaymentReceipt from "../../components/PaymentReceipt";
 import React, { useState } from "react";
-import KeyValueInfo from "../../components/KeyValueInfo";
 import { PaymentMethodSelection } from "../../components/PaymentMethodSelection";
 
 const DonationPayment = () => {
@@ -37,18 +36,18 @@ const DonationPayment = () => {
             <div className="paymentMethodTitle">결제 수단</div>
             <PaymentMethod
               methodName={"카드결제"}
-              isPaymentMethodSelected={selectedPaymentMethod === "카드결제"} // boolean 값으로 전달
-              onClick={() => handlePaymentMethodClick("카드결제")} // onClick 핸들러 전달
+              isPaymentMethodSelected={selectedPaymentMethod === "카드결제"}
+              onClick={() => handlePaymentMethodClick("카드결제")}
             />
             <PaymentMethod
               methodName={"무통장입금"}
-              isPaymentMethodSelected={selectedPaymentMethod === "무통장입금"} // boolean 값으로 전달
-              onClick={() => handlePaymentMethodClick("무통장입금")} // onClick 핸들러 전달
+              isPaymentMethodSelected={selectedPaymentMethod === "무통장입금"}
+              onClick={() => handlePaymentMethodClick("무통장입금")}
             />
             <PaymentMethod
               methodName={"기타결제"}
-              isPaymentMethodSelected={selectedPaymentMethod === "기타결제"} // boolean 값으로 전달
-              onClick={() => handlePaymentMethodClick("기타결제")} // onClick 핸들러 전달
+              isPaymentMethodSelected={selectedPaymentMethod === "기타결제"}
+              onClick={() => handlePaymentMethodClick("기타결제")}
             />
           </div> */}
         </div>

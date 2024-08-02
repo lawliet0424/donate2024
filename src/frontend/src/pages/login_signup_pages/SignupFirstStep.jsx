@@ -25,30 +25,28 @@ const SignupFirstStep = () => {
     navigate("/login");
   };
 
-  const onSignupNameChange = (event) => setSignupName(event.target.value);
-  const onSignupEmailChange = (event) => setSignupEmail(event.target.value);
-  const onSignupPhoneNumberChange = (event) =>
-    setSignupPhoneNumber(event.target.value);
-
   return (
     <div className="SignupFirstStep">
       <div className="title">회원가입</div>
       <input
+        type="text"
         placeholder="이름"
         value={signupName}
-        onChange={onSignupNameChange}
+        onChange={(e) => setSignupName(e.target.value)}
       />
       <input
+        type="email"
         placeholder="이메일"
         value={signupEmail}
-        onChange={onSignupEmailChange}
+        onChange={(e) => setSignupEmail(e.target.value)}
       />
       <input
+        type="tel"
         placeholder="전화번호"
         value={signupPhoneNumber}
-        onChange={onSignupPhoneNumberChange}
+        onChange={(e) => setSignupPhoneNumber(e.target.value)}
       />
-      <ColoredButton text="다음" type="Orange" onClick={onNextButtonClicked} />
+      <ColoredButton text="다음" colorScheme="Orange" onClick={onNextButtonClicked} />
 
       <div className="separator">
         <div className="line"></div>
@@ -58,7 +56,7 @@ const SignupFirstStep = () => {
 
       <ColoredButton
         text="로그인"
-        type="White"
+        colorScheme="White"
         onClick={onClickToSignupButton}
         className="ColoredButton_White"
       />
