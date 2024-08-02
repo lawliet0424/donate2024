@@ -33,14 +33,14 @@
   font-size: 18px;
 }
 
-.DonationSecondStep .ColoredButton {
-  width: 120px;
-  height: 50px;
-  border-radius: 5px;
-}
-
 .DonationSecondStep .pageNavigationButtons {
   display: flex;
   gap: 10px;
   padding-top: 140px;
+}
+
+.DonationSecondStep .ColoredButton {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
 }

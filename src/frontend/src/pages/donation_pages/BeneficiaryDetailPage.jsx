@@ -37,10 +37,10 @@ const BeneficiaryDetailPage = () => {
   const [searchParams] = useSearchParams();
   const urlBeneficiaryId = searchParams.get("beneficiaryId");
   const beneficiaryData = findMatchingData(urlBeneficiaryId);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isInterest, setIsInterest] = useState(false);
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const toggleInterest = () => {
+    setIsInterest(!isInterest);
   };
 
   if (!beneficiaryData) {
@@ -61,10 +61,11 @@ const BeneficiaryDetailPage = () => {
             <div className="beneficiaryName">
               {beneficiaryData.beneficiaryName}
             </div>
-            <div className="favoriteButton" onClick={toggleFavorite}>
+            <div className="interestButton" onClick={toggleInterest}>
               <img
-                className="heartButton"
-                src={isFavorite ? filledHeart : emptyHeart}
+                className="heartImg"
+                src={isInterest ? filledHeart : emptyHeart}
+                alt="Heart Icon"
               />
             </div>
           </div>

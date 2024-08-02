@@ -7,18 +7,18 @@ import useAuth from "../hooks/useAuth";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const onClickHeaderTitle = () => {
-    nav("/");
+    navigate("/");
   };
 
   const onClickHeaderDonationButton = () => {
     if (isAuthenticated) {
-      nav("/donation");
+      navigate("/donation");
     } else {
       window.alert("로그인을 먼저 해주세요.");
-      nav("/login");
+      navigate("/login");
     }
   };
 
@@ -27,23 +27,23 @@ const Header = () => {
       const confirmLogout = window.confirm("정말 로그아웃 하시겠습니까?");
       if (confirmLogout) {
         logout();
-        nav("/login");
+        navigate("/login");
       }
     } else {
-      nav("/login");
+      navigate("/login");
     }
   };
 
   const onClickHeaderSignupButton = () => {
-    nav("/signup");
+    navigate("/signup");
   };
 
   const onClickHeaderMypageButton = () => {
     if (isAuthenticated) {
-      nav("/mypage");
+      navigate("/mypage");
     } else {
       window.alert("로그인을 먼저 해주세요.");
-      nav("/login");
+      navigate("/login");
     }
   };
 
@@ -56,12 +56,12 @@ const Header = () => {
         />
         {!isAuthenticated && (
           <TransparentButton
-            text={"회원가입"}
+            text="회원가입"
             onClick={onClickHeaderSignupButton}
           />
         )}
         <TransparentButton
-          text={"마이페이지"}
+          text="마이페이지"
           onClick={onClickHeaderMypageButton}
         />
       </div>
@@ -73,11 +73,10 @@ const Header = () => {
             alt="DoNate Logo"
           />
         </div>
-
         <div className="headerRight">
           <ColoredButton
-            text={"기부하기"}
-            type={"Orange"}
+            text="기부하기"
+            colorScheme="Orange"
             onClick={onClickHeaderDonationButton}
           />
         </div>

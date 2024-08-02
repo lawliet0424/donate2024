@@ -1,9 +1,9 @@
 .PaymentMethodSelection {
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
   width: 600px;
-  padding: 0px;
+  padding: 0;
 }
 
 .PaymentMethodSelection .box_section {

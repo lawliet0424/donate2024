@@ -13,11 +13,13 @@ import MyPage from "./pages/my_pages/MyPage";
 import MyInfo from "./pages/my_pages/MyInfo";
 import MyInterest from "./pages/my_pages/MyInterest";
 import MyStatus from "./pages/my_pages/MyStatus";
-import Notfound from "./pages/Notfound";
+import PageNotFound from "./pages/error_pages/PageNotFound.jsx";
 import Header from "./layouts/Header";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DonationDone from "./pages/donation_pages/DonationDone.jsx";
+import Footer from "./layouts/Footer.jsx";
+import ErrorOccur from "./pages/error_pages/ErrorOccur.jsx";
 // import { Checkout } from "./pages/toss_payments/Checkout.jsx";
 
 function App() {
@@ -80,9 +82,11 @@ function App() {
               />
             }
           /> */}
-          <Route path="*" element={<Notfound />} />
+          <Route path="/error" element={<ErrorOccur />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
+      <Footer />
     </AuthProvider>
   );
 }

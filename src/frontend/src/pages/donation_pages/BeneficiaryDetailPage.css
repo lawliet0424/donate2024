@@ -1,3 +1,7 @@
+.BeneficiaryDetailPage {
+  position: relative;
+}
+
 .BeneficiaryDetailPage .backgroungImage {
   width: 1000px;
   height: 300px;
@@ -21,6 +25,16 @@
 .BeneficiaryDetailPage
   .beneficiaryProfile
   .beneficiaryProfileText
+  .beneficiaryFirstLine {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+
+.BeneficiaryDetailPage
+  .beneficiaryProfile
+  .beneficiaryProfileText
+  .beneficiaryFirstLine
   .beneficiaryName {
   font-size: 18px;
 }
@@ -28,10 +42,22 @@
 .BeneficiaryDetailPage
   .beneficiaryProfile
   .beneficiaryProfileText
-  .beneficiaryFirstLine {
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 5px;
+  .beneficiaryFirstLine
+  .interestButton {
+  cursor: pointer;
+  align-items: center;
+  padding-left: 7px;
+}
+
+.BeneficiaryDetailPage
+  .beneficiaryProfile
+  .beneficiaryProfileText
+  .beneficiaryFirstLine
+  .interestButton
+  .heartImg {
+  padding-top: 3px;
+  width: 18px;
+  height: 18px;
 }
 
 .BeneficiaryDetailPage
@@ -45,16 +71,4 @@
 
 .BeneficiaryDetailPage .beneficiaryInfo {
   padding: 0 60px;
-}
-
-.BeneficiaryDetailPage .favoriteButton {
-  cursor: pointer;
-  align-items: center;
-  padding-left: 7px;
-}
-
-.BeneficiaryDetailPage .heartButton {
-  padding-top: 3px;
-  width: 18px;
-  height: 18px;
 }

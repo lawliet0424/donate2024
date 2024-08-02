@@ -33,6 +33,7 @@ const DonationFirstStep = () => {
     ],
     분류2: ["12", "33", "44", "55", "66", "77", "88", "99", "10", "11"],
   };
+
   const [selectedTags, setSelectedTags] = useState(new Set());
 
   const handleTagClick = (tagName) => {
@@ -72,7 +73,7 @@ const DonationFirstStep = () => {
 
       <ColoredButton
         text={"다음"}
-        type={"Orange"}
+        colorScheme={"Orange"}
         onClick={onNextButtonClicked}
       />
     </div>

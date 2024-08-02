@@ -4,7 +4,8 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //(임시) 기본 상태를 로그인으로 설정
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const login = () => setIsAuthenticated(true);
   const logout = () => setIsAuthenticated(false);

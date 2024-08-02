@@ -31,6 +31,11 @@ const DonationSecondStep = () => {
   };
 
   const onNextButtonClicked = () => {
+    // Ensure both personnel and amount are greater than 0
+    if (personnel < 1 || amount < 1) {
+      window.alert("모든 필드는 1 이상의 값을 입력해 주세요.");
+      return;
+    }
     navigate("/donation/third", { state: { fromSecondStep: true } });
   };
 
@@ -45,17 +50,17 @@ const DonationSecondStep = () => {
         <input
           className="personnel"
           type="number"
-          min="0"
+          min="1" // Set minimum value to 1
           value={personnel}
-          onChange={(e) => setPersonnel(e.target.value)}
+          onChange={(e) => setPersonnel(Number(e.target.value))}
         />
         <div>명에게</div>
         <input
           className="amount"
           type="number"
-          min="0"
+          min="1" // Set minimum value to 1
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(Number(e.target.value))}
         />
         <div>원을 나눠 기부합니다.</div>
       </div>
@@ -69,7 +74,7 @@ const DonationSecondStep = () => {
         <ColoredButton text={"이전"} onClick={onBeforeButtonClicked} />
         <ColoredButton
           text={"다음"}
-          type={"Orange"}
+          colorScheme={"Orange"}
           onClick={onNextButtonClicked}
         />
       </div>

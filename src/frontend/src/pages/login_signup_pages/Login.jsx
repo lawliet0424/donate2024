@@ -12,7 +12,6 @@ const Login = () => {
   const nav = useNavigate();
 
   const onClickLoginButton = () => {
-    // id, pw 확인 절차 추가
     console.log("아이디:", loginId);
     console.log("비밀번호:", loginPassword);
     login();
@@ -47,7 +46,11 @@ const Login = () => {
         value={loginPassword}
         onChange={(e) => setLoginPassword(e.target.value)}
       />
-      <ColoredButton text="로그인" type="Orange" onClick={onClickLoginButton} />
+      <ColoredButton
+        text="로그인"
+        colorScheme="Orange"
+        onClick={onClickLoginButton}
+      />
 
       <div className="userAssistance">
         <TransparentButton
@@ -69,7 +72,7 @@ const Login = () => {
 
       <ColoredButton
         text="회원가입"
-        type="White"
+        colorScheme="White"
         onClick={onClickToSignupButton}
         className="ColoredButton_White"
       />

@@ -5,24 +5,23 @@ import filledHeart from "../assets/filled_heart.png";
 import emptyHeart from "../assets/empty_heart.png";
 
 const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
-  const onClickBeneficiaryDetailPageLink = (beneficiaryId, beneficiaryName) => {
-    const newWindow = window.open(
-      `/beneficiarydetailpage?beneficiaryId=${beneficiaryId}`,
-      "_blank"
-    );
-
-    if (newWindow) {
-      // Wait for the new window to load, then set the title
-      newWindow.onload = () => {
-        newWindow.document.title = `Do-Nate/수혜자/상세페이지${beneficiaryName}`;
-      };
-    }
-  };
-
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const onClickBeneficiaryDetailPageLink = () => {
+    const newWindow = window.open(
+      `/beneficiarydetailpage?beneficiaryId=${id}`,
+      "_blank"
+    );
+
+    if (newWindow) {
+      newWindow.onload = () => {
+        newWindow.document.title = `Do-Nate/수혜자/상세페이지 ${name}`;
+      };
+    }
   };
 
   return (
@@ -35,6 +34,7 @@ const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
             <img
               className="heartButton"
               src={isFavorite ? filledHeart : emptyHeart}
+              alt="Favorite"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@ const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
       </div>
       <TransparentButton
         text="> 상세 페이지"
-        onClick={() => onClickBeneficiaryDetailPageLink(id, name)}
+        onClick={onClickBeneficiaryDetailPageLink}
       />
     </div>
   );

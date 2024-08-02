@@ -1,0 +1,8 @@
+.Footer {
+    height: 200px;
+    color: #878787;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 70px;
+  }

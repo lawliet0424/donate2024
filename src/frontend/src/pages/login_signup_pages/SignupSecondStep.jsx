@@ -44,12 +44,14 @@ const SignupSecondStep = () => {
       <div className="title">회원가입</div>
 
       <input
+        type="text"
         placeholder="닉네임"
         value={signupNickname}
         onChange={(e) => setSignupNickname(e.target.value)}
       />
       <div className="idForm">
         <input
+          type="text"
           placeholder="아이디"
           value={signupId}
           onChange={(e) => setSignupId(e.target.value)}
@@ -62,17 +64,17 @@ const SignupSecondStep = () => {
         </button>
       </div>
       <input
+        type="password"
         placeholder="비밀번호"
         value={signupPassword}
         onChange={(e) => setSignupPassword(e.target.value)}
-        type="password"
       />
 
       <div className="pageNavigationButtons">
         <ColoredButton text="이전" onClick={onBeforeButtonClicked} />
         <ColoredButton
           text="완료"
-          type="Orange"
+          colorScheme="Orange"
           onClick={onSignupButtonClicked}
         />
       </div>

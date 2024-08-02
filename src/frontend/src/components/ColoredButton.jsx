@@ -1,11 +1,12 @@
 import "./ColoredButton.css";
 
-const ColoredButton = ({ text, type, onClick }) => {
+const ColoredButton = ({ text, colorScheme, onClick }) => {
+  const buttonClass = `ColoredButton ${
+    colorScheme ? `ColoredButton_${colorScheme}` : ""
+  }`;
+
   return (
-    <button
-      onClick={onClick}
-      className={`ColoredButton ${type ? `ColoredButton_${type}` : ""}`}
-    >
+    <button onClick={onClick} className={buttonClass}>
       {text}
     </button>
   );

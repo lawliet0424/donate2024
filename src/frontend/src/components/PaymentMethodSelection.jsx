@@ -14,56 +14,40 @@ export function PaymentMethodSelection({ value }) {
   const [widgets, setWidgets] = useState(null);
 
   useEffect(() => {
-    async function fetchPaymentWidgets() {
-      // ------  결제위젯 초기화 ------
+    const fetchPaymentWidgets = async () => {
       const tossPayments = await loadTossPayments(clientKey);
-      // 회원 결제
-      const widgets = tossPayments.widgets({
-        customerKey,
-      });
-      // 비회원 결제
-      // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
-
+      const widgets = tossPayments.widgets({ customerKey });
       setWidgets(widgets);
-    }
+    };
 
     fetchPaymentWidgets();
-  }, [clientKey, customerKey]);
+  }, []);
 
   useEffect(() => {
-    async function renderPaymentWidgets() {
-      if (widgets == null) {
-        return;
-      }
-      // ------ 주문의 결제 금액 설정 ------
-      await widgets.setAmount(amount);
+    const renderPaymentWidgets = async () => {
+      if (!widgets) return;
 
-      await Promise.all([
-        // ------  결제 UI 렌더링 ------
-        widgets.renderPaymentMethods({
-          selector: "#payment-method",
-          variantKey: "DEFAULT",
-        }),
-      ]);
+      await widgets.setAmount(amount);
+      await widgets.renderPaymentMethods({
+        selector: "#payment-method",
+        variantKey: "DEFAULT",
+      });
 
       setReady(true);
-    }
+    };
 
     renderPaymentWidgets();
-  }, [widgets]);
+  }, [widgets, amount]);
 
   useEffect(() => {
-    if (widgets == null) {
-      return;
+    if (widgets) {
+      widgets.setAmount(amount);
     }
-
-    widgets.setAmount(amount);
   }, [widgets, amount]);
 
   return (
     <div className="PaymentMethodSelection">
       <div className="box_section">
-        {/* 결제 UI */}
         <div id="payment-method" />
       </div>
     </div>
