@@ -2,6 +2,7 @@ import "./BeneficiaryDetailPage.css";
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import backgroungImage from "../../assets/exampleImg.png";
+import defaultProfileImage from "../../assets/defaultProfile.png";
 import filledHeart from "../../assets/filled_heart.png";
 import emptyHeart from "../../assets/empty_heart.png";
 
@@ -50,7 +51,11 @@ const BeneficiaryDetailPage = () => {
     <div className="BeneficiaryDetailPage">
       <img className="backgroungImage" src={backgroungImage} alt="Background" />
       <div className="beneficiaryProfile">
-        <img className="beneficiaryImage" alt="Beneficiary" />
+        <img
+          className="beneficiaryImage"
+          src={defaultProfileImage}
+          alt="Beneficiary"
+        />
         <div className="beneficiaryProfileText">
           <div className="beneficiaryFirstLine">
             <div className="beneficiaryName">
