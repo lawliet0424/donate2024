@@ -1,8 +1,8 @@
-import ColoredButton from "../../components/ColoredButton";
-import DonationStepsBar from "../../components/DonationStepsBar";
+import "./DonationSecondStep.css";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./DonationSecondStep.css";
+import DonationStepsBar from "../../components/DonationStepsBar";
+import ColoredButton from "../../components/ColoredButton";
 
 const DonationSecondStep = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import "./PaymentReceipt.css";
 import React from "react";
-import ColoredButton from "../components/ColoredButton";
 import { useNavigate } from "react-router-dom";
+import ColoredButton from "../components/ColoredButton";
 
 const PaymentReceipt = ({ numberOfBeneficiaries, donationAmountPerPerson }) => {
   const navigate = useNavigate();

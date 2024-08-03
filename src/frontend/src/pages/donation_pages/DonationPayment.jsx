@@ -1,8 +1,8 @@
 import "./DonationPayment.css";
-import PaymentMethod from "../../components/PaymentMethod";
-import PaymentReceipt from "../../components/PaymentReceipt";
 import React, { useState } from "react";
-import { PaymentMethodSelection } from "../../components/PaymentMethodSelection";
+// import PaymentMethod from "../../components/PaymentMethod";
+import PaymentMethodSelection from "../../components/PaymentMethodSelection";
+import PaymentReceipt from "../../components/PaymentReceipt";
 
 const DonationPayment = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);

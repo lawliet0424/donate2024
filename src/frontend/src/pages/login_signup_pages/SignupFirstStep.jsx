@@ -1,7 +1,7 @@
+import "./SignupFirstStep.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ColoredButton from "../../components/ColoredButton";
-import "./SignupFirstStep.css";
 
 const SignupFirstStep = () => {
   const navigate = useNavigate();
@@ -46,7 +46,11 @@ const SignupFirstStep = () => {
         value={signupPhoneNumber}
         onChange={(e) => setSignupPhoneNumber(e.target.value)}
       />
-      <ColoredButton text="다음" colorScheme="Orange" onClick={onNextButtonClicked} />
+      <ColoredButton
+        text="다음"
+        colorScheme="Orange"
+        onClick={onNextButtonClicked}
+      />
 
       <div className="separator">
         <div className="line"></div>

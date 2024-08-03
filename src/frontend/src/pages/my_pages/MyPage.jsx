@@ -1,6 +1,6 @@
 import "./MyPage.css";
 import MyPageMenuBox from "../../components/MyPageMenuBox";
-import profileImage from "../../assets/basicProfile.png";
+import profileImage from "../../assets/defaultProfile.png";
 
 const MyPage = () => {
   return (

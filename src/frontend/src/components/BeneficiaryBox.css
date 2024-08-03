@@ -17,7 +17,8 @@
 
 .BeneficiaryBox .beneficiaryBoxText {
   flex-grow: 1;
-  padding-left: 20px;
+  padding-left: 12px;
+  padding-bottom: 2px;
 }
 
 .BeneficiaryBox .beneficiaryFirstLine {
@@ -41,12 +42,12 @@
   padding: 10px;
 }
 
-.BeneficiaryBox .favoriteButton {
+.BeneficiaryBox .interestButton {
   cursor: pointer;
   padding-left: 5px;
 }
 
-.BeneficiaryBox .heartButton {
+.BeneficiaryBox .heartImg {
   width: 16px;
   height: 16px;
   padding-top: 5px;

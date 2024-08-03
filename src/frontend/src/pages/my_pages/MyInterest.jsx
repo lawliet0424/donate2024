@@ -1,6 +1,6 @@
 import "./MyInterest.css";
 import BeneficiaryBox from "../../components/BeneficiaryBox";
-import profileImage from "../../assets/basicProfile.png";
+import profileImage from "../../assets/defaultProfile.png";
 
 const MyInterest = () => {
   return (

@@ -1,8 +1,7 @@
+import "./BeneficiaryDetailPage.css";
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import backgroungImage from "../../assets/exampleImg.png";
-import beneficiaryImage from "../../assets/basicProfile.png";
-import "./BeneficiaryDetailPage.css";
 import filledHeart from "../../assets/filled_heart.png";
 import emptyHeart from "../../assets/empty_heart.png";
 
@@ -37,10 +36,10 @@ const BeneficiaryDetailPage = () => {
   const [searchParams] = useSearchParams();
   const urlBeneficiaryId = searchParams.get("beneficiaryId");
   const beneficiaryData = findMatchingData(urlBeneficiaryId);
-  const [isInterest, setIsInterest] = useState(false);
+  const [isInterested, setIsInterested] = useState(false);
 
   const toggleInterest = () => {
-    setIsInterest(!isInterest);
+    setIsInterested(!isInterested);
   };
 
   if (!beneficiaryData) {
@@ -51,11 +50,7 @@ const BeneficiaryDetailPage = () => {
     <div className="BeneficiaryDetailPage">
       <img className="backgroungImage" src={backgroungImage} alt="Background" />
       <div className="beneficiaryProfile">
-        <img
-          className="beneficiaryImage"
-          src={beneficiaryImage}
-          alt="Beneficiary"
-        />
+        <img className="beneficiaryImage" alt="Beneficiary" />
         <div className="beneficiaryProfileText">
           <div className="beneficiaryFirstLine">
             <div className="beneficiaryName">
@@ -64,7 +59,7 @@ const BeneficiaryDetailPage = () => {
             <div className="interestButton" onClick={toggleInterest}>
               <img
                 className="heartImg"
-                src={isInterest ? filledHeart : emptyHeart}
+                src={isInterested ? filledHeart : emptyHeart}
                 alt="Heart Icon"
               />
             </div>

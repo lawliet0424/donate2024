@@ -1,14 +1,15 @@
 import "./BeneficiaryBox.css";
-import TransparentButton from "../components/TransparentButton";
 import React, { useState } from "react";
+import TransparentButton from "../components/TransparentButton";
+import defaultProfileImage from "../assets/defaultProfile.png";
 import filledHeart from "../assets/filled_heart.png";
 import emptyHeart from "../assets/empty_heart.png";
 
 const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isInterested, setIsInterested] = useState(false);
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const toggleInterest = () => {
+    setIsInterested(!isInterested);
   };
 
   const onClickBeneficiaryDetailPageLink = () => {
@@ -24,17 +25,19 @@ const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
     }
   };
 
+  const imageSrc = profileImage ? profileImage : defaultProfileImage;
+
   return (
     <div className="BeneficiaryBox">
-      <img className="profileImage" src={profileImage} alt={name} />
+      <img className="profileImage" src={imageSrc} alt={name} />
       <div className="beneficiaryBoxText">
         <div className="beneficiaryFirstLine">
           <div className="name">{name}</div>
-          <div className="favoriteButton" onClick={toggleFavorite}>
+          <div className="interestButton" onClick={toggleInterest}>
             <img
-              className="heartButton"
-              src={isFavorite ? filledHeart : emptyHeart}
-              alt="Favorite"
+              className="heartImg"
+              src={isInterested ? filledHeart : emptyHeart}
+              alt="Heart Icon"
             />
           </div>
         </div>
