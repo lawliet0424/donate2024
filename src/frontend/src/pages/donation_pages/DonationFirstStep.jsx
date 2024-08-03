@@ -1,9 +1,9 @@
-import ColoredButton from "../../components/ColoredButton";
-import DonationStepsBar from "../../components/DonationStepsBar";
-import TagBox from "../../components/TagBox";
+import "./DonationFirstStep.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./DonationFirstStep.css";
+import DonationStepsBar from "../../components/DonationStepsBar";
+import TagBox from "../../components/TagBox";
+import ColoredButton from "../../components/ColoredButton";
 
 const DonationFirstStep = () => {
   const categories = {
@@ -70,7 +70,6 @@ const DonationFirstStep = () => {
           ))}
         </div>
       ))}
-
       <ColoredButton
         text={"다음"}
         colorScheme={"Orange"}

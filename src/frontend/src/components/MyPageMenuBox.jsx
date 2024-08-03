@@ -1,7 +1,7 @@
 import "./MyPageMenuBox.css";
 import React from "react";
-import TransparentButton from "../components/TransparentButton";
 import { useNavigate } from "react-router-dom";
+import TransparentButton from "../components/TransparentButton";
 
 const MyPageMenuBox = ({ menuName, myPageType }) => {
   const navigate = useNavigate();

@@ -1,10 +1,9 @@
-import ColoredButton from "../../components/ColoredButton";
-import DonationStepsBar from "../../components/DonationStepsBar";
+import "./DonationThirdStep.css";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import DonationStepsBar from "../../components/DonationStepsBar";
 import BeneficiaryBox from "../../components/BeneficiaryBox";
-import profileImage from "../../assets/basicProfile.png";
-import "./DonationThirdStep.css";
+import ColoredButton from "../../components/ColoredButton";
 
 const DonationThirdStep = () => {
   const location = useLocation();
@@ -28,12 +27,7 @@ const DonationThirdStep = () => {
     <div className="DonationThirdStep">
       <DonationStepsBar stepNow={3} />
       <div className="beneficiaryLists">
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
+        <BeneficiaryBox name={"이름"} tags={["태그1", "태그2"]} id={3} />
         {/* 필요한 만큼 BeneficiaryBox 컴포넌트를 추가 */}
       </div>
       <div className="pageNavigationButtons">

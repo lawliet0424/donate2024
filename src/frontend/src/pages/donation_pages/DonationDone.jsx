@@ -1,7 +1,7 @@
 import "./DonationDone.css";
+import { useNavigate } from "react-router-dom";
 import DoNateLogo from "../../assets/DoNateIcon.png";
 import ColoredButton from "../../components/ColoredButton";
-import { useNavigate } from "react-router-dom";
 
 const DonationDone = () => {
   const nav = useNavigate();

@@ -1,7 +1,7 @@
+import "./SignupSecondStep.css";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ColoredButton from "../../components/ColoredButton";
-import "./SignupSecondStep.css";
 
 const SignupSecondStep = () => {
   const navigate = useNavigate();

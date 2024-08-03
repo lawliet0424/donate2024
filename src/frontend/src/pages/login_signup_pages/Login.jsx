@@ -1,9 +1,9 @@
+import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import ColoredButton from "../../components/ColoredButton";
 import TransparentButton from "../../components/TransparentButton";
-import "./Login.css";
+import ColoredButton from "../../components/ColoredButton";
 
 const Login = () => {
   const [loginId, setLoginId] = useState("");

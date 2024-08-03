@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import "./MyInfo.css";
-import profileImage from "../../assets/basicProfile.png";
+import React, { useState } from "react";
+import profileImage from "../../assets/defaultProfile.png";
 
 const MyInfo = () => {
   const [image, setImage] = useState(profileImage);
