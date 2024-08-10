@@ -1,5 +1,6 @@
 package com.hikdonate.donate;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -22,9 +23,22 @@ public class Donate2024Application {
     Written by: 조현지
     */
 	public static void main(String[] args) throws IOException {
-
 		// 서버 띄우기
 		SpringApplication.run(Donate2024Application.class, args);
+	}
+
+	/*
+    Function name: init
+    Summary: 서버 초기화 작업
+    Parameter: 없음
+    Return: 없음
+    Date: 2024.08.10
+    Written by: 조현지
+    */
+	@PostConstruct
+	public void init() throws IOException {
+		// 초기화 작업 수행
+		System.out.println("Application has been initialized");
 
 		// 스마트 컨트랙트를 가져오기 위해 EtherscanAPI(Sepolia testnet ABI data -> json 저장)과 Web3jWrapperGenerator(json -> java wrapper 저장) 객체 만들기
 		EtherscanAPI etherscanAPI = new EtherscanAPI();

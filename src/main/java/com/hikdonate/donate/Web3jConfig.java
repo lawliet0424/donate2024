@@ -1,12 +1,17 @@
 package com.hikdonate.donate;
 
+import com.hikdonate.contracts.DonateTokenBank;
+import com.hikdonate.contracts.MultiTokenTransfer;
+import com.hikdonate.contracts.TokenTransfer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.gas.DefaultGasProvider;
 
 /*
 Class name: Web3jConfig
@@ -21,9 +26,41 @@ public class Web3jConfig {
     @Value("${infura.url}")
     private String infuraURL;
 
+    @Value("${admin.private-key}")
+    private String adminPrivateKey;
+
+    @Value("${donateTokenBank.address}") // 의논하기
+    private String donateTokenBankAddress;
+
+    @Value("${tokenTransfer.address}") // 의논하기
+    private String tokenTransferAddress;
+
+    @Value("${multiTokenTransfer.address}") // 의논하기
+    private String multiTokenTransferAddress;
+
     @Bean
     public Web3j web3j() {
         return Web3j.build(new HttpService(infuraURL));
+    }
+
+    @Bean
+    public Credentials credentials() {
+        return Credentials.create(adminPrivateKey);
+    }
+
+    @Bean
+    public DonateTokenBank donateTokenBank(Web3j web3j, Credentials credentials) {
+        return DonateTokenBank.load(donateTokenBankAddress, web3j, credentials, new DefaultGasProvider());
+    }
+
+    @Bean
+    public TokenTransfer tokenTransfer(Web3j web3j, Credentials credentials) {
+        return TokenTransfer.load(tokenTransferAddress, web3j, credentials, new DefaultGasProvider());
+    }
+
+    @Bean
+    public MultiTokenTransfer multiTokenTransfer(Web3j web3j, Credentials credentials) {
+        return MultiTokenTransfer.load(multiTokenTransferAddress, web3j, credentials, new DefaultGasProvider());
     }
 
     @Bean
