@@ -28,6 +28,7 @@ dependencies {
 	implementation 'com.h2database:h2'
 	implementation 'org.projectlombok:lombok'
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+	implementation 'org.mongodb:mongodb-driver-sync:5.1.2'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
