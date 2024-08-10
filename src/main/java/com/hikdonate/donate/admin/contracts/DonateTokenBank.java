@@ -1,4 +1,4 @@
-package com.hikdonate.contracts;
+package com.hikdonate.donate.admin.contracts;
 
 import io.reactivex.Flowable;
 import java.math.BigInteger;

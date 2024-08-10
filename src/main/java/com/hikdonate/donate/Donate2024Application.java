@@ -1,5 +1,7 @@
 package com.hikdonate.donate;
 
+import com.hikdonate.donate.donor.service.EtherscanAPI;
+import com.hikdonate.donate.donor.service.Web3jWrapperGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

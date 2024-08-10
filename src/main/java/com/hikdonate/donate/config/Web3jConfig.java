@@ -1,4 +1,4 @@
-package com.hikdonate.donate;
+package com.hikdonate.donate.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

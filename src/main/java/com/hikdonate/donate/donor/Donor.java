@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain;
+package com.hikdonate.donate.donor;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Column;

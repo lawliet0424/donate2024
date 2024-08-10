@@ -1,4 +1,4 @@
-package com.hikdonate.donate;
+package com.hikdonate.donate.donor.service;
 
 import java.io.IOException;
 
