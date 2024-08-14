@@ -1,6 +1,6 @@
-package com.hikdonate.donate.admin.service;
+package com.hikdonate.donate.transaction.service;
 
-import com.hikdonate.donate.admin.Transaction;
+import com.hikdonate.donate.transaction.Transaction;
 import com.hikdonate.donate.admin.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

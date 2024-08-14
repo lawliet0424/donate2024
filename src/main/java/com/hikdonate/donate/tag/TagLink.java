@@ -1,4 +1,4 @@
-package com.hikdonate.donate.admin;
+package com.hikdonate.donate.tag;
 
 import com.hikdonate.donate.beneficiary.Beneficiary;
 import jakarta.persistence.*;

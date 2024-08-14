@@ -1,4 +1,4 @@
-package com.hikdonate.donate.donor.service;
+package com.hikdonate.donate.web3jAPI;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -7,7 +7,6 @@ import java.net.URL;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /*
 Class name: EtherscanAPI
@@ -15,7 +14,7 @@ Summary: Sepolia testnet의 verified smart contract에 접속해서, ABI 파일 
 Date: 2024.07.26
 Written by: 조현지
 */
-@Service
+
 public class EtherscanAPI {
     // [하드코딩]이지만, DB나 클라우드와 연동하기 전까지는 하드코딩이 맞음
     @Value("${infura.api-key}")

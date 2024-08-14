@@ -1,8 +1,8 @@
 package com.hikdonate.donate.beneficiary;
 
-import com.hikdonate.donate.donor.Interest;
+import com.hikdonate.donate.interest.Interest;
 import com.hikdonate.donate.organization.Organization;
-import com.hikdonate.donate.admin.TagLink;
+import com.hikdonate.donate.tag.TagLink;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

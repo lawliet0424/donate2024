@@ -1,4 +1,4 @@
-package com.hikdonate.donate.donor;
+package com.hikdonate.donate.interest;
 
 import jakarta.persistence.Embeddable;
 
