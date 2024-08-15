@@ -1,7 +1,7 @@
 package com.hikdonate.donate;
 
 import com.hikdonate.donate.transaction.Transaction;
-import com.hikdonate.donate.admin.repository.TransactionRepository;
+import com.hikdonate.donate.transaction.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
