@@ -1,0 +1,19 @@
+.ColoredButton {
+  background-color: #d9d9d9;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  white-space: nowrap;
+  width: 150px;
+  height: 60px;
+}
+
+.ColoredButton_Orange {
+  background-color: #fea801;
+}
+
+.ColoredButton_White {
+  background-color: white;
+  border: 1px solid #fea801;
+}
