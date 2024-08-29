@@ -3,6 +3,7 @@ package com.hikdonate.donate;
 import com.hikdonate.donate.web3jAPI.EtherscanAPI;
 import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,6 +16,7 @@ Date: 2024.07.26
 Written by: 조현지
 */
 @SpringBootApplication
+@Slf4j
 public class Donate2024Application {
 	/*
     Function name: main

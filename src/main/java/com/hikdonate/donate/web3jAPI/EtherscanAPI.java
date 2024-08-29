@@ -7,6 +7,7 @@ import java.net.URL;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /*
 Class name: EtherscanAPI
@@ -14,14 +15,13 @@ Summary: Sepolia testnet의 verified smart contract에 접속해서, ABI 파일 
 Date: 2024.07.26
 Written by: 조현지
 */
-
+@Component
 public class EtherscanAPI {
     // [하드코딩]이지만, DB나 클라우드와 연동하기 전까지는 하드코딩이 맞음
-    @Value("${infura.api-key}")
-    private static final String apiKey = null;
-
+    @Value("${apikey}")
+    private String apiKey = "QEJBFXZB62T9MVG2YVD2HS4ZG1SZU458XG";
     @Value("${abi.file-path}")
-    private static final String filePath = null;
+    private String filePath = "src/main/resources/contracts/";
 
     /*
     Function name: getContractABI
@@ -34,7 +34,7 @@ public class EtherscanAPI {
     Date: 2024.07.26
     Written by: 조현지
     */
-    public static void getContractABI(String contractAddress, String contractName) throws IOException {
+    public void getContractABI(String contractAddress, String contractName) throws IOException {
         // Sepolia testnet에 verified된 스마트 컨트랙트 주소
         String url = "https://api-sepolia.etherscan.io/api" +
                 "?module=contract" +
@@ -81,7 +81,7 @@ public class EtherscanAPI {
     Date: 2024.07.26
     Written by: 조현지
     */
-    private static void saveToFile(String filename, String data) throws IOException {
+    private void saveToFile(String filename, String data) throws IOException {
         // 파일 객체 생성
         File file = new File(filename);
 
