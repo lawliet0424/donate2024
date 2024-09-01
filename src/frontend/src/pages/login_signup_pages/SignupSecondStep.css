@@ -13,8 +13,8 @@
 }
 
 .SignupSecondStep input {
-  width: 270px;
-  height: 40px;
+  width: 272px;
+  height: 38px;
   font-size: 15px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -22,14 +22,14 @@
   box-sizing: border-box;
 }
 
-.SignupSecondStep .idForm {
+/* .SignupSecondStep .idForm {
   position: relative;
   width: 270px;
 }
 
 .SignupSecondStep .idForm input {
   width: 100%;
-  padding-right: 90px; /* Adjusted for button width */
+  padding-right: 90px;
 }
 
 .SignupSecondStep .duplicateCheckButton {
@@ -45,7 +45,8 @@
   border-radius: 4px;
   cursor: pointer;
   color: #808080;
-}
+  height: 20px;
+} */
 
 .SignupSecondStep .pageNavigationButtons {
   display: flex;
@@ -60,4 +61,26 @@
   font-size: 15px;
   border-radius: 8px;
   padding: 3px 10px;
+}
+
+/* inputInvalid 클래스가 적용된 입력 필드의 스타일 */
+.SignupSecondStep input.inputInvalid {
+  border: 1px solid red; /* 테두리 빨간색 */
+}
+
+/* inputInvalid 클래스가 적용된 오류 메시지 스타일 */
+.SignupSecondStep .errorMessage {
+  color: red; /* 글씨 빨간색 */
+  font-size: 12px; /* 글씨 크기 */
+  text-align: left; /* 왼쪽 정렬 */
+  width: 272px; /* 입력 필드와 동일한 너비 */
+  margin-top: -8px; /* 입력 필드와 간격 조정 */
+}
+
+.SignupSecondStep .defaultMessage {
+  color: #767676;
+  font-size: 12px; /* 글씨 크기 */
+  text-align: left; /* 왼쪽 정렬 */
+  width: 272px; /* 입력 필드와 동일한 너비 */
+  margin-top: -8px; /* 입력 필드와 간격 조정 */
 }

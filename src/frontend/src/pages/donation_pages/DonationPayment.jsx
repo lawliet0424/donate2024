@@ -1,15 +1,31 @@
 import "./DonationPayment.css";
-import React, { useState } from "react";
-// import PaymentMethod from "../../components/PaymentMethod";
-import PaymentMethodSelection from "../../components/PaymentMethodSelection";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import PaymentMethod from "../../components/PaymentMethod";
+// import PaymentMethodSelection from "../../components/PaymentMethodSelection";
 import PaymentReceipt from "../../components/PaymentReceipt";
+import { AuthContext } from "../../context/AuthContext";
 
 const DonationPayment = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useContext(AuthContext);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [isMethodSelected, setIsMethodSelected] = useState(false);
 
   const handlePaymentMethodClick = (methodName) => {
     setSelectedPaymentMethod(methodName);
+    setIsMethodSelected(true);
   };
+
+  const { personnel, amount, perPerson, fromThirdStep } = location.state || {};
+  useEffect(() => {
+    if (!fromThirdStep) {
+      window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+      navigate("/");
+      return;
+    }
+  }, [fromThirdStep, navigate]);
 
   return (
     <div className="DonationPayment">
@@ -25,14 +41,14 @@ const DonationPayment = () => {
                 <div>메일</div>
               </div>
               <div className="donorInfoRight">
-                <div>기부자</div>
-                <div>010-1234-5678</div>
-                <div>dfhdfjlk@gmail.com</div>
+                <div>{user.donorName}</div>
+                <div>{user.donorPhone}</div>
+                <div>{user.donorEmail}</div>
               </div>
             </div>
           </div>
-          <PaymentMethodSelection value={30000} />
-          {/* <div className="paymentMethodList">
+          {/* <PaymentMethodSelection value={30000} /> */}
+          <div className="paymentMethodList">
             <div className="paymentMethodTitle">결제 수단</div>
             <PaymentMethod
               methodName={"카드결제"}
@@ -49,12 +65,14 @@ const DonationPayment = () => {
               isPaymentMethodSelected={selectedPaymentMethod === "기타결제"}
               onClick={() => handlePaymentMethodClick("기타결제")}
             />
-          </div> */}
+          </div>
         </div>
         <div className="donationPaymentRight">
           <PaymentReceipt
-            numberOfBeneficiaries={"3"}
-            donationAmountPerPerson={"10000"}
+            numberOfBeneficiaries={personnel}
+            donationAmountPerPerson={perPerson}
+            totalAmount={amount}
+            isMethodSelected={isMethodSelected}
           />
         </div>
       </div>

@@ -1,36 +1,22 @@
 import "./MyInterest.css";
+import React, { useEffect } from "react";
 import BeneficiaryBox from "../../components/BeneficiaryBox";
-import profileImage from "../../assets/defaultProfile.png";
+import useInterest from "../../hooks/useInterest";
 
 const MyInterest = () => {
+  const { userInterests, getUserInterests } = useInterest();
+
+  useEffect(() => {
+    getUserInterests();
+  }, [getUserInterests]);
+
   return (
     <div className="MyInterest">
       <div className="title">나의 관심 수혜자</div>
       <div className="beneficiaryLists">
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
-        <BeneficiaryBox
-          profileImage={profileImage}
-          name={"이름"}
-          tags={["태그1", "태그2"]}
-          id={3}
-        />
+        {userInterests.map((beneficiaryId) => (
+          <BeneficiaryBox key={beneficiaryId} beneficiaryId={beneficiaryId} />
+        ))}
       </div>
     </div>
   );

@@ -1,17 +1,20 @@
 import "./DonationDone.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DoNateLogo from "../../assets/DoNateIcon.png";
 import ColoredButton from "../../components/ColoredButton";
 
 const DonationDone = () => {
   const nav = useNavigate();
+  const location = useLocation();
+
+  const { personnel, amount, perPerson } = location.state || {};
 
   const onStatusButtonClicked = () => {
-    nav("/mystatus", { state: { fromThirdStep: true } });
+    nav("/mystatus");
   };
 
   const onHomeButtonClicked = () => {
-    nav("/", { state: { fromThirdStep: true } });
+    nav("/");
   };
 
   return (
@@ -20,10 +23,10 @@ const DonationDone = () => {
       <img className="DoNateLogoImg" src={DoNateLogo} alt="DoNateLogo" />
       <div className="resultContent">
         <div className="resultLineOne">
-          {"___명에게 __________원을 나눠 기부하였습니다."}
+          {`${personnel.toLocaleString()}명에게 ${amount.toLocaleString()}원을 나눠 기부하였습니다.`}
         </div>
         <div className="resultLineTwo">
-          {"한 명당 _______원 기부되었습니다."}
+          {`수혜자 한 명당 ${perPerson.toLocaleString()}원 기부되었습니다.`}
         </div>
       </div>
       <div className="pageNavigationButtons">

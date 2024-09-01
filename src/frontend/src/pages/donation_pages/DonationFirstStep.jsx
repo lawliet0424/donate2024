@@ -1,75 +1,73 @@
 import "./DonationFirstStep.css";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import DonationStepsBar from "../../components/DonationStepsBar";
 import TagBox from "../../components/TagBox";
 import ColoredButton from "../../components/ColoredButton";
+import useTag from "../../hooks/useTag";
 
 const DonationFirstStep = () => {
-  const categories = {
-    분류1: [
-      "태그1",
-      "태그2",
-      "태그3",
-      "태그4",
-      "태그5",
-      "태그6",
-      "태그7",
-      "태그8",
-      "태그9",
-      "태그10",
-      "태그11",
-      "태그12",
-      "태그13",
-      "태그14",
-      "태그15",
-      "태그16",
-      "태그17",
-      "태그18",
-      "태그19",
-      "태그20",
-      "태그21",
-      "태그22",
-    ],
-    분류2: ["12", "33", "44", "55", "66", "77", "88", "99", "10", "11"],
-  };
-
+  const { loading, error, getTagCategories } = useTag();
   const [selectedTags, setSelectedTags] = useState(new Set());
 
-  const handleTagClick = (tagName) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.selectedTags) {
+      setSelectedTags(new Set(location.state.selectedTags));
+    }
+  }, [location.state]);
+
+  const categories = getTagCategories();
+
+  const handleTagClick = (tagId) => {
     setSelectedTags((prevSelectedTags) => {
       const newSelectedTags = new Set(prevSelectedTags);
-      if (newSelectedTags.has(tagName)) {
-        newSelectedTags.delete(tagName);
+      if (newSelectedTags.has(tagId)) {
+        newSelectedTags.delete(tagId);
       } else {
-        newSelectedTags.add(tagName);
+        newSelectedTags.add(tagId);
       }
       return newSelectedTags;
     });
   };
 
-  const navigate = useNavigate();
-
   const onNextButtonClicked = () => {
-    navigate("/donation/second", { state: { fromFirstStep: true } });
+    navigate("/donation/second", {
+      state: {
+        fromFirstStep: true,
+        selectedTags: Array.from(selectedTags),
+      },
+    });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading tags: {error.message}</div>;
+  }
 
   return (
     <div className="DonationFirstStep">
       <DonationStepsBar stepNow={1} />
-      {Object.keys(categories).map((category) => (
-        <div key={category} className="categorySection">
-          <div className="categoryName">{category}</div>
-          {categories[category].map((tag) => (
-            <TagBox
-              key={tag}
-              tagName={tag}
-              isSelected={selectedTags.has(tag)}
-              onTagClick={() => handleTagClick(tag)}
-            />
-          ))}
-        </div>
-      ))}
+      <div className="TagSection">
+        {Object.keys(categories).map((category) => (
+          <div key={category} className="categorySection">
+            <div className="categoryName">{category}</div>
+            {categories[category].map((tag) => (
+              <TagBox
+                key={tag.id}
+                tagName={tag.name}
+                isSelected={selectedTags.has(tag.id)}
+                onTagClick={() => handleTagClick(tag.id)}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
       <ColoredButton
         text={"다음"}
         colorScheme={"Orange"}

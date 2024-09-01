@@ -1,26 +1,28 @@
-import "./Login.css";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import TransparentButton from "../../components/TransparentButton";
 import ColoredButton from "../../components/ColoredButton";
+import "./Login.css";
 
 const Login = () => {
   const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const { login } = useAuth();
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
-  const onClickLoginButton = () => {
-    console.log("아이디:", loginId);
-    console.log("비밀번호:", loginPassword);
-    login();
-    window.alert("로그인");
-    nav("/", { replace: true });
+  const onClickLoginButton = async () => {
+    try {
+      await login(loginId, loginPassword);
+      navigate("/");
+    } catch (error) {
+      window.alert("오류");
+      console.error("Login failed", error);
+    }
   };
 
   const onClickToSignupButton = () => {
-    nav("/signup");
+    navigate("/signup");
   };
 
   const onIdSearchingButtonClick = () => {

@@ -1,0 +1,39 @@
+.SignupDone {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.SignupDone .title {
+  font-size: 23px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.SignupDone .checkMark {
+  width: 70px;
+  height: 70px;
+  padding-top: 170px;
+}
+
+.SignupDone .resultText {
+  font-size: 124x;
+  padding-top: 30px;
+}
+
+.SignupDone .ColoredButton {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.SignupDone .pageNavigationButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 130px;
+}
