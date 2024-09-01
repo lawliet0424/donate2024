@@ -2,7 +2,7 @@ import "./ColoredButton.css";
 
 const ColoredButton = ({ text, colorScheme, onClick }) => {
   const buttonClass = `ColoredButton ${
-    colorScheme ? `ColoredButton_${colorScheme}` : ""
+    colorScheme ? `ColoredButton--${colorScheme}` : ""
   }`;
 
   return (

@@ -7,13 +7,13 @@ const PaymentMethod = ({
   isPaymentMethodSelected,
   onClick,
 }) => {
+  const buttonClass = `PaymentMethod ${
+    isPaymentMethodSelected ? `PaymentMethod--selected` : ""
+  }`;
   return (
-    <div
-      className={`PaymentMethod ${isPaymentMethodSelected ? "selected" : ""}`}
-      onClick={onClick}
-    >
-      <div className="methodName">{methodName}</div>
-    </div>
+    <button onClick={onClick} className={buttonClass}>
+      {methodName}
+    </button>
   );
 };
 

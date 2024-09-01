@@ -2,11 +2,11 @@
   display: flex;
   align-items: center;
   width: 880px;
+  height: 60px;
   padding: 15px 20px;
+  background-color: white;
   border: 1px solid #d9d9d9;
   border-radius: 20px;
-  background-color: white;
-  height: 60px;
 }
 
 .BeneficiaryBox .profileImage {
@@ -16,13 +16,13 @@
   border-radius: 50%;
 }
 
-.BeneficiaryBox .beneficiaryBoxText {
+.BeneficiaryBox .beneficiaryDetails {
   flex-grow: 1;
   padding-left: 12px;
   padding-bottom: 2px;
 }
 
-.BeneficiaryBox .beneficiaryFirstLine {
+.BeneficiaryBox .beneficiaryHeader {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -32,33 +32,33 @@
   font-size: 16px;
 }
 
-.BeneficiaryBox .beneficiaryTags {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  width: 700px;
-}
-
-.BeneficiaryBox .tagItem_isSelected {
-  background: linear-gradient(
-    to top,
-    rgb(254, 168, 1, 0.5) 60%,
-    transparent 40%
-  );
-}
-
-.BeneficiaryBox .TransparentButton {
-  padding: 10px;
-}
-
-.BeneficiaryBox .interestButton {
-  cursor: pointer;
+.BeneficiaryBox .likeButton {
   padding-left: 8px;
+  cursor: pointer;
 }
 
 .BeneficiaryBox .heartImg {
   width: 16px;
   height: 16px;
   padding-top: 5px;
+}
+
+.BeneficiaryBox .beneficiaryTagsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 700px;
+  font-size: 14px;
+}
+
+.BeneficiaryBox .tagItem--selected {
+  background: linear-gradient(
+    to top,
+    rgba(254, 168, 1, 0.5) 60%,
+    transparent 40%
+  );
+}
+
+.BeneficiaryBox .TransparentButton {
+  padding: 10px;
 }

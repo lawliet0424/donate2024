@@ -12,7 +12,7 @@ const MyPageMenuBox = ({ menuName, myPageType }) => {
 
   return (
     <div className="MyPageMenuBox">
-      <div className="menuName">{menuName}</div>
+      <div className="MyPageMenuBox__title">{menuName}</div>
       <TransparentButton text="> 상세 페이지" onClick={onClickMenuBox} />
     </div>
   );

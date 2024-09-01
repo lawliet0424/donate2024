@@ -58,7 +58,7 @@ const DonationThirdStep = () => {
         <ColoredButton text={"이전"} onClick={onBeforeButtonClicked} />
         <ColoredButton
           text={"결제하기"}
-          colorScheme={"Orange"}
+          colorScheme={"orange"}
           onClick={onNextButtonClicked}
         />
       </div>

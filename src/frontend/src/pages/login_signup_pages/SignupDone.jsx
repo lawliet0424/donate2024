@@ -35,7 +35,7 @@ const SignupDone = () => {
         <ColoredButton text={"메인"} onClick={onHomeButtonClicked} />
         <ColoredButton
           text={"로그인"}
-          colorScheme={"Orange"}
+          colorScheme={"orange"}
           onClick={onLoginButtonClicked}
         />
       </div>

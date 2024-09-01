@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       setIsAuthenticated(true);
 
-      // 로그인 정보를 로컬 스토리지에 저장
       localStorage.setItem("user", JSON.stringify(userData));
       localStorage.setItem("isAuthenticated", "true");
 
@@ -89,7 +88,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
 
-    // 로컬 스토리지에서 사용자 정보 제거
     localStorage.clear();
   };
 

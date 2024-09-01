@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import { mockGetTags } from "../api";
-import useLoadingError from "../hooks/useLoadingError";
 
 export const TagContext = createContext();
 
 export const TagProvider = ({ children }) => {
   const [tags, setTags] = useState([]);
-  const { loading, error, setLoading, setError } = useLoadingError();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTags = async () => {

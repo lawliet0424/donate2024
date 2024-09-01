@@ -1,5 +1,5 @@
 import "./BeneficiaryBox.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import TransparentButton from "../components/TransparentButton";
 import defaultProfileImage from "../assets/defaultProfile.png";
 import filledHeart from "../assets/filledHeart.png";
@@ -17,19 +17,20 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
     if (!beneficiaries[beneficiaryId]) {
       getBeneficiaryById(beneficiaryId);
     }
-  }, [beneficiaryId, getBeneficiaryById, beneficiaries]);
+  }, [beneficiaryId, beneficiaries, getBeneficiaryById]);
 
-  // 로딩 상태 처리
+  const handleToggleInterest = useCallback(() => {
+    toggleInterest(beneficiaryId);
+  }, [beneficiaryId, toggleInterest]);
+
   if (loading && !beneficiaries[beneficiaryId]) {
     return <p>Loading...</p>;
   }
 
-  // 오류 상태 처리
   if (error) {
     return <p>Error: {error}</p>;
   }
 
-  // `selectedBeneficiary`가 null인 경우
   const selectedBeneficiary = beneficiaries[beneficiaryId];
   if (!selectedBeneficiary) {
     return <p>No beneficiary data available</p>;
@@ -45,15 +46,12 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
         src={imageSrc}
         alt={selectedBeneficiary.beneficiaryName || "Beneficiary"}
       />
-      <div className="beneficiaryBoxText">
-        <div className="beneficiaryFirstLine">
+      <div className="beneficiaryDetails">
+        <div className="beneficiaryHeader">
           <div className="beneficiaryName">
             {selectedBeneficiary.beneficiaryName || "No Name"}
           </div>
-          <div
-            className="interestButton"
-            onClick={() => toggleInterest(beneficiaryId)}
-          >
+          <div className="likeButton" onClick={handleToggleInterest}>
             <img
               className="heartImg"
               src={isInterested ? filledHeart : emptyHeart}
@@ -61,14 +59,14 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
             />
           </div>
         </div>
-        <div className="beneficiaryTags">
+        <div className="beneficiaryTagsContainer">
           {selectedBeneficiary.beneficiaryTags &&
           selectedBeneficiary.beneficiaryTags.length > 0 ? (
-            selectedBeneficiary.beneficiaryTags.map((tag, index) => (
+            selectedBeneficiary.beneficiaryTags.map((tag) => (
               <div
-                key={index}
+                key={tag.id}
                 className={`tagItem ${
-                  selectedTags.includes(tag.id) ? "tagItem_isSelected" : ""
+                  selectedTags.includes(tag.id) ? "tagItem--selected" : ""
                 }`}
               >
                 #{tag.name}

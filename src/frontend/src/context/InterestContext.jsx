@@ -1,20 +1,14 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { createContext, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import { mockGetUserInterests } from "../api";
-import useLoadingError from "../hooks/useLoadingError";
 
 export const InterestContext = createContext();
 
 export const InterestProvider = ({ children }) => {
   const [userInterests, setUserInterests] = useState([]);
-  const { loading, error, setLoading, setError } = useLoadingError();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { user } = useContext(AuthContext);
 
   const getUserInterests = useCallback(async () => {

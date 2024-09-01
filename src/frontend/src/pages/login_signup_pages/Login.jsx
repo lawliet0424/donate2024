@@ -50,7 +50,7 @@ const Login = () => {
       />
       <ColoredButton
         text="로그인"
-        colorScheme="Orange"
+        colorScheme="orange"
         onClick={onClickLoginButton}
       />
 
@@ -74,9 +74,8 @@ const Login = () => {
 
       <ColoredButton
         text="회원가입"
-        colorScheme="White"
+        colorScheme="white"
         onClick={onClickToSignupButton}
-        className="ColoredButton_White"
       />
     </div>
   );

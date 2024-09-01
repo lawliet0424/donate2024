@@ -120,7 +120,7 @@ const SignupFirstStep = () => {
       )}
       <ColoredButton
         text="다음"
-        colorScheme="Orange"
+        colorScheme="orange"
         onClick={onNextButtonClicked}
       />
 
@@ -132,9 +132,8 @@ const SignupFirstStep = () => {
 
       <ColoredButton
         text="로그인"
-        colorScheme="White"
+        colorScheme="white"
         onClick={onClickToSignupButton}
-        className="ColoredButton_White"
       />
     </div>
   );

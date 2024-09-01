@@ -2,21 +2,23 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  font-size: 18px;
+
   width: 320px;
   padding: 10px 0;
   border-bottom: 3px solid #d9d9d9;
+
+  font-size: 18px;
 }
 
 .DonationSteps .num {
   font-weight: 600;
 }
 
-.DonationSteps.here {
+.DonationSteps.is-active {
   border-bottom: 3px solid #fea801;
 }
 
-.DonationSteps.here .num {
+.DonationSteps.is-active .num {
   color: #fea801;
 }
 

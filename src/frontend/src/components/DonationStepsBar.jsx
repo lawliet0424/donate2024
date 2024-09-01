@@ -2,7 +2,7 @@ import "./DonationStepsBar.css";
 
 const DonationSteps = ({ num, text, isNow }) => {
   return (
-    <div className={`DonationSteps ${isNow ? "here" : ""}`}>
+    <div className={`DonationSteps ${isNow ? "is-active" : ""}`}>
       <div className="num">{num}</div>
       <div className="text">{text}</div>
     </div>

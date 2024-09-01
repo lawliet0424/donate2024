@@ -98,7 +98,7 @@ const DonationSecondStep = () => {
         <ColoredButton text={"이전"} onClick={onBeforeButtonClicked} />
         <ColoredButton
           text={"다음"}
-          colorScheme={"Orange"}
+          colorScheme={"orange"}
           onClick={onNextButtonClicked}
         />
       </div>
