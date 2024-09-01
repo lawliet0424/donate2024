@@ -1,0 +1,139 @@
+{
+  "userInfo": [
+    {
+      "donorId": "first",
+      "donorPassword": "userfirst1",
+      "donorNickname": "일번",
+      "donorName": "사용자일번",
+      "donorEmail": "1111@gmail.com",
+      "donorPhone": "01011111111",
+      "donorProfileImage": "/assets/exampleImg.png",
+      "donorAge": "",
+      "donorFinancialAccount": "",
+      "donorWalletAddress": "0x1111111"
+    },
+    {
+      "donorId": "second",
+      "donorPassword": "usersecond1",
+      "donorNickname": "이번",
+      "donorName": "사용자이번",
+      "donorEmail": "2222@gmail.com",
+      "donorPhone": "01022222222",
+      "donorProfileImage": "/assets/exampleImg.png",
+      "donorAge": "",
+      "donorFinancialAccount": "",
+      "donorWalletAddress": "0x22222222"
+    }
+  ],
+  "beneficiaries": [
+    {
+      "beneficiaryId": 1,
+      "beneficiaryName": "수혜자1",
+
+      "beneficiaryTags": [
+        { "id": 1, "name": "여성" },
+        { "id": 5, "name": "청소년(13-18세)" },
+        { "id": 9, "name": "한부모가정" }
+      ],
+      "beneficiaryInfo": "수혜자1 내용입니다.",
+      "beneficiaryProfileImg": "/assets/exampleImg.png",
+      "beneficiaryBackgroundImg": "/assets/exampleImg.png"
+    },
+    {
+      "beneficiaryId": 2,
+      "beneficiaryName": "수혜자2",
+      "beneficiaryTags": [
+        { "id": 1, "name": "여성" },
+        { "id": 5, "name": "청소년(13-18세)" },
+        { "id": 9, "name": "한부모가정" }
+      ],
+      "beneficiaryInfo": "수혜자2 내용입니다.",
+      "beneficiaryProfileImg": "/assets/exampleImg.png",
+      "beneficiaryBackgroundImg": "/assets/exampleImg.png"
+    },
+    {
+      "beneficiaryId": 3,
+      "beneficiaryName": "수혜자3",
+      "beneficiaryTags": [
+        { "id": 1, "name": "여성" },
+        { "id": 5, "name": "청소년(13-18세)" },
+        { "id": 9, "name": "한부모가정" }
+      ],
+      "beneficiaryInfo": "수혜자3 내용입니다.",
+      "beneficiaryProfileImg": "/assets/exampleImg.png",
+      "beneficiaryBackgroundImg": "/assets/exampleImg.png"
+    }
+  ],
+  "userInterests": [
+    { "donorId": "first", "interestInfo": [1, 3] },
+    { "donorId": "second", "interestInfo": [] }
+  ],
+
+  "tagInfo": [
+    {
+      "tagClass": "성별",
+      "tagLists": [
+        { "id": 1, "name": "여성" },
+        { "id": 2, "name": "남성" }
+      ]
+    },
+    {
+      "tagClass": "연령",
+      "tagLists": [
+        { "id": 3, "name": "유아(0-2세)" },
+        { "id": 4, "name": "아동(3-12세)" },
+        { "id": 5, "name": "청소년(13-18세)" },
+        { "id": 6, "name": "청년(19-29세)" },
+        { "id": 7, "name": "성인(30-59세)" },
+        { "id": 8, "name": "노인(60세 이상)" }
+      ]
+    },
+    {
+      "tagClass": "가정 형태",
+      "tagLists": [
+        { "id": 9, "name": "한부모가정" },
+        { "id": 10, "name": "다문화가정" },
+        { "id": 11, "name": "조손가정" },
+        { "id": 12, "name": "보호시설가정" },
+        { "id": 13, "name": "입양가정" },
+        { "id": 14, "name": "독신자" },
+        { "id": 15, "name": "다자녀가정" }
+      ]
+    },
+    {
+      "tagClass": "장애",
+      "tagLists": [
+        { "id": 16, "name": "시각장애" },
+        { "id": 17, "name": "청각장애" },
+        { "id": 18, "name": "지체장애" },
+        { "id": 19, "name": "지적장애" },
+        { "id": 20, "name": "정신장애" },
+        { "id": 21, "name": "발달장애" },
+        { "id": 22, "name": "신체장애" },
+        { "id": 23, "name": "언어장애" },
+        { "id": 24, "name": "학습장애" },
+        { "id": 25, "name": "자폐스펙트럼" },
+        { "id": 26, "name": "다중장애" },
+        { "id": 27, "name": "특수장애" }
+      ]
+    },
+    {
+      "tagClass": "질병",
+      "tagLists": [
+        { "id": 28, "name": "암환자" },
+        { "id": 29, "name": "심장병" },
+        { "id": 30, "name": "당뇨병" },
+        { "id": 31, "name": "고혈압" },
+        { "id": 32, "name": "호흡기질환" },
+        { "id": 33, "name": "간질" },
+        { "id": 34, "name": "난치성질환" },
+        { "id": 35, "name": "만성질환" },
+        { "id": 36, "name": "희귀병" },
+        { "id": 37, "name": "정신질환" },
+        { "id": 39, "name": "파킨슨병" },
+        { "id": 40, "name": "알츠하이머" },
+        { "id": 41, "name": "자가면역질환" }
+      ]
+    }
+  ]
+}

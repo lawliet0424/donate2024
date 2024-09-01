@@ -1,39 +1,59 @@
 import "./BeneficiaryBox.css";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import TransparentButton from "../components/TransparentButton";
 import defaultProfileImage from "../assets/defaultProfile.png";
-import filledHeart from "../assets/filled_heart.png";
-import emptyHeart from "../assets/empty_heart.png";
+import filledHeart from "../assets/filledHeart.png";
+import emptyHeart from "../assets/emptyHeart.png";
+import useBeneficiary from "../hooks/useBeneficiary";
+import useInterest from "../hooks/useInterest";
 
-const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
-  const [isInterested, setIsInterested] = useState(false);
+const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
+  const { beneficiaries, getBeneficiaryById, loading, error } =
+    useBeneficiary();
+  const { userInterests, toggleInterest } = useInterest();
+  const isInterested = userInterests.includes(beneficiaryId.toString());
 
-  const toggleInterest = () => {
-    setIsInterested(!isInterested);
-  };
-
-  const onClickBeneficiaryDetailPageLink = () => {
-    const newWindow = window.open(
-      `/beneficiarydetailpage?beneficiaryId=${id}`,
-      "_blank"
-    );
-
-    if (newWindow) {
-      newWindow.onload = () => {
-        newWindow.document.title = `Do-Nate/수혜자/상세페이지 ${name}`;
-      };
+  useEffect(() => {
+    if (!beneficiaries[beneficiaryId]) {
+      getBeneficiaryById(beneficiaryId);
     }
-  };
+  }, [beneficiaryId, getBeneficiaryById, beneficiaries]);
 
-  const imageSrc = profileImage ? profileImage : defaultProfileImage;
+  // 로딩 상태 처리
+  if (loading && !beneficiaries[beneficiaryId]) {
+    return <p>Loading...</p>;
+  }
+
+  // 오류 상태 처리
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  // `selectedBeneficiary`가 null인 경우
+  const selectedBeneficiary = beneficiaries[beneficiaryId];
+  if (!selectedBeneficiary) {
+    return <p>No beneficiary data available</p>;
+  }
+
+  const imageSrc =
+    selectedBeneficiary.beneficiaryProfileImg || defaultProfileImage;
 
   return (
     <div className="BeneficiaryBox">
-      <img className="profileImage" src={imageSrc} alt={name} />
+      <img
+        className="profileImage"
+        src={imageSrc}
+        alt={selectedBeneficiary.beneficiaryName || "Beneficiary"}
+      />
       <div className="beneficiaryBoxText">
         <div className="beneficiaryFirstLine">
-          <div className="name">{name}</div>
-          <div className="interestButton" onClick={toggleInterest}>
+          <div className="beneficiaryName">
+            {selectedBeneficiary.beneficiaryName || "No Name"}
+          </div>
+          <div
+            className="interestButton"
+            onClick={() => toggleInterest(beneficiaryId)}
+          >
             <img
               className="heartImg"
               src={isInterested ? filledHeart : emptyHeart}
@@ -41,17 +61,27 @@ const BeneficiaryBox = ({ profileImage, name, tags, id }) => {
             />
           </div>
         </div>
-        <div className="tagList">
-          {tags.map((tag, index) => (
-            <div key={index} className="tagItem">
-              #{tag}
-            </div>
-          ))}
+        <div className="beneficiaryTags">
+          {selectedBeneficiary.beneficiaryTags &&
+          selectedBeneficiary.beneficiaryTags.length > 0 ? (
+            selectedBeneficiary.beneficiaryTags.map((tag, index) => (
+              <div
+                key={index}
+                className={`tagItem ${
+                  selectedTags.includes(tag.id) ? "tagItem_isSelected" : ""
+                }`}
+              >
+                #{tag.name}
+              </div>
+            ))
+          ) : (
+            <div className="tagItem">No Tags</div>
+          )}
         </div>
       </div>
       <TransparentButton
         text="> 상세 페이지"
-        onClick={onClickBeneficiaryDetailPageLink}
+        onClick={() => window.open(`/beneficiary/${beneficiaryId}`, "_blank")}
       />
     </div>
   );

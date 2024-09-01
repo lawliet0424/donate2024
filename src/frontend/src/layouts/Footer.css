@@ -1,8 +1,16 @@
 .Footer {
-    height: 200px;
-    color: #878787;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 70px;
-  }
+  margin-top: 150px;
+  height: 200px;
+  color: #787a86;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 70px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+}
+
+.Footer .footerContent {
+  width: 1000px;
+}

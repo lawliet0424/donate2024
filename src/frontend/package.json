@@ -12,6 +12,7 @@
   "dependencies": {
     "@tosspayments/payment-widget-sdk": "^0.11.1",
     "@tosspayments/tosspayments-sdk": "^2.2.4",
+    "axios": "^1.7.7",
     "nanoid": "^5.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

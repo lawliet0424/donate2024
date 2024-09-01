@@ -1,8 +1,12 @@
 import "./DonationSecondStep.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DonationStepsBar from "../../components/DonationStepsBar";
 import ColoredButton from "../../components/ColoredButton";
+import {
+  formatPerPerson,
+  validatePersonnelAmount,
+} from "../../utils/FormatValidate";
 
 const DonationSecondStep = () => {
   const navigate = useNavigate();
@@ -11,36 +15,45 @@ const DonationSecondStep = () => {
   const [personnel, setPersonnel] = useState("");
   const [amount, setAmount] = useState("");
 
-  // Check if the state includes the expected values
-  if (
-    !location.state ||
-    (!location.state.fromFirstStep && !location.state.fromThirdStep)
-  ) {
-    window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    const { fromFirstStep, fromThirdStep } = location.state || {};
+
+    if (!fromFirstStep && !fromThirdStep) {
+      window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+      navigate("/");
+      return;
+    }
+
+    const { personnel: savedPersonnel, amount: savedAmount } = location.state;
+    setPersonnel(savedPersonnel);
+    setAmount(savedAmount);
+  }, [location.state, navigate]);
 
   const perPerson = personnel && amount ? amount / personnel : 0;
 
-  const formatPerPerson = (value) => {
-    if (value % 1 === 0) {
-      return value;
-    }
-    return value.toFixed(2).replace(/\.?0+$/, "");
-  };
-
   const onNextButtonClicked = () => {
-    // Ensure both personnel and amount are greater than 0
-    if (personnel < 1 || amount < 1) {
-      window.alert("모든 필드는 1 이상의 값을 입력해 주세요.");
+    const errorMessage = validatePersonnelAmount(personnel, amount, perPerson);
+    if (errorMessage) {
+      window.alert(errorMessage);
       return;
     }
-    navigate("/donation/third", { state: { fromSecondStep: true } });
+    navigate("/donation/third", {
+      state: {
+        fromSecondStep: true,
+        selectedTags: location.state.selectedTags,
+        personnel: personnel,
+        amount: amount,
+        perPerson: formatPerPerson(perPerson),
+      },
+    });
   };
 
   const onBeforeButtonClicked = () => {
-    navigate("/donation", { state: { fromSecondStep: true } });
+    navigate("/donation", {
+      state: {
+        selectedTags: location.state.selectedTags,
+      },
+    });
   };
 
   return (
@@ -50,7 +63,7 @@ const DonationSecondStep = () => {
         <input
           className="personnel"
           type="number"
-          min="1" // Set minimum value to 1
+          min="1"
           value={personnel}
           onChange={(e) => setPersonnel(Number(e.target.value))}
         />
@@ -58,16 +71,27 @@ const DonationSecondStep = () => {
         <input
           className="amount"
           type="number"
-          min="1" // Set minimum value to 1
+          min="1,000"
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
         />
         <div>원을 나눠 기부합니다.</div>
       </div>
+      <div className="amountResult">
+        {personnel > 0 && amount > 0 ? (
+          <>
+            수혜자 한 명당{" "}
+            <span className="perPersonAmount">
+              {formatPerPerson(perPerson).toLocaleString()}원
+            </span>{" "}
+            기부됩니다
+          </>
+        ) : (
+          "수혜자 한 명당 1,000원 이상 기부되도록 입력해주세요."
+        )}
+      </div>
       <div className="explanation">
-        {personnel > 0 && amount > 0
-          ? `한 명당 <${formatPerPerson(perPerson)}원>씩 기부됩니다`
-          : "한 명당 ___________원씩 기부됩니다"}
+        *소수점 이하 금액은 블록체인 수수료로 사용됩니다.
       </div>
 
       <div className="pageNavigationButtons">

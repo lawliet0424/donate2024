@@ -22,12 +22,17 @@ const Header = () => {
     }
   };
 
-  const onClickHeaderLoginButton = () => {
+  const onClickHeaderLoginButton = async () => {
     if (isAuthenticated) {
       const confirmLogout = window.confirm("정말 로그아웃 하시겠습니까?");
       if (confirmLogout) {
-        logout();
-        navigate("/login");
+        try {
+          await logout(); // 로그아웃 요청을 서버에 보냄
+          navigate("/login"); // 로그아웃 후 로그인 페이지로 이동
+        } catch (error) {
+          console.error("Logout failed", error);
+          window.alert("로그아웃에 실패했습니다. 다시 시도해 주세요.");
+        }
       }
     } else {
       navigate("/login");
@@ -49,36 +54,38 @@ const Header = () => {
 
   return (
     <header className="Header">
-      <div className="headerShortcut">
-        <TransparentButton
-          text={isAuthenticated ? "로그아웃" : "로그인"}
-          onClick={onClickHeaderLoginButton}
-        />
-        {!isAuthenticated && (
+      <div className="headerContent">
+        <div className="headerShortcut">
           <TransparentButton
-            text="회원가입"
-            onClick={onClickHeaderSignupButton}
+            text={isAuthenticated ? "로그아웃" : "로그인"}
+            onClick={onClickHeaderLoginButton}
           />
-        )}
-        <TransparentButton
-          text="마이페이지"
-          onClick={onClickHeaderMypageButton}
-        />
-      </div>
-      <div className="hearderEntire">
-        <div className="headerLeft">
-          <img
-            src={DoNateLogo}
-            onClick={onClickHeaderTitle}
-            alt="DoNate Logo"
+          {!isAuthenticated && (
+            <TransparentButton
+              text="회원가입"
+              onClick={onClickHeaderSignupButton}
+            />
+          )}
+          <TransparentButton
+            text="마이페이지"
+            onClick={onClickHeaderMypageButton}
           />
         </div>
-        <div className="headerRight">
-          <ColoredButton
-            text="기부하기"
-            colorScheme="Orange"
-            onClick={onClickHeaderDonationButton}
-          />
+        <div className="hearderEntire">
+          <div className="headerLeft">
+            <img
+              src={DoNateLogo}
+              onClick={onClickHeaderTitle}
+              alt="DoNate Logo"
+            />
+          </div>
+          <div className="headerRight">
+            <ColoredButton
+              text="기부하기"
+              colorScheme="Orange"
+              onClick={onClickHeaderDonationButton}
+            />
+          </div>
         </div>
       </div>
     </header>

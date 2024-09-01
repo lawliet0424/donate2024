@@ -6,24 +6,25 @@
 html,
 body {
   margin: 0px;
-  width: 100%;
-  background-color: #f6f6f6;
 }
 
 #root {
   background-color: white;
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
 }
 
 .content {
-  background-color: beige;
+  /* background-color: beige; */
+  background-color: white;
   width: 1000px;
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
 }
 /*
 body * {

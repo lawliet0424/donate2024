@@ -46,16 +46,6 @@
   gap: 200px;
 }
 
-.MyInfo .myProfileInfo .myProfileInfoContent .myProfileInfoLeft,
-.MyInfo .myProfileInfo .myProfileInfoContent .myProfileInfoRight,
-.MyInfo .mySubInfo .mySubInfoContent .mySubInfoLeft,
-.MyInfo .mySubInfo .mySubInfoContent .mySubInfoRight {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  text-align: left;
-}
-
 .MyInfo img {
   width: 70px;
   height: 70px;
@@ -85,20 +75,43 @@
 .MyInfo .myProfileInfo .myProfileInfoImg {
   display: flex;
   flex-direction: row;
-  gap: 210px;
+  gap: 200px;
   margin-bottom: 30px;
-}
-
-.MyInfo .myProfileInfoContent.editing .myProfileInfoLeft,
-.MyInfo .mySubInfoContent.editing .mySubInfoLeft {
-  margin-top: 3px;
-  gap: 35px;
-}
-
-.idFix {
-  margin-top: 5px;
 }
 
 .default-text {
   color: #878787;
+}
+
+.MyInfo .myProfileImgText {
+  width: 60px;
+}
+
+.MyInfo input.inputInvalid {
+  border: 1px solid red;
+}
+
+.MyInfo .errorMessage {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+  width: 272px;
+  margin-top: 3px;
+}
+
+.MyInfo .myProfileTest {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.MyInfo .myProfileLine {
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
+.MyInfo .myProfileLine .myProfileLineLeft {
+  text-align: left;
+  width: 70px;
 }

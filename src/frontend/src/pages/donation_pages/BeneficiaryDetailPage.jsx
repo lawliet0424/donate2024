@@ -1,67 +1,69 @@
 import "./BeneficiaryDetailPage.css";
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import backgroungImage from "../../assets/exampleImg.png";
 import defaultProfileImage from "../../assets/defaultProfile.png";
-import filledHeart from "../../assets/filled_heart.png";
-import emptyHeart from "../../assets/empty_heart.png";
-
-const dummyBeneficiaryData = [
-  {
-    beneficiaryId: 1,
-    beneficiaryName: "수혜자1",
-    beneficiaryInfo: "수혜자 상세 정보1",
-    beneficiaryTags: ["태그", "태그", "태그"],
-  },
-  {
-    beneficiaryId: 2,
-    beneficiaryName: "수혜자2",
-    beneficiaryInfo: "수혜자 상세 정보2",
-    beneficiaryTags: ["태그", "태그", "태그"],
-  },
-  {
-    beneficiaryId: 3,
-    beneficiaryName: "수혜자3",
-    beneficiaryInfo: "수혜자 상세 정보3",
-    beneficiaryTags: ["태그", "태그", "태그", "xorm", "태그", "xorm"],
-  },
-];
-
-const findMatchingData = (urlBeneficiaryId) => {
-  return dummyBeneficiaryData.find(
-    (data) => String(data.beneficiaryId) === String(urlBeneficiaryId)
-  );
-};
+import filledHeart from "../../assets/filledHeart.png";
+import emptyHeart from "../../assets/emptyHeart.png";
+import useBeneficiary from "../../hooks/useBeneficiary";
+import useInterest from "../../hooks/useInterest";
 
 const BeneficiaryDetailPage = () => {
-  const [searchParams] = useSearchParams();
-  const urlBeneficiaryId = searchParams.get("beneficiaryId");
-  const beneficiaryData = findMatchingData(urlBeneficiaryId);
-  const [isInterested, setIsInterested] = useState(false);
+  const { beneficiaryId } = useParams();
+  const { beneficiaries, getBeneficiaryById, loading, error } =
+    useBeneficiary();
+  const { userInterests, toggleInterest, getUserInterests } = useInterest();
 
-  const toggleInterest = () => {
-    setIsInterested(!isInterested);
-  };
+  const isInterested = userInterests.includes(beneficiaryId.toString());
 
-  if (!beneficiaryData) {
-    return <div className="BeneficiaryDetailPage">Beneficiary not found</div>;
+  useEffect(() => {
+    getUserInterests();
+  }, [getUserInterests]);
+
+  useEffect(() => {
+    if (!beneficiaries[beneficiaryId]) {
+      getBeneficiaryById(beneficiaryId);
+    }
+  }, [beneficiaryId, beneficiaries, getBeneficiaryById]);
+
+  // 로딩 상태 처리
+  if (loading && !beneficiaries[beneficiaryId]) {
+    return <p>Loading...</p>;
+  }
+
+  // 오류 상태 처리
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  // `selectedBeneficiary`가 null인 경우
+  const selectedBeneficiary = beneficiaries[beneficiaryId];
+  if (!selectedBeneficiary) {
+    return <p>No beneficiary data available</p>;
   }
 
   return (
     <div className="BeneficiaryDetailPage">
-      <img className="backgroungImage" src={backgroungImage} alt="Background" />
+      <img
+        className="backgroungImage"
+        src={selectedBeneficiary.beneficiaryBackgroundImg}
+        alt="Background"
+      />
       <div className="beneficiaryProfile">
         <img
           className="beneficiaryImage"
-          src={defaultProfileImage}
+          src={selectedBeneficiary.beneficiaryProfileImg}
           alt="Beneficiary"
         />
         <div className="beneficiaryProfileText">
           <div className="beneficiaryFirstLine">
             <div className="beneficiaryName">
-              {beneficiaryData.beneficiaryName}
+              {selectedBeneficiary.beneficiaryName}
             </div>
-            <div className="interestButton" onClick={toggleInterest}>
+            <div
+              className="interestButton"
+              onClick={() => toggleInterest(beneficiaryId)}
+            >
               <img
                 className="heartImg"
                 src={isInterested ? filledHeart : emptyHeart}
@@ -70,15 +72,17 @@ const BeneficiaryDetailPage = () => {
             </div>
           </div>
           <div className="beneficiaryTags">
-            {beneficiaryData.beneficiaryTags.map((tag, index) => (
+            {selectedBeneficiary.beneficiaryTags.map((tag, index) => (
               <div key={index} className="tagItem">
-                #{tag}
+                #{tag.name} {/* 태그의 name 속성에 접근 */}
               </div>
             ))}
           </div>
         </div>
       </div>
-      <div className="beneficiaryInfo">{beneficiaryData.beneficiaryInfo}</div>
+      <div className="beneficiaryInfo">
+        {selectedBeneficiary.beneficiaryInfo}
+      </div>
     </div>
   );
 };

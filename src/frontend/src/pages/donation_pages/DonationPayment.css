@@ -1,17 +1,18 @@
 .DonationPayment {
   display: flex;
   flex-direction: column;
-  padding-left: 30px;
-  padding-right: 60px;
+  /* padding-left: 30px;
+  padding-right: 60px; */
+  padding: 60px;
   align-items: flex-start;
 }
 
 .DonationPayment .title {
   font-size: 23px;
   font-weight: 600;
-  padding-top: 50px;
-  padding-bottom: 10px;
-  padding-left: 30px;
+  /* padding-top: 50px;
+    padding-bottom: 10px;
+  padding-left: 30px; */
   width: 100%;
   text-align: left;
 }
@@ -19,22 +20,24 @@
 .DonationPayment .donationPaymentContent {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .DonationPayment .donationPaymentLeft {
   flex: 1;
 }
 
-.DonationPayment .donorInfo {
+/* .DonationPayment .donorInfo {
   padding: 24px 30px;
-}
+} */
 
 .DonationPayment .donorInfoTitle,
 .DonationPayment .paymentMethodTitle {
   font-size: 20px;
   font-weight: 700;
-  color: rgb(51, 61, 75);
   padding-bottom: 15px;
+  padding-top: 50px;
 }
 
 .DonationPayment .donorInfoContent {
@@ -43,7 +46,6 @@
   gap: 200px;
   font-size: 16px;
   font-weight: 400;
-  color: rgb(78, 89, 104);
 }
 
 .DonationPayment .donorInfoContent .donorInfoLeft,

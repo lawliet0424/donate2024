@@ -28,15 +28,24 @@
   margin-left: 12px;
 }
 
-.DonationSecondStep .explanation {
-  padding-top: 50px;
+.DonationSecondStep .amountResult {
+  padding-top: 40px;
   font-size: 18px;
+}
+
+.DonationSecondStep .amountResult .perPersonAmount {
+  background-color: rgb(254, 170, 1, 0.7);
+}
+
+.DonationSecondStep .explanation {
+  padding-top: 35px;
+  font-size: 14px;
 }
 
 .DonationSecondStep .pageNavigationButtons {
   display: flex;
   gap: 10px;
-  padding-top: 140px;
+  padding: 140px 0px;
 }
 
 .DonationSecondStep .ColoredButton {
