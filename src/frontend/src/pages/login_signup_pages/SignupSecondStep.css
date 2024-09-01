@@ -63,24 +63,22 @@
   padding: 3px 10px;
 }
 
-/* inputInvalid 클래스가 적용된 입력 필드의 스타일 */
 .SignupSecondStep input.inputInvalid {
-  border: 1px solid red; /* 테두리 빨간색 */
+  border: 1px solid red;
 }
 
-/* inputInvalid 클래스가 적용된 오류 메시지 스타일 */
 .SignupSecondStep .errorMessage {
-  color: red; /* 글씨 빨간색 */
-  font-size: 12px; /* 글씨 크기 */
-  text-align: left; /* 왼쪽 정렬 */
-  width: 272px; /* 입력 필드와 동일한 너비 */
-  margin-top: -8px; /* 입력 필드와 간격 조정 */
+  color: red;
+  font-size: 12px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
 }
 
 .SignupSecondStep .defaultMessage {
   color: #767676;
-  font-size: 12px; /* 글씨 크기 */
-  text-align: left; /* 왼쪽 정렬 */
-  width: 272px; /* 입력 필드와 동일한 너비 */
-  margin-top: -8px; /* 입력 필드와 간격 조정 */
+  font-size: 12px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
 }

@@ -11,7 +11,7 @@
   font-size: 15px;
 }
 
-.PaymentReceipt .PaymentReceiptTitle {
+.PaymentReceipt__title {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 30px;

@@ -31,7 +31,7 @@ const PaymentReceipt = ({
 
   return (
     <div className="PaymentReceipt">
-      <div className="PaymentReceiptTitle">최종 결제 금액</div>
+      <div className="PaymentReceipt__title">최종 결제 금액</div>
       <div className="infoRow">
         <div className="leftvalue">수혜 인원</div>
         <div className="rightvalue">
@@ -53,7 +53,7 @@ const PaymentReceipt = ({
       <ColoredButton
         text="결제하기"
         onClick={onClickPaymentButton}
-        colorScheme="Orange"
+        colorScheme="orange"
       />
     </div>
   );

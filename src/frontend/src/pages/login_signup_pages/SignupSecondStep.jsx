@@ -139,7 +139,7 @@ const SignupSecondStep = () => {
         <ColoredButton text="이전" onClick={onBeforeButtonClicked} />
         <ColoredButton
           text="완료"
-          colorScheme="Orange"
+          colorScheme="orange"
           onClick={onCompleteButtonClicked}
         />
       </div>

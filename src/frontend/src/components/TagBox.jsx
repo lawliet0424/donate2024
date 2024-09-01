@@ -1,14 +1,13 @@
 import "./TagBox.css";
 import React from "react";
 
-const TagBox = ({ tagName, isSelected, onTagClick }) => {
+const TagBox = ({ tagName, isTagSelected, onTagClick }) => {
+  const buttonClass = `TagBox ${isTagSelected ? "TagBox--selected" : ""}`;
+
   return (
-    <div
-      className={`TagBox ${isSelected ? "selected" : ""}`}
-      onClick={onTagClick}
-    >
+    <button onClick={onTagClick} className={buttonClass}>
       {tagName}
-    </div>
+    </button>
   );
 };
 

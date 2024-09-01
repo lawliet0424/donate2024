@@ -8,46 +8,49 @@
   position: relative;
 }
 
-.Header .headerContent {
-  width: 1200px;
+.Header__content {
   display: flex;
   flex-direction: column;
+  width: 1200px;
+  padding: 0 20px;
 }
-.Header .headerShortcut {
+
+.Header__shortcut {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
   font-size: 10px;
 }
 
-.Header .hearderEntire {
+.Header__main {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
-.Header .hearderEntire .headerLeft {
-  width: 80%;
+.Header__main--left {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 80%;
 }
 
-.Header .hearderEntire .headerLeft img {
+.Header__main--left img {
   height: 80px;
   cursor: pointer;
 }
 
-.Header .hearderEntire .headerRight {
-  width: 20%;
+.Header__main--right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  width: 20%;
 }
 
-.Header .hearderEntire .headerRight .ColoredButton {
+.Header__main--right .ColoredButton {
+  font-size: 17px;
   font-weight: 500;
   height: 46px;
   width: 110px;
   border-radius: 10px;
-  font-size: 17px;
 }

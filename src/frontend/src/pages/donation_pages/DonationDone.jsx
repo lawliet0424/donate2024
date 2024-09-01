@@ -33,7 +33,7 @@ const DonationDone = () => {
         <ColoredButton text={"메인으로"} onClick={onHomeButtonClicked} />
         <ColoredButton
           text={"내역 조회"}
-          colorScheme={"Orange"}
+          colorScheme={"orange"}
           onClick={onStatusButtonClicked}
         />
       </div>

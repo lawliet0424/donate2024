@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import { mockGetBeneficiary } from "../api";
-import useLoadingError from "../hooks/useLoadingError";
 
 export const BeneficiaryContext = createContext();
 
 export const BeneficiaryProvider = ({ children }) => {
   const [beneficiaries, setBeneficiaries] = useState({});
-  const { loading, error, setLoading, setError } = useLoadingError();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const getBeneficiaryById = async (beneficiaryId, forceRefresh = false) => {
     // const beneficiary = beneficiaries[beneficiaryId];

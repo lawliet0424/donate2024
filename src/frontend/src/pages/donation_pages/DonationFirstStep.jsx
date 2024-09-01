@@ -61,7 +61,7 @@ const DonationFirstStep = () => {
               <TagBox
                 key={tag.id}
                 tagName={tag.name}
-                isSelected={selectedTags.has(tag.id)}
+                isTagSelected={selectedTags.has(tag.id)}
                 onTagClick={() => handleTagClick(tag.id)}
               />
             ))}
@@ -70,7 +70,7 @@ const DonationFirstStep = () => {
       </div>
       <ColoredButton
         text={"다음"}
-        colorScheme={"Orange"}
+        colorScheme={"orange"}
         onClick={onNextButtonClicked}
       />
     </div>

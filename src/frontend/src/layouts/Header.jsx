@@ -54,8 +54,8 @@ const Header = () => {
 
   return (
     <header className="Header">
-      <div className="headerContent">
-        <div className="headerShortcut">
+      <div className="Header__content">
+        <div className="Header__shortcut">
           <TransparentButton
             text={isAuthenticated ? "로그아웃" : "로그인"}
             onClick={onClickHeaderLoginButton}
@@ -71,18 +71,18 @@ const Header = () => {
             onClick={onClickHeaderMypageButton}
           />
         </div>
-        <div className="hearderEntire">
-          <div className="headerLeft">
+        <div className="Header__main">
+          <div className="Header__main--left">
             <img
               src={DoNateLogo}
               onClick={onClickHeaderTitle}
               alt="DoNate Logo"
             />
           </div>
-          <div className="headerRight">
+          <div className="Header__main--right">
             <ColoredButton
               text="기부하기"
-              colorScheme="Orange"
+              colorScheme="orange"
               onClick={onClickHeaderDonationButton}
             />
           </div>
