@@ -18,7 +18,7 @@ const ProtectedRoute = ({ element }) => {
   }, [isAuthenticated, navigate, location.pathname]);
 
   if (isLoading) {
-    return null; // 페이지가 렌더링되지 않도록 빈 컴포넌트를 반환
+    return null;
   }
 
   return element;

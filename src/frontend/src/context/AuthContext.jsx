@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { mockLogin } from "../api";
+import { mockGetUserInfo, mockLogin } from "../api";
 
 const initialUserState = {
   donorId: "",
@@ -21,18 +21,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(initialUserState);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:5000/profile", { withCredentials: true })
-  //     .then((response) => {
-  //       setUser(response.data);
-  //       setIsAuthenticated(true);
-  //     })
-  //     .catch(() => {
-  //       setUser(null);
-  //       setIsAuthenticated(true);
-  //     });
-  // }, []);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedAuth = localStorage.getItem("isAuthenticated");
@@ -42,6 +30,31 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     }
   }, []);
+
+  const getUserInfo = () => {
+    if (isAuthenticated) {
+      // 실제 API 호출 코드 (주석 처리됨)
+      // return axios
+      //   .get("http://localhost:5000/profile", { withCredentials: true })
+      //   .then((response) => {
+      //     setUser(response.data);
+      //     localStorage.setItem("user", JSON.stringify(response.data));
+      //     return response.data;
+      //   })
+      //   .catch((error) => {
+      //     console.error("Failed to fetch user info:", error);
+      //   });
+
+      // Mock 데이터 사용
+      return mockGetUserInfo(user.donorId).then((userData) => {
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        return userData;
+      });
+    } else {
+      return Promise.reject("User is not authenticated");
+    }
+  };
 
   const signup = (
     signupName,
@@ -66,7 +79,7 @@ export const AuthProvider = ({ children }) => {
     //   .then((response) => {
     //     setUser(response.data);
     //     setIsAuthenticated(true);
-    //   });
+    //   }); 세션아이디
     return mockLogin(loginId, loginPassword).then((userData) => {
       setUser(userData);
       setIsAuthenticated(true);
@@ -84,7 +97,7 @@ export const AuthProvider = ({ children }) => {
     //   .then(() => {
     //     setUser(null);
     //     setIsAuthenticated(false);
-    //   });
+    //   }); 세션아이디
     setUser(null);
     setIsAuthenticated(false);
 

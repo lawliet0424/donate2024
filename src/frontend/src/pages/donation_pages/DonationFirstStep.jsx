@@ -34,7 +34,7 @@ const DonationFirstStep = () => {
   };
 
   const onNextButtonClicked = () => {
-    navigate("/donation/second", {
+    navigate("/donation/step2", {
       state: {
         fromFirstStep: true,
         selectedTags: Array.from(selectedTags),

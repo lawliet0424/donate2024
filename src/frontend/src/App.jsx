@@ -23,7 +23,6 @@ import MyStatus from "./pages/my_pages/MyStatus";
 import ErrorOccur from "./pages/error_pages/ErrorOccur.jsx";
 import PageNotFound from "./pages/error_pages/PageNotFound.jsx";
 
-
 // 레이아웃 컴포넌트 임포트
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer.jsx";
@@ -31,9 +30,10 @@ import Footer from "./layouts/Footer.jsx";
 // 컨텍스트 및 기타 컴포넌트 임포트
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { InterestProvider } from "./context/InterestContext";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { BeneficiaryProvider } from "./context/BeneficiaryContext.jsx";
 import { TagProvider } from "./context/TagContext.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import PublicRoute from "./routes/PublicRoute.jsx";
 
 function App() {
   return (
@@ -45,21 +45,34 @@ function App() {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignupFirstStep />} />
-                <Route path="/signup/second" element={<SignupSecondStep />} />
+                <Route
+                  path="/login"
+                  element={
+                    <PublicRoute restricted={true} element={<Login />} />
+                  }
+                />
+                <Route
+                  path="/signup/step1"
+                  element={
+                    <PublicRoute
+                      restricted={true}
+                      element={<SignupFirstStep />}
+                    />
+                  }
+                />
+                <Route path="/signup/step2" element={<SignupSecondStep />} />
                 <Route path="/signup/done" element={<SignupDone />} />
 
                 <Route
-                  path="/donation"
+                  path="/donation/step1"
                   element={<ProtectedRoute element={<DonationFirstStep />} />}
                 />
                 <Route
-                  path="/donation/second"
+                  path="/donation/step2"
                   element={<ProtectedRoute element={<DonationSecondStep />} />}
                 />
                 <Route
-                  path="/donation/third"
+                  path="/donation/step3"
                   element={<ProtectedRoute element={<DonationThirdStep />} />}
                 />
                 <Route
