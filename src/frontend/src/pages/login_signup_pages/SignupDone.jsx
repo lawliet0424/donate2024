@@ -1,4 +1,5 @@
 import "./SignupDone.css";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import checkMark from "../../assets/checkMark.png";
 import ColoredButton from "../../components/ColoredButton";
@@ -7,11 +8,12 @@ const SignupDone = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (!location.state?.fromSignupSecond) {
-    window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (!location.state?.fromSignupFirst) {
+      window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+      navigate("/");
+    }
+  }, [location.state, navigate]);
 
   const onLoginButtonClicked = () => {
     navigate("/login");

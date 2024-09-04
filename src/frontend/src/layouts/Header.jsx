@@ -15,7 +15,7 @@ const Header = () => {
 
   const onClickHeaderDonationButton = () => {
     if (isAuthenticated) {
-      navigate("/donation");
+      navigate("/donation/step1");
     } else {
       window.alert("로그인을 먼저 해주세요.");
       navigate("/login");
@@ -40,7 +40,7 @@ const Header = () => {
   };
 
   const onClickHeaderSignupButton = () => {
-    navigate("/signup");
+    navigate("/signup/step1");
   };
 
   const onClickHeaderMypageButton = () => {

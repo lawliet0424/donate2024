@@ -68,7 +68,7 @@ const SignupFirstStep = () => {
 
     const numbersOnly = signupPhoneNumber.replace(/\D/g, "");
 
-    navigate("/signup/second", {
+    navigate("/signup/step2", {
       state: {
         fromSignupFirst: true,
         signupName: signupName,

@@ -1,5 +1,5 @@
 import "./SignupSecondStep.css";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ColoredButton from "../../components/ColoredButton";
 import {
@@ -24,13 +24,14 @@ const SignupSecondStep = () => {
     password: "",
   });
 
-  if (!location.state?.fromSignupFirst) {
-    window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (!location.state?.fromSignupFirst) {
+      window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
+      navigate("/");
+    }
+  }, [location.state, navigate]);
 
-  const { signupName, signupEmail, signupPhoneNumber } = location.state;
+  const { signupName, signupEmail, signupPhoneNumber } = location.state || {};
 
   const handleNicknameChange = (e) => {
     const newNickname = e.target.value;
@@ -79,7 +80,7 @@ const SignupSecondStep = () => {
   };
 
   const onBeforeButtonClicked = () => {
-    navigate("/signup", {
+    navigate("/signup/step1", {
       state: {
         signupName: location.state.signupName,
         signupEmail: location.state.signupEmail,

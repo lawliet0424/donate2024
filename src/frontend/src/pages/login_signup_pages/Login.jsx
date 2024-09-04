@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import TransparentButton from "../../components/TransparentButton";
 import ColoredButton from "../../components/ColoredButton";
@@ -16,13 +16,13 @@ const Login = () => {
       await login(loginId, loginPassword);
       navigate("/");
     } catch (error) {
-      window.alert("오류");
+      window.alert("아이디 또는 비밀번호를 잘못 입력했습니다.");
       console.error("Login failed", error);
     }
   };
 
   const onClickToSignupButton = () => {
-    navigate("/signup");
+    navigate("/signup/step1");
   };
 
   const onIdSearchingButtonClick = () => {

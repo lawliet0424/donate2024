@@ -32,7 +32,7 @@ const DonationThirdStep = () => {
   };
 
   const onBeforeButtonClicked = () => {
-    navigate("/donation/second", {
+    navigate("/donation/step2", {
       state: {
         fromThirdStep: true,
         selectedTags: location.state.selectedTags,

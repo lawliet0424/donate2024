@@ -37,7 +37,7 @@ const DonationSecondStep = () => {
       window.alert(errorMessage);
       return;
     }
-    navigate("/donation/third", {
+    navigate("/donation/step3", {
       state: {
         fromSecondStep: true,
         selectedTags: location.state.selectedTags,
@@ -49,7 +49,7 @@ const DonationSecondStep = () => {
   };
 
   const onBeforeButtonClicked = () => {
-    navigate("/donation", {
+    navigate("/donation/step1", {
       state: {
         selectedTags: location.state.selectedTags,
       },
