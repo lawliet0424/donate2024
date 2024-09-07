@@ -34,48 +34,52 @@ const Login = () => {
   };
 
   return (
-    <div className="Login">
-      <div className="title">로그인</div>
+    <div className="login">
+      <div className="login__title">로그인</div>
       <input
         type="text"
         placeholder="아이디"
         value={loginId}
         onChange={(e) => setLoginId(e.target.value)}
+        className="login__input"
       />
       <input
         type="password"
         placeholder="비밀번호"
         value={loginPassword}
         onChange={(e) => setLoginPassword(e.target.value)}
+        className="login__input"
       />
       <ColoredButton
         text="로그인"
         colorScheme="orange"
         onClick={onClickLoginButton}
+        className={"login__button--login"}
       />
 
-      <div className="userAssistance">
+      <div className="login__userAssistance">
         <TransparentButton
           text="아이디 찾기"
           onClick={onIdSearchingButtonClick}
         />
-        <div className="divider">|</div>
+        <div className="login__userAssistance__divider">|</div>
         <TransparentButton
           text="비밀번호 찾기"
           onClick={onPwSearchingButtonClick}
         />
       </div>
 
-      <div className="separator">
-        <div className="line"></div>
-        <div className="text">또는</div>
-        <div className="line"></div>
+      <div className="login__separator">
+        <div className="login__separator__line"></div>
+        <div className="login__separator__text">또는</div>
+        <div className="login__separator__line"></div>
       </div>
 
       <ColoredButton
         text="회원가입"
         colorScheme="white"
         onClick={onClickToSignupButton}
+        className={"login__button--signup"}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { mockGetUserInfo, mockLogin } from "../api";
+import { mockLogin } from "../api";
 
 const initialUserState = {
   donorId: "",
@@ -8,7 +8,7 @@ const initialUserState = {
   donorPassword: "",
   donorName: "",
   donorEmail: "",
-  donorPhone: "",
+  donorPhoneNumber: "",
   donorProfileImage: "",
   donorAge: "",
   donorFinancialAccount: "",
@@ -31,31 +31,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const getUserInfo = () => {
-    if (isAuthenticated) {
-      // 실제 API 호출 코드 (주석 처리됨)
-      // return axios
-      //   .get("http://localhost:5000/profile", { withCredentials: true })
-      //   .then((response) => {
-      //     setUser(response.data);
-      //     localStorage.setItem("user", JSON.stringify(response.data));
-      //     return response.data;
-      //   })
-      //   .catch((error) => {
-      //     console.error("Failed to fetch user info:", error);
-      //   });
-
-      // Mock 데이터 사용
-      return mockGetUserInfo(user.donorId).then((userData) => {
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-        return userData;
-      });
-    } else {
-      return Promise.reject("User is not authenticated");
-    }
-  };
-
   const signup = (
     signupName,
     signupEmail,
@@ -64,6 +39,31 @@ export const AuthProvider = ({ children }) => {
     signupId,
     signupPassword
   ) => {
+    // return axios
+    //   .post(
+    //     "http://localhost:5000/signup/step2",
+    //     {
+    //       signupName,
+    //       signupEmail,
+    //       signupPhoneNumber,
+    //       signupNickname,
+    //       signupId,
+    //       signupPassword,
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((response) => {
+    //   if (response.data.success) {
+    //     console.log("회원가입 성공");}
+    //   else {
+    //     console.log("회원가입 실패");
+    //     return Promise.reject("회원가입에 실패했습니다.");
+    //   }
+    //    });
+    // .catch((error) => {
+    //   console.error("회원가입 중 오류 발생:", error);
+    //   return Promise.reject(error);
+    // });
     console.log(
       `Name: ${signupName}\nEmail: ${signupEmail}\nPhone: ${signupPhoneNumber}\nNickname: ${signupNickname}\nID: ${signupId}\nPassword: ${signupPassword}`
     );
@@ -79,7 +79,10 @@ export const AuthProvider = ({ children }) => {
     //   .then((response) => {
     //     setUser(response.data);
     //     setIsAuthenticated(true);
-    //   }); 세션아이디
+    //   });
+    //   .catch((error) => {
+    //     console.error("Failed to login:", error);
+    //   });
     return mockLogin(loginId, loginPassword).then((userData) => {
       setUser(userData);
       setIsAuthenticated(true);
@@ -97,7 +100,7 @@ export const AuthProvider = ({ children }) => {
     //   .then(() => {
     //     setUser(null);
     //     setIsAuthenticated(false);
-    //   }); 세션아이디
+    //   });
     setUser(null);
     setIsAuthenticated(false);
 
@@ -109,10 +112,17 @@ export const AuthProvider = ({ children }) => {
     //   ...prevUser,
     //   ...updatedData,
     // }));
-    // // 실제 API 호출로 업데이트를 서버에 반영하려면 여기에 추가
-    // // axios.post('/update-profile', updatedData).then(response => {
-    // //   setUser(response.data);
-    // // });
+    //
+    // axios
+    // .post("http://localhost:5000//myinfo", updatedData, { withCredentials: true })
+    // .then((response) => {
+    //   // 서버에서 최신 데이터를 받아 상태 업데이트
+    //   setUser(response.data);
+    // })
+    // .catch((error) => {
+    //   console.error("Failed to update user info:", error);
+    //   // 에러 처리 로직 추가
+    // });
     setUser((prevUser) => {
       const newUser = { ...prevUser, ...updatedData };
       localStorage.setItem("user", JSON.stringify(newUser));

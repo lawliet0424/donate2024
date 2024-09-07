@@ -43,35 +43,35 @@ const BeneficiaryDetailPage = () => {
   }
 
   return (
-    <div className="BeneficiaryDetailPage">
+    <div className="beneficiary-detail-page">
       <img
-        className="backgroungImage"
+        className="beneficiary-detail-page__background"
         src={selectedBeneficiary.beneficiaryBackgroundImg}
         alt="Background"
       />
-      <div className="beneficiaryProfile">
+      <div className="beneficiary-detail-page__profile">
         <img
-          className="beneficiaryImage"
+          className="beneficiary-detail-page__img"
           src={selectedBeneficiary.beneficiaryProfileImg}
           alt="Beneficiary"
         />
-        <div className="beneficiaryProfileText">
-          <div className="beneficiaryFirstLine">
-            <div className="beneficiaryName">
+        <div className="beneficiary-detail-page__text">
+          <div className="beneficiary-detail-page__text--first">
+            <div className="beneficiary-detail-page__name">
               {selectedBeneficiary.beneficiaryName}
             </div>
             <div
-              className="interestButton"
+              className="beneficiary-detail-page__button--interest"
               onClick={() => toggleInterest(beneficiaryId)}
             >
               <img
-                className="heartImg"
+                className="beneficiary-detail-page__heart"
                 src={isInterested ? filledHeart : emptyHeart}
                 alt="Heart Icon"
               />
             </div>
           </div>
-          <div className="beneficiaryTags">
+          <div className="beneficiary-detail-page__tags">
             {selectedBeneficiary.beneficiaryTags.map((tag, index) => (
               <div key={index} className="tagItem">
                 #{tag.name} {/* 태그의 name 속성에 접근 */}
@@ -80,7 +80,7 @@ const BeneficiaryDetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="beneficiaryInfo">
+      <div className="beneficiary-detail-page__content">
         {selectedBeneficiary.beneficiaryInfo}
       </div>
     </div>

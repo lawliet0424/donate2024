@@ -1,31 +1,28 @@
 import "./MyPage.css";
 import MyPageMenuBox from "../../components/MyPageMenuBox";
 import profileImage from "../../assets/defaultProfile.png";
-import { AuthContext } from "../../context/AuthContext";
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 const MyPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
-    <div className="MyPage">
-      <div className="title">마이페이지</div>
-      <div className="MyPageContent">
-        <div className="userInfo">
+    <div className="my-page">
+      <div className="my-page__title">마이페이지</div>
+      <div className="my-page__content">
+        <div className="my-page__profile">
           <img
-            className="myProfileImage"
+            className="my-page__img"
             src={user.donorProfileImage || profileImage}
             alt="Profile"
           />
-          <div className="nickname">{user.donorNickname}</div>
+          <div className="my-page__nickname">{user.donorNickname}</div>
         </div>
 
-        <MyPageMenuBox menuName={"회원정보"} myPageType={"/myinfo"} />
-        <MyPageMenuBox
-          menuName={"나의 관심 수혜자"}
-          myPageType={"/myinterest"}
-        />
-        <MyPageMenuBox menuName={"나의 기부 현황"} myPageType={"/mystatus"} />
+        <MyPageMenuBox menuName={"회원정보"} myPageLink={"/myinfo"} />
+        <MyPageMenuBox menuName={"관심 수혜자"} myPageLink={"/myinterest"} />
+        <MyPageMenuBox menuName={"기부 현황"} myPageLink={"/mystatus"} />
       </div>
     </div>
   );

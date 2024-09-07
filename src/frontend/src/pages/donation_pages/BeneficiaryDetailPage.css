@@ -1,76 +1,57 @@
-.BeneficiaryDetailPage {
+.beneficiary-detail-page {
   position: relative;
 }
 
-.BeneficiaryDetailPage .backgroungImage {
+.beneficiary-detail-page__background {
   width: 1000px;
   height: 300px;
 }
 
-.BeneficiaryDetailPage .beneficiaryProfile {
+.beneficiary-detail-page__profile {
   display: flex;
   align-items: center;
   padding: 30px 50px;
 }
 
-.BeneficiaryDetailPage .beneficiaryProfile .beneficiaryImage {
+.beneficiary-detail-page__img {
   width: 80px;
   height: 80px;
   border: 1px solid #d9d9d9;
   border-radius: 50%;
 }
 
-.BeneficiaryDetailPage .beneficiaryProfile .beneficiaryProfileText {
+.beneficiary-detail-page__text {
   padding-left: 15px;
 }
 
-.BeneficiaryDetailPage
-  .beneficiaryProfile
-  .beneficiaryProfileText
-  .beneficiaryFirstLine {
+.beneficiary-detail-page__text--first {
   display: flex;
   flex-direction: row;
   padding-bottom: 5px;
 }
 
-.BeneficiaryDetailPage
-  .beneficiaryProfile
-  .beneficiaryProfileText
-  .beneficiaryFirstLine
-  .beneficiaryName {
+.beneficiary-detail-page__name {
   font-size: 18px;
 }
 
-.BeneficiaryDetailPage
-  .beneficiaryProfile
-  .beneficiaryProfileText
-  .beneficiaryFirstLine
-  .interestButton {
+.beneficiary-detail-page__button--interest {
   cursor: pointer;
   align-items: center;
   padding-left: 7px;
 }
 
-.BeneficiaryDetailPage
-  .beneficiaryProfile
-  .beneficiaryProfileText
-  .beneficiaryFirstLine
-  .interestButton
-  .heartImg {
+.beneficiary-detail-page__heart {
   padding-top: 3px;
   width: 18px;
   height: 18px;
 }
 
-.BeneficiaryDetailPage
-  .beneficiaryProfile
-  .beneficiaryProfileText
-  .beneficiaryTags {
+.beneficiary-detail-page__tags {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.BeneficiaryDetailPage .beneficiaryInfo {
+.beneficiary-detail-page__content {
   padding: 0 60px;
 }

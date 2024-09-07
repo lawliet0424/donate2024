@@ -1,11 +1,11 @@
-.MyStatus {
+.my-status {
   display: flex;
   flex-direction: column;
   padding: 0px 40px;
   align-items: center;
 }
 
-.MyStatus .title {
+.my-status__title {
   font-size: 23px;
   font-weight: 600;
   padding: 50px 0;

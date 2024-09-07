@@ -11,9 +11,9 @@ const MyInterest = () => {
   }, [getUserInterests]);
 
   return (
-    <div className="MyInterest">
-      <div className="title">나의 관심 수혜자</div>
-      <div className="beneficiaryLists">
+    <div className="my-interest">
+      <div className="my-interest__title">나의 관심 수혜자</div>
+      <div className="my-interest__beneficiaryLists">
         {userInterests.map((beneficiaryId) => (
           <BeneficiaryBox key={beneficiaryId} beneficiaryId={beneficiaryId} />
         ))}

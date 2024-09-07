@@ -1,18 +1,18 @@
-.SignupSecondStep {
+.signup-step-two {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.SignupSecondStep .title {
+.signup-step-two__title {
   font-size: 23px;
   font-weight: 600;
   padding-top: 180px;
   padding-bottom: 20px;
 }
 
-.SignupSecondStep input {
+.signup-step-two__input {
   width: 272px;
   height: 38px;
   font-size: 15px;
@@ -22,17 +22,17 @@
   box-sizing: border-box;
 }
 
-/* .SignupSecondStep .idForm {
+/* .signup-step-two .idForm {
   position: relative;
   width: 270px;
 }
 
-.SignupSecondStep .idForm input {
+.signup-step-two .idForm input {
   width: 100%;
   padding-right: 90px;
 }
 
-.SignupSecondStep .duplicateCheckButton {
+.signup-step-two .duplicateCheckButton {
   position: absolute;
   right: 3px;
   top: 50%;
@@ -48,14 +48,14 @@
   height: 20px;
 } */
 
-.SignupSecondStep .pageNavigationButtons {
+.signup-step-two .pageNavigationButtons {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 12px;
 }
 
-.SignupSecondStep .pageNavigationButtons .ColoredButton {
+.signup-step-two .pageNavigationButtons .ColoredButton {
   width: 270px;
   height: 37px;
   font-size: 15px;
@@ -63,22 +63,22 @@
   padding: 3px 10px;
 }
 
-.SignupSecondStep input.inputInvalid {
+.signup-step-two__input--invalid {
   border: 1px solid red;
 }
 
-.SignupSecondStep .errorMessage {
+.signup-step-two__message--error {
   color: red;
   font-size: 12px;
-  text-align: left; 
+  text-align: left;
   width: 272px;
-  margin-top: -8px; 
+  margin-top: -8px;
 }
 
-.SignupSecondStep .defaultMessage {
+.signup-step-two__message--default {
   color: #767676;
-  font-size: 12px; 
-  text-align: left; 
-  width: 272px; 
-  margin-top: -8px; 
+  font-size: 12px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
 }

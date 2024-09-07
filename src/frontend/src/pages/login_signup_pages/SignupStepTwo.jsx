@@ -1,4 +1,4 @@
-import "./SignupSecondStep.css";
+import "./SignupStepTwo.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ColoredButton from "../../components/ColoredButton";
@@ -9,7 +9,7 @@ import {
 } from "../../utils/FormatValidate";
 import useAuth from "../../hooks/useAuth";
 
-const SignupSecondStep = () => {
+const SignupStepTwo = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { signup } = useAuth();
@@ -48,7 +48,6 @@ const SignupSecondStep = () => {
     setErrors((prevErrors) => ({
       ...prevErrors,
       id: validateId(newId),
-      password: validatePassword(signupPassword, newId),
     }));
   };
 
@@ -61,21 +60,27 @@ const SignupSecondStep = () => {
     }));
   };
 
-  const onCompleteButtonClicked = () => {
+  const onCompleteButtonClicked = async () => {
     if (!errors.nickname && !errors.id && !errors.password) {
-      signup(
-        signupName,
-        signupEmail,
-        signupPhoneNumber,
-        signupNickname,
-        signupId,
-        signupPassword
-      );
-      navigate("/signup/done", {
-        state: {
-          fromSignupSecond: true,
-        },
-      });
+      try {
+        await signup(
+          signupName,
+          signupEmail,
+          signupPhoneNumber,
+          signupNickname,
+          signupId,
+          signupPassword
+        );
+        navigate("/signup/done", {
+          state: {
+            fromSignupSecond: true,
+          },
+        });
+      } catch (error) {
+        window.alert("오류가 발생하였습니다.");
+        navigate("/error");
+        console.error("Login failed", error);
+      }
     }
   };
 
@@ -90,19 +95,23 @@ const SignupSecondStep = () => {
   };
 
   return (
-    <div className="SignupSecondStep">
-      <div className="title">회원가입</div>
+    <div className="signup-step-two">
+      <div className="signup-step-two__title">회원가입</div>
 
       <input
         type="text"
         placeholder="닉네임"
-        className={errors.nickname ? "inputInvalid" : ""}
+        className={`signup-step-two__input ${
+          errors.nickname ? "--invalid" : ""
+        }`}
         value={signupNickname}
         onChange={handleNicknameChange}
       />
-      {errors.nickname && <div className="errorMessage">{errors.nickname}</div>}
+      {errors.nickname && (
+        <div className="signup-step-two__message--error">{errors.nickname}</div>
+      )}
       {!errors.nickname && (
-        <div className="defaultMessage">
+        <div className="signup-step-two__message--default">
           {"한글 또는 영문(대소문자)으로만 2~5자"}
         </div>
       )}
@@ -110,14 +119,16 @@ const SignupSecondStep = () => {
       <input
         type="text"
         placeholder="아이디"
-        className={errors.id ? "inputInvalid" : ""}
+        className={`signup-step-two__input ${errors.id ? "--invalid" : ""}`}
         value={signupId}
         onChange={handleIdChange}
       />
 
-      {errors.id && <div className="errorMessage">{errors.id}</div>}
+      {errors.id && (
+        <div className="signup-step-two__message--error">{errors.id}</div>
+      )}
       {!errors.id && (
-        <div className="defaultMessage">
+        <div className="signup-step-two__message--default">
           {"영문 소문자 또는 숫자로 이루어진 4~16자"}
         </div>
       )}
@@ -125,13 +136,17 @@ const SignupSecondStep = () => {
       <input
         type="password"
         placeholder="비밀번호"
-        className={errors.password ? "inputInvalid" : ""}
+        className={`signup-step-two__input ${
+          errors.password ? "--invalid" : ""
+        }`}
         value={signupPassword}
         onChange={handlePasswordChange}
       />
-      {errors.password && <div className="errorMessage">{errors.password}</div>}
+      {errors.password && (
+        <div className="signup-step-two__message--error">{errors.password}</div>
+      )}
       {!errors.password && (
-        <div className="defaultMessage">
+        <div className="signup-step-two__message--default">
           {"하나 이상의 영문(대소문자), 숫자 포함 10자 이상"}
         </div>
       )}
@@ -148,4 +163,4 @@ const SignupSecondStep = () => {
   );
 };
 
-export default SignupSecondStep;
+export default SignupStepTwo;

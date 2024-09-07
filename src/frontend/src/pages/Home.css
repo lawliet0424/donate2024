@@ -1,8 +1,8 @@
-.Home {
+.home {
   width: 1000px;
 }
 
-.Home .homeIntroImage {
+.home__img {
   width: 1000px;
   height: 2000px;
   align-items: center;

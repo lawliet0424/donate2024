@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import profileImage from "../../assets/defaultProfile.png";
-import { AuthContext } from "../../context/AuthContext";
 import "./MyInfo.css";
 import {
   formatPhoneNumber,
@@ -12,9 +11,10 @@ import {
   validateAge,
   validateFinancialAccount,
 } from "../../utils/FormatValidate";
+import useAuth from "../../hooks/useAuth";
 
 const MyInfo = () => {
-  const { user, updateUserInfo } = useContext(AuthContext);
+  const { user, updateUserInfo } = useAuth();
   const [image, setImage] = useState(user.donorProfileImage || profileImage);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingSubInfo, setIsEditingSubInfo] = useState(false);
@@ -31,7 +31,7 @@ const MyInfo = () => {
     donorId: user.donorId,
     donorPassword: user.donorPassword,
     donorName: user.donorName,
-    donorPhone: formatPhoneNumber(user.donorPhone || ""),
+    donorPhoneNumber: formatPhoneNumber(user.donorPhoneNumber || ""),
     donorEmail: user.donorEmail,
   });
 
@@ -44,7 +44,7 @@ const MyInfo = () => {
   const [subInfoErrors, setSubInfoErrors] = useState({
     donorPassword: "",
     donorName: "",
-    donorPhone: "",
+    donorPhoneNumber: "",
     donorEmail: "",
   });
 
@@ -60,7 +60,7 @@ const MyInfo = () => {
       donorId: user.donorId,
       donorPassword: user.donorPassword,
       donorName: user.donorName,
-      donorPhone: formatPhoneNumber(user.donorPhone || ""),
+      donorPhoneNumber: formatPhoneNumber(user.donorPhoneNumber || ""),
       donorEmail: user.donorEmail,
     });
   }, [user]);
@@ -80,7 +80,7 @@ const MyInfo = () => {
     let errors = {
       donorPassword: validatePassword(data.donorPassword),
       donorName: validateName(data.donorName),
-      donorPhone: validatePhoneNumber(data.donorPhone),
+      donorPhoneNumber: validatePhoneNumber(data.donorPhoneNumber),
       donorEmail: validateEmail(data.donorEmail),
     };
     return errors;
@@ -391,20 +391,22 @@ const MyInfo = () => {
                   <>
                     <input
                       type="text"
-                      name="donorPhone"
-                      value={subInfo.donorPhone}
+                      name="donorPhoneNumber"
+                      value={subInfo.donorPhoneNumber}
                       onChange={(e) => handleInputChange(e, "sub")}
-                      className={subInfoErrors.donorPhone ? "inputInvalid" : ""}
+                      className={
+                        subInfoErrors.donorPhoneNumber ? "inputInvalid" : ""
+                      }
                     />
-                    {subInfoErrors.donorPhone && (
+                    {subInfoErrors.donorPhoneNumber && (
                       <div className="errorMessage">
-                        {subInfoErrors.donorPhone}
+                        {subInfoErrors.donorPhoneNumber}
                       </div>
                     )}
                   </>
                 ) : (
                   <>
-                    <div>{subInfo.donorPhone}</div>
+                    <div>{subInfo.donorPhoneNumber}</div>
                   </>
                 )}
               </div>

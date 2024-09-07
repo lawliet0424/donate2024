@@ -1,4 +1,4 @@
-import "./DonationFirstStep.css";
+import "./DonationStepOne.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DonationStepsBar from "../../components/DonationStepsBar";
@@ -6,20 +6,25 @@ import TagBox from "../../components/TagBox";
 import ColoredButton from "../../components/ColoredButton";
 import useTag from "../../hooks/useTag";
 
-const DonationFirstStep = () => {
-  const { loading, error, getTagCategories } = useTag();
+const DonationStepOne = () => {
+  const { getTags, getTagCategories, loading, error } = useTag();
   const [selectedTags, setSelectedTags] = useState(new Set());
+  const [categories, setCategories] = useState({});
 
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state?.selectedTags) {
-      setSelectedTags(new Set(location.state.selectedTags));
-    }
-  }, [location.state]);
+    const initialize = async () => {
+      if (location.state?.selectedTags) {
+        setSelectedTags(new Set(location.state.selectedTags));
+      }
+      await getTags();
+      setCategories(getTagCategories());
+    };
 
-  const categories = getTagCategories();
+    initialize();
+  }, [location.state, getTags, getTagCategories]);
 
   const handleTagClick = (tagId) => {
     setSelectedTags((prevSelectedTags) => {
@@ -51,12 +56,12 @@ const DonationFirstStep = () => {
   }
 
   return (
-    <div className="DonationFirstStep">
-      <DonationStepsBar stepNow={1} />
-      <div className="TagSection">
+    <div className="donation-step-one">
+      <DonationStepsBar currentStep={1} />
+      <div className="donation-step-one__tags">
         {Object.keys(categories).map((category) => (
-          <div key={category} className="categorySection">
-            <div className="categoryName">{category}</div>
+          <div key={category} className="donation-step-one__section">
+            <div className="donation-step-one__category">{category}</div>
             {categories[category].map((tag) => (
               <TagBox
                 key={tag.id}
@@ -72,9 +77,10 @@ const DonationFirstStep = () => {
         text={"다음"}
         colorScheme={"orange"}
         onClick={onNextButtonClicked}
+        className={"donation-step-one__button"}
       />
     </div>
   );
 };
 
-export default DonationFirstStep;
+export default DonationStepOne;

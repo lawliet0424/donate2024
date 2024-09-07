@@ -17,31 +17,31 @@
   margin-bottom: 30px;
 }
 
-.PaymentReceipt .infoRow {
+.PaymentReceipt__infoRow {
   display: flex;
   margin-bottom: 20px;
 }
 
-.PaymentReceipt .leftvalue {
+.PaymentReceipt__leftvalue {
   margin-right: auto;
 }
 
-.PaymentReceipt .rightvalue {
+.PaymentReceipt__rightvalue {
   margin-left: auto;
 }
 
-.PaymentReceipt .divider {
+.PaymentReceipt__divider {
   border-top: 1px solid #d9d9d9;
   margin-bottom: 20px;
 }
 
-.PaymentReceipt .result {
+.PaymentReceipt__result {
   font-size: 16px;
   font-weight: 700;
   margin-left: auto;
 }
 
-.PaymentReceipt .ColoredButton {
+.PaymentReceipt__paymentButton {
   width: 100%;
   height: 40px;
   border-radius: 5px;

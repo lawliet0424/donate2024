@@ -1,18 +1,18 @@
-import "./DonationSecondStep.css";
+import "./DonationStepTwo.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DonationStepsBar from "../../components/DonationStepsBar";
 import ColoredButton from "../../components/ColoredButton";
 import {
-  formatPerPerson,
-  validatePersonnelAmount,
+  formatamountPerPerson,
+  validateNumberOfPeopleAmount,
 } from "../../utils/FormatValidate";
 
-const DonationSecondStep = () => {
+const DonationStepTwo = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [personnel, setPersonnel] = useState("");
+  const [numberOfPeople, setNumberOfPeople] = useState("");
   const [amount, setAmount] = useState("");
 
   useEffect(() => {
@@ -24,16 +24,23 @@ const DonationSecondStep = () => {
       return;
     }
 
-    const { personnel: savedPersonnel, amount: savedAmount } = location.state;
-    setPersonnel(savedPersonnel);
+    const { numberOfPeople: savedNumberOfPeople, amount: savedAmount } =
+      location.state;
+    setNumberOfPeople(savedNumberOfPeople);
     setAmount(savedAmount);
   }, [location.state, navigate]);
 
-  const perPerson = personnel && amount ? amount / personnel : 0;
+  const amountPerPerson =
+    numberOfPeople && amount ? amount / numberOfPeople : 0;
 
   const onNextButtonClicked = () => {
-    const errorMessage = validatePersonnelAmount(personnel, amount, perPerson);
+    const errorMessage = validateNumberOfPeopleAmount(
+      numberOfPeople,
+      amount,
+      amountPerPerson
+    );
     if (errorMessage) {
+      validateNumberOfPeopleAmount;
       window.alert(errorMessage);
       return;
     }
@@ -41,9 +48,9 @@ const DonationSecondStep = () => {
       state: {
         fromSecondStep: true,
         selectedTags: location.state.selectedTags,
-        personnel: personnel,
+        numberOfPeople: numberOfPeople,
         amount: amount,
-        perPerson: formatPerPerson(perPerson),
+        amountPerPerson: formatamountPerPerson(amountPerPerson),
       },
     });
   };
@@ -57,32 +64,32 @@ const DonationSecondStep = () => {
   };
 
   return (
-    <div className="DonationSecondStep">
-      <DonationStepsBar stepNow={2} />
-      <div className="DonationSecondStepText">
+    <div className="donation-step-two">
+      <DonationStepsBar currentStep={2} />
+      <div className="donation-step-two__text">
         <input
-          className="personnel"
+          className="donation-step-two__input--numberOfPeople"
           type="number"
           min="1"
-          value={personnel}
-          onChange={(e) => setPersonnel(Number(e.target.value))}
+          value={numberOfPeople || ""}
+          onChange={(e) => setNumberOfPeople(Number(e.target.value))}
         />
         <div>명에게</div>
         <input
-          className="amount"
+          className="donation-step-two__input--amount"
           type="number"
           min="1,000"
-          value={amount}
+          value={amount || ""}
           onChange={(e) => setAmount(Number(e.target.value))}
         />
         <div>원을 나눠 기부합니다.</div>
       </div>
-      <div className="amountResult">
-        {personnel > 0 && amount > 0 ? (
+      <div className="donation-step-two__result">
+        {numberOfPeople > 0 && amount > 0 ? (
           <>
             수혜자 한 명당{" "}
-            <span className="perPersonAmount">
-              {formatPerPerson(perPerson).toLocaleString()}원
+            <span className="donation-step-two__perPersonAmount">
+              {formatamountPerPerson(amountPerPerson).toLocaleString()}원
             </span>{" "}
             기부됩니다
           </>
@@ -90,20 +97,25 @@ const DonationSecondStep = () => {
           "수혜자 한 명당 1,000원 이상 기부되도록 입력해주세요."
         )}
       </div>
-      <div className="explanation">
+      <div className="donation-step-two__explanation">
         *소수점 이하 금액은 블록체인 수수료로 사용됩니다.
       </div>
 
-      <div className="pageNavigationButtons">
-        <ColoredButton text={"이전"} onClick={onBeforeButtonClicked} />
+      <div className="donation-step-two__navigation">
+        <ColoredButton
+          text={"이전"}
+          onClick={onBeforeButtonClicked}
+          className={"donation-step-two__button"}
+        />
         <ColoredButton
           text={"다음"}
           colorScheme={"orange"}
           onClick={onNextButtonClicked}
+          className={"donation-step-two__button"}
         />
       </div>
     </div>
   );
 };
 
-export default DonationSecondStep;
+export default DonationStepTwo;

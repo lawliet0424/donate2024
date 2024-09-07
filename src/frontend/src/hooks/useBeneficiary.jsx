@@ -4,14 +4,18 @@ import { BeneficiaryContext } from "../context/BeneficiaryContext";
 const useBeneficiary = () => {
   const {
     beneficiaries,
-    selectedBeneficiary,
+    getSelectedBeneficiary,
+    getBeneficiaryDetail,
+    getInterestBeneficiary,
     getBeneficiaryById,
     loading,
     error,
   } = useContext(BeneficiaryContext);
   return {
     beneficiaries,
-    selectedBeneficiary,
+    getSelectedBeneficiary,
+    getBeneficiaryDetail,
+    getInterestBeneficiary,
     getBeneficiaryById,
     loading,
     error,

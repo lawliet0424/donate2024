@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useCallback } from "react";
 import axios from "axios";
-import { AuthContext } from "./AuthContext";
 import { mockGetUserInterests } from "../api";
+import useAuth from "../hooks/useAuth";
 
 export const InterestContext = createContext();
 
@@ -9,7 +9,7 @@ export const InterestProvider = ({ children }) => {
   const [userInterests, setUserInterests] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const getUserInterests = useCallback(async () => {
     // if (user && user.donorId) {
@@ -70,12 +70,12 @@ export const InterestProvider = ({ children }) => {
   const toggleInterest = async (beneficiaryId) => {
     // const request = isInterested
     //   ? axios.post(
-    //       "http://localhost:5000/remove-interest",
+    //       "http://localhost:5000/interest/remove",
     //       { beneficiaryId },
     //       { withCredentials: true }
     //     )
     //   : axios.post(
-    //       "http://localhost:5000/add-interest",
+    //       "http://localhost:5000/interest/add",
     //       { beneficiaryId },
     //       { withCredentials: true }
     //     );

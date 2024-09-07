@@ -1,54 +1,55 @@
-.DonationSecondStep {
+.donation-step-two {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.DonationSecondStep .DonationSecondStepText {
+.donation-step-two__text {
   display: flex;
   flex-direction: row;
   padding-top: 180px;
   font-size: 18px;
 }
 
-.DonationSecondStep input {
+.donation-step-two__input--numberOfPeople {
+  width: 40px;
   height: 20px;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 3px 10px;
 }
 
-.DonationSecondStep .personnel {
-  width: 40px;
-}
-
-.DonationSecondStep .amount {
+.donation-step-two__input--amount {
   width: 80px;
   margin-left: 12px;
+  height: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
 }
 
-.DonationSecondStep .amountResult {
+.donation-step-two__result {
   padding-top: 40px;
   font-size: 18px;
 }
 
-.DonationSecondStep .amountResult .perPersonAmount {
+.donation-step-two__perPersonAmount {
   background-color: rgb(254, 170, 1, 0.7);
 }
 
-.DonationSecondStep .explanation {
+.donation-step-two__explanation {
   padding-top: 35px;
   font-size: 14px;
 }
 
-.DonationSecondStep .pageNavigationButtons {
+.donation-step-two__navigation {
   display: flex;
   gap: 10px;
   padding: 140px 0px;
 }
 
-.DonationSecondStep .ColoredButton {
+.donation-step-two__button {
   width: 120px;
   height: 50px;
   border-radius: 5px;
