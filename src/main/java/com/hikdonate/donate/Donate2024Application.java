@@ -1,8 +1,9 @@
 package com.hikdonate.donate;
 
-import com.hikdonate.donate.web3jAPI.EtherscanAPI;
-import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
+import com.hikdonate.donate.donor.service.EtherscanAPI;
+import com.hikdonate.donate.donor.service.Web3jWrapperGenerator;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +17,10 @@ Written by: 조현지
 */
 @SpringBootApplication
 public class Donate2024Application {
+	// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
+	@Value("${donateManagement.address}")
+	private String contractAddress;
+
 	/*
     Function name: main
     Summary: Sepolia testnet 상의 스마트계약을 가져온 뒤, service와 controller에 필요한 json파일과 java wrapper 파일 생성하기
@@ -46,30 +51,13 @@ public class Donate2024Application {
 		EtherscanAPI etherscanAPI = new EtherscanAPI();
 		Web3jWrapperGenerator web3jWrapperGenerator = new Web3jWrapperGenerator();
 
-		// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
-		String[][] contracts = {
-				{"0xE47c8606fCbd06A51C3Ff44f5cdc6bE10eE65752", "DonateTokenBank"},
-				{"0xD068C31619cc12342B7fD8b6fd42a8c9e1aE019e", "TokenTransfer"},
-				{"0x32a321495bF737Ba46235542e2C5286D8445b3d2", "MultiTokenTransfer"}
-		};
-
 		// java wrapper로 변환할 json 파일명 지정
-		String[] abiFiles = {
-				"DonateTokenBank.json",
-				"TokenTransfer.json",
-				"MultiTokenTransfer.json"
-		};
+		String abiFile = "DonateManagement.json";
 
 		// Sepolia testnet에 verified된 스마트 컨트랙트를 순서대로 가져와서 로컬에 저장하기
-		for (String[] contract : contracts) {
-			String contractAddress = contract[0];
-			String contractName = contract[1];
-			etherscanAPI.getContractABI(contractAddress, contractName);
-		}
+		etherscanAPI.getContractABI(contractAddress, "DonateManagement");
 
 		// 로컬에 저장할 json 파일을 토대로 java wrapper 파일을 로컬에 생성하기
-		for (String abiFile : abiFiles) {
-			web3jWrapperGenerator.generateWrapper(abiFile);
-		}
+		Web3jWrapperGenerator.generateWrapper(abiFile);
 	}
 }
