@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ColoredButton from "../../components/ColoredButton";
-import "./SignupFirstStep.css";
+import "./SignupStepOne.css";
 import {
   formatPhoneNumber,
   validateName,
@@ -9,16 +9,19 @@ import {
   validatePhoneNumber,
 } from "../../utils/FormatValidate";
 
-const SignupFirstStep = () => {
+const SignupStepOne = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPhoneNumber, setSignupPhoneNumber] = useState("");
-  const [isNameTouched, setIsNameTouched] = useState(false);
-  const [isEmailTouched, setIsEmailTouched] = useState(false);
-  const [isPhoneNumberTouched, setIsPhoneNumberTouched] = useState(false);
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+  });
 
   useEffect(() => {
     if (location.state) {
@@ -35,35 +38,52 @@ const SignupFirstStep = () => {
   }, [location.state]);
 
   const handleNameChange = (e) => {
-    setSignupName(e.target.value);
-    setIsNameTouched(true);
+    const newName = e.target.value;
+    setSignupName(newName);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      name: validateName(newName),
+    }));
   };
 
   const handlePhoneNumberChange = (e) => {
-    const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-    setSignupPhoneNumber(formattedPhoneNumber);
-    setIsPhoneNumberTouched(true);
+    const formattedInput = e.target.value;
+    const numbersOnly = formattedInput.replace(/\D/g, "");
+
+    setSignupPhoneNumber(numbersOnly);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      phoneNumber: validatePhoneNumber(formattedInput),
+    }));
   };
 
   const handleEmailChange = (e) => {
-    setSignupEmail(e.target.value);
-    setIsEmailTouched(true);
+    const newEmail = e.target.value;
+    setSignupEmail(newEmail);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      email: validateEmail(newEmail),
+    }));
   };
 
   const onNextButtonClicked = () => {
     const nameValidationError = validateName(signupName);
     const emailValidationError = validateEmail(signupEmail);
-    const phoneNumberValidationError = validatePhoneNumber(signupPhoneNumber);
+    const phoneNumberValidationError = validatePhoneNumber(
+      formatPhoneNumber(signupPhoneNumber)
+    );
 
-    const isNameValid = nameValidationError === "";
-    const isEmailValid = emailValidationError === "";
-    const isPhoneNumberValid = phoneNumberValidationError === "";
-
-    if (!isNameValid || !isEmailValid || !isPhoneNumberValid) {
-      setIsNameTouched(true);
-      setIsEmailTouched(true);
-      setIsPhoneNumberTouched(true);
-      return; // 오류가 있으면 진행하지 않음
+    if (
+      nameValidationError ||
+      emailValidationError ||
+      phoneNumberValidationError
+    ) {
+      setErrors({
+        name: nameValidationError,
+        email: emailValidationError,
+        phoneNumber: phoneNumberValidationError,
+      });
+      return;
     }
 
     const numbersOnly = signupPhoneNumber.replace(/\D/g, "");
@@ -82,61 +102,65 @@ const SignupFirstStep = () => {
     navigate("/login");
   };
 
-  const nameError = isNameTouched ? validateName(signupName) : "";
-  const emailError = isEmailTouched ? validateEmail(signupEmail) : "";
-  const phoneNumberError = isPhoneNumberTouched
-    ? validatePhoneNumber(signupPhoneNumber)
-    : "";
-
   return (
-    <div className="SignupFirstStep">
-      <div className="title">회원가입</div>
+    <div className="signup-step-one">
+      <div className="signup-step-one__title">회원가입</div>
       <input
         type="text"
         placeholder="이름"
         value={signupName}
         onChange={handleNameChange}
-        className={nameError ? "inputInvalid" : ""}
+        className={`signup-step-one__input ${errors.name ? "--invalid" : ""}`}
       />
-      {nameError && <div className="errorMessage">{nameError}</div>}
+      {errors.name && (
+        <div className="signup-step-one__message--error">{errors.name}</div>
+      )}
       <input
         type="email"
         placeholder="메일"
         value={signupEmail}
         onChange={handleEmailChange}
-        className={emailError ? "inputInvalid" : ""}
+        className={`signup-step-one__input ${errors.email ? "--invalid" : ""}`}
       />
-      {emailError && <div className="errorMessage">{emailError}</div>}
+      {errors.email && (
+        <div className="signup-step-one__message--error">{errors.email}</div>
+      )}
       <input
         type="tel"
         placeholder="전화번호"
-        value={signupPhoneNumber}
+        value={formatPhoneNumber(signupPhoneNumber)}
         onChange={handlePhoneNumberChange}
         maxLength={13}
-        className={phoneNumberError ? "inputInvalid" : ""}
+        className={`signup-step-one__input ${
+          errors.phoneNumber ? "--invalid" : ""
+        }`}
       />
-      {phoneNumberError && (
-        <div className="errorMessage">{phoneNumberError}</div>
+      {errors.phoneNumber && (
+        <div className="signup-step-one__message--error">
+          {errors.phoneNumber}
+        </div>
       )}
       <ColoredButton
         text="다음"
         colorScheme="orange"
         onClick={onNextButtonClicked}
+        className={"signup-step-one__button--next"}
       />
 
-      <div className="separator">
-        <div className="line"></div>
-        <div className="text">또는</div>
-        <div className="line"></div>
+      <div className="signup-step-one__separator">
+        <div className="signup-step-one__separator__line"></div>
+        <div className="signup-step-one__separator__text">또는</div>
+        <div className="signup-step-one__separator__line"></div>
       </div>
 
       <ColoredButton
         text="로그인"
         colorScheme="white"
         onClick={onClickToSignupButton}
+        className={"signup-step-one__button--login"}
       />
     </div>
   );
 };
 
-export default SignupFirstStep;
+export default SignupStepOne;

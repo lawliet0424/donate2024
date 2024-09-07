@@ -1,4 +1,4 @@
-.Footer {
+.footer {
   margin-top: 150px;
   height: 200px;
   color: #787a86;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.Footer__content {
+.footer__content {
   width: 100%;
   max-width: 1000px;
 }

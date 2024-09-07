@@ -1,4 +1,5 @@
 import "./TransparentButton.css";
+import React from "react";
 
 const TransparentButton = ({ text, onClick }) => {
   return (

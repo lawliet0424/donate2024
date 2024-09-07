@@ -1,4 +1,3 @@
-// FormatValidate.js
 export const formatPhoneNumber = (value) => {
   const numbersOnly = value.replace(/\D/g, "");
   let formattedPhoneNumber = numbersOnly;
@@ -15,7 +14,7 @@ export const formatPhoneNumber = (value) => {
   return formattedPhoneNumber;
 };
 
-export const formatPerPerson = (value) => {
+export const formatamountPerPerson = (value) => {
   if (value % 1 === 0) {
     return value;
   }
@@ -67,7 +66,7 @@ export const validateId = (id) => {
   return "";
 };
 
-export const validatePassword = (password, id) => {
+export const validatePassword = (password) => {
   if (!password) {
     return "비밀번호를 입력해주세요.";
   } else if (!/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{10,}$/.test(password)) {
@@ -76,8 +75,6 @@ export const validatePassword = (password, id) => {
     } else {
       return "비밀번호는 영문(대소문자 포함)과 숫자를 모두 포함해야 합니다.";
     }
-  } else if (id === password) {
-    return "아이디와 비밀번호는 같을 수 없습니다.";
   }
   return "";
 };
@@ -100,10 +97,14 @@ export const validateFinancialAccount = (financialAccount) => {
   return "";
 };
 
-export const validatePersonnelAmount = (personnel, amount, perPerson) => {
-  if (!personnel || !amount) {
+export const validateNumberOfPeopleAmount = (
+  numberOfPeople,
+  amount,
+  amountPerPerson
+) => {
+  if (!numberOfPeople || !amount) {
     return "모든 필드에 값을 입력해주세요.";
-  } else if (formatPerPerson(perPerson) < 1000) {
+  } else if (formatamountPerPerson(amountPerPerson) < 1000) {
     return "수혜자 한 명당 1,000원 이상 기부되도록 입력 해주세요.";
   }
   return null;

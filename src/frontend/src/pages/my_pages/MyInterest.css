@@ -1,11 +1,11 @@
-.MyInterest {
+.my-interest {
   display: flex;
   flex-direction: column;
   padding: 0px 40px;
   align-items: center;
 }
 
-.MyInterest .title {
+.my-interest__title {
   font-size: 23px;
   font-weight: 600;
   padding-top: 50px;
@@ -14,7 +14,7 @@
   text-align: left;
 }
 
-.MyInterest .beneficiaryLists {
+.my-interest__beneficiaryLists {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

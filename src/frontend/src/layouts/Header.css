@@ -1,4 +1,4 @@
-.Header {
+.header {
   padding: 15px 0;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
@@ -8,46 +8,46 @@
   position: relative;
 }
 
-.Header__content {
+.header__content {
   display: flex;
   flex-direction: column;
   width: 1200px;
   padding: 0 20px;
 }
 
-.Header__shortcut {
+.header__shortcut {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
   font-size: 10px;
 }
 
-.Header__main {
+.header__main {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.Header__main--left {
+.header__main--left {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 80%;
 }
 
-.Header__main--left img {
+.header__main--left img {
   height: 80px;
   cursor: pointer;
 }
 
-.Header__main--right {
+.header__main--right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 20%;
 }
 
-.Header__main--right .ColoredButton {
+.header__donationButton {
   font-size: 17px;
   font-weight: 500;
   height: 46px;

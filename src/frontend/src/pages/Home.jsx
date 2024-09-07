@@ -4,8 +4,8 @@ import homeIntroImage from "../assets/homeIntroImage.png";
 
 const Home = () => {
   return (
-    <div className="Home">
-      <img className="homeIntroImage" src={homeIntroImage} alt="Beneficiary" />
+    <div className="home">
+      <img className="home__img" src={homeIntroImage} />
     </div>
   );
 };

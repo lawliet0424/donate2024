@@ -1,24 +1,29 @@
 import "./DonationPayment.css";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import PaymentMethod from "../../components/PaymentMethod";
 // import PaymentMethodSelection from "../../components/PaymentMethodSelection";
 import PaymentReceipt from "../../components/PaymentReceipt";
-import { AuthContext } from "../../context/AuthContext";
+import useAuth from "../../hooks/useAuth";
+import usePayment from "../../hooks/usePayment";
+import { formatPhoneNumber } from "../../utils/FormatValidate";
 
 const DonationPayment = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  const { submitPayment } = usePayment();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [isMethodSelected, setIsMethodSelected] = useState(false);
+  const [loading, setLoading] = useState(false); // loading 상태 추가
 
-  const handlePaymentMethodClick = (methodName) => {
-    setSelectedPaymentMethod(methodName);
-    setIsMethodSelected(true);
-  };
-
-  const { personnel, amount, perPerson, fromThirdStep } = location.state || {};
+  const {
+    numberOfPeople,
+    amount,
+    amountPerPerson,
+    fromThirdStep,
+    selectedBeneficiaryList,
+  } = location.state || {};
   useEffect(() => {
     if (!fromThirdStep) {
       window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
@@ -26,6 +31,60 @@ const DonationPayment = () => {
       return;
     }
   }, [fromThirdStep, navigate]);
+
+  const handlePaymentMethodClick = (methodName) => {
+    setSelectedPaymentMethod(methodName);
+    setIsMethodSelected(true);
+  };
+
+  // 결제 처리 중 뒤로가기 방지
+  useEffect(() => {
+    if (loading) {
+      // 히스토리 상태 추가
+      window.history.pushState(null, null, window.location.href);
+
+      const handlePopState = (event) => {
+        window.alert("결제 처리 중에는 뒤로가기를 할 수 없습니다.");
+        window.history.pushState(null, null, window.location.href); // 다시 현재 페이지 상태로
+      };
+
+      window.addEventListener("popstate", handlePopState);
+
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }
+  }, [loading]);
+
+  const onClickPaymentButton = async () => {
+    if (!isMethodSelected) {
+      window.alert("결제 수단을 선택하세요.");
+      return;
+    }
+
+    setLoading(true); // 로딩 시작
+    navigate("/loading"); // 로딩 페이지로 이동
+
+    try {
+      await submitPayment(
+        numberOfPeople,
+        amountPerPerson,
+        selectedBeneficiaryList
+      );
+      navigate("/donation/done", {
+        state: {
+          numberOfPeople,
+          amount,
+          amountPerPerson,
+        },
+      });
+    } catch (error) {
+      window.alert("결제 중 오류가 발생했습니다.");
+      navigate("/error"); // 결제 중 오류 시 에러 페이지로 이동
+    } finally {
+      setLoading(false); // 로딩 종료
+    }
+  };
 
   return (
     <div className="DonationPayment">
@@ -42,7 +101,7 @@ const DonationPayment = () => {
               </div>
               <div className="donorInfoRight">
                 <div>{user.donorName}</div>
-                <div>{user.donorPhone}</div>
+                <div>{formatPhoneNumber(user.donorPhoneNumber)}</div>
                 <div>{user.donorEmail}</div>
               </div>
             </div>
@@ -69,10 +128,10 @@ const DonationPayment = () => {
         </div>
         <div className="donationPaymentRight">
           <PaymentReceipt
-            numberOfBeneficiaries={personnel}
-            donationAmountPerPerson={perPerson}
+            numberOfBeneficiaries={numberOfPeople}
+            donationAmountPerPerson={amountPerPerson}
             totalAmount={amount}
-            isMethodSelected={isMethodSelected}
+            onClickPaymentButton={onClickPaymentButton}
           />
         </div>
       </div>
