@@ -1,4 +1,4 @@
-.DonationPayment {
+.donation-payment {
   display: flex;
   flex-direction: column;
   /* padding-left: 30px;
@@ -7,7 +7,7 @@
   align-items: flex-start;
 }
 
-.DonationPayment .title {
+.donation-payment__title {
   font-size: 23px;
   font-weight: 600;
   /* padding-top: 50px;
@@ -17,14 +17,14 @@
   text-align: left;
 }
 
-.DonationPayment .donationPaymentContent {
+.donation-payment__content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
 
-.DonationPayment .donationPaymentLeft {
+.donation-payment__content--left {
   flex: 1;
 }
 
@@ -32,15 +32,14 @@
   padding: 24px 30px;
 } */
 
-.DonationPayment .donorInfoTitle,
-.DonationPayment .paymentMethodTitle {
+.donation-payment__title--sub {
   font-size: 20px;
   font-weight: 700;
   padding-bottom: 15px;
   padding-top: 50px;
 }
 
-.DonationPayment .donorInfoContent {
+.donation-payment__info {
   display: flex;
   flex-direction: row;
   gap: 200px;
@@ -48,18 +47,18 @@
   font-weight: 400;
 }
 
-.DonationPayment .donorInfoContent .donorInfoLeft,
-.DonationPayment .donorInfoContent .donorInfoRight {
+.donation-payment__info--left,
+.donation-payment__info--right {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-top: 10px;
 }
 
-.DonationPayment .donationPaymentRight {
+.donation-payment__content--right {
   padding-top: 50px;
 }
 
-.DonationPayment .paymentMethodList .PaymentMethod {
+.donation-payment__method .PaymentMethod {
   margin-right: 8px;
 }

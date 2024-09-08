@@ -146,13 +146,14 @@ const MyInfo = () => {
   };
 
   return (
-    <div className="MyInfo">
-      <div className="title">회원 정보</div>
+    <div className="my-info">
+      <div className="my-info__title">회원 정보</div>
 
-      <div className="myProfileInfo">
-        <div className="myProfileInfoTitle">
+      <div className="my-info__profile">
+        <div className="my-info__title--sub">
           프로필
           <button
+            className="my-info__button"
             onClick={() =>
               isEditingProfile
                 ? handleSaveClick("profile")
@@ -162,32 +163,41 @@ const MyInfo = () => {
             {isEditingProfile ? "저장" : "수정"}
           </button>
         </div>
-        <div className="myProfileInfoImg">
-          <div className="myProfileImgText">이미지</div>
-          <img
-            className="myProfileImage"
-            src={image}
-            alt="Profile"
-            onClick={() =>
-              isEditingProfile && document.getElementById("fileInput").click()
-            }
-          />
-          <input
-            id="fileInput"
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleImageChange}
-          />
-        </div>
-        <div
-          className={`myProfileInfoContent ${
-            isEditingProfile ? "editing" : ""
-          }`}
-        >
-          <div className="myProfileTest">
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">닉네임</div>
-              <div className="myProfileLineRight">
+        <div className="my-info__content">
+          <div className="my-info__text">
+            <div className="my-info__line">
+              <div className="my-info__line--left">이미지</div>
+              <div className="my-info__line--right">
+                {isEditingProfile ? (
+                  <>
+                    <img
+                      className="my-info__profile--img"
+                      src={image}
+                      alt="Profile"
+                      onClick={() =>
+                        isEditingProfile &&
+                        document.getElementById("my-info__input--file").click()
+                      }
+                    />
+                    <input
+                      id="my-info__input--file"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleImageChange}
+                    />
+                  </>
+                ) : (
+                  <img
+                    className="my-info__profile--img"
+                    src={image}
+                    alt="Profile"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="my-info__line">
+              <div className="my-info__line--left">닉네임</div>
+              <div className="my-info__line--right">
                 {isEditingProfile ? (
                   <>
                     <input
@@ -196,11 +206,13 @@ const MyInfo = () => {
                       value={profileData.donorNickname}
                       onChange={(e) => handleInputChange(e, "profile")}
                       className={
-                        profileErrors.donorNickname ? "inputInvalid" : ""
+                        profileErrors.donorNickname
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
                       }
                     />
                     {profileErrors.donorNickname && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {profileErrors.donorNickname}
                       </div>
                     )}
@@ -210,9 +222,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">나이</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">나이</div>
+              <div className="my-info__line--right">
                 {isEditingProfile ? (
                   <>
                     <input
@@ -221,26 +233,34 @@ const MyInfo = () => {
                       placeholder="나이를 입력하세요"
                       value={profileData.donorAge}
                       onChange={(e) => handleInputChange(e, "profile")}
-                      className={profileErrors.donorAge ? "inputInvalid" : ""}
+                      className={
+                        profileErrors.donorAge
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
+                      }
                     />
                     {profileErrors.donorAge && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {profileErrors.donorAge}
                       </div>
                     )}
                   </>
                 ) : (
                   <div>
-                    <div className={profileData.donorAge ? "" : "default-text"}>
+                    <div
+                      className={
+                        profileData.donorAge ? "" : "my-info__text--default"
+                      }
+                    >
                       {profileData.donorAge || "(선택) 나이를 입력하세요"}
                     </div>
                   </div>
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">금융계좌</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">금융계좌</div>
+              <div className="my-info__line--right">
                 {isEditingProfile ? (
                   <>
                     <input
@@ -251,12 +271,12 @@ const MyInfo = () => {
                       onChange={(e) => handleInputChange(e, "profile")}
                       className={
                         profileErrors.donorFinancialAccount
-                          ? "inputInvalid"
-                          : ""
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
                       }
                     />
                     {profileErrors.donorFinancialAccount && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {profileErrors.donorFinancialAccount}
                       </div>
                     )}
@@ -264,7 +284,9 @@ const MyInfo = () => {
                 ) : (
                   <div
                     className={
-                      profileData.donorFinancialAccount ? "" : "default-text"
+                      profileData.donorFinancialAccount
+                        ? ""
+                        : "my-info__text--default"
                     }
                   >
                     {profileData.donorFinancialAccount ||
@@ -273,9 +295,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">지갑주소</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">지갑주소</div>
+              <div className="my-info__line--right">
                 {isEditingProfile ? (
                   <div>
                     <a
@@ -303,10 +325,11 @@ const MyInfo = () => {
         </div>
       </div>
 
-      <div className="mySubInfo">
-        <div className="mySubInfoTitle">
+      <div className="my-info__signup">
+        <div className="my-info__title--sub">
           가입 정보
           <button
+            className="my-info__button"
             onClick={() =>
               isEditingSubInfo ? handleSaveClick("sub") : handleEditClick("sub")
             }
@@ -317,10 +340,10 @@ const MyInfo = () => {
         <div
           className={`mySubInfoContent ${isEditingSubInfo ? "editing" : ""}`}
         >
-          <div className="myProfileTest">
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">아이디</div>
-              <div className="myProfileLineRight">
+          <div className="my-info__text">
+            <div className="my-info__line">
+              <div className="my-info__line--left">아이디</div>
+              <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
                     <div>{subInfo.donorId}</div>
@@ -332,9 +355,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">비밀번호</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">비밀번호</div>
+              <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
                     <input
@@ -343,11 +366,13 @@ const MyInfo = () => {
                       value={subInfo.donorPassword}
                       onChange={(e) => handleInputChange(e, "sub")}
                       className={
-                        subInfoErrors.donorPassword ? "inputInvalid" : ""
+                        subInfoErrors.donorPassword
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
                       }
                     />
                     {subInfoErrors.donorPassword && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {subInfoErrors.donorPassword}
                       </div>
                     )}
@@ -359,9 +384,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">이름</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">이름</div>
+              <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
                     <input
@@ -369,10 +394,14 @@ const MyInfo = () => {
                       name="donorName"
                       value={subInfo.donorName}
                       onChange={(e) => handleInputChange(e, "sub")}
-                      className={subInfoErrors.donorName ? "inputInvalid" : ""}
+                      className={
+                        subInfoErrors.donorName
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
+                      }
                     />
                     {subInfoErrors.donorName && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {subInfoErrors.donorName}
                       </div>
                     )}
@@ -384,9 +413,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">전화번호</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">전화번호</div>
+              <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
                     <input
@@ -395,11 +424,13 @@ const MyInfo = () => {
                       value={subInfo.donorPhoneNumber}
                       onChange={(e) => handleInputChange(e, "sub")}
                       className={
-                        subInfoErrors.donorPhoneNumber ? "inputInvalid" : ""
+                        subInfoErrors.donorPhoneNumber
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
                       }
                     />
                     {subInfoErrors.donorPhoneNumber && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {subInfoErrors.donorPhoneNumber}
                       </div>
                     )}
@@ -411,9 +442,9 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
-            <div className="myProfileLine">
-              <div className="myProfileLineLeft">메일</div>
-              <div className="myProfileLineRight">
+            <div className="my-info__line">
+              <div className="my-info__line--left">메일</div>
+              <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
                     <input
@@ -421,10 +452,14 @@ const MyInfo = () => {
                       name="donorEmail"
                       value={subInfo.donorEmail}
                       onChange={(e) => handleInputChange(e, "sub")}
-                      className={subInfoErrors.donorEmail ? "inputInvalid" : ""}
+                      className={
+                        subInfoErrors.donorEmail
+                          ? "my-info__input--invalid"
+                          : "my-info__input"
+                      }
                     />
                     {subInfoErrors.donorEmail && (
-                      <div className="errorMessage">
+                      <div className="my-info__message--error">
                         {subInfoErrors.donorEmail}
                       </div>
                     )}
