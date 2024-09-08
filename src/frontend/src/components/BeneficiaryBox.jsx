@@ -40,37 +40,37 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
     selectedBeneficiary.beneficiaryProfileImg || defaultProfileImage;
 
   return (
-    <div className="beneficiary-box">
+    <div className="BeneficiaryBox">
       <img
-        className="beneficiary-box__profile"
+        className="BeneficiaryBox__profile"
         src={imageSrc}
         alt={selectedBeneficiary.beneficiaryName || "Beneficiary"}
       />
-      <div className="beneficiary-box__details">
-        <div className="beneficiary-box__header">
-          <div className="beneficiary-box__name">
+      <div className="BeneficiaryBox__details">
+        <div className="BeneficiaryBox__header">
+          <div className="BeneficiaryBox__name">
             {selectedBeneficiary.beneficiaryName || "No Name"}
           </div>
           <div
-            className="beneficiary-box__button--interest"
+            className="BeneficiaryBox__button--interest"
             onClick={handleToggleInterest}
           >
             <img
-              className="beneficiary-box__heart"
+              className="BeneficiaryBox__heart"
               src={isInterested ? filledHeart : emptyHeart}
               alt="Heart Icon"
             />
           </div>
         </div>
-        <div className="beneficiary-box__tag__section">
+        <div className="BeneficiaryBox__tag__section">
           {selectedBeneficiary.beneficiaryTags &&
           selectedBeneficiary.beneficiaryTags.length > 0 ? (
             selectedBeneficiary.beneficiaryTags.map((tag) => (
               <div
                 key={tag.id}
-                className={`beneficiary-box__tag ${
+                className={`BeneficiaryBox__tag ${
                   selectedTags.includes(tag.id)
-                    ? "beneficiary-box__tag--selected"
+                    ? "BeneficiaryBox__tag--selected"
                     : ""
                 }`}
               >
@@ -78,7 +78,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
               </div>
             ))
           ) : (
-            <div className="beneficiary-box__tag">No Tags</div>
+            <div className="BeneficiaryBox__tag">No Tags</div>
           )}
         </div>
       </div>

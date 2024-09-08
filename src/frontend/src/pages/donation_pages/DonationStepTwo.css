@@ -35,7 +35,11 @@
 }
 
 .donation-step-two__perPersonAmount {
-  background-color: rgb(254, 170, 1, 0.7);
+  background: linear-gradient(
+    to top,
+    rgba(254, 168, 1, 0.5) 80%,
+    transparent 40%
+  );
 }
 
 .donation-step-two__explanation {

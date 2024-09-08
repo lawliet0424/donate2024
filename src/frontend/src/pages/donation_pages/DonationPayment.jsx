@@ -87,19 +87,19 @@ const DonationPayment = () => {
   };
 
   return (
-    <div className="DonationPayment">
-      <div className="title">결제하기</div>
-      <div className="donationPaymentContent">
-        <div className="donationPaymentLeft">
+    <div className="donation-payment">
+      <div className="donation-payment__title">결제하기</div>
+      <div className="donation-payment__content">
+        <div className="donation-payment__content--left">
           <div className="donorInfo">
-            <div className="donorInfoTitle">기부자 정보</div>
-            <div className="donorInfoContent">
-              <div className="donorInfoLeft">
+            <div className="donation-payment__title--sub">기부자 정보</div>
+            <div className="donation-payment__info">
+              <div className="donation-payment__info--left">
                 <div>이름</div>
                 <div>전화번호</div>
                 <div>메일</div>
               </div>
-              <div className="donorInfoRight">
+              <div className="donation-payment__info--right">
                 <div>{user.donorName}</div>
                 <div>{formatPhoneNumber(user.donorPhoneNumber)}</div>
                 <div>{user.donorEmail}</div>
@@ -107,8 +107,8 @@ const DonationPayment = () => {
             </div>
           </div>
           {/* <PaymentMethodSelection value={30000} /> */}
-          <div className="paymentMethodList">
-            <div className="paymentMethodTitle">결제 수단</div>
+          <div className="donation-payment__method">
+            <div className="donation-payment__title--sub">결제 수단</div>
             <PaymentMethod
               methodName={"카드결제"}
               isPaymentMethodSelected={selectedPaymentMethod === "카드결제"}
@@ -126,7 +126,7 @@ const DonationPayment = () => {
             />
           </div>
         </div>
-        <div className="donationPaymentRight">
+        <div className="donation-payment__content--right">
           <PaymentReceipt
             numberOfBeneficiaries={numberOfPeople}
             donationAmountPerPerson={amountPerPerson}

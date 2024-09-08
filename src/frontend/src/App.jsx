@@ -14,8 +14,8 @@ import DonationStepOne from "./pages/donation_pages/DonationStepOne.jsx";
 import DonationStepTwo from "./pages/donation_pages/DonationStepTwo.jsx";
 import DonationStepThree from "./pages/donation_pages/DonationStepThree.jsx";
 import DonationPayment from "./pages/donation_pages/DonationPayment.jsx";
-import BeneficiaryDetailPage from "./pages/donation_pages/BeneficiaryDetailPage";
 import DonationDone from "./pages/donation_pages/DonationDone.jsx";
+import BeneficiaryDetailPage from "./pages/donation_pages/BeneficiaryDetailPage";
 import MyPage from "./pages/my_pages/MyPage";
 import MyInfo from "./pages/my_pages/MyInfo";
 import MyInterest from "./pages/my_pages/MyInterest";
@@ -28,12 +28,14 @@ import Loading from "./pages/error_loading_pages/Loading.jsx";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer.jsx";
 
-// 컨텍스트 및 기타 컴포넌트 임포트
+// 컨텍스트 컴포넌트 임포트
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { InterestProvider } from "./context/InterestContext";
 import { BeneficiaryProvider } from "./context/BeneficiaryContext.jsx";
+import { InterestProvider } from "./context/InterestContext";
 import { TagProvider } from "./context/TagContext.jsx";
 import { PaymentProvider } from "./context/PaymentContext.jsx";
+
+// 라우트 관련 컴포넌트 임포트
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
 
