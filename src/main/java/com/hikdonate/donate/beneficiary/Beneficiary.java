@@ -22,6 +22,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Beneficiary {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long beneficiary_id;
@@ -57,7 +58,4 @@ public class Beneficiary {
     @OneToMany(mappedBy = "beneficiary", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TagLink> tagLinks = new HashSet<>();
 
-    public Long getBeneficiary_id() {
-        return beneficiary_id;
-    }
 }

@@ -19,19 +19,27 @@ import java.util.Set;
 @Getter
 @Setter
 public class Tag {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tag_id;
 
     @Column(nullable = false)
     private String tag_name;
-
     private String tag_classification;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TagLink> tagLinks = new HashSet<>();
 
-    public Long getTag_id() {
+    public String getTagClass() {
+        return tag_classification;
+    }
+
+    public Long getTagId() {
         return tag_id;
+    }
+
+    public String getTagName() {
+        return tag_name;
     }
 }

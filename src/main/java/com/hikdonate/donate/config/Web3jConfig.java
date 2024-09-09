@@ -1,12 +1,17 @@
 package com.hikdonate.donate.config;
 
+
+import com.hikdonate.donate.web3jAPI.EtherscanAPI;
+import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.gas.DefaultGasProvider;
 
 /*
 Class name: Web3jConfig
@@ -21,12 +26,27 @@ public class Web3jConfig {
     @Value("${infura.url}")
     private String infuraURL;
 
-    @Value("${apikey}")
+    @Value("${admin.private-key}")
     private String adminPrivateKey;
+
+    @Bean
+    public EtherscanAPI etherscanAPI() {
+        return new EtherscanAPI();
+    }
+
+    @Bean
+    public Web3jWrapperGenerator web3jWrapperGenerator() {
+        return new Web3jWrapperGenerator();
+    }
 
     @Bean
     public Web3j web3j() {
         return Web3j.build(new HttpService(infuraURL));
+    }
+
+    @Bean
+    public Credentials credentials() {
+        return Credentials.create(adminPrivateKey);
     }
 
     @Bean
