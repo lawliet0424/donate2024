@@ -1,9 +1,8 @@
 package com.hikdonate.donate.config;
 
 
-import com.hikdonate.donate.web3jAPI.contracts.DonateTokenBank;
-import com.hikdonate.donate.web3jAPI.contracts.MultiTokenTransfer;
-import com.hikdonate.donate.web3jAPI.contracts.TokenTransfer;
+import com.hikdonate.donate.web3jAPI.EtherscanAPI;
+import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.DefaultGasProvider;
 
 /*
 Class name: Web3jConfig
@@ -30,14 +28,15 @@ public class Web3jConfig {
     @Value("${admin.private-key}")
     private String adminPrivateKey;
 
-    @Value("${donateTokenBank.address}")
-    private String donateTokenBankAddress;
+    @Bean
+    public EtherscanAPI etherscanAPI() {
+        return new EtherscanAPI();
+    }
 
-    @Value("${tokenTransfer.address}")
-    private String tokenTransferAddress;
-
-    @Value("${multiTokenTransfer.address}")
-    private String multiTokenTransferAddress;
+    @Bean
+    public Web3jWrapperGenerator web3jWrapperGenerator() {
+        return new Web3jWrapperGenerator();
+    }
 
     @Bean
     public Web3j web3j() {
@@ -47,21 +46,6 @@ public class Web3jConfig {
     @Bean
     public Credentials credentials() {
         return Credentials.create(adminPrivateKey);
-    }
-
-    @Bean
-    public DonateTokenBank donateTokenBank(Web3j web3j, Credentials credentials) {
-        return DonateTokenBank.load(donateTokenBankAddress, web3j, credentials, new DefaultGasProvider());
-    }
-
-    @Bean
-    public TokenTransfer tokenTransfer(Web3j web3j, Credentials credentials) {
-        return TokenTransfer.load(tokenTransferAddress, web3j, credentials, new DefaultGasProvider());
-    }
-
-    @Bean
-    public MultiTokenTransfer multiTokenTransfer(Web3j web3j, Credentials credentials) {
-        return MultiTokenTransfer.load(multiTokenTransferAddress, web3j, credentials, new DefaultGasProvider());
     }
 
     @Bean

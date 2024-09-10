@@ -17,11 +17,11 @@ Written by: 조현지
 
 public class EtherscanAPI {
     // [하드코딩]이지만, DB나 클라우드와 연동하기 전까지는 하드코딩이 맞음
-    @Value("${infura.api-key}")
-    private static final String apiKey = null;
+    @Value("${admin.api-key}")
+    private String apiKey;
 
     @Value("${abi.file-path}")
-    private static final String filePath = null;
+    private String filePath;
 
     /*
     Function name: getContractABI
@@ -34,7 +34,7 @@ public class EtherscanAPI {
     Date: 2024.07.26
     Written by: 조현지
     */
-    public static void getContractABI(String contractAddress, String contractName) throws IOException {
+    public void getContractABI(String contractAddress, String contractName) throws IOException {
         // Sepolia testnet에 verified된 스마트 컨트랙트 주소
         String url = "https://api-sepolia.etherscan.io/api" +
                 "?module=contract" +
@@ -42,6 +42,7 @@ public class EtherscanAPI {
                 "&address=" + contractAddress +
                 "&apikey=" + apiKey;
 
+        System.out.println(url);
         // Sepolia testnet이 넘겨준 Response 정보 가져오기
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("GET");
