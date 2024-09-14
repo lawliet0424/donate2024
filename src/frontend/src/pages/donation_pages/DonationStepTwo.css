@@ -8,7 +8,7 @@
 .donation-step-two__text {
   display: flex;
   flex-direction: row;
-  padding-top: 180px;
+  padding-top: 240px;
   font-size: 18px;
 }
 
@@ -50,7 +50,7 @@
 .donation-step-two__navigation {
   display: flex;
   gap: 10px;
-  padding: 140px 0px;
+  padding: 200px 0px;
 }
 
 .donation-step-two__button {
