@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.tag;
+package com.hikdonate.donate.tag;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,26 +20,22 @@ import java.util.Set;
 @Setter
 public class Tag {
     @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tag_id;
+    private Long tagId;
 
+
+    @Getter
+    @Setter
     @Column(nullable = false)
-    private String tag_name;
-    private String tag_classification;
+    private String tagName;
+
+    @Getter
+    @Setter
+    private String tagClassification;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TagLink> tagLinks = new HashSet<>();
 
-    public String getTagClass() {
-        return tag_classification;
-    }
-
-    public Long getTagId() {
-        return tag_id;
-    }
-
-    public String getTagName() {
-        return tag_name;
-    }
 }

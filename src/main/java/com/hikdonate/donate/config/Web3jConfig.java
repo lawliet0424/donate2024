@@ -26,7 +26,7 @@ public class Web3jConfig {
     @Value("${infura.url}")
     private String infuraURL;
 
-    @Value("${apikey}")
+    @Value("${admin.private-key}")
     private String adminPrivateKey;
 
     @Bean

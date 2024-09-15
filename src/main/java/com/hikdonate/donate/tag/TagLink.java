@@ -1,6 +1,6 @@
-package com.hikdonate.donate.domain.tag;
+package com.hikdonate.donate.tag;
 
-import com.hikdonate.donate.domain.beneficiary.Beneficiary;
+import com.hikdonate.donate.beneficiary.Beneficiary;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +43,7 @@ public class TagLink implements Serializable {
     public TagLink() {}
 
     public TagLink(Beneficiary beneficiary, Tag tag, String beneficiary_nickname, String tag_name, String tag_classification) {
-        this.taglink_id = new TagLinkId(beneficiary.getBeneficiary_id(), tag.getTag_id());
+        this.taglink_id = new TagLinkId(beneficiary.getBeneficiary_id(), tag.getTagId());
         this.beneficiary = beneficiary;
         this.tag = tag;
         this.beneficiary_nickname = beneficiary_nickname;

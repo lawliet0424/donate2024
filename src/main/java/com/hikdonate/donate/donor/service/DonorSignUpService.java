@@ -1,7 +1,7 @@
-package com.hikdonate.donate.domain.donor.application;
+package com.hikdonate.donate.donor.service;
 
-import com.hikdonate.donate.domain.donor.dao.DonorRepository;
-import com.hikdonate.donate.domain.donor.domain.Donor;
+import com.hikdonate.donate.donor.dao.DonorRepository;
+import com.hikdonate.donate.donor.Donor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

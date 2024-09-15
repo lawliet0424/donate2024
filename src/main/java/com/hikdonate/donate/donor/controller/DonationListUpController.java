@@ -3,7 +3,7 @@ package com.hikdonate.donate.donor.controller;
 import com.hikdonate.donate.beneficiary.service.BeneficiaryInfoService;
 import com.hikdonate.donate.tag.repository.TagBasedSuggestionRequest;
 import com.hikdonate.donate.tag.repository.TaggedBeneficiaryContainer;
-import com.hikdonate.donate.tag.repository.tagResponse.TagResponse;
+import com.hikdonate.donate.tag.repository.tagResponse.TagInfo;
 import com.hikdonate.donate.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class DonationListUpController {
 
     // 태그 정보 반환
     @GetMapping("/step1")
-    public TagResponse getAllTags() {
+    public List<TagInfo> getAllTags() {
         return tagService.getAllTags();
     }
 

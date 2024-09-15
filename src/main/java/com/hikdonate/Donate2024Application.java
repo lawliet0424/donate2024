@@ -1,4 +1,4 @@
-package com.hikdonate.donate;
+package com.hikdonate;
 
 import com.hikdonate.donate.web3jAPI.EtherscanAPI;
 import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
 
@@ -19,7 +19,8 @@ Written by: 조현지
 */
 
 @RequiredArgsConstructor
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.hikdonate.donate"})
 public class Donate2024Application {
    /*
     Function name: main
@@ -39,8 +40,6 @@ public class Donate2024Application {
 	public static void main(String[] args) throws IOException {
 		// 서버 띄우기
 		SpringApplication.run(Donate2024Application.class, args);
-
-
 	}
 
 	/*

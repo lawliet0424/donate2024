@@ -1,5 +1,5 @@
 package com.hikdonate.donate.donor.service;
-import com.hikdonate.contracts.DonateManagement;
+
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,8 +8,6 @@ import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
-import java.math.BigInteger;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,14 +29,14 @@ public class DonationWeb3Service {
     private final Web3j web3j;
     private final Credentials credentials;
 
-    private DonateManagement donateManagement;
+//    private DonateManagement donateManagement;
 
     @PostConstruct
     private void init() {
         RawTransactionManager rawTransactionManager = new RawTransactionManager(web3j, credentials);
 
         // Wrapper로 감싸진 스마트 컨트랙트(ABI 파일)를 통해, 테스트넷 상의 스마트 컨트랙트를 가져오기
-        donateManagement = DonateManagement.load(donateManagement_addr, web3j, rawTransactionManager, new DefaultGasProvider());
+//        donateManagement = DonateManagement.load(donateManagement_addr, web3j, rawTransactionManager, new DefaultGasProvider());
     }
 
 
@@ -46,9 +44,9 @@ public class DonationWeb3Service {
     public String sendTokenToDonor(String donor, Long total_amount) throws Exception {
         String result = "";
         try {
-            if (donateManagement.sendTokensToDonor(donor, BigInteger.valueOf((long) total_amount)).send().isStatusOK()){
-                result = "success";
-            }
+//            if (donateManagement.sendTokensToDonor(donor, BigInteger.valueOf((long) total_amount)).send().isStatusOK()){
+//                result = "success";
+//            }
         } catch (Exception e)  {
             System.out.println("Revert: " + e.getMessage());
             result = e.getMessage();
@@ -64,9 +62,9 @@ public class DonationWeb3Service {
         if (beneficiaries!= null) num_of_beneficiaries = beneficiaries.length;
         if (num_of_beneficiaries == 1){ // 단일 기부
             try {
-                if (donateManagement.triggerSendTokensToBeneficiaryAndDonateBank(donor, beneficiaries[0], BigInteger.valueOf((long) divided_amount)).send().isStatusOK()){
-                    result = "success";
-                }
+//                if (donateManagement.triggerSendTokensToBeneficiaryAndDonateBank(donor, beneficiaries[0], BigInteger.valueOf((long) divided_amount)).send().isStatusOK()){
+//                    result = "success";
+//                }
             } catch (Exception e) {
                 System.out.println("Revert: " + e.getMessage());
                 result = e.getMessage();
@@ -74,9 +72,9 @@ public class DonationWeb3Service {
         } else { // 다중 기부
             try {
                 assert beneficiaries != null;
-                if (donateManagement.triggerSendBatchTokensToBeneficiaryAndDonateBank(donor, List.of(beneficiaries), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
-                    result = "success";
-                }
+//                if (donateManagement.triggerSendBatchTokensToBeneficiaryAndDonateBank(donor, List.of(beneficiaries), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
+//                    result = "success";
+//                }
             } catch (Exception e) {
                 System.out.println("Revert: " + e.getMessage());
                 result = e.getMessage();
@@ -90,9 +88,9 @@ public class DonationWeb3Service {
         String result="";
 
         try {
-            if (donateManagement.sendTokensToBeneficiary(donor, List.of(beneficiaries).toString(), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
-                result = "success";
-            }
+//            if (donateManagement.sendTokensToBeneficiary(donor, List.of(beneficiaries).toString(), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
+//                result = "success";
+//            }
         } catch (Exception e) {
             System.out.println("Revert: " + e.getMessage());
             result = e.getMessage();
@@ -105,9 +103,9 @@ public class DonationWeb3Service {
         String result="";
 
         try {
-            if (donateManagement.sendTokensToDonateBank(List.of(beneficiaries).toString(), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
-                result = "success";
-            }
+//            if (donateManagement.sendTokensToDonateBank(List.of(beneficiaries).toString(), BigInteger.valueOf((long) divided_amount)).send().isStatusOK()) {
+//                result = "success";
+//            }
         } catch (Exception e) {
             System.out.println("Revert: " + e.getMessage());
             result = e.getMessage();

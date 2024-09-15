@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.organization;
+package com.hikdonate.donate.organization;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

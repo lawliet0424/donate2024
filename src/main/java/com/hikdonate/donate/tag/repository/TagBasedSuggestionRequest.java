@@ -1,8 +1,14 @@
 package com.hikdonate.donate.tag.repository;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class TagBasedSuggestionRequest {
+    // Getter/Setter 메서드들
     private List<Long> tagIds; // 사용자가 선택한 태그의 ID 리스트
     private int numberOfBeneficiaries; // 요청된 수혜자 인원수
 
@@ -15,20 +21,4 @@ public class TagBasedSuggestionRequest {
         this.numberOfBeneficiaries = numberOfBeneficiaries;
     }
 
-    // Getter/Setter 메서드들
-    public List<Long> getTagIds() {
-        return tagIds;
-    }
-
-    public void setTagIds(List<Long> tagIds) {
-        this.tagIds = tagIds;
-    }
-
-    public int getNumberOfBeneficiaries() {
-        return numberOfBeneficiaries;
-    }
-
-    public void setNumberOfBeneficiaries(int numberOfBeneficiaries) {
-        this.numberOfBeneficiaries = numberOfBeneficiaries;
-    }
 }

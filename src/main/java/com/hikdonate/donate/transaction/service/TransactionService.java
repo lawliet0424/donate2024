@@ -1,7 +1,7 @@
-package com.hikdonate.donate.domain.transaction.service;
+package com.hikdonate.donate.transaction.service;
 
-import com.hikdonate.donate.domain.transaction.Transaction;
-import com.hikdonate.donate.domain.transaction.repository.TransactionRepository;
+import com.hikdonate.donate.transaction.Transaction;
+import com.hikdonate.donate.transaction.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,9 @@
 package com.hikdonate.donate.tag.service;
 
-
 import com.hikdonate.donate.tag.Tag;
 import com.hikdonate.donate.tag.repository.TagRepository;
 import com.hikdonate.donate.tag.repository.tagResponse.TagInfo;
 import com.hikdonate.donate.tag.repository.tagResponse.TagItem;
-import com.hikdonate.donate.tag.repository.tagResponse.TagResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,28 +35,24 @@ public class TagService {
         return tagRepository.findAllById(tagIds);
     }
 
-    public TagResponse getAllTags() {
+    public List<TagInfo> getAllTags() {
         List<Tag> tags = tagRepository.findAll();
 
         Map<String, List<TagItem>> groupedTags = tags.stream()
                 .collect(Collectors.groupingBy(
-                        Tag::getTagClass,
+                        Tag::getTagClassification,
                         Collectors.mapping(tag -> new TagItem(tag.getTagId(), tag.getTagName()), Collectors.toList())
                 ));
 
-        TagResponse response = new TagResponse();
-        response.setTagInfo(groupedTags.entrySet().stream()
+        List<TagInfo> tagInfos = groupedTags.entrySet().stream()
                 .map(entry -> {
                     TagInfo tagInfo = new TagInfo();
                     tagInfo.setTagClass(entry.getKey());
                     tagInfo.setTagLists(entry.getValue());
                     return tagInfo;
                 })
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList());
 
-        return response;
+        return tagInfos;
     }
 }
-
-// + 검증로직 추가해야 ...

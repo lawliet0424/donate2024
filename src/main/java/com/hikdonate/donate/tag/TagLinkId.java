@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.tag;
+package com.hikdonate.donate.tag;
 
 import jakarta.persistence.Embeddable;
 

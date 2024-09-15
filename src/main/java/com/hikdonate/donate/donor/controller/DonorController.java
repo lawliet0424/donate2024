@@ -1,7 +1,7 @@
-package com.hikdonate.donate.domain.donor.controller;
+package com.hikdonate.donate.donor.controller;
 
-import com.hikdonate.donate.domain.donor.application.DonorSignUpService;
-import com.hikdonate.donate.domain.donor.domain.Donor;
+import com.hikdonate.donate.donor.service.DonorSignUpService;
+import com.hikdonate.donate.donor.Donor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
