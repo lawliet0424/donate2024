@@ -11,7 +11,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [] }) => {
   const { beneficiaries, getBeneficiaryById, loading, error } =
     useBeneficiary();
   const { userInterests, toggleInterest } = useInterest();
-  const isInterested = userInterests.includes(beneficiaryId.toString());
+  const isInterested = userInterests.includes(beneficiaryId);
 
   useEffect(() => {
     if (!beneficiaries[beneficiaryId]) {

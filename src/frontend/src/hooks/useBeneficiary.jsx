@@ -1,22 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BeneficiaryContext } from "../context/BeneficiaryContext";
 
 const useBeneficiary = () => {
   const {
-    beneficiaries,
-    getSelectedBeneficiary,
+    selectedBeneficiaries,
+    beneficiaryDetailInfo,
+    interestBeneficiaries,
+    getSelectedBeneficiaries,
     getBeneficiaryDetail,
     getInterestBeneficiary,
-    getBeneficiaryById,
     loading,
     error,
   } = useContext(BeneficiaryContext);
+
   return {
-    beneficiaries,
-    getSelectedBeneficiary,
+    selectedBeneficiaries,
+    beneficiaryDetailInfo,
+    interestBeneficiaries,
+    getSelectedBeneficiaries,
     getBeneficiaryDetail,
     getInterestBeneficiary,
-    getBeneficiaryById,
     loading,
     error,
   };

@@ -21,7 +21,7 @@ const MyInfo = () => {
 
   const [profileData, setProfileData] = useState({
     donorNickname: user.donorNickname,
-    donorAge: user.donorAge || "",
+    donorAge: user.donorAge || null,
     donorFinancialAccount: user.donorFinancialAccount || "",
     walletAddressLink: `https://www.etherscan.io/address/${user.donorWalletAddress}`,
     donorWalletAddress: user.donorWalletAddress,
@@ -51,7 +51,7 @@ const MyInfo = () => {
   useEffect(() => {
     setProfileData({
       donorNickname: user.donorNickname,
-      donorAge: user.donorAge || "",
+      donorAge: user.donorAge || null,
       donorFinancialAccount: user.donorFinancialAccount || "",
       walletAddressLink: `https://www.etherscan.io/address/${user.donorWalletAddress}`,
       donorWalletAddress: user.donorWalletAddress,

@@ -1,21 +1,20 @@
 import "./MyInterest.css";
-import React, { useEffect } from "react";
+import React from "react";
 import BeneficiaryBox from "../../components/BeneficiaryBox";
-import useInterest from "../../hooks/useInterest";
+import useBeneficiary from "../../hooks/useBeneficiary";
 
 const MyInterest = () => {
-  const { userInterests, getUserInterests } = useInterest();
-
-  useEffect(() => {
-    getUserInterests();
-  }, [getUserInterests]);
+  const { interestBeneficiaries } = useBeneficiary();
 
   return (
     <div className="my-interest">
       <div className="my-interest__title">나의 관심 수혜자</div>
       <div className="my-interest__beneficiaryLists">
-        {userInterests.map((beneficiaryId) => (
-          <BeneficiaryBox key={beneficiaryId} beneficiaryId={beneficiaryId} />
+        {interestBeneficiaries.map((beneficiary) => (
+          <BeneficiaryBox
+            key={beneficiary.beneficiaryId}
+            beneficiaryId={beneficiary.beneficiaryId}
+          />
         ))}
       </div>
     </div>

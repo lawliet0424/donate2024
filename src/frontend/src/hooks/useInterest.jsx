@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { InterestContext } from "../context/InterestContext";
 
 const useInterest = () => {
-  const { userInterests, toggleInterest, getUserInterests, loading, error } =
+  const { getInterest, toggleInterest, loading, error } =
     useContext(InterestContext);
-  return { userInterests, toggleInterest, getUserInterests, loading, error };
+  return { getInterest, toggleInterest, loading, error };
 };
 
 export default useInterest;

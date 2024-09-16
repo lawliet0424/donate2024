@@ -110,7 +110,7 @@ const SignupStepOne = () => {
         placeholder="이름"
         value={signupName}
         onChange={handleNameChange}
-        className={`signup-step-one__input ${errors.name ? "--invalid" : ""}`}
+        className={`signup-step-one__input${errors.name ? "--invalid" : ""}`}
       />
       {errors.name && (
         <div className="signup-step-one__message--error">{errors.name}</div>
@@ -120,7 +120,7 @@ const SignupStepOne = () => {
         placeholder="메일"
         value={signupEmail}
         onChange={handleEmailChange}
-        className={`signup-step-one__input ${errors.email ? "--invalid" : ""}`}
+        className={`signup-step-one__input${errors.email ? "--invalid" : ""}`}
       />
       {errors.email && (
         <div className="signup-step-one__message--error">{errors.email}</div>
@@ -131,7 +131,7 @@ const SignupStepOne = () => {
         value={formatPhoneNumber(signupPhoneNumber)}
         onChange={handlePhoneNumberChange}
         maxLength={13}
-        className={`signup-step-one__input ${
+        className={`signup-step-one__input${
           errors.phoneNumber ? "--invalid" : ""
         }`}
       />

@@ -10,24 +10,20 @@ import useInterest from "../../hooks/useInterest";
 
 const BeneficiaryDetailPage = () => {
   const { beneficiaryId } = useParams();
-  const { beneficiaries, getBeneficiaryById, loading, error } =
+  const { beneficiaryDetailInfo, getBeneficiaryDetail, loading, error } =
     useBeneficiary();
-  const { userInterests, toggleInterest, getUserInterests } = useInterest();
+  const { userInterests, toggleInterest } = useInterest();
 
-  const isInterested = userInterests.includes(beneficiaryId.toString());
-
-  useEffect(() => {
-    getUserInterests();
-  }, [getUserInterests]);
+  const isInterested = userInterests.includes(beneficiaryId);
 
   useEffect(() => {
-    if (!beneficiaries[beneficiaryId]) {
-      getBeneficiaryById(beneficiaryId);
+    if (!beneficiaryDetailInfo[beneficiaryId]) {
+      getBeneficiaryDetail(beneficiaryId); // 수혜자 상세 정보를 가져옵니다.
     }
-  }, [beneficiaryId, beneficiaries, getBeneficiaryById]);
+  }, [beneficiaryId, beneficiaryDetailInfo, getBeneficiaryDetail]);
 
   // 로딩 상태 처리
-  if (loading && !beneficiaries[beneficiaryId]) {
+  if (loading && !beneficiaryDetailInfo[beneficiaryId]) {
     return <p>Loading...</p>;
   }
 
@@ -36,8 +32,8 @@ const BeneficiaryDetailPage = () => {
     return <p>Error: {error}</p>;
   }
 
-  // `selectedBeneficiary`가 null인 경우
-  const selectedBeneficiary = beneficiaries[beneficiaryId];
+  // 수혜자 상세 정보가 없는 경우 처리
+  const selectedBeneficiary = beneficiaryDetailInfo[beneficiaryId];
   if (!selectedBeneficiary) {
     return <p>No beneficiary data available</p>;
   }
@@ -46,13 +42,13 @@ const BeneficiaryDetailPage = () => {
     <div className="beneficiary-detail-page">
       <img
         className="beneficiary-detail-page__background"
-        src={selectedBeneficiary.beneficiaryBackgroundImg}
+        src={selectedBeneficiary.beneficiaryBackgroundImg || backgroungImage}
         alt="Background"
       />
       <div className="beneficiary-detail-page__profile">
         <img
           className="beneficiary-detail-page__img"
-          src={selectedBeneficiary.beneficiaryProfileImg}
+          src={selectedBeneficiary.beneficiaryProfileImg || defaultProfileImage}
           alt="Beneficiary"
         />
         <div className="beneficiary-detail-page__text">

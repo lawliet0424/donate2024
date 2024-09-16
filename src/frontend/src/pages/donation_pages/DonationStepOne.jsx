@@ -19,8 +19,13 @@ const DonationStepOne = () => {
       if (location.state?.selectedTags) {
         setSelectedTags(new Set(location.state.selectedTags));
       }
-      await getTags();
-      setCategories(getTagCategories());
+      try {
+        await getTags();
+        const updatedCategories = getTagCategories();
+        setCategories(updatedCategories);
+      } catch (err) {
+        console.error("Failed to fetch tags:", err);
+      }
     };
 
     initialize();

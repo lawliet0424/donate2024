@@ -2,8 +2,16 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const useAuth = () => {
-  const { user, isAuthenticated, signup, login, logout, updateUserInfo } =
-    useContext(AuthContext);
+  const {
+    user,
+    isAuthenticated,
+    signup,
+    login,
+    logout,
+    getUserInfo,
+    updateUserInfo,
+    checkIdDuplicate,
+  } = useContext(AuthContext);
 
   return {
     user,
@@ -11,7 +19,9 @@ const useAuth = () => {
     signup,
     login,
     logout,
+    getUserInfo,
     updateUserInfo,
+    checkIdDuplicate,
   };
 };
 

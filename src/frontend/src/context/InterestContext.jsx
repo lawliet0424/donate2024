@@ -1,6 +1,11 @@
-import React, { createContext, useState, useContext, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+} from "react";
 import axios from "axios";
-import { mockGetUserInterests } from "../api";
 import useAuth from "../hooks/useAuth";
 
 export const InterestContext = createContext();
@@ -11,84 +16,32 @@ export const InterestProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const { user } = useAuth();
 
-  const getUserInterests = useCallback(async () => {
-    // if (user && user.donorId) {
-    //   axios
-    //     .get(`http://localhost:5000/user/${user.donorId}/interests`, {
-    //       withCredentials: true,
-    //     })
-    //     .then((response) => {
-    //       setUserInterests(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Failed to load user interests", error);
-    //       setUserInterests([]);
-    //     });
-    // }
-    //
-    //
-    // try {
-    //   const interests = await mockGetUserInterests(user.donorId);
-    //   setUserInterests(interests);
-    // } catch (error) {
-    //   console.error("Failed to load user interests", error);
-    //   setUserInterests([]);
-    // }
-
-    // Check if user is logged in
+  const getInterest = useCallback(async () => {
     if (!user || !user.donorId) return;
 
     setLoading(true);
     setError(null);
 
-    const cachedInterests = localStorage.getItem(
-      `user_interests_${user.donorId}`
-    );
-
-    if (cachedInterests) {
-      setUserInterests(JSON.parse(cachedInterests));
-      setLoading(false);
-      return;
-    }
-
     try {
-      const interests = await mockGetUserInterests(user.donorId);
-      const stringifiedInterests = interests.map(String);
-      localStorage.setItem(
-        `user_interests_${user.donorId}`,
-        JSON.stringify(stringifiedInterests)
-      );
-      setUserInterests(stringifiedInterests);
+      // 서버에서 관심 수혜자 ID 리스트를 받아옵니다.
+      const response = await axios.get("/api/interest/get", {
+        withCredentials: true,
+      });
+      setUserInterests(response.data);
     } catch (error) {
+      console.error("Failed to load user interests", error);
       setError("Failed to load user interests");
       setUserInterests([]);
     } finally {
       setLoading(false);
     }
-  }, [user, setError, setLoading]);
+  }, [user]);
+
+  useEffect(() => {
+    getInterest();
+  }, [getInterest]);
 
   const toggleInterest = async (beneficiaryId) => {
-    // const request = isInterested
-    //   ? axios.post(
-    //       "http://localhost:5000/interest/remove",
-    //       { beneficiaryId },
-    //       { withCredentials: true }
-    //     )
-    //   : axios.post(
-    //       "http://localhost:5000/interest/add",
-    //       { beneficiaryId },
-    //       { withCredentials: true }
-    //     );
-
-    // return request.then(() => {
-    //   setUserInterests((prevInterests) => {
-    //     if (isInterested) {
-    //       return prevInterests.filter((id) => id !== beneficiaryId);
-    //     } else {
-    //       return [...prevInterests, beneficiaryId];
-    //     }
-    //   });
-    // });
     const isInterested = userInterests.includes(beneficiaryId);
     setLoading(true);
     setError(null);
@@ -98,15 +51,16 @@ export const InterestProvider = ({ children }) => {
         ? userInterests.filter((id) => id !== beneficiaryId)
         : [...userInterests, beneficiaryId];
 
-      setUserInterests(updatedInterests);
+      // 서버에 변경된 리스트 전체를 전송합니다.
+      await axios.post(
+        "/api/interest/toggle",
+        { interests: updatedInterests },
+        { withCredentials: true }
+      );
 
-      if (user && user.donorId) {
-        localStorage.setItem(
-          `user_interests_${user.donorId}`,
-          JSON.stringify(updatedInterests.map(String))
-        );
-      }
+      setUserInterests(updatedInterests);
     } catch (error) {
+      console.error("Failed to toggle interest", error);
       setError("Failed to toggle interest");
     } finally {
       setLoading(false);
@@ -116,9 +70,8 @@ export const InterestProvider = ({ children }) => {
   return (
     <InterestContext.Provider
       value={{
-        userInterests,
         toggleInterest,
-        getUserInterests,
+        userInterests,
         loading,
         error,
       }}
