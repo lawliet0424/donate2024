@@ -40,6 +40,7 @@ public class DonationWeb3Service {
 
         // Wrapper로 감싸진 스마트 컨트랙트(ABI 파일)를 통해, 테스트넷 상의 스마트 컨트랙트를 가져오기
         donateManagement = DonateManagement.load(donateManagement_addr, web3j, rawTransactionManager, new DefaultGasProvider());
+
     }
 
 

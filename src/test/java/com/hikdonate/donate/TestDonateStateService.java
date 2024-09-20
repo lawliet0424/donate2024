@@ -1,4 +1,4 @@
-package com.hikdonate.donate.donate;
+package com.hikdonate.donate;
 
 import com.hikdonate.donate.domain.donor.repository.DonateState;
 import com.hikdonate.donate.domain.donor.service.DonateStateService;
@@ -45,6 +45,9 @@ public class TestDonateStateService {
         donateStateService = new DonateStateService(donationWeb3Service, donationBillService);
     }
 
+    /*
+    기부 상태 객체 생성 및 기부 상태 확인
+    */
     @Test
     void createStateAndCheckState() throws Exception {
         // given
@@ -60,6 +63,9 @@ public class TestDonateStateService {
         donateStateService.deleteDonateState(stateID1);
     }
 
+    /*
+    기부 상태 객체 생성 및 디폴트 기부 상태 설정 확인
+    */
     @Test
     void createStateAndCheckDefaultState() throws Exception {
         // given
@@ -73,6 +79,9 @@ public class TestDonateStateService {
         donateStateService.deleteDonateState(stateID1);
     }
 
+    /*
+    기부 상태 객체 삭제 유무 확인
+    */
     @Test
     void deleteStateAndCheckDeletion() throws Exception {
         // given
@@ -88,6 +97,9 @@ public class TestDonateStateService {
         assertThat(existResultAfter).isEqualTo(false);
     }
 
+    /*
+    기부 상태 삭제 로직 정상 작동 여부 확인
+    */
     @Test
     public void doubleDeleteCheck() throws Exception {
         // given
@@ -107,13 +119,17 @@ public class TestDonateStateService {
         }
     }
 
+    /*
+    기부가 성공했을 때, 작동되는 로직이 정상적으로 작동되는지 확인
+    */
     @Test
-    public void changeStateAndCheck() throws Exception {
+    public void changeStateAndCheckSuccess() throws Exception {
         // given
         UUID stateID1 = donateStateService.createDonateState();
+        String result = "success";
 
         // when
-        donateStateService.updateState(stateID1, DonateState.State.PAYMENT_COMPLETED);
+        donateStateService.updateState(stateID1, result, DonateState.State.PAYMENT_COMPLETED, DonateState.State.PAYMENT_FAILED);
 
         // then
         DonateState.State checkState = donateStateService.getCurrentState(stateID1);
@@ -121,6 +137,9 @@ public class TestDonateStateService {
         donateStateService.deleteDonateState(stateID1);
     }
 
+    /*
+    에러 메세지와 반환된 기부자 리스트의 디폴트 설정 확인
+    */
     @Test
     public void checkDefaultErrorMessageAndBeneficiaryList() throws Exception {
         // given
@@ -142,6 +161,9 @@ public class TestDonateStateService {
         donateStateService.deleteDonateState(stateID1);
     }
 
+    /*
+    에러 메시지와 반환된 수혜자 리스트를 업데이트했을 때, 변경된 내용이 정상적으로 반영되는지 확인
+    */
     @Test
     public void checkAndUpdateErrorMessageAndRevertedBeneficiaryList() throws Exception {
         // given
@@ -154,7 +176,7 @@ public class TestDonateStateService {
         testRevertedBeneficiaryList.add("C");
 
         // when
-        donateStateService.updateErrorMessage(stateID1, testErrorMessage);
+        donateStateService.setErrorMessage(stateID1, testErrorMessage);
         donateStateService.updateRevertedBeneficiaries(stateID1, testRevertedBeneficiaryList);
 
         // then

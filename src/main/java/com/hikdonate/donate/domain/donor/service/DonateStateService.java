@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -62,7 +63,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: getCurrentState
     Summary: 특정 기부 상태 객체의 현재 기부 상태를 조회
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -77,22 +78,32 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: updateState
     Summary: 특정 기부 상태 객체의 기부 상태를 업데이트
-    Parameter: 1개
+    Parameter: 4개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
-    Return: DonateState.State -> 현재 기부 상태
+        String result : 현재 단계의 수행 결과
+        DonateState.State success_state : 수행이 성공했을 때의 기부 상태
+        DonateState.State fail_state : 수행이 실패했을 때의 기부 상태
+    Return: None
     Caller: DonateStateService
     Date: 2024.09.08
     Written by: 조현지
     */
-    public void updateState(UUID donationId, DonateState.State newState) throws Exception {
+    // 특정 기부의 상태를 업데이트
+    public void updateState(UUID donationId, String result, DonateState.State success_state, DonateState.State fail_state) throws Exception {
         DonateState donateState = getDonateState(donationId);
-        donateState.setCurrentState(newState);
+        if (Objects.equals(result, "success")) {
+                donateState.setCurrentState(success_state);
+        } else {
+                donateState.setCurrentState(fail_state);
+                setErrorMessage(donationId, result);
+                handleDonationError(donationId);
+        }
     }
 
     /*
-    Function name: createDonateState
+    Function name: setErrorMessage
     Summary: 특정 기부 상태 객체의 오류 메시지를 설정
     Parameter: 2개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -102,13 +113,13 @@ public class DonateStateService {
     Date: 2024.09.08
     Written by: 조현지
     */
-    public void updateErrorMessage(UUID donationId, String errorMessage) throws Exception {
+    public void setErrorMessage(UUID donationId, String errorMessage) throws Exception {
         DonateState donateState = getDonateState(donationId);
         donateState.setErrorMessage(errorMessage);
     }
 
     /*
-    Function name: createDonateState
+    Function name: getErrorMessage
     Summary: 특정 기부 상태 객체의 오류 메시지를 조회
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -123,7 +134,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: getDonateState
     Summary: 특정 기부 상태 객체 가져오기
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -150,7 +161,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: validDonateState
     Summary: 특정 기부 상태 객체의 존재 여부 확인
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -164,7 +175,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: deleteDonateState
     Summary: 특정 기부 상태 객체 삭제
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -191,7 +202,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: updateRevertedBeneficiaries
     Summary: 특정 기부 상태 객체의 수혜자 리스트를 업데이트
     Parameter: 2개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
@@ -207,7 +218,7 @@ public class DonateStateService {
     }
 
     /*
-    Function name: createDonateState
+    Function name: getRevertedBeneficiaries
     Summary: 특정 기부 상태 객체의 수혜자 리스트를 조회
     Parameter: 1개
         UUID donationId : 조회하고자 하는 기부 상태의 고유 ID
