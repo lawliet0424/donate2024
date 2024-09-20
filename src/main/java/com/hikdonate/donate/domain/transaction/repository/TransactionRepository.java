@@ -23,7 +23,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
             // 상위 태그 해당자들의 wallet address를 리스트로 전달
             "{ '$project': { 'beneficiary_wallet': '$_id', '_id': 0 } }"
     })
-    List<String> findTopBeneficiariesWalletAddressByDonation(List<String> beneficiaryWallets, Date fromDate, int numOfBeneficiary);
+    List<String> findTopBeneficiariesWalletAddressByDonation(List<String> beneficiaryWallets, String fromDate, int numOfBeneficiary);
 
 
     // 특정 Donor의 donation history 가져오기 (전체)
