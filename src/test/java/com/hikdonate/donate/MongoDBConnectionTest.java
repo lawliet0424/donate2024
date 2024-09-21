@@ -1,7 +1,7 @@
 package com.hikdonate.donate;
 
-import com.hikdonate.donate.domain.transaction.Transaction;
-import com.hikdonate.donate.domain.transaction.repository.TransactionRepository;
+import com.hikdonate.donate.domain.transaction.domain.Transaction;
+import com.hikdonate.donate.domain.transaction.repository.TransactionHistoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class MongoDBConnectionTest {
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionHistoryRepository transactionRepository;
 
     @Test
     public void testMongoDBConnection() {
