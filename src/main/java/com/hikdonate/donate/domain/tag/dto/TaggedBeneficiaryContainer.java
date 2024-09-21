@@ -1,7 +1,7 @@
-package com.hikdonate.donate.domain.tag.repository;
+package com.hikdonate.donate.domain.tag.dto;
 
 import com.hikdonate.donate.domain.beneficiary.domain.Beneficiary;
-import com.hikdonate.donate.domain.tag.repository.tagResponse.TagResponse;
+import com.hikdonate.donate.domain.tag.dto.tagResponse.TagResponse;
 
 import java.util.List;
 

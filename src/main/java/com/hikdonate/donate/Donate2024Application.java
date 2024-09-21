@@ -1,7 +1,7 @@
 package com.hikdonate.donate;
 
-import com.hikdonate.donate.web3jAPI.EtherscanAPI;
-import com.hikdonate.donate.web3jAPI.Web3jWrapperGenerator;
+import com.hikdonate.donate.web3j.web3jAPI.EtherscanAPI;
+import com.hikdonate.donate.web3j.web3jAPI.Web3jWrapperGenerator;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

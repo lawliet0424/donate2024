@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.tag.repository.tagResponse;
+package com.hikdonate.donate.domain.tag.dto.tagResponse;
 
 import lombok.Getter;
 import lombok.Setter;

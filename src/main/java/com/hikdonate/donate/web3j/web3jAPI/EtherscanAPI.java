@@ -1,4 +1,4 @@
-package com.hikdonate.donate.web3jAPI;
+package com.hikdonate.donate.web3j.web3jAPI;
 
 import java.io.*;
 import java.net.HttpURLConnection;

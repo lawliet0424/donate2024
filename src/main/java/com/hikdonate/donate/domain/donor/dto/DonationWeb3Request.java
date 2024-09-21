@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.donor.repository;
+package com.hikdonate.donate.domain.donor.dto;
 
 import lombok.Getter;
 import lombok.Setter;

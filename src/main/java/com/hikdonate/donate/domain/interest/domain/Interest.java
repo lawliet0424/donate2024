@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.interest;
+package com.hikdonate.donate.domain.interest.domain;
 
 import com.hikdonate.donate.domain.beneficiary.domain.Beneficiary;
 import com.hikdonate.donate.domain.donor.domain.Donor;

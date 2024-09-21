@@ -1,6 +1,6 @@
 package com.hikdonate.donate.domain.donor.domain;
 
-import com.hikdonate.donate.domain.interest.Interest;
+import com.hikdonate.donate.domain.interest.domain.Interest;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

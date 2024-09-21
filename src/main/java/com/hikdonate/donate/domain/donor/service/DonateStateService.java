@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.hikdonate.donate.domain.donor.repository.DonateState.State.*;
+
 @RequiredArgsConstructor
 @Service
 public class DonateStateService {
@@ -26,20 +28,19 @@ public class DonateStateService {
 
         // 실결
         result= donationBillService.processPayment();
-        //updateState(donationId, result, PAYMENT_COMPLETED, PAYMENT_FAILED);
+        updateState(donationId, result, PAYMENT_COMPLETED, PAYMENT_FAILED);
 
         // 스마트 컨트랙트 1단계 실행
         result = donationWeb3Service.sendTokenToDonor(donorId, divided_amount * beneficiaryId.length);
-        //updateState(donationId, result, TOKEN_SENT_TO_DONOR_SUCCESS, TOKEN_SENT_TO_DONOR_FAILED);
+        updateState(donationId, result, TOKEN_SENT_TO_DONOR_SUCCESS, TOKEN_SENT_TO_DONOR_FAILED);
 
         // 수혜자에게 기부금 전달
         result = donationBillService.processPayment();
-        //pdateState(donationId, result, CONVEYED_TO_BENEFICIARY_SUCCESS, CONVEYED_TO_BENEFICIARY_FAILED);
+        updateState(donationId, result, CONVEYED_TO_BENEFICIARY_SUCCESS, CONVEYED_TO_BENEFICIARY_FAILED);
 
         // 스마트 컨트랙트 2&3단계 실행
         result = donationWeb3Service.sendTokensToBeneficiaryAndDonateBank(donorId, beneficiaryId, divided_amount);
-        //updateState(donationId, result, TOKEN_RECLAIMED_BY_DONATEBANK_SUCCESS, TOKEN_RECLAIMED_BY_DONATEBANK_FAILED);
-
+        updateState(donationId, result, TOKEN_RECLAIMED_BY_DONATEBANK_SUCCESS, TOKEN_RECLAIMED_BY_DONATEBANK_FAILED);
     }
 
     public void handleDonationError(UUID error_donationId) {

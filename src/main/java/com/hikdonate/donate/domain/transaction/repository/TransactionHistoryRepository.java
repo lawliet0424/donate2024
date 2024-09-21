@@ -1,14 +1,13 @@
 package com.hikdonate.donate.domain.transaction.repository;
 
-import com.hikdonate.donate.domain.transaction.Transaction;
+import com.hikdonate.donate.domain.transaction.domain.Transaction;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 
-public interface TransactionRepository extends MongoRepository<Transaction, String> {
+public interface TransactionHistoryRepository extends MongoRepository<Transaction, String> {
 
     /*
     Function name: findTopBeneficiariesWalletAddressByDonation

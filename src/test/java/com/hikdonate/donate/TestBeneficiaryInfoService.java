@@ -1,7 +1,7 @@
 package com.hikdonate.donate;
 
 import com.hikdonate.donate.domain.beneficiary.service.BeneficiaryInfoService;
-import com.hikdonate.donate.domain.transaction.repository.TransactionRepository;
+import com.hikdonate.donate.domain.transaction.repository.TransactionHistoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestBeneficiaryInfoService {
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionHistoryRepository transactionHistoryRepository;
 
     @Autowired
     private BeneficiaryInfoService beneficiaryInfoService;
 
     @BeforeEach
     public void beforeEach() {
-        beneficiaryInfoService = new BeneficiaryInfoService(transactionRepository);
+        beneficiaryInfoService = new BeneficiaryInfoService(transactionHistoryRepository);
     }
 
     @Test

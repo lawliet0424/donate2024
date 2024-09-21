@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.tag.repository;
+package com.hikdonate.donate.domain.tag.dto;
 
 import java.util.List;
 

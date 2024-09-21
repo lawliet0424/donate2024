@@ -1,7 +1,6 @@
 package com.hikdonate.donate.domain.beneficiary.service;
 
-import com.hikdonate.donate.domain.tag.repository.TaggedBeneficiaryContainer;
-import com.hikdonate.donate.domain.transaction.repository.TransactionRepository;
+import com.hikdonate.donate.domain.transaction.repository.TransactionHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @Service
 public class BeneficiaryInfoService {
 
-    private final TransactionRepository transactionRepository;
+    private final TransactionHistoryRepository transactionHistoryRepository;
 
         /*
         Function name: selectedBeneficiariesList
@@ -36,7 +35,7 @@ public class BeneficiaryInfoService {
             String fromDate = calculateRecentTwoWeeks();
 
             // 태그에 해당되는 수혜자를 정렬한 뒤, 상위 N명에 대해서만 뽑아서 수혜자 web3 지갑 리스트 반환
-            List<String> topBeneficiariesWalletAddress = transactionRepository.findTopBeneficiariesWalletAddressByDonation(beneficiary_list, fromDate, numOfBeneficiaries);
+            List<String> topBeneficiariesWalletAddress = transactionHistoryRepository.findTopBeneficiariesWalletAddressByDonation(beneficiary_list, fromDate, numOfBeneficiaries);
             System.out.println("top N: " + topBeneficiariesWalletAddress);
 
             //-----남은 과정 : TaggedBeneficiaryContainer (DTO)에 선택된 수혜자들의 정보 담기.

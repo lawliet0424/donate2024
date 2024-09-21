@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.transaction;
+package com.hikdonate.donate.domain.transaction.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
