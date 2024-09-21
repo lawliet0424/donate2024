@@ -1,4 +1,4 @@
-package com.hikdonate.donate.domain.donor.application;
+package com.hikdonate.donate.domain.donor.service;
 
 import com.hikdonate.donate.domain.donor.dao.DonorRepository;
 import com.hikdonate.donate.domain.donor.domain.Donor;
