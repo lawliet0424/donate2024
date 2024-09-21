@@ -38,6 +38,8 @@ public class TokenTransfer extends Contract {
 
     public static final String FUNC_SENDTOKENSTODONATOR = "sendTokensToDonator";
 
+
+
     @Deprecated
     protected TokenTransfer(String contractAddress, Web3j web3j, Credentials credentials,
             BigInteger gasPrice, BigInteger gasLimit) {

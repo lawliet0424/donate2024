@@ -33,7 +33,7 @@ public class DonorSignUpService {
         String donorPassword; 사용자가 입력한 비밀번호
     Return: 사용자의 입력을 바탕으로 생성된 donor 객체
     Date: 2024.08.26
-    Written by: 조현지
+    Written by: 양예현
      */
     public Donor createDonor (String donorName, String donorMail, String donorPhonenumber,
                          String donorNickname, String donorId, String donorPassword) {

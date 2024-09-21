@@ -47,7 +47,7 @@ public class Donor {
 
     private String donorAccount;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String donorWallet;
 
     @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL, orphanRemoval = true)
