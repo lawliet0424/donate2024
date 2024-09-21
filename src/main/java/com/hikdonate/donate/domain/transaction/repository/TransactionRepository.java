@@ -10,7 +10,18 @@ import java.util.List;
 
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
 
-    // 태그 해당자 선택 알고리즘
+    /*
+    Function name: findTopBeneficiariesWalletAddressByDonation
+    Summary: 태그에 해당되는 수혜자 리스트 중 N명 선택 알고리즘
+    Parameter: 3개
+        List<String> beneficiaryWallets : 태그에 해당되는 수혜자 리스트
+        String fromDate : 현재 시각으로부터 2주 전의 시각
+        int numOfBeneficiary : 선택하고자하는 N명의 수혜자
+    Return: List<String>
+    Caller: BeneficiaryInfoService
+    Date: 2024.09.21
+    Written by: 조현지
+    */
     @Aggregation(pipeline = {
             // 태그 해당자의 donation history 가져오기 (최근 2주간)
             "{ '$match': { 'beneficiary_wallet': { '$in': ?0 }, 'timestamp': { '$gte': ?1 } } }",
@@ -26,7 +37,9 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
     List<String> findTopBeneficiariesWalletAddressByDonation(List<String> beneficiaryWallets, String fromDate, int numOfBeneficiary);
 
 
-    // 특정 Donor의 donation history 가져오기 (전체)
+    /*
+    특정 Donor의 donation history 가져오기 (전체) <-- 기부 내역 조회 기능 만들 때 사용할 예정
+    */
     @Query("{'donor_wallet': ?0}")
     List<Transaction> findAllDonorDonationHistory(String donorWalletAddress);
 
