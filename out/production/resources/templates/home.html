@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Donate 홈 화면</h1>
+    <a sec:authorize="isAnonymous()" th:href="@{/donor/login}">로그인</a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/donor/logout}">로그아웃</a>
+    <a th:href="@{/donor/signup1}">회원가입</a>
+</body>
+</html>
