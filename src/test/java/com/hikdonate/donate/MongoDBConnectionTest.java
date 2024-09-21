@@ -1,6 +1,6 @@
 package com.hikdonate.donate;
 
-import com.hikdonate.donate.domain.transaction.Transaction;
+import com.hikdonate.donate.domain.transaction.domain.Transaction;
 import com.hikdonate.donate.domain.transaction.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
