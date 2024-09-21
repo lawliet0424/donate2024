@@ -1,4 +1,6 @@
+
 package com.hikdonate.donate.domain.tag.domain;
+
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -37,5 +39,9 @@ public class Tag {
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TagLink> tagLinks = new HashSet<>();
+
+    public Long getTag_id() {
+        return tagId;
+    }
 
 }

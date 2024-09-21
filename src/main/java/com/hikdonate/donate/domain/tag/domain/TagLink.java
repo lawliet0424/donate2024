@@ -1,4 +1,6 @@
+
 package com.hikdonate.donate.domain.tag.domain;
+
 
 import com.hikdonate.donate.domain.beneficiary.domain.Beneficiary;
 import jakarta.persistence.*;

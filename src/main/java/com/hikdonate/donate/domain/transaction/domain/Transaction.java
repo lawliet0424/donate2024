@@ -1,4 +1,6 @@
+
 package com.hikdonate.donate.domain.transaction.domain;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
