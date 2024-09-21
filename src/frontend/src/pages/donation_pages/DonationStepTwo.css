@@ -1,0 +1,60 @@
+.donation-step-two {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donation-step-two__text {
+  display: flex;
+  flex-direction: row;
+  padding-top: 240px;
+  font-size: 18px;
+}
+
+.donation-step-two__input--numberOfPeople {
+  width: 40px;
+  height: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+}
+
+.donation-step-two__input--amount {
+  width: 80px;
+  margin-left: 12px;
+  height: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+}
+
+.donation-step-two__result {
+  padding-top: 40px;
+  font-size: 18px;
+}
+
+.donation-step-two__perPersonAmount {
+  background: linear-gradient(
+    to top,
+    rgba(254, 168, 1, 0.5) 80%,
+    transparent 40%
+  );
+}
+
+.donation-step-two__explanation {
+  padding-top: 35px;
+  font-size: 14px;
+}
+
+.donation-step-two__navigation {
+  display: flex;
+  gap: 10px;
+  padding: 200px 0px;
+}
+
+.donation-step-two__button {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+}

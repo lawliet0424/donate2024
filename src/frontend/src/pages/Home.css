@@ -1,0 +1,9 @@
+.home {
+  width: 1000px;
+}
+
+.home__img {
+  width: 1000px;
+  height: 2000px;
+  align-items: center;
+}

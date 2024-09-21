@@ -1,0 +1,56 @@
+.header {
+  padding: 15px 0;
+  border-bottom: 1px solid #d9d9d9;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.header__content {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  padding: 0 20px;
+}
+
+.header__shortcut {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  font-size: 10px;
+}
+
+.header__main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.header__main--left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
+}
+
+.header__main--left img {
+  height: 80px;
+  cursor: pointer;
+}
+
+.header__main--right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20%;
+}
+
+.header__donationButton {
+  font-size: 17px;
+  font-weight: 500;
+  height: 46px;
+  width: 110px;
+  border-radius: 10px;
+}

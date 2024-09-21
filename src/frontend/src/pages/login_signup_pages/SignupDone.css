@@ -1,0 +1,39 @@
+.signup-done {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-done__checkMark {
+  width: 70px;
+  height: 70px;
+  padding-top: 170px;
+}
+
+.signup-done__title {
+  font-size: 23px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.signup-done__text {
+  font-size: 124x;
+  padding-top: 30px;
+}
+
+.signup-done__button {
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.signup-done__navigation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 130px;
+}
