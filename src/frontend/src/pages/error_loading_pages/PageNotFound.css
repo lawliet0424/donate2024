@@ -1,0 +1,35 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  padding-top: 200px;
+  align-items: center;
+  text-align: center;
+}
+
+.page-not-found__title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #fea801;
+}
+
+.page-not-found__text--first {
+  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+
+.page-not-found__text--second {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.page-not-found__button {
+  width: 180px;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-size: 16px;
+}

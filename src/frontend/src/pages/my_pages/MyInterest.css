@@ -1,0 +1,22 @@
+.my-interest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 40px;
+}
+
+.my-interest__title {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  text-align: left;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.my-interest__beneficiaryLists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}

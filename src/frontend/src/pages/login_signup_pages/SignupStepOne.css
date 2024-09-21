@@ -1,0 +1,78 @@
+.signup-step-one {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.signup-step-one__title {
+  font-size: 23px;
+  font-weight: 600;
+  padding-top: 180px;
+  padding-bottom: 20px;
+}
+
+.signup-step-one__input {
+  width: 272px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup-step-one__input--invalid {
+  width: 272px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup-step-one__message--error {
+  color: red;
+  font-size: 10px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
+}
+
+.signup-step-one__button--next {
+  width: 270px;
+  height: 37px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 10px;
+  margin-top: 12px;
+}
+
+.signup-step-one__separator {
+  display: flex;
+  align-items: center;
+  width: 270px;
+  margin: 18px 0;
+}
+
+.signup-step-one__separator__line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #d9d9d9;
+}
+
+.signup-step-one__separator__text {
+  margin: 0 10px;
+  font-size: 13px;
+  color: #808080;
+}
+
+.signup-step-one__button--login {
+  width: 270px;
+  height: 37px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 10px;
+  margin-top: 0;
+}

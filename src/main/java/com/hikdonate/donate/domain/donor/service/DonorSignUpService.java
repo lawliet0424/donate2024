@@ -36,7 +36,7 @@ public class DonorSignUpService {
     Written by: 양예현
      */
     public Donor createDonor (String donorName, String donorMail, String donorPhonenumber,
-                              String donorNickname, String donorId, String donorPassword) {
+                         String donorNickname, String donorId, String donorPassword) {
         Donor donor = new Donor();
         donor.setDonorName(donorName);
         donor.setDonorMail(donorMail);

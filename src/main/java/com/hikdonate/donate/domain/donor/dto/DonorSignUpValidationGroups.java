@@ -9,7 +9,7 @@ package com.hikdonate.donate.domain.donor.dto;
                 SignUpStep2; 두 번째 페이지에서 검사하는 데이터 - donorNickname, donorId, donorPassword
  */
 public interface DonorSignUpValidationGroups {
-    interface SignUpStep1 {}
-    interface SignUpStep2 {}
+        interface SignUpStep1 {}
+        interface SignUpStep2 {}
 
 }

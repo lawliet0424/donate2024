@@ -13,10 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DonorLoginForm {
-
+    
     @NotEmpty(message = "id를 입력해주세요")
     private String donorLoginId;
-
+    
     @NotEmpty(message = "pw를 입력해주세요")
     private String donorLoginPassword;
 }
