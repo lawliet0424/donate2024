@@ -1,0 +1,64 @@
+.BeneficiaryBox {
+  display: flex;
+  align-items: center;
+  width: 960px;
+  height: 60px;
+  padding: 15px 20px;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+}
+
+.BeneficiaryBox__profile {
+  width: 55px;
+  height: 55px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+}
+
+.BeneficiaryBox__details {
+  flex-grow: 1;
+  padding-left: 12px;
+  padding-bottom: 2px;
+}
+
+.BeneficiaryBox__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.BeneficiaryBox__name {
+  font-size: 16px;
+}
+
+.BeneficiaryBox__button--interest {
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+.BeneficiaryBox__heart {
+  width: 16px;
+  height: 16px;
+  padding-top: 5px;
+}
+
+.BeneficiaryBox__tag__section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 700px;
+  font-size: 14px;
+}
+
+.BeneficiaryBox__tag--selected {
+  background: linear-gradient(
+    to top,
+    rgba(254, 168, 1, 0.5) 60%,
+    transparent 40%
+  );
+}
+
+.BeneficiaryBox .TransparentButton {
+  padding: 10px;
+}

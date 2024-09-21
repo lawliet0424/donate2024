@@ -1,0 +1,35 @@
+.error-occur {
+  display: flex;
+  flex-direction: column;
+  padding-top: 200px;
+  align-items: center;
+  text-align: center;
+}
+
+.error-occur__title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #fea801;
+}
+
+.error-occur__text--first {
+  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+
+.error-occur__text--second {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error-occur__button {
+  width: 180px;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-size: 16px;
+}
