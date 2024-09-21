@@ -1,7 +1,7 @@
 package com.hikdonate.donate.domain.donor.service;
 
-import com.hikdonate.donate.domain.donor.Donor;
 import com.hikdonate.donate.domain.donor.dao.DonorRepository;
+import com.hikdonate.donate.domain.donor.domain.Donor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,10 +33,10 @@ public class DonorSignUpService {
         String donorPassword; 사용자가 입력한 비밀번호
     Return: 사용자의 입력을 바탕으로 생성된 donor 객체
     Date: 2024.08.26
-    Written by: 조현지
+    Written by: 양예현
      */
     public Donor createDonor (String donorName, String donorMail, String donorPhonenumber,
-                              String donorNickname, String donorId, String donorPassword) {
+                         String donorNickname, String donorId, String donorPassword) {
         Donor donor = new Donor();
         donor.setDonorName(donorName);
         donor.setDonorMail(donorMail);
