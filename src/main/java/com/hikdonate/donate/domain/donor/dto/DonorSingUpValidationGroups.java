@@ -1,1 +1,0 @@
-package com.hikdonate.donate.domain.donor.dto;
