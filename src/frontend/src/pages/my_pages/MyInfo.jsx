@@ -13,12 +13,23 @@ import {
 } from "../../utils/FormatValidate";
 import useAuth from "../../hooks/useAuth";
 
+/*
+Function name: MyInfo
+Summary: 사용자의 정보를 표시하는 컴포넌트
+Parameter: 총 0개
+Return: 총 1개; MyInfo 컴포넌트
+Caller: React 애플리케이션의 렌더링 과정
+Date: 2024-09-22
+Write by: 길정수 
+*/
+
 const MyInfo = () => {
   const { user, updateUserInfo } = useAuth();
-  const [image, setImage] = useState(user.donorProfileImage || profileImage);
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const [isEditingSubInfo, setIsEditingSubInfo] = useState(false);
+  const [image, setImage] = useState(user.donorProfileImage || profileImage); // 프로필 이미지 상태
+  const [isEditingProfile, setIsEditingProfile] = useState(false); // 프로필 편집 상태
+  const [isEditingSubInfo, setIsEditingSubInfo] = useState(false); // 가입 정보 편집 상태
 
+  // 프로필 데이터 초기화
   const [profileData, setProfileData] = useState({
     donorNickname: user.donorNickname,
     donorAge: user.donorAge || null,
@@ -27,6 +38,7 @@ const MyInfo = () => {
     donorWalletAddress: user.donorWalletAddress,
   });
 
+  // 가입 정보 데이터 초기화
   const [subInfo, setSubInfo] = useState({
     donorId: user.donorId,
     donorPassword: user.donorPassword,
@@ -35,6 +47,7 @@ const MyInfo = () => {
     donorEmail: user.donorEmail,
   });
 
+  // 에러 메시지 상태
   const [profileErrors, setProfileErrors] = useState({
     donorNickname: "",
     donorAge: "",
@@ -49,6 +62,7 @@ const MyInfo = () => {
   });
 
   useEffect(() => {
+    // 사용자 정보 업데이트 시, 상태를 최신화
     setProfileData({
       donorNickname: user.donorNickname,
       donorAge: user.donorAge || null,
@@ -65,6 +79,7 @@ const MyInfo = () => {
     });
   }, [user]);
 
+  // 프로필 데이터 유효성 검사
   const validateProfileData = (data) => {
     let errors = {
       donorNickname: validateNickname(data.donorNickname),
@@ -76,6 +91,7 @@ const MyInfo = () => {
     return errors;
   };
 
+  // 가입 정보 유효성 검사
   const validateSubInfo = (data) => {
     let errors = {
       donorPassword: validatePassword(data.donorPassword),
@@ -86,6 +102,7 @@ const MyInfo = () => {
     return errors;
   };
 
+  // 프로필 이미지 변경 핸들러
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -98,6 +115,7 @@ const MyInfo = () => {
     }
   };
 
+  // 입력 값 처리
   const handleInputChange = (e, section) => {
     const { name, value } = e.target;
     if (section === "profile") {
@@ -117,6 +135,7 @@ const MyInfo = () => {
     }
   };
 
+  // 저장 버튼 클릭 시 유효성 검사 후 업데이트
   const handleSaveClick = (section) => {
     if (section === "profile") {
       const errors = validateProfileData(profileData);
@@ -137,6 +156,7 @@ const MyInfo = () => {
     }
   };
 
+  // 수정 버튼 클릭 시 편집 모드로 전환
   const handleEditClick = (section) => {
     if (section === "profile") {
       setIsEditingProfile(true);
@@ -195,6 +215,8 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
+
+            {/* 닉네임 */}
             <div className="my-info__line">
               <div className="my-info__line--left">닉네임</div>
               <div className="my-info__line--right">
@@ -222,6 +244,8 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
+
+            {/* 나이 */}
             <div className="my-info__line">
               <div className="my-info__line--left">나이</div>
               <div className="my-info__line--right">
@@ -258,6 +282,8 @@ const MyInfo = () => {
                 )}
               </div>
             </div>
+
+            {/* 금융 계좌 */}
             <div className="my-info__line">
               <div className="my-info__line--left">금융계좌</div>
               <div className="my-info__line--right">
@@ -266,7 +292,7 @@ const MyInfo = () => {
                     <input
                       type="text"
                       name="donorFinancialAccount"
-                      placeholder="금융계좌를 입력하세요"
+                      placeholder="금융 계좌를 입력하세요"
                       value={profileData.donorFinancialAccount}
                       onChange={(e) => handleInputChange(e, "profile")}
                       className={
@@ -282,50 +308,42 @@ const MyInfo = () => {
                     )}
                   </>
                 ) : (
-                  <div
-                    className={
-                      profileData.donorFinancialAccount
-                        ? ""
-                        : "my-info__text--default"
-                    }
-                  >
-                    {profileData.donorFinancialAccount ||
-                      "(선택) 금융 계좌를 입력하세요"}
+                  <div>
+                    <div
+                      className={
+                        profileData.donorFinancialAccount
+                          ? ""
+                          : "my-info__text--default"
+                      }
+                    >
+                      {profileData.donorFinancialAccount ||
+                        "(선택) 금융 계좌를 입력하세요"}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
+
+            {/* 지갑 주소 */}
             <div className="my-info__line">
-              <div className="my-info__line--left">지갑주소</div>
+              <div className="my-info__line--left">지갑 주소</div>
               <div className="my-info__line--right">
-                {isEditingProfile ? (
-                  <div>
-                    <a
-                      href={profileData.walletAddressLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {profileData.donorWalletAddress}
-                    </a>
-                  </div>
-                ) : (
-                  <div>
-                    <a
-                      href={profileData.walletAddressLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {profileData.donorWalletAddress}
-                    </a>
-                  </div>
-                )}
+                <a
+                  href={profileData.walletAddressLink}
+                  className="my-info__wallet-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {profileData.donorWalletAddress}
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="my-info__signup">
+      {/* 가입 정보 섹션 */}
+      <div className="my-info__profile">
         <div className="my-info__title--sub">
           가입 정보
           <button
@@ -337,24 +355,9 @@ const MyInfo = () => {
             {isEditingSubInfo ? "저장" : "수정"}
           </button>
         </div>
-        <div
-          className={`mySubInfoContent ${isEditingSubInfo ? "editing" : ""}`}
-        >
+        <div className="my-info__content">
           <div className="my-info__text">
-            <div className="my-info__line">
-              <div className="my-info__line--left">아이디</div>
-              <div className="my-info__line--right">
-                {isEditingSubInfo ? (
-                  <>
-                    <div>{subInfo.donorId}</div>
-                  </>
-                ) : (
-                  <>
-                    <div>{subInfo.donorId}</div>
-                  </>
-                )}
-              </div>
-            </div>
+            {/* 비밀번호 */}
             <div className="my-info__line">
               <div className="my-info__line--left">비밀번호</div>
               <div className="my-info__line--right">
@@ -378,12 +381,12 @@ const MyInfo = () => {
                     )}
                   </>
                 ) : (
-                  <>
-                    <div>***********</div>
-                  </>
+                  <div>********</div>
                 )}
               </div>
             </div>
+
+            {/* 이름 */}
             <div className="my-info__line">
               <div className="my-info__line--left">이름</div>
               <div className="my-info__line--right">
@@ -407,12 +410,12 @@ const MyInfo = () => {
                     )}
                   </>
                 ) : (
-                  <>
-                    <div>{subInfo.donorName}</div>
-                  </>
+                  <div>{subInfo.donorName}</div>
                 )}
               </div>
             </div>
+
+            {/* 전화번호 */}
             <div className="my-info__line">
               <div className="my-info__line--left">전화번호</div>
               <div className="my-info__line--right">
@@ -436,14 +439,14 @@ const MyInfo = () => {
                     )}
                   </>
                 ) : (
-                  <>
-                    <div>{subInfo.donorPhoneNumber}</div>
-                  </>
+                  <div>{subInfo.donorPhoneNumber}</div>
                 )}
               </div>
             </div>
+
+            {/* 이메일 */}
             <div className="my-info__line">
-              <div className="my-info__line--left">메일</div>
+              <div className="my-info__line--left">이메일</div>
               <div className="my-info__line--right">
                 {isEditingSubInfo ? (
                   <>
@@ -465,9 +468,7 @@ const MyInfo = () => {
                     )}
                   </>
                 ) : (
-                  <>
-                    <div>{subInfo.donorEmail}</div>
-                  </>
+                  <div>{subInfo.donorEmail}</div>
                 )}
               </div>
             </div>

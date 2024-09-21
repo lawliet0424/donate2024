@@ -1,40 +1,51 @@
-import "./SignupStepTwo.css";
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import ColoredButton from "../../components/ColoredButton";
+import "./SignupStepTwo.css"; // CSS 파일 임포트
+import React, { useState, useEffect } from "react"; // React와 관련 훅 임포트
+import { useNavigate, useLocation } from "react-router-dom"; // useNavigate와 useLocation 훅 임포트
+import ColoredButton from "../../components/ColoredButton"; // 색상 버튼 컴포넌트 임포트
 import {
   validateNickname,
   validateId,
   validatePassword,
-} from "../../utils/FormatValidate";
-import useAuth from "../../hooks/useAuth";
+} from "../../utils/FormatValidate"; // 유틸리티 함수 임포트
+import useAuth from "../../hooks/useAuth"; // 인증 관련 훅 임포트
 
+/*
+Function name: SignupStepTwo
+Summary: 회원가입 두 번째 단계 컴포넌트
+Parameter: N/A
+Return: 총 1개; 사용자 정보를 입력받는 폼을 포함한 컴포넌트
+Caller: N/A
+Date: 2024-09-22
+Write by: 길정수
+*/
 const SignupStepTwo = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { signup, checkIdDuplicate } = useAuth();
+  const navigate = useNavigate(); // navigate 함수 초기화
+  const location = useLocation(); // 현재 위치 정보 가져오기
+  const { signup, checkIdDuplicate } = useAuth(); // 인증 관련 기능 가져오기
 
-  const [signupNickname, setSignupNickname] = useState("");
-  const [signupId, setSignupId] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-
+  // 상태 관리
+  const [signupNickname, setSignupNickname] = useState(""); // 닉네임 상태
+  const [signupId, setSignupId] = useState(""); // 아이디 상태
+  const [signupPassword, setSignupPassword] = useState(""); // 비밀번호 상태
   const [errors, setErrors] = useState({
+    // 에러 상태
     nickname: "",
     id: "",
     password: "",
   });
-
-  const [isIdDuplicate, setIsIdDuplicate] = useState(null);
+  const [isIdDuplicate, setIsIdDuplicate] = useState(null); // 중복 아이디 확인 상태
 
   useEffect(() => {
+    // 이전 단계에서 전달된 상태가 있는지 확인
     if (!location.state?.fromSignupFirst) {
       window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
-      navigate("/");
+      navigate("/"); // 홈으로 이동
     }
   }, [location.state, navigate]);
 
-  const { signupName, signupEmail, signupPhoneNumber } = location.state || {};
+  const { signupName, signupEmail, signupPhoneNumber } = location.state || {}; // 이전 단계의 상태 가져오기
 
+  // 닉네임 변경 처리 함수
   const handleNicknameChange = (e) => {
     const newNickname = e.target.value;
     setSignupNickname(newNickname);
@@ -44,6 +55,7 @@ const SignupStepTwo = () => {
     }));
   };
 
+  // 아이디 변경 처리 함수
   const handleIdChange = (e) => {
     const newId = e.target.value;
     setSignupId(newId);
@@ -53,6 +65,7 @@ const SignupStepTwo = () => {
     }));
   };
 
+  // 비밀번호 변경 처리 함수
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setSignupPassword(newPassword);
@@ -62,6 +75,15 @@ const SignupStepTwo = () => {
     }));
   };
 
+  /*
+  Function name: onDuplicateCheckButtonClicked
+  Summary: 아이디 중복 확인 버튼 클릭 시 실행되는 함수
+  Parameter: N/A
+  Return: N/A
+  Caller: 아이디 중복 확인 버튼
+  Date: 2024-09-22
+  Write by: 길정수
+  */
   const onDuplicateCheckButtonClicked = async () => {
     const idError = validateId(signupId);
     if (idError) {
@@ -92,6 +114,15 @@ const SignupStepTwo = () => {
     }
   };
 
+  /*
+  Function name: onCompleteButtonClicked
+  Summary: 완료 버튼 클릭 시 실행되는 함수
+  Parameter: N/A
+  Return: N/A
+  Caller: 완료 버튼
+  Date: 2024-09-22
+  Write by: 길정수
+  */
   const onCompleteButtonClicked = async () => {
     const nicknameError = validateNickname(signupNickname);
     const idError = validateId(signupId);
@@ -133,11 +164,20 @@ const SignupStepTwo = () => {
       });
     } catch (error) {
       window.alert("오류가 발생하였습니다.");
-      navigate("/error");
+      navigate("/error"); // 오류 페이지로 이동
       console.error("Signup failed", error);
     }
   };
 
+  /*
+  Function name: onBeforeButtonClicked
+  Summary: 이전 버튼 클릭 시 실행되는 함수
+  Parameter: N/A
+  Return: N/A
+  Caller: 이전 버튼
+  Date: 2024-09-22
+  Write by: 길정수
+  */
   const onBeforeButtonClicked = () => {
     navigate("/signup/step1", {
       state: {
@@ -230,4 +270,4 @@ const SignupStepTwo = () => {
   );
 };
 
-export default SignupStepTwo;
+export default SignupStepTwo; // SignupStepTwo 컴포넌트 내보내기
