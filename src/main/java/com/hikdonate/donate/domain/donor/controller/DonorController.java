@@ -1,20 +1,17 @@
 package com.hikdonate.donate.domain.donor.controller;
 
-import com.hikdonate.donate.domain.donor.application.DonorLoginService;
-import com.hikdonate.donate.domain.donor.application.DonorSignUpService;
 import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.dto.DonorLoginForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpValidationGroups;
-import jakarta.validation.Valid;
+import com.hikdonate.donate.domain.donor.service.DonorSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;
 
 @Controller
 @RequiredArgsConstructor
