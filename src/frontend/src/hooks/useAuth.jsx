@@ -7,7 +7,8 @@ const useAuth = () => {
   const {
     user, // 현재 사용자 정보
     isAuthenticated, // 인증 상태
-    signup, // 회원가입 함수
+    signupFirstPage, // 회원가입 1단계 함수
+    signupSecondPage, // 회원가입 2단계 함수
     login, // 로그인 함수
     logout, // 로그아웃 함수
     getUserInfo, // 사용자 정보 가져오는 함수
@@ -19,7 +20,8 @@ const useAuth = () => {
   return {
     user,
     isAuthenticated,
-    signup,
+    signupFirstPage,
+    signupSecondPage,
     login,
     logout,
     getUserInfo,

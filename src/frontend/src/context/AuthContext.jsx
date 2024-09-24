@@ -36,6 +36,42 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null); // 오류 상태
 
   /*
+    Function name: signupFirstPage
+    Summary: 회원가입 처리 함수
+    Parameter: 총 3개
+               string signupName; 사용자 이름
+               string signupEmail; 사용자 이메일
+               string signupPhoneNumber; 사용자 전화번호
+    Return: Promise 객체; 검증 처리 결과
+  */
+  const signupFirstPage = (signupName, signupEmail, signupPhoneNumber) => {
+    setLoading(true); // 로딩 시작
+    return axios
+      .post("/api/signup/step1", {
+        signupName,
+        signupEmail,
+        signupPhoneNumber,
+      })
+      .then((response) => {
+        // 성공적으로 회원가입했을 경우
+        if (response.data.success) {
+          console.log("검증 성공");
+        } else {
+          console.log("검증 실패");
+          return Promise.reject("검증에 실패했습니다."); // 실패 메시지 반환
+        }
+      })
+      .catch((error) => {
+        console.error("검증 중 오류 발생:", error);
+        setError(error); // 오류 상태 설정
+        return Promise.reject(error);
+      })
+      .finally(() => {
+        setLoading(false); // 로딩 종료
+      });
+  };
+
+  /*
     Function name: signup
     Summary: 회원가입 처리 함수
     Parameter: 총 6개
@@ -47,7 +83,7 @@ export const AuthProvider = ({ children }) => {
                string signupPassword; 사용자 비밀번호
     Return: Promise 객체; 회원가입 처리 결과
   */
-  const signup = (
+  const signupSecondPage = (
     signupName,
     signupEmail,
     signupPhoneNumber,
@@ -223,7 +259,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         isAuthenticated,
-        signup,
+        signupFirstPage,
+        signupSecondPage,
         login,
         logout,
         getUserInfo,
