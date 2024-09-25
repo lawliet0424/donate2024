@@ -23,16 +23,22 @@ export const TagProvider = ({ children }) => {
     Summary: 서버에서 태그 리스트를 요청하고 상태를 업데이트하는 비동기 함수
     Return: 없음
   */
-  const getTags = async () => {
+  const getTags = () => {
     setLoading(true); // 로딩 시작
-    try {
-      const response = await axios.get("/api/donation/step1"); // 서버에서 태그 요청
+   axios
+   .get("/api/donation/step1", { withCredentials: false })
+   .then((response) => { // 서버에서 태그 요청
       setTags(response.data); // 태그 상태 업데이트
-    } catch (err) {
+            console.log("응답:", response);
+      console.log("태그:", tags);
+    } )
+    .catch ((err) => {
       setError(err); // 오류 발생 시 상태 업데이트
-    } finally {
+      console.log(err);
+      })
+      .finally(()=>{
       setLoading(false); // 로딩 종료
-    }
+    });
   };
 
   // 컴포넌트가 마운트될 때 태그 데이터를 가져옴

@@ -34,7 +34,7 @@ import org.web3j.tx.gas.ContractGasProvider;
  * <p>Auto generated code.
  * <p><strong>Do not modify!</strong>
  * <p>Please use the <a href="https://docs.web3j.io/command_line.html">web3j command line tools</a>,
- * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the
+ * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the 
  * <a href="https://github.com/web3j/web3j/tree/main/codegen">codegen module</a> to update.
  *
  * <p>Generated with web3j version 1.6.0.
@@ -91,33 +91,33 @@ public class DonateManagement extends Contract {
 
     public static final String FUNC_TRIGGERSENDTOKENSTOBENEFICIARYANDDONATEBANK = "triggerSendTokensToBeneficiaryAndDonateBank";
 
-    public static final Event APPROVAL_EVENT = new Event("Approval",
+    public static final Event APPROVAL_EVENT = new Event("Approval", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>(true) {}, new TypeReference<Address>(true) {}, new TypeReference<Uint256>() {}));
     ;
 
-    public static final Event TRANSFER_EVENT = new Event("Transfer",
+    public static final Event TRANSFER_EVENT = new Event("Transfer", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>(true) {}, new TypeReference<Address>(true) {}, new TypeReference<Uint256>() {}));
     ;
 
     @Deprecated
     protected DonateManagement(String contractAddress, Web3j web3j, Credentials credentials,
-                               BigInteger gasPrice, BigInteger gasLimit) {
+            BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, web3j, credentials, gasPrice, gasLimit);
     }
 
     protected DonateManagement(String contractAddress, Web3j web3j, Credentials credentials,
-                               ContractGasProvider contractGasProvider) {
+            ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, credentials, contractGasProvider);
     }
 
     @Deprecated
     protected DonateManagement(String contractAddress, Web3j web3j,
-                               TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+            TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, web3j, transactionManager, gasPrice, gasLimit);
     }
 
     protected DonateManagement(String contractAddress, Web3j web3j,
-                               TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+            TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, transactionManager, contractGasProvider);
     }
 
@@ -151,7 +151,7 @@ public class DonateManagement extends Contract {
     }
 
     public Flowable<ApprovalEventResponse> approvalEventFlowable(DefaultBlockParameter startBlock,
-                                                                 DefaultBlockParameter endBlock) {
+            DefaultBlockParameter endBlock) {
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(APPROVAL_EVENT));
         return approvalEventFlowable(filter);
@@ -187,7 +187,7 @@ public class DonateManagement extends Contract {
     }
 
     public Flowable<TransferEventResponse> transferEventFlowable(DefaultBlockParameter startBlock,
-                                                                 DefaultBlockParameter endBlock) {
+            DefaultBlockParameter endBlock) {
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(TRANSFER_EVENT));
         return transferEventFlowable(filter);
@@ -195,63 +195,63 @@ public class DonateManagement extends Contract {
 
     public RemoteFunctionCall<TransactionReceipt> addAdmin(String newAdmin) {
         final Function function = new Function(
-                FUNC_ADDADMIN,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, newAdmin)),
+                FUNC_ADDADMIN, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, newAdmin)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> additionalMint(BigInteger amount) {
         final Function function = new Function(
-                FUNC_ADDITIONALMINT,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_ADDITIONALMINT, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<BigInteger> allowance(String _owner, String spender) {
-        final Function function = new Function(FUNC_ALLOWANCE,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, _owner),
-                        new org.web3j.abi.datatypes.Address(160, spender)),
+        final Function function = new Function(FUNC_ALLOWANCE, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, _owner), 
+                new org.web3j.abi.datatypes.Address(160, spender)), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<TransactionReceipt> approve(String spender, BigInteger amount) {
         final Function function = new Function(
-                FUNC_APPROVE,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, spender),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_APPROVE, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, spender), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<BigInteger> balanceOf(String account) {
-        final Function function = new Function(FUNC_BALANCEOF,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, account)),
+        final Function function = new Function(FUNC_BALANCEOF, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, account)), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<TransactionReceipt> burn(String to, BigInteger amount) {
         final Function function = new Function(
-                FUNC_BURN,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, to),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_BURN, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, to), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<BigInteger> decimals() {
-        final Function function = new Function(FUNC_DECIMALS,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_DECIMALS, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint8>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<List> getAdminArray() {
-        final Function function = new Function(FUNC_GETADMINARRAY,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_GETADMINARRAY, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Address>>() {}));
         return new RemoteFunctionCall<List>(function,
                 new Callable<List>() {
@@ -265,43 +265,43 @@ public class DonateManagement extends Contract {
     }
 
     public RemoteFunctionCall<Boolean> isAdmin(String addr) {
-        final Function function = new Function(FUNC_ISADMIN,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, addr)),
+        final Function function = new Function(FUNC_ISADMIN, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, addr)), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
         return executeRemoteCallSingleValueReturn(function, Boolean.class);
     }
 
     public RemoteFunctionCall<String> name() {
-        final Function function = new Function(FUNC_NAME,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_NAME, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<String> owner() {
-        final Function function = new Function(FUNC_OWNER,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_OWNER, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<TransactionReceipt> removeAdmin(String admin) {
         final Function function = new Function(
-                FUNC_REMOVEADMIN,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, admin)),
+                FUNC_REMOVEADMIN, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, admin)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> sendBatchTokensToBeneficiary(String donor,
-                                                                               List<String> beneficiary_list, BigInteger divided_amount) {
+            List<String> beneficiary_list, BigInteger divided_amount) {
         final Function function = new Function(
-                FUNC_SENDBATCHTOKENSTOBENEFICIARY,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor),
-                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Address>(
-                                org.web3j.abi.datatypes.Address.class,
-                                org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)),
-                        new org.web3j.abi.datatypes.generated.Uint256(divided_amount)),
+                FUNC_SENDBATCHTOKENSTOBENEFICIARY, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor), 
+                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Address>(
+                        org.web3j.abi.datatypes.Address.class,
+                        org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)), 
+                new org.web3j.abi.datatypes.generated.Uint256(divided_amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
@@ -309,87 +309,87 @@ public class DonateManagement extends Contract {
     public RemoteFunctionCall<TransactionReceipt> sendBatchTokensToDonateBank(
             List<String> beneficiary_list, BigInteger divided_amount) {
         final Function function = new Function(
-                FUNC_SENDBATCHTOKENSTODONATEBANK,
+                FUNC_SENDBATCHTOKENSTODONATEBANK, 
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Address>(
-                                org.web3j.abi.datatypes.Address.class,
-                                org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)),
-                        new org.web3j.abi.datatypes.generated.Uint256(divided_amount)),
+                        org.web3j.abi.datatypes.Address.class,
+                        org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)), 
+                new org.web3j.abi.datatypes.generated.Uint256(divided_amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> sendTokensToBeneficiary(String donor,
-                                                                          String beneficiary, BigInteger amount) {
+            String beneficiary, BigInteger amount) {
         final Function function = new Function(
-                FUNC_SENDTOKENSTOBENEFICIARY,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor),
-                        new org.web3j.abi.datatypes.Address(160, beneficiary),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_SENDTOKENSTOBENEFICIARY, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor), 
+                new org.web3j.abi.datatypes.Address(160, beneficiary), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> sendTokensToDonateBank(String beneficiary,
-                                                                         BigInteger amount) {
+            BigInteger amount) {
         final Function function = new Function(
-                FUNC_SENDTOKENSTODONATEBANK,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, beneficiary),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_SENDTOKENSTODONATEBANK, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, beneficiary), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> sendTokensToDonor(String donor,
-                                                                    BigInteger amount) {
+            BigInteger amount) {
         final Function function = new Function(
-                FUNC_SENDTOKENSTODONOR,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_SENDTOKENSTODONOR, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<String> symbol() {
-        final Function function = new Function(FUNC_SYMBOL,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_SYMBOL, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<BigInteger> totalSupply() {
-        final Function function = new Function(FUNC_TOTALSUPPLY,
-                Arrays.<Type>asList(),
+        final Function function = new Function(FUNC_TOTALSUPPLY, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<TransactionReceipt> transfer(String to, BigInteger amount) {
         final Function function = new Function(
-                FUNC_TRANSFER,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, to),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_TRANSFER, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, to), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> transferByAdmin(String remitter, String recipient,
-                                                                  BigInteger amount) {
+            BigInteger amount) {
         final Function function = new Function(
-                FUNC_TRANSFERBYADMIN,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, remitter),
-                        new org.web3j.abi.datatypes.Address(160, recipient),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_TRANSFERBYADMIN, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, remitter), 
+                new org.web3j.abi.datatypes.Address(160, recipient), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> transferFrom(String _from, String _to,
-                                                               BigInteger _value) {
+            BigInteger _value) {
         final Function function = new Function(
-                FUNC_TRANSFERFROM,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, _from),
-                        new org.web3j.abi.datatypes.Address(160, _to),
-                        new org.web3j.abi.datatypes.generated.Uint256(_value)),
+                FUNC_TRANSFERFROM, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, _from), 
+                new org.web3j.abi.datatypes.Address(160, _to), 
+                new org.web3j.abi.datatypes.generated.Uint256(_value)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
@@ -397,12 +397,12 @@ public class DonateManagement extends Contract {
     public RemoteFunctionCall<TransactionReceipt> triggerSendBatchTokensToBeneficiaryAndDonateBank(
             String donor, List<String> beneficiary_list, BigInteger divided_amount) {
         final Function function = new Function(
-                FUNC_TRIGGERSENDBATCHTOKENSTOBENEFICIARYANDDONATEBANK,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor),
-                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Address>(
-                                org.web3j.abi.datatypes.Address.class,
-                                org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)),
-                        new org.web3j.abi.datatypes.generated.Uint256(divided_amount)),
+                FUNC_TRIGGERSENDBATCHTOKENSTOBENEFICIARYANDDONATEBANK, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor), 
+                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Address>(
+                        org.web3j.abi.datatypes.Address.class,
+                        org.web3j.abi.Utils.typeMap(beneficiary_list, org.web3j.abi.datatypes.Address.class)), 
+                new org.web3j.abi.datatypes.generated.Uint256(divided_amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
@@ -410,33 +410,33 @@ public class DonateManagement extends Contract {
     public RemoteFunctionCall<TransactionReceipt> triggerSendTokensToBeneficiaryAndDonateBank(
             String donor, String beneficiary, BigInteger amount) {
         final Function function = new Function(
-                FUNC_TRIGGERSENDTOKENSTOBENEFICIARYANDDONATEBANK,
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor),
-                        new org.web3j.abi.datatypes.Address(160, beneficiary),
-                        new org.web3j.abi.datatypes.generated.Uint256(amount)),
+                FUNC_TRIGGERSENDTOKENSTOBENEFICIARYANDDONATEBANK, 
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, donor), 
+                new org.web3j.abi.datatypes.Address(160, beneficiary), 
+                new org.web3j.abi.datatypes.generated.Uint256(amount)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     @Deprecated
     public static DonateManagement load(String contractAddress, Web3j web3j,
-                                        Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+            Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new DonateManagement(contractAddress, web3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
     public static DonateManagement load(String contractAddress, Web3j web3j,
-                                        TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+            TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new DonateManagement(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
     }
 
     public static DonateManagement load(String contractAddress, Web3j web3j,
-                                        Credentials credentials, ContractGasProvider contractGasProvider) {
+            Credentials credentials, ContractGasProvider contractGasProvider) {
         return new DonateManagement(contractAddress, web3j, credentials, contractGasProvider);
     }
 
     public static DonateManagement load(String contractAddress, Web3j web3j,
-                                        TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+            TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new DonateManagement(contractAddress, web3j, transactionManager, contractGasProvider);
     }
 

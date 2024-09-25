@@ -31,16 +31,17 @@ public class DonationController {
     Date: 2024.09.10
     Written by: 심민서
      */
-    @PostMapping("/payment")
+    @PostMapping("/payment/submit")
     public String savePaymentInfo(@RequestBody PaymentRequest paymentRequest){
         System.out.println("savePaymentInfo 시작");
+        String sessionId = paymentRequest.getPaymentInfo().getSessionId();
         String donorId = paymentRequest.getTransactionInfo().getDonorId();
         Long amount = paymentRequest.getTransactionInfo().getAmount();
         String[] beneficiariesId = paymentRequest.getTransactionInfo().getBeneficiaryId();
         System.out.println("Received Payment Info:" + paymentRequest);
         System.out.println("DonorId: " + donorId);
         System.out.println("Amount: " + amount);
-        // paymentRequest.getPaymentInfo() 만들어 놓긴 했는데 (toss API를 위한) 필요없는 정보라 안받아옴
+
         try {
             donateStateService.executeDonationTransaction(donorId, beneficiariesId, amount);
             return "ok";

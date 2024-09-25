@@ -51,7 +51,6 @@ public class DonationListUpController {
     @PostMapping("/step3")
     public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestBody TagBasedSuggestionRequest request) {
         // 수혜자 정보를 TaggedBeneficiaryContainer에 담아 반환
-//        return beneficiaryInfoService.getBeneficiariesByTags(request);
-        return null;
+        return beneficiaryInfoService.getBeneficiariesByTags(request);
     }
 }
