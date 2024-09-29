@@ -22,33 +22,37 @@ import java.util.Objects;
 public class TagLink implements Serializable {
 
     @EmbeddedId
-    private TagLinkId taglink_id;
+    @Column(name = "taglink_id")
+    private TagLinkId taglinkId;
 
     @ManyToOne
-    @MapsId("beneficiary_id")
+    @MapsId("beneficiaryId")
     @JoinColumn(name = "beneficiary_id")
     private Beneficiary beneficiary;
 
     @ManyToOne
-    @MapsId("tag_id")
+    @MapsId("tagId")
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    private String beneficiary_nickname;
+    @Column(name = "beneficiary_nickname")
+    private String beneficiaryNickname;
 
-    private String tag_name;
+    @Column(name = "tag_name")
+    private String tagName;
 
-    private String tag_classification;
+    @Column(name = "tag_classification")
+    private String tagClassification;
 
     public TagLink() {}
 
     public TagLink(Beneficiary beneficiary, Tag tag, String beneficiary_nickname, String tag_name, String tag_classification) {
-        this.taglink_id = new TagLinkId(beneficiary.getBeneficiary_id(), tag.getTagId());
+        this.taglinkId = new TagLinkId(beneficiary.getBeneficiaryId(), tag.getTagId());
         this.beneficiary = beneficiary;
         this.tag = tag;
-        this.beneficiary_nickname = beneficiary_nickname;
-        this.tag_name = tag_name;
-        this.tag_classification = tag_classification;
+        this.beneficiaryNickname = beneficiary_nickname;
+        this.tagName = tag_name;
+        this.tagClassification = tag_classification;
     }
 
     @Override
@@ -56,11 +60,11 @@ public class TagLink implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TagLink tagLink = (TagLink) o;
-        return Objects.equals(taglink_id, tagLink.taglink_id);
+        return Objects.equals(taglinkId, tagLink.taglinkId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taglink_id);
+        return Objects.hash(taglinkId);
     }
 }

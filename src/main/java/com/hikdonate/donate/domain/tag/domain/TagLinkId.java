@@ -1,5 +1,6 @@
 package com.hikdonate.donate.domain.tag.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.util.Objects;
@@ -15,14 +16,17 @@ import java.util.Objects;
 @Embeddable
 public class TagLinkId {
 
-    private Long beneficiary_id;
-    private Long tag_id;
+    @Column(name = "beneficiary_id")
+    private Long beneficiaryId;
+
+    @Column(name = "tag_id")
+    private Long tagId;
 
     public TagLinkId() {}
 
     public TagLinkId(Long beneficiary_id, Long tag_id) {
-        this.beneficiary_id = beneficiary_id;
-        this.tag_id = tag_id;
+        this.beneficiaryId = beneficiary_id;
+        this.tagId = tag_id;
     }
 
     @Override
@@ -30,12 +34,12 @@ public class TagLinkId {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         TagLinkId that = (TagLinkId) o;
-        return Objects.equals(beneficiary_id, that.beneficiary_id) && Objects.equals(tag_id, that.tag_id);
+        return Objects.equals(beneficiaryId, that.beneficiaryId) && Objects.equals(tagId, that.tagId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(beneficiary_id, tag_id);
+        return Objects.hash(beneficiaryId, tagId);
     }
 
 }

@@ -38,7 +38,6 @@ public class DonationListUpController {
         return tagService.getAllTags();
     }
 
-
     /*
     Function name: getBeneficiariesByTags
     Summary: 수혜자 필터링 및 반환
@@ -50,7 +49,14 @@ public class DonationListUpController {
 */
     @PostMapping("/step3")
     public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestBody TagBasedSuggestionRequest request) {
+
+        System.out.println(" step3 시작 " + request);
         // 수혜자 정보를 TaggedBeneficiaryContainer에 담아 반환
-        return beneficiaryInfoService.getBeneficiariesByTags(request);
+        List<Long> tagIds = request.getTagIds();
+        int numberOfBeneficiaries= request.getNumberOfBeneficiaries();
+
+        System.out.println(" tagIds: " + tagIds);
+        System.out.println(" numberOfBeneficiaries: " + numberOfBeneficiaries);
+        return beneficiaryInfoService.selectedBeneficiariesList(tagIds, numberOfBeneficiaries);
     }
 }

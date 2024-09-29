@@ -25,32 +25,34 @@ public class Beneficiary {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long beneficiary_id;
+    @Column(name = "beneficiary_id")
+    private Long beneficiaryId;
 
     @ManyToOne
     @JoinColumn(name = "organization_name", nullable = false)
     private Organization affiliation;
 
-    @Column(nullable = false)
-    private String beneficiary_name;
+    @Column(name = "beneficiary_name", nullable = false)
+    private String beneficiaryName;
 
-    @Column(nullable = false)
-    private String beneficiary_nickname;
+    @Column(name = "beneficiary_nickname", nullable = false)
+    private String beneficiaryNickname;
 
-    @Column(nullable = false)
-    private Integer beneficiary_age;
+    @Column(name = "beneficiary_age", nullable = false)
+    private Integer beneficiaryAge;
 
-    @Column(nullable = false)
-    private String beneficiary_gender;
+    @Column(name = "beneficiary_gender", nullable = false)
+    private String beneficiaryGender;
 
     @Lob
-    private String beneficiary_info;
+    @Column(name = "beneficiary_info")
+    private String beneficiaryInfo;
 
-    @Column(nullable = false)
-    private String beneficiary_account;
+    @Column(name = "beneficiary_account", nullable = false)
+    private String beneficiaryAccount;
 
-    @Column(nullable = false)
-    private String beneficiary_wallet;
+    @Column(name = "beneficiary_wallet", nullable = false)
+    private String beneficiaryWallet;
 
     @OneToMany(mappedBy = "beneficiary", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Interest> likedByDonors = new HashSet<>();

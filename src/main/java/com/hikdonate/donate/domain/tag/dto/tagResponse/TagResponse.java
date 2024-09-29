@@ -8,4 +8,7 @@ import java.util.List;
 @Getter
 public class TagResponse {
     private List<TagInfo> tagInfo;
+
+    public TagResponse(Long tagId, String tagName) {
+    }
 }

@@ -23,16 +23,18 @@ public class Tag {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tag_id")
     private Long tagId;
 
 
     @Getter
     @Setter
-    @Column(nullable = false)
+    @Column(name = "tag_name", nullable = false)
     private String tagName;
 
     @Getter
     @Setter
+    @Column(name = "tag_classification")
     private String tagClassification;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)

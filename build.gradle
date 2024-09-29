@@ -39,6 +39,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	testImplementation 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -47,5 +48,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-	
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << '-parameters'
 }
