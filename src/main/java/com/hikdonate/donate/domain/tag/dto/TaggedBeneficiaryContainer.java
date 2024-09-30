@@ -9,14 +9,15 @@ import java.util.Optional;
 
 @Getter
 public class TaggedBeneficiaryContainer {
-    // Getter 메서드들
-    private final Beneficiary beneficiary;
-    private final List<TagItem> tags;
+    private final Long beneficiaryId;
+    private final String beneficiaryName;
+//    private final String beneficiaryProfileImg;
+    private final List<TagItem> beneficiaryTags;
 
     // 생성자
     public TaggedBeneficiaryContainer(Beneficiary beneficiary, List<TagItem> tags) {
-        this.beneficiary = beneficiary;
-        this.tags = tags;
+        this.beneficiaryId = beneficiary.getBeneficiaryId();
+        this.beneficiaryName = beneficiary.getBeneficiaryName();
+        this.beneficiaryTags = tags;
     }
-
 }
