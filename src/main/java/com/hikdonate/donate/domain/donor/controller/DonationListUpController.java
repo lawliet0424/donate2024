@@ -44,19 +44,15 @@ public class DonationListUpController {
     Parameter: 총 1개
     Return: 총 1개
         Caller: 없음
-    Date: 2024.9.10
+    Date: 2024.10.01
     Write by: 심민서
 */
     @GetMapping("/step3")
-    public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestBody TagBasedSuggestionRequest request) {
-
-        System.out.println(" step3 시작 " + request);
-        // 수혜자 정보를 TaggedBeneficiaryContainer에 담아 반환
-        List<Long> tagIds = request.getTags();
-        int numberOfBeneficiaries= request.getPersonnel();
-
-        System.out.println(" tagIds: " + tagIds);
-        System.out.println(" numberOfBeneficiaries: " + numberOfBeneficiaries);
-        return beneficiaryInfoService.selectedBeneficiariesList(tagIds, numberOfBeneficiaries);
+    public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestParam List<Long> tags,
+                                                                   @RequestParam int personnel) {
+        System.out.println(" step3 시작 ");
+        System.out.println(" tagIds: " + tags);
+        System.out.println(" numberOfBeneficiaries: " + personnel);
+        return beneficiaryInfoService.selectedBeneficiariesList(tags, personnel);
     }
 }
