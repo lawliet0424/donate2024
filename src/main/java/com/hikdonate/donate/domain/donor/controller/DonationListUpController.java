@@ -1,7 +1,6 @@
 package com.hikdonate.donate.domain.donor.controller;
 
 import com.hikdonate.donate.domain.beneficiary.service.BeneficiaryInfoService;
-import com.hikdonate.donate.domain.tag.dto.TagBasedSuggestionRequest;
 import com.hikdonate.donate.domain.tag.dto.TaggedBeneficiaryContainer;
 import com.hikdonate.donate.domain.tag.dto.tagResponse.TagInfo;
 import com.hikdonate.donate.domain.tag.service.TagService;
