@@ -29,8 +29,6 @@ export const TagProvider = ({ children }) => {
    .get("/api/donation/step1", { withCredentials: false })
    .then((response) => { // 서버에서 태그 요청
       setTags(response.data); // 태그 상태 업데이트
-            console.log("응답:", response);
-      console.log("태그:", tags);
     } )
     .catch ((err) => {
       setError(err); // 오류 발생 시 상태 업데이트

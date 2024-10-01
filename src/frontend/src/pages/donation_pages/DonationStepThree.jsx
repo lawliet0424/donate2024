@@ -18,16 +18,30 @@ Write by: 길정수
 const DonationStepThree = () => {
   const location = useLocation(); // 현재 위치 가져오기
   const navigate = useNavigate(); // navigate 훅 사용
-  const { beneficiaries } = useBeneficiary(); // 수혜자 관련 훅 사용
+  const { selectedBeneficiaries, getSelectedBeneficiaries, loading, error } = useBeneficiary(); // 수혜자 관련 훅 사용
+
 
   useEffect(() => {
-    // 잘못된 접근 처리
     if (!location.state || !location.state.fromSecondStep) {
       window.alert("잘못된 접근입니다. 홈으로 이동합니다.");
-      navigate("/"); // 홈으로 이동
+      navigate("/");
       return;
     }
-  }, [location.state, navigate]);
+
+    const fetchBeneficiaries = async () => {
+      try {
+          console.log("step-3");
+          await getSelectedBeneficiaries(
+             location.state.selectedTags,
+             location.state.numberOfPeople
+             );
+          } catch (err) {
+              console.log("수혜자 로딩 실패", err)}
+
+    };
+
+    fetchBeneficiaries();
+  }, [location.state]);
 
   const onNextButtonClicked = () => {
     navigate("/donation/payment", {
@@ -37,7 +51,7 @@ const DonationStepThree = () => {
         numberOfPeople: location.state.numberOfPeople,
         amount: location.state.amount,
         amountPerPerson: location.state.amountPerPerson,
-        beneficiaryList: beneficiaries.map((b) => b.beneficiaryId), // beneficiaries에서 ID를 추출
+        beneficiaryList: selectedBeneficiaries.map((b) => b.beneficiaryId), // beneficiaries에서 ID를 추출
       },
     });
   };
@@ -53,11 +67,19 @@ const DonationStepThree = () => {
     });
   };
 
+    if (loading) {
+      return <div>Loading...</div>; // 로딩 중 표시
+    }
+
+    if (error) {
+      return <div>Error loading beneficiary: {error.message}</div>; // 에러 발생 시 메시지 표시
+    }
+
   return (
     <div className="donation-step-three">
       <DonationStepsBar currentStep={3} /> {/* 현재 단계 표시 */}
       <div className="donation-step-three__beneficiaries">
-        {beneficiaries.map((beneficiary) => (
+        {selectedBeneficiaries.map((beneficiary) => (
           <BeneficiaryBox
             key={beneficiary.beneficiaryId}
             beneficiaryId={beneficiary.beneficiaryId} // 수혜자 ID

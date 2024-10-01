@@ -55,12 +55,11 @@ const DonationStepTwo = () => {
       window.alert(errorMessage); // 에러 메시지 출력
       return;
     }
-
-    getSelectedBeneficiaries(
-      location.state.selectedTags,
-      numberOfPeople,
-      formatamountPerPerson(amountPerPerson)
-    );
+//     console.log("step2", location.state.selectedTags, numberOfPeople);
+//     getSelectedBeneficiaries(
+//       location.state.selectedTags,
+//       numberOfPeople,
+//     );
 
     navigate("/donation/step3", {
       state: {
