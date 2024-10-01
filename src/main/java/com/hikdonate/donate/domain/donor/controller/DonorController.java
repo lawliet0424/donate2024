@@ -7,6 +7,8 @@ import com.hikdonate.donate.domain.donor.dto.DonorSignUpValidationGroups;
 import com.hikdonate.donate.domain.donor.service.DonorSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +19,7 @@ import org.springframework.ui.Model;
 @RequiredArgsConstructor
 @RequestMapping("/donor")
 @Slf4j
-@SessionAttributes("donorSignUpForm")
+//@SessionAttributes("donorSignUpForm")
 /*
 Class name: DonorController
 Summary: 기부자(Donor) 측 Controller
@@ -48,13 +50,13 @@ public class DonorController {
     Date: 2024.09.21
     Written by: 양예현
      */
-    @GetMapping("/signup1")
-    public String donorSignUpForm1(Model model) {
-        if(!model.containsAttribute("donorSignUpForm")){
-            model.addAttribute("donorSignUpForm", new DonorSignUpForm());
-        }
-        return "signup/donor_signup_form1";
-    }
+//    @GetMapping("/signup1")
+//    public String donorSignUpForm1(Model model) {
+//        if(!model.containsAttribute("donorSignUpForm")){
+//            model.addAttribute("donorSignUpForm", new DonorSignUpForm());
+//        }
+//        return "signup/donor_signup_form1";
+//    }
 
     /*
     Function name: donorSignUpSubmit1
@@ -67,11 +69,13 @@ public class DonorController {
     Written by: 양예현
      */
     @PostMapping("/signup1")
-    public String donorSignUpSubmit1(@Validated(DonorSignUpValidationGroups.SignUpStep1.class) @ModelAttribute("donorSignUpForm") DonorSignUpForm donorSignUpForm, BindingResult bindingResult) {
+    public ResponseEntity<String> donorSignUpSubmit1(@Validated(DonorSignUpValidationGroups.SignUpStep1.class)
+                                                     @RequestBody DonorSignUpForm donorSignUpForm,
+                                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return  "signup/donor_signup_form1";
+            return ResponseEntity.badRequest().body("validation failed");
         }
-        return "redirect:/donor/signup2";
+        return ResponseEntity.ok("Singup step1 success");
     }
 
     /*
@@ -84,10 +88,10 @@ public class DonorController {
     Date: 2024.09.21
     Written by: 양예현
      */
-    @GetMapping("/signup2")
-    public String donorSignUpForm2(Model model, @ModelAttribute("donorSignUpForm") DonorSignUpForm donorSignUpForm) {
-        return "signup/donor_signup_form2";
-    }
+//    @GetMapping("/signup2")
+//    public String donorSignUpForm2(Model model, @ModelAttribute("donorSignUpForm") DonorSignUpForm donorSignUpForm) {
+//        return "signup/donor_signup_form2";
+//    }
 
     /*
     Function name: donorSignUpSubmit2
@@ -100,15 +104,17 @@ public class DonorController {
     Written by: 양예현
      */
     @PostMapping("/signup2")
-    public String donorSignUpSubmit2(@Validated(DonorSignUpValidationGroups.SignUpStep2.class) @ModelAttribute("donorSignUpForm") DonorSignUpForm donorSignUpForm, BindingResult bindingResult) {
+    public ResponseEntity<String> donorSignUpSubmit2(@Validated(DonorSignUpValidationGroups.SignUpStep2.class)
+                                                     @RequestBody DonorSignUpForm donorSignUpForm,
+                                                     BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> log.error("Validation error: " + error));
-            return "signup/donor_signup_form2";
+            return ResponseEntity.badRequest().body("validation failed");
         }
         // 아직 아이디 중복 처리 기능을 구현하지 않아서 동일 아이디로 가입을 하면 update 되는 방식으로 작동함
         donorSignUpService.createDonor(donorSignUpForm.getDonorName(), donorSignUpForm.getDonorMail(), donorSignUpForm.getDonorPhoneNumber(),
                 donorSignUpForm.getDonorNickname(), donorSignUpForm.getDonorId(), donorSignUpForm.getDonorPassword());
-        return "redirect:/donor/signupSuccess";
+        return ResponseEntity.ok("SignUp step2 success");
     }
 
     /*
@@ -120,10 +126,10 @@ public class DonorController {
     Date: 2024.09.21
     Written by: 양예현
      */
-    @GetMapping("/signupSuccess")
-    public String donorSuccess(@ModelAttribute("donor") Donor donor) {
-        return "signup/donor_signup_success";
-    }
+//    @GetMapping("/signupSuccess")
+//    public String donorSuccess(@ModelAttribute("donor") Donor donor) {
+//        return "signup/donor_signup_success";
+//    }
 
     /*
     Function name: login
@@ -133,9 +139,9 @@ public class DonorController {
     Date: 2024.09.21
     Written by: 양예현
      */
-    @GetMapping("/login")
-    public String donorLogin() {
-        return "login/login";
-    }
+//    @GetMapping("/login")
+//    public String donorLogin() {
+//        return "login/login";
+//    }
 
 }

@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   const login = (loginId, loginPassword) => {
     setLoading(true); // 로딩 시작
     return axios
-      .post("/api/login", { loginId, loginPassword }, { withCredentials: true })
+      .post("/api/donor/login", { loginId, loginPassword }, { withCredentials: true })
       .then((response) => {
         // 로그인 성공 시 사용자 정보 설정
         const {

@@ -3,6 +3,7 @@ package com.hikdonate.donate.domain.donor.service;
 import com.hikdonate.donate.domain.donor.dao.DonorRepository;
 import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.domain.DonorRole;
+import com.hikdonate.donate.domain.donor.domain.DonorUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,7 +41,7 @@ public class DonorLoginService implements UserDetailsService {
     Written by: 양예현
      */
     @Override
-    public UserDetails loadUserByUsername(String donorId) throws UsernameNotFoundException {
+    public DonorUserDetails loadUserByUsername(String donorId) throws UsernameNotFoundException {
         Optional<Donor> _donor = this.donorRepository.findByDonorId(donorId);
         if(_donor.isEmpty()) {
             throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
@@ -56,7 +57,8 @@ public class DonorLoginService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(DonorRole.USER.getValue()));
         }
 
-        return new User(donor.getDonorId(), donor.getDonorPassword(), authorities);
+//        return new User(donor.getDonorId(), donor.getDonorPassword(), authorities);
+        return new DonorUserDetails(donor);
     }
 
 }

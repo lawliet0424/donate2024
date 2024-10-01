@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
@@ -50,18 +51,18 @@ public class Donate2024Application {
      Date: 2024.08.10
      Written by: 조현지
      */
-	@PostConstruct
-	public void init() throws IOException {
-		// 초기화 작업 수행
-		System.out.println("Application has been initialized");
-
-		// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
-		String abiFile = "DonateManagement.json";
-
-		// Sepolia testnet에 verified된 스마트 컨트랙트를 순서대로 가져와서 로컬에 저장하기
-		etherscanAPI.getContractABI(contractAddress, "DonateManagement");
-
-		// 로컬에 저장할 json 파일을 토대로 java wrapper 파일을 로컬에 생성하기
-		web3jWrapperGenerator.generateWrapper(abiFile);
-	}
+//	@PostConstruct
+//	public void init() throws IOException {
+//		// 초기화 작업 수행
+//		System.out.println("Application has been initialized");
+//
+//		// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
+//		String abiFile = "DonateManagement.json";
+//
+//		// Sepolia testnet에 verified된 스마트 컨트랙트를 순서대로 가져와서 로컬에 저장하기
+//		etherscanAPI.getContractABI(contractAddress, "DonateManagement");
+//
+//		// 로컬에 저장할 json 파일을 토대로 java wrapper 파일을 로컬에 생성하기
+//		web3jWrapperGenerator.generateWrapper(abiFile);
+//	}
 }
