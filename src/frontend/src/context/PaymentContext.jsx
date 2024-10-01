@@ -28,7 +28,8 @@ export const PaymentProvider = ({ children }) => {
   const submitPayment = async (
     numberOfPeople,
     amountPerPerson,
-    selectedBeneficiaryList
+    selectedBeneficiaryList,
+    donorId
   ) => {
     try {
       // 서버에 결제 요청
@@ -36,14 +37,16 @@ export const PaymentProvider = ({ children }) => {
         numberOfPeople,
         amountPerPerson,
         selectedBeneficiaryList,
+        donorId,
       });
 
-      if (response.status === 200) {
+      // 응답 데이터에서 성공 메시지를 확인
+      if (response.data.message === "ok") {
         setPaymentStatus("success"); // 결제 성공 시 상태 업데이트
         return response.data; // 서버 응답 데이터 반환
       } else {
         setPaymentStatus("error"); // 결제 실패 시 상태 업데이트
-        throw new Error("결제 실패"); // 오류 발생
+        throw new Error(response.data.message || "결제 실패"); // 서버의 오류 메시지를 사용
       }
     } catch (error) {
       console.error("결제 중 오류 발생:", error);

@@ -7,6 +7,7 @@ import {
   formatamountPerPerson,
   validateNumberOfPeopleAmount,
 } from "../../utils/FormatValidate"; // 유틸리티 함수 임포트
+import useBeneficiary from "../../hooks/useBeneficiary"; // 수혜자 훅 임포트
 
 /*
 Function name: DonationStepTwo
@@ -23,6 +24,7 @@ const DonationStepTwo = () => {
 
   const [numberOfPeople, setNumberOfPeople] = useState(""); // 기부자 수 상태
   const [amount, setAmount] = useState(""); // 기부 총액 상태
+  const { getSelectedBeneficiaries } = useBeneficiary(); // 수혜자 관련 훅 사용
 
   useEffect(() => {
     const { fromFirstStep, fromThirdStep } = location.state || {};
@@ -47,12 +49,19 @@ const DonationStepTwo = () => {
     const errorMessage = validateNumberOfPeopleAmount(
       numberOfPeople,
       amount,
-      amountPerPerson
+      formatamountPerPerson(amountPerPerson)
     ); // 유효성 검사
     if (errorMessage) {
       window.alert(errorMessage); // 에러 메시지 출력
       return;
     }
+
+    getSelectedBeneficiaries(
+      location.state.selectedTags,
+      numberOfPeople,
+      formatamountPerPerson(amountPerPerson)
+    );
+
     navigate("/donation/step3", {
       state: {
         fromSecondStep: true,

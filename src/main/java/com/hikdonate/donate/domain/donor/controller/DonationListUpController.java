@@ -47,7 +47,7 @@ public class DonationListUpController {
     Date: 2024.9.10
     Write by: 심민서
 */
-    @PostMapping("/step3")
+    @GetMapping("/step3")
     public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestBody TagBasedSuggestionRequest request) {
 
         System.out.println(" step3 시작 " + request);

@@ -56,8 +56,21 @@ public class BeneficiaryInfoService {
         }
         System.out.println(" tagged_beneficiaries_wallet_addr " + tagged_beneficiaries_wallet_addr );
 
-        List<String> topBeneficiariesWalletAddress = transactionHistoryRepository.findTopBeneficiariesWalletAddressByDonation(tagged_beneficiaries_wallet_addr, fromDate, numOfBeneficiaries);
+        // 태그에 해당되는 수혜자를 정렬한 뒤, 상위 N명에 대해서만 뽑아서 수혜자 web3 지갑 리스트 반환
+        List<String> sortedBeneficiariesWalletAddress = transactionHistoryRepository.findTopBeneficiariesWalletAddressByDonation(tagged_beneficiaries_wallet_addr, fromDate);
+        System.out.println("sorted: " + sortedBeneficiariesWalletAddress);
+
+        // 최근 2주간의 기부 내역이 없거나 기부받은 내역이 없는 수혜자 처리
+        for (String beneficiary : tagged_beneficiaries_wallet_addr) {
+            if (sortedBeneficiariesWalletAddress.stream().noneMatch(result -> result.equals(beneficiary))) {
+                sortedBeneficiariesWalletAddress.add(0, beneficiary); // 없는 beneficiary에 대해 totalAmount를 0으로 추가
+            }
+        }
+
+        // 앞에서부터 N명만 slice하기
+        List<String> topBeneficiariesWalletAddress = sortedBeneficiariesWalletAddress.subList(0, numOfBeneficiaries);
         System.out.println("top N: " + topBeneficiariesWalletAddress);
+
 
         List<TaggedBeneficiaryContainer> taggedBeneficiaries = new ArrayList<>();
 

@@ -38,7 +38,7 @@ const DonationStepOne = () => {
     };
 
     initialize(); // 초기화 함수 실행
-  }, [location.states]);
+  }, [location.state]);
 
   const handleTagClick = (tagId) => {
     setSelectedTags((prevSelectedTags) => {

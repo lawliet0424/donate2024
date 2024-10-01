@@ -34,10 +34,10 @@ public class DonationController {
     @PostMapping("/payment/submit")
     public String savePaymentInfo(@RequestBody PaymentRequest paymentRequest){
         System.out.println("savePaymentInfo 시작");
-        String sessionId = paymentRequest.getPaymentInfo().getSessionId();
-        String donorId = paymentRequest.getTransactionInfo().getDonorId();
-        Long amount = paymentRequest.getTransactionInfo().getAmount();
-        String[] beneficiariesId = paymentRequest.getTransactionInfo().getBeneficiaryId();
+        String sessionId = paymentRequest.getSessionId();
+        String donorId = paymentRequest.getDonorId();
+        Long amount = paymentRequest.getPerPerson();
+        String[] beneficiariesId = paymentRequest.getBeneficiaryList();
         System.out.println("Received Payment Info:" + paymentRequest);
         System.out.println("DonorId: " + donorId);
         System.out.println("Amount: " + amount);

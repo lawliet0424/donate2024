@@ -18,7 +18,7 @@ public interface TransactionHistoryRepository extends MongoRepository<Transactio
         int numOfBeneficiary : 선택하고자하는 N명의 수혜자
     Return: List<String>
     Caller: BeneficiaryInfoService
-    Date: 2024.09.21
+    Date: 2024.10.1
     Written by: 조현지
     */
     @Aggregation(pipeline = {
@@ -28,14 +28,10 @@ public interface TransactionHistoryRepository extends MongoRepository<Transactio
             "{ '$group': { '_id': '$beneficiary_wallet', 'totalAmount': { '$sum': { '$ifNull': ['$amount', 0] } } } }",
             // 기부 금액 총합에 대해 오름차순 정렬
             "{ '$sort': { 'totalAmount': 1 } }",
-            // 상위 태그 해당자에 대한 정보만 남기기 (N명)
-            "{ '$limit': ?2 }",
             // 상위 태그 해당자들의 wallet address를 리스트로 전달
             "{ '$project': { 'beneficiary_wallet': '$_id', '_id': 0 } }"
     })
-    List<String> findTopBeneficiariesWalletAddressByDonation(List<String> beneficiaryWallets, String fromDate, int numOfBeneficiary);
-
-
+    List<String> findTopBeneficiariesWalletAddressByDonation(List<String> beneficiaryWallets, String fromDate);
     /*
     특정 Donor의 donation history 가져오기 (전체) <-- 기부 내역 조회 기능 만들 때 사용할 예정
     */
