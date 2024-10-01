@@ -11,7 +11,7 @@ import java.util.Optional;
 public class TaggedBeneficiaryContainer {
     private final Long beneficiaryId;
     private final String beneficiaryName;
-//    private final String beneficiaryProfileImg;
+    private final String beneficiaryProfileImg= "null";
     private final List<TagItem> beneficiaryTags;
 
     // 생성자

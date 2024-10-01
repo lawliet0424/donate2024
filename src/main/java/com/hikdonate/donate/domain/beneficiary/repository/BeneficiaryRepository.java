@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> {
     Beneficiary findByBeneficiaryWallet(String beneficiary_wallet);
 
+    Beneficiary findByBeneficiaryId(Long beneficiary_id);
 }

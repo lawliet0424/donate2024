@@ -52,8 +52,8 @@ public class DonationListUpController {
 
         System.out.println(" step3 시작 " + request);
         // 수혜자 정보를 TaggedBeneficiaryContainer에 담아 반환
-        List<Long> tagIds = request.getTagIds();
-        int numberOfBeneficiaries= request.getNumberOfBeneficiaries();
+        List<Long> tagIds = request.getTags();
+        int numberOfBeneficiaries= request.getPersonnel();
 
         System.out.println(" tagIds: " + tagIds);
         System.out.println(" numberOfBeneficiaries: " + numberOfBeneficiaries);

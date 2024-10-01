@@ -67,10 +67,14 @@ public class BeneficiaryInfoService {
             }
         }
 
-        // 앞에서부터 N명만 slice하기
+        // slice out of bound 오류 처리
+        if (sortedBeneficiariesWalletAddress.size() < numOfBeneficiaries || sortedBeneficiariesWalletAddress.isEmpty()) {
+            throw new IndexOutOfBoundsException("Requested N cannot be processed due to short sortedBeneficiariesWalletAddress");
+        }
+
+        // slicing 처리
         List<String> topBeneficiariesWalletAddress = sortedBeneficiariesWalletAddress.subList(0, numOfBeneficiaries);
         System.out.println("top N: " + topBeneficiariesWalletAddress);
-
 
         List<TaggedBeneficiaryContainer> taggedBeneficiaries = new ArrayList<>();
 
