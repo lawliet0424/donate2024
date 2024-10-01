@@ -18,7 +18,7 @@ Write by: 길정수
 const DonationStepThree = () => {
   const location = useLocation(); // 현재 위치 가져오기
   const navigate = useNavigate(); // navigate 훅 사용
-  const { beneficiaries, getSelectedBeneficiaries } = useBeneficiary(); // 수혜자 관련 훅 사용
+  const { beneficiaries } = useBeneficiary(); // 수혜자 관련 훅 사용
 
   useEffect(() => {
     // 잘못된 접근 처리
@@ -27,14 +27,7 @@ const DonationStepThree = () => {
       navigate("/"); // 홈으로 이동
       return;
     }
-
-    // 선택된 태그, 인원수, 1인당 수혜금액을 기반으로 수혜자 정보 가져오기
-    getSelectedBeneficiaries(
-      location.state.selectedTags,
-      location.state.numberOfPeople,
-      location.state.amountPerPerson
-    );
-  }, [location.state, navigate, getSelectedBeneficiaries]);
+  }, [location.state, navigate]);
 
   const onNextButtonClicked = () => {
     navigate("/donation/payment", {

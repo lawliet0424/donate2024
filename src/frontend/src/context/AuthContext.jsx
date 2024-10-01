@@ -31,7 +31,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // 사용자 상태 관리
   const [user, setUser] = useState(initialUserState);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 여부 상태
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // 인증 여부 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
 

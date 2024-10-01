@@ -1,0 +1,101 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.signup__title {
+  font-size: 23px;
+  font-weight: 600;
+  padding-top: 150px;
+  padding-bottom: 20px;
+}
+
+.signup__input {
+  width: 272px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup__input--invalid {
+  border-color: #ff0000;
+}
+
+.signup__error {
+  font-size: 13px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.signup__id-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.signup__input--invalid {
+  width: 272px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup__id {
+  width: 197px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup__id--invalid {
+  width: 197px;
+  height: 38px;
+  font-size: 15px;
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+.signup__btn--duplicate {
+  width: 70px;
+  height: 38px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.signup__btn--done {
+  width: 270px;
+  height: 37px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 10px;
+  margin-top: 12px;
+}
+
+.signup__message--error {
+  color: red;
+  font-size: 10px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
+}
+
+.signup__message--default {
+  color: #767676;
+  font-size: 10px;
+  text-align: left;
+  width: 272px;
+  margin-top: -8px;
+}

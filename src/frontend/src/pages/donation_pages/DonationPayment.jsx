@@ -78,7 +78,8 @@ const DonationPayment = () => {
       await submitPayment(
         numberOfPeople,
         amountPerPerson,
-        selectedBeneficiaryList
+        selectedBeneficiaryList,
+        user.donorId
       ); // 결제 처리 요청
       navigate("/donation/done", {
         state: {
