@@ -5,9 +5,8 @@ import { BeneficiaryContext } from "../context/BeneficiaryContext";
 const useBeneficiary = () => {
   // BeneficiaryContext에서 수혜자 관련 정보 및 메서드 가져오기
   const {
-    selectedBeneficiaries, // 선택된 수혜자 목록
     beneficiaryDetailInfo, // 수혜자 상세 정보
-    interestBeneficiaries, // 관심 수혜자 목록
+    beneficiaryKeyInfo,
     getSelectedBeneficiaries, // 선택된 수혜자를 가져오는 함수
     getBeneficiaryDetail, // 수혜자 상세 정보를 가져오는 함수
     getInterestBeneficiary, // 관심 수혜자를 가져오는 함수
@@ -17,9 +16,8 @@ const useBeneficiary = () => {
 
   // 필요한 값들을 반환
   return {
-    selectedBeneficiaries,
     beneficiaryDetailInfo,
-    interestBeneficiaries,
+    beneficiaryKeyInfo,
     getSelectedBeneficiaries,
     getBeneficiaryDetail,
     getInterestBeneficiary,

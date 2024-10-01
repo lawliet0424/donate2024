@@ -1,8 +1,8 @@
 package com.hikdonate.donate.web3j.config;
 
 
-import com.hikdonate.donate.web3j.EtherscanAPI;
-import com.hikdonate.donate.web3j.Web3jWrapperGenerator;
+import com.hikdonate.donate.web3j.web3jAPI.EtherscanAPI;
+import com.hikdonate.donate.web3j.web3jAPI.Web3jWrapperGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

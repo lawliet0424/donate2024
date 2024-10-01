@@ -29,7 +29,6 @@ const DonationStepOne = () => {
         setSelectedTags(new Set(location.state.selectedTags)); // 이전 단계에서 선택된 태그 설정
       }
       try {
-          console.log("stepone");
         await getTags(); // 태그 가져오기
         const updatedCategories = getTagCategories(); // 카테고리 업데이트
         setCategories(updatedCategories); // 카테고리 상태 업데이트
@@ -60,7 +59,6 @@ const DonationStepOne = () => {
         selectedTags: Array.from(selectedTags), // 선택된 태그 배열로 변환
       },
     });
-console.log(Array.from(selectedTags));
   };
 
   if (loading) {

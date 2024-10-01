@@ -23,7 +23,7 @@ Summary: 기부하기 step4~ 과정 담당 컨트롤러
 Date: 2024.09.10
 Written by: 심민서
  */
-@RequestMapping("/donation")
+//@RequestMapping("/donation")
 @RestController
 @RequiredArgsConstructor
 public class DonationController {
@@ -42,10 +42,10 @@ public class DonationController {
     @PostMapping("/payment/submit")
     public String savePaymentInfo(@RequestBody PaymentRequest paymentRequest){
         System.out.println("savePaymentInfo 시작");
-        String sessionId = paymentRequest.getSessionId();
+//        String sessionId = paymentRequest.getSessionId();
         String donorId = paymentRequest.getDonorId();
         Long amount = paymentRequest.getPerPerson();
-        String[] beneficiariesId = paymentRequest.getBeneficiaryList();
+        Long[] beneficiariesId = paymentRequest.getBeneficiaryList();
         System.out.println("Received Payment Info:" + paymentRequest);
         System.out.println("DonorId: " + donorId);
         System.out.println("Amount: " + amount);

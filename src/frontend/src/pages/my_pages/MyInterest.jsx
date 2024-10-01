@@ -1,5 +1,5 @@
 import "./MyInterest.css"; // 스타일시트 임포트
-import React from "react"; // React 라이브러리 임포트
+import React, { useEffect } from "react"; // React 및 필요한 훅 임포트
 import BeneficiaryBox from "../../components/BeneficiaryBox"; // 수혜자 박스 컴포넌트 임포트
 import useBeneficiary from "../../hooks/useBeneficiary"; // 수혜자 훅 임포트
 
@@ -13,7 +13,18 @@ Date: 2024-09-22
 Write by: 길정수 
 */
 const MyInterest = () => {
-  const { interestBeneficiaries } = useBeneficiary(); // 관심 수혜자 목록을 가져옴
+  const { beneficiaryKeyInfo, getInterestBeneficiary } = useBeneficiary(); // 관심 수혜자 목록을 가져옴
+
+  useEffect(() => {
+    const fetchBeneficiaries = async () => {
+      try {
+          await getInterestBeneficiary();
+          } catch (err) {
+              console.log("(myinterest) 관심 수혜자 로딩 실패", err)};
+    };
+
+    fetchBeneficiaries();
+  }, [location.state]);
 
   return (
     <div className="my-interest">
@@ -24,7 +35,7 @@ const MyInterest = () => {
       <div className="my-interest__beneficiaryLists">
         {" "}
         {/* 수혜자 목록 래퍼 */}
-        {interestBeneficiaries.map(
+        {beneficiaryKeyInfo.map(
           (
             beneficiary // 관심 수혜자를 맵핑하여 BeneficiaryBox 생성
           ) => (

@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 public class PaymentRequest {
 
-    private String sessionId;
-    private String[] personnel;
+//    private String sessionId;
+    private Long personnel;
     private Long perPerson;
     private String donorId;
-    private String[] beneficiaryList;
+    private Long[] beneficiaryList;
 }

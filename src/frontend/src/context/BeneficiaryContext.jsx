@@ -14,9 +14,8 @@ export const BeneficiaryContext = createContext();
   Write by: 길정수
 */
 export const BeneficiaryProvider = ({ children }) => {
-  const [selectedBeneficiaries, setSelectedBeneficiaries] = useState([]); // 선택된 수혜자 목록
   const [beneficiaryDetailInfo, setBeneficiaryDetailInfo] = useState({}); // 수혜자 상세 정보
-  const [interestBeneficiaries, setInterestBeneficiaries] = useState([]); // 관심 수혜자 목록
+  const [beneficiaryKeyInfo, setBeneficiaryKeyInfo] = useState([]); // 수혜자 박스 랜더링을 위한 수혜자 정보 목록
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
 
@@ -36,29 +35,32 @@ export const BeneficiaryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      // 서버로부터 선택된 수혜자 정보 요청
-      console.log("Request URL: ", "/api/donation/step3");
-      console.log("Request Params: ", {
-        tags: selectedTagList,
-        personnel: numberOfPeople,
-      });
-
       const response = await axios.get("/api/donation/step3", {
         params: {
           tags: selectedTagList,
           personnel: numberOfPeople
         },
+          // paramsSerializer를 통해 배열을 'tags=1&tags=2' 형태로 처리
+          paramsSerializer: (params) => {
+            return Object.keys(params)
+              .map((key) => {
+                const value = params[key];
+                if (Array.isArray(value)) {
+                  return value.map((val) => `${key}=${encodeURIComponent(val)}`).join("&");
+                }
+                return `${key}=${encodeURIComponent(value)}`;
+              })
+              .join("&");
+          },
       });
-      console.log("수혜자 가져오기 : ", response);
-      setSelectedBeneficiaries(response.data); // 서버로부터 받은 수혜자 데이터 저장
+      setBeneficiaryKeyInfo(response.data); // 서버로부터 받은 수혜자 데이터 저장
+
     } catch (err) {
       console.error("Failed to load selected beneficiaries", err);
       setError(err || "Failed to load selected beneficiaries"); // 오류 발생 시 처리
-      console.log("에러: ", err);
     } finally {
       setLoading(false); // 로딩 종료
     }
-    console.log("수혜자", selectedBeneficiaries);
   };
 
   /*
@@ -98,7 +100,7 @@ export const BeneficiaryProvider = ({ children }) => {
     try {
       // 서버로부터 관심 수혜자 정보 요청
       const response = await axios.get("/api/myinterest");
-      setInterestBeneficiaries(response.data); // 서버로부터 받은 관심 수혜자 목록 저장
+      setBeneficiaryKeyInfo(response.data); // 서버로부터 받은 관심 수혜자 목록 저장
     } catch (err) {
       console.error("Failed to load interest beneficiaries", err);
       setError(err.message || "Failed to load interest beneficiaries"); // 오류 발생 시 처리
@@ -107,12 +109,15 @@ export const BeneficiaryProvider = ({ children }) => {
     }
   };
 
+    useEffect(() => {
+      getSelectedBeneficiaries();
+    }, []);
+
   return (
     <BeneficiaryContext.Provider
       value={{
-        selectedBeneficiaries, // 선택된 수혜자 목록
         beneficiaryDetailInfo, // 수혜자 상세 정보
-        interestBeneficiaries, // 관심 수혜자 목록
+        beneficiaryKeyInfo, // 수혜자 박스 랜더링을 위한 수혜자 정보 목록
         getSelectedBeneficiaries, // 선택된 수혜자 정보를 가져오는 함수
         getBeneficiaryDetail, // 수혜자 상세 정보를 가져오는 함수
         getInterestBeneficiary, // 관심 수혜자 정보를 가져오는 함수

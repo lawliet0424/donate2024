@@ -55,7 +55,7 @@ export const InterestProvider = ({ children }) => {
 
   useEffect(() => {
     getInterest(); // 컴포넌트가 마운트될 때 사용자 관심 목록을 가져옴
-  }, [getInterest]);
+  }, []);
 
   /*
     Function name: toggleInterest
