@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
+import { authAxios } from './AuthContext';
 
 // 결제 관련 컨텍스트 생성
 export const PaymentContext = createContext();
@@ -34,7 +35,7 @@ export const PaymentProvider = ({ children }) => {
     try {
       // 서버에 결제 요청
       console.log(paymentData);
-      const response = await axios.post("/api/payment/submit", paymentData);
+      const response = await authAxios.post("/api/payment/submit", paymentData);
 
       // 결제 성공 여부 확인
       if (response.data.message === "ok") {

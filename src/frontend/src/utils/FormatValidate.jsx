@@ -9,6 +9,10 @@ Date: 2024-09-22
 Write by: 길정수
 */
 export const formatPhoneNumber = (value) => {
+
+  // value가 null 또는 undefined일 경우 빈 문자열로 대체
+  if (!value) return "";
+
   const numbersOnly = value.replace(/\D/g, ""); // 숫자만 추출
   let formattedPhoneNumber = numbersOnly;
 

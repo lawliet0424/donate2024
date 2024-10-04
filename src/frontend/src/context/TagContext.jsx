@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { authAxios } from './AuthContext';
 
 // 태그 관련 컨텍스트 생성
 export const TagContext = createContext();
@@ -19,7 +20,7 @@ export const TagProvider = ({ children }) => {
     setError(null);  // 에러 초기화
     try {
       // 서버로부터 태그 리스트 요청
-      const response = await axios.get("/api/donation/step1", { withCredentials: false });
+      const response = await authAxios.get("/api/donation/step1", { withCredentials: false });
       setTags(response.data); // 태그 상태 업데이트
     } catch (err) {
       console.error("태그 데이터를 가져오는 중 오류 발생:", err);

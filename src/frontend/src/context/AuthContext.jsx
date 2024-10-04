@@ -12,6 +12,8 @@ authAxios.interceptors.request.use((config) => {
     return config;
 });
 
+export { authAxios };
+
 // 초기 사용자 상태 정의
 const initialUserState = {
   donorId: "", // 기부자 ID

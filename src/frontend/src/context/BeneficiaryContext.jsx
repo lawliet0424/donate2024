@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { authAxios } from './AuthContext';
 
 // 수혜자 컨텍스트 생성
 export const BeneficiaryContext = createContext();
@@ -35,7 +36,7 @@ export const BeneficiaryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      const response = await axios.get("/api/donation/step3", {
+      const response = await authAxios.get("/api/donation/step3", {
         params: {
           tags: selectedTagList,
           personnel: numberOfPeople
@@ -75,7 +76,7 @@ export const BeneficiaryProvider = ({ children }) => {
     setError(null); // 오류 초기화
     try {
       // 서버로부터 수혜자 상세 정보 요청
-      const response = await axios.get(`/api/beneficiaries/${beneficiaryId}`);
+      const response = await authAxios.get(`/api/beneficiaries/${beneficiaryId}`);
       setBeneficiaryDetailInfo((prev) => ({
         ...prev,
         [beneficiaryId]: response.data, // 각 수혜자 ID에 해당하는 데이터 저장
@@ -99,7 +100,7 @@ export const BeneficiaryProvider = ({ children }) => {
     setError(null); // 오류 초기화
     try {
       // 서버로부터 관심 수혜자 정보 요청
-      const response = await axios.get("/api/myinterest");
+      const response = await authAxios.get("/api/myinterest");
       setBeneficiaryKeyInfo(response.data); // 서버로부터 받은 관심 수혜자 목록 저장
     } catch (err) {
       console.error("Failed to load interest beneficiaries", err);
