@@ -34,7 +34,7 @@ public class BeneficiaryInfoService {
         int numOfBeneficiaries : 선택하고자하는 N명의 수혜자
     Return: List<String>
     Caller: DonationListUpController
-    Date: 2024.09.21
+    Date: 2024.09.30 (Updated by 심민서)
     Written by: 조현지
     */
     public List<TaggedBeneficiaryContainer> selectedBeneficiariesList(List<Long> tagIds, int numOfBeneficiaries) {

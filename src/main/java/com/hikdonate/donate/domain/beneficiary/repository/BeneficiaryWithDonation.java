@@ -12,5 +12,4 @@ public class BeneficiaryWithDonation {
         this.beneficiary = beneficiary;
         this.totalDonations = totalDonations;
     }
-
 }

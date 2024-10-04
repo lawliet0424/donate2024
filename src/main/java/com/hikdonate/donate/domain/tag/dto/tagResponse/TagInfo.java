@@ -1,7 +1,6 @@
 package com.hikdonate.donate.domain.tag.dto.tagResponse;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;

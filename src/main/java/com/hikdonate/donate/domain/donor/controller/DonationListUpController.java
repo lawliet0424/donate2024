@@ -42,16 +42,16 @@ public class DonationListUpController {
     Summary: 수혜자 필터링 및 반환
     Parameter: 총 1개
     Return: 총 1개
-        Caller: 없음
+    Caller: 없음
     Date: 2024.10.01
     Write by: 심민서
 */
     @GetMapping("/step3")
     public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestParam List<Long> tags,
                                                                    @RequestParam int personnel) {
-        System.out.println(" step3 시작 ");
-        System.out.println(" tagIds: " + tags);
-        System.out.println(" numberOfBeneficiaries: " + personnel);
+//        System.out.println(" step3 시작 ");
+//        System.out.println(" tagIds: " + tags);
+//        System.out.println(" numberOfBeneficiaries: " + personnel);
         return beneficiaryInfoService.selectedBeneficiariesList(tags, personnel);
     }
 }

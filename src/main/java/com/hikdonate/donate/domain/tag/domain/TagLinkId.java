@@ -8,8 +8,8 @@ import java.util.Objects;
 /*
  * Class name: TagLinkId
  * Summary: TagLinkId 테이블의 복합 키 속성 설정을 위한 클래스
- * Date: 2024.07.19
- * Write by: 양예현
+ * Date: 2024.09.30
+ * Write by: 양예현 (Updated by 심민서)
  * P.S.: DB 관련 endpoint 설정 및 password과 같은 보안 설정은 계속 업데이트 예정
  *       ERD 및 DB에 대한 전체적인 내용은 노션 페이지 참고
  */

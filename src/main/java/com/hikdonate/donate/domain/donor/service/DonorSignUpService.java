@@ -1,6 +1,6 @@
 package com.hikdonate.donate.domain.donor.service;
 
-import com.hikdonate.donate.domain.donor.dao.DonorRepository;
+import com.hikdonate.donate.domain.donor.repository.DonorRepository;
 import com.hikdonate.donate.domain.donor.domain.Donor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

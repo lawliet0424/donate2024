@@ -21,7 +21,7 @@ Write by: 길정수
 const SignupStepTwo = () => {
   const navigate = useNavigate(); // navigate 함수 초기화
   const location = useLocation(); // 현재 위치 정보 가져오기
-  const { signupSecondPage, checkIdDuplicate } = useAuth(); // 인증 관련 기능 가져오기
+  const { signup, checkIdDuplicate } = useAuth(); // 인증 관련 기능 가져오기
 
   // 상태 관리
   const [signupNickname, setSignupNickname] = useState(""); // 닉네임 상태
@@ -149,7 +149,7 @@ const SignupStepTwo = () => {
     }
 
     try {
-      await signupSecondPage(
+      await signup(
         signupName,
         signupEmail,
         signupPhoneNumber,

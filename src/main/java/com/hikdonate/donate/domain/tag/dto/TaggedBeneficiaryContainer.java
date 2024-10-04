@@ -7,6 +7,13 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Optional;
 
+
+/*
+ * Class name: TaggedBeneficiaryContainer
+ * Summary: 선정한 태그 해당자 리스트 응답을 위한 dto
+ * Date: 2024.09.30
+ * Write by: 심민서
+ */
 @Getter
 public class TaggedBeneficiaryContainer {
     private final Long beneficiaryId;

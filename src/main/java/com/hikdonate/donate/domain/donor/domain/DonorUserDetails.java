@@ -38,4 +38,23 @@ public class DonorUserDetails implements UserDetails {
         return donor.getDonorId();
     }
 
+    // 계정 만료 여부 (true일 경우 만료되지 않음)
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    // 계정 잠김 여부 (true인 경우 잠겨 있지 않음)
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    // 계정 활성화 여부 반환 (true일 경우 계정이 활성화됨)
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }

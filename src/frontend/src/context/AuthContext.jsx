@@ -1,6 +1,17 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
 
+const authAxios = axios.create();
+
+// 요청 인터셉트로 토큰 추가
+authAxios.interceptors.request.use((config) => {
+    const token = sessionStorage.getItem("token");
+    if(token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
 // 초기 사용자 상태 정의
 const initialUserState = {
   donorId: "", // 기부자 ID
@@ -31,7 +42,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // 사용자 상태 관리
   const [user, setUser] = useState(initialUserState);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // 인증 여부 상태
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 여부 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
 
@@ -131,22 +142,29 @@ export const AuthProvider = ({ children }) => {
   const login = (loginId, loginPassword) => {
     setLoading(true); // 로딩 시작
     return axios
-      .post("/api/login", { loginId, loginPassword }, { withCredentials: true })
+//       .post("/api/donor/login", { loginId, loginPassword }, { withCredentials: true })
+      .post ("/api/donor/login", { id: loginId, password: loginPassword })
       .then((response) => {
-        // 로그인 성공 시 사용자 정보 설정
+
+        // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
+        const token = response.data.token; // 서버에서 반환된 토큰
+
+        // 토큰을 sessionStorage에 저장
+        sessionStorage.setItem("token", token);
+
         const {
           donorNickname,
           donorName,
           donorPhoneNumber,
           donorEmail,
-          donorProfileImage,
+//           donorProfileImage,
         } = response.data;
         setUser({
           donorNickname,
           donorName,
           donorPhoneNumber,
           donorEmail,
-          donorProfileImage,
+//           donorProfileImage,
         });
         setIsAuthenticated(true); // 인증 상태 업데이트
       })
@@ -168,9 +186,12 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setLoading(true); // 로딩 시작
     return axios
-      .post("/api/logout", {}, { withCredentials: true })
+//       .post("/api/logout", {}, { withCredentials: true })
+      .post("/api/donor/logout", {})
       .then(() => {
-        setUser(null); // 사용자 정보 초기화
+        sessionStorage.removeItem("token"); // sessionStorage에서 토큰 삭제
+//         setUser(null); // 사용자 정보 초기화
+        setUser(initialUserState); // 사용자 정보 초기화
         setIsAuthenticated(false); // 인증 상태 업데이트
       })
       .catch((error) => {
@@ -191,7 +212,8 @@ export const AuthProvider = ({ children }) => {
   const getUserInfo = () => {
     setLoading(true); // 로딩 시작
     return axios
-      .get("/api/myinfo", { withCredentials: true })
+//       .get("/api/myinfo", { withCredentials: true })
+      .get("/api/myinfo")
       .then((response) => {
         setUser(response.data); // 사용자 정보 설정
       })
@@ -222,9 +244,10 @@ export const AuthProvider = ({ children }) => {
 
     // 서버에 업데이트 요청
     axios
-      .post("/api/myinfo", updatedData, {
-        withCredentials: true,
-      })
+      .post("/api/myinfo", updatedData)
+//       {
+//         withCredentials: true,
+//       })
       .then((response) => {
         setUser(response.data); // 서버에서 받은 최신 데이터로 상태 업데이트
       })
