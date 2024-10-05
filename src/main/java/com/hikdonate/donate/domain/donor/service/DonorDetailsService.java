@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ Summary: 기부자(Donor)의 로그인을 구현한 Service
          Spring Security의 UserDeatailsService를 구현하는 class
 Written by: 양예현
  */
-public class DonorLoginService implements UserDetailsService {
+public class DonorUserDetailsService implements UserDetailsService {
 
     private final DonorRepository donorRepository;
 
