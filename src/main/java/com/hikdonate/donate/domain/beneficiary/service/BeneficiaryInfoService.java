@@ -66,6 +66,7 @@ public class BeneficiaryInfoService {
                 sortedBeneficiariesWalletAddress.add(0, beneficiary); // 없는 beneficiary에 대해 totalAmount를 0으로 추가
             }
         }
+        System.out.println("sorted: " + sortedBeneficiariesWalletAddress);
 
         // slice out of bound 오류 처리
         if (sortedBeneficiariesWalletAddress.size() < numOfBeneficiaries || sortedBeneficiariesWalletAddress.isEmpty()) {

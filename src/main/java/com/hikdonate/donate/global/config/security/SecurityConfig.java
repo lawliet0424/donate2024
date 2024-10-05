@@ -79,6 +79,8 @@ public class SecurityConfig {
                         .requestMatchers("/donation/step1", "/donation/step2", "/donation/step3").permitAll()
                         // 결제하기 경로 허용
                         .requestMatchers("/payment/submit").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/beneficiaries").permitAll()
                         .anyRequest().authenticated()
                 );
 

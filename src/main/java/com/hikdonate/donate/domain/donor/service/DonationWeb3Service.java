@@ -68,6 +68,7 @@ public class DonationWeb3Service {
         try {
             if (donateManagement.sendTokensToDonor(donor, BigInteger.valueOf((long) total_amount)).send().isStatusOK()){
                 result = "success";
+                System.out.println("TOKEN 전송 끝!!!!!!!!!!!!");
             }
         } catch (Exception e)  {
             System.out.println("Revert: " + e.getMessage());
@@ -85,6 +86,7 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToBeneficiaryAndDonateBank(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
+        System.out.println("TOKEN 전송 시작 - 1!!!!!!!!!!!!");
         String result="";
 
         int num_of_beneficiaries = 0;
@@ -121,6 +123,7 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToBeneficiary(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
+        System.out.println("TOKEN 전송 시작-2!!!!!!!!!!!!");
         String result="";
 
         try {
@@ -143,6 +146,7 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToDonateBank(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
+        System.out.println("TOKEN 전송 시작-3!!!!!!!!!!!!");
         String result="";
 
         try {
