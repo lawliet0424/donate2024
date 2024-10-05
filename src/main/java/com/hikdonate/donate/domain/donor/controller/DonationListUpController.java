@@ -43,6 +43,8 @@ public class DonationListUpController {
     Function name: getBeneficiariesByTags
     Summary: 수혜자 필터링 및 반환
     Parameter: 총 1개
+
+
     Return: 총 1개
         Caller: 없음
     Date: 2024.9.10

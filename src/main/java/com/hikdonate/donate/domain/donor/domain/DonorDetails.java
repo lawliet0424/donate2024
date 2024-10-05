@@ -13,10 +13,10 @@ import java.util.Collections;
              Donor 객체를 기반으로 인증과 권한 관련 정보를 제공함
     Written by: 양예현
 */
-public class DonorUserDetails implements UserDetails {
+public class DonorDetails implements UserDetails {
     private final Donor donor;
 
-    public DonorUserDetails(Donor donor) {
+    public DonorDetails(Donor donor) {
         this.donor = donor;
     }
 

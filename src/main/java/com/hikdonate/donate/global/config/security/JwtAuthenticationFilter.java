@@ -1,7 +1,7 @@
 package com.hikdonate.donate.global.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hikdonate.donate.domain.donor.domain.DonorUserDetails;
+import com.hikdonate.donate.domain.donor.domain.DonorDetails;
 import com.hikdonate.donate.domain.donor.dto.DonorLoginRequest;
 import com.hikdonate.donate.domain.donor.dto.TokenResponse;
 import com.hikdonate.donate.global.JwtToken.TokenProvider;
@@ -16,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.io.IOError;
 import java.io.IOException;
 
 @Slf4j
@@ -58,7 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult
     ) throws IOException, ServletException {
         // 토큰 생성
-        DonorUserDetails userDetails = (DonorUserDetails) authResult.getPrincipal();
+        DonorDetails userDetails = (DonorDetails) authResult.getPrincipal();
         String jwt = tokenProvider.generateToken(userDetails);
         TokenResponse tokenResponse = new TokenResponse(jwt);
 

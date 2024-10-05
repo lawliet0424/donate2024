@@ -1,6 +1,8 @@
 package com.hikdonate.donate.global.config.security;
 
 import com.hikdonate.donate.global.JwtToken.TokenProvider;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.hibernate.grammars.hql.HqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -51,17 +53,6 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-//        http
-//                .authorizeHttpRequests((authorizeHttpRequests)
-//                        -> authorizeHttpRequests.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-//                .csrf((csrf) -> csrf
-//                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"), new AntPathRequestMatcher("/donor/login")))
-//                .headers((headers) -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-//                .formLogin((formLogin) -> formLogin
-//                        .loginPage("/donor/login")
-//                        .defaultSuccessUrl("/"))
-//                .logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/donor/logout")).logoutSuccessUrl("/").invalidateHttpSession(true))
-//        ;
 
         http
                 // jwt 토큰 사용
@@ -71,6 +62,14 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .logout(logout -> logout
+                        .logoutUrl("/donor/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                        })
+                        .permitAll()
+                )
 
                 // 요청 처리
                 .authorizeHttpRequests(authorize -> authorize
@@ -86,8 +85,6 @@ public class SecurityConfig {
         JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(authenticationManager, tokenProvider);
 
         // 필터 체인에 추가
-//        http.addFilter(jwtAuthenticationFilter)
-//                .addFilter(jwtAuthorizationFilter);
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 

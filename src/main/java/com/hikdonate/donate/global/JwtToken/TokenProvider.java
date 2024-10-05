@@ -1,6 +1,6 @@
 package com.hikdonate.donate.global.JwtToken;
-import com.hikdonate.donate.domain.donor.domain.DonorUserDetails;
-import com.hikdonate.donate.domain.donor.service.DonorLoginService;
+import com.hikdonate.donate.domain.donor.domain.DonorDetails;
+import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,6 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -21,15 +20,15 @@ import java.util.Date;
 @Component
 @Slf4j
 public class TokenProvider {
-    private final DonorLoginService donorLoginService;
+    private final DonorDetailsService donorDetailsService;
     private final Key jwtSecretKey;
     private final long jwtExpirationInMs;
 
 
-    public TokenProvider(DonorLoginService donorLoginService,
+    public TokenProvider(DonorDetailsService donorDetailsService,
                          @Value("${jwt.secret}") String secretKey,
                          @Value("${jwt.expiration}") long jwtExpirationInMs) {
-        this.donorLoginService = donorLoginService;
+        this.donorDetailsService = donorDetailsService;
         this.jwtSecretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.jwtExpirationInMs = jwtExpirationInMs;
     }
@@ -60,8 +59,8 @@ public class TokenProvider {
         String name = getUsernameFromToken(accessToken);
 
         // UserDetails 객체를 만들어서 Authentication 리턴
-        DonorUserDetails donorUserDetails = donorLoginService.loadUserByUsername(name);
-        return new UsernamePasswordAuthenticationToken(donorUserDetails, null, donorUserDetails.getAuthorities());
+        DonorDetails donorDetails = donorDetailsService.loadUserByUsername(name);
+        return new UsernamePasswordAuthenticationToken(donorDetails, null, donorDetails.getAuthorities());
     }
 
     // 토큰 복호화
