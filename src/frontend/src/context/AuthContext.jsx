@@ -260,7 +260,7 @@ export const AuthProvider = ({ children }) => {
 
     // 서버에 업데이트 요청
     axios
-      .post("/api/myinfo", updatedData)
+      .post("/api/donor/myinfo", updatedData)
 //       {
 //         withCredentials: true,
 //       })
