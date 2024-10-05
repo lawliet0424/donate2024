@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+
 import axios from "axios";
 
 const authAxios = axios.create();
@@ -47,6 +48,19 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 여부 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
+
+  // 컴포넌트 마운트 시 토큰 확인 및 사용자 정보 가져오기
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          getUserInfo()
+            .then(() => setIsAuthenticated(true))
+            .catch(() => {
+              sessionStorage.removeItem("token");
+              setIsAuthenticated(false);
+            });
+        }
+      }, []);
 
   /*
     Function name: signupFirstPage
@@ -133,7 +147,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  /*
+/*
     Function name: login
     Summary: 로그인 처리 함수
     Parameter: 총 2개
@@ -147,12 +161,11 @@ export const AuthProvider = ({ children }) => {
 //       .post("/api/donor/login", { loginId, loginPassword }, { withCredentials: true })
       .post ("/api/donor/login", { id: loginId, password: loginPassword })
       .then((response) => {
-
         // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
         const token = response.data.token; // 서버에서 반환된 토큰
 
         // 토큰을 sessionStorage에 저장
-        sessionStorage.setItem("token", token);
+        localStorage.setItem("token", token);
 
         const {
           donorNickname,
@@ -179,33 +192,33 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  /*
-    Function name: logout
-    Summary: 로그아웃 처리 함수
-    Parameter: 없음
-    Return: Promise 객체; 로그아웃 처리 결과
-  */
-  const logout = () => {
-    setLoading(true); // 로딩 시작
-    return axios
-//       .post("/api/logout", {}, { withCredentials: true })
-      .post("/api/donor/logout", {})
-      .then(() => {
-        sessionStorage.removeItem("token"); // sessionStorage에서 토큰 삭제
-//         setUser(null); // 사용자 정보 초기화
-        setUser(initialUserState); // 사용자 정보 초기화
-        setIsAuthenticated(false); // 인증 상태 업데이트
-      })
-      .catch((error) => {
-        console.error("Logout failed:", error);
-        setError(error); // 오류 상태 설정
-      })
-      .finally(() => {
-        setLoading(false); // 로딩 종료
-      });
-  };
+   /*
+      Function name: logout
+      Summary: 로그아웃 처리 함수
+      Parameter: 없음
+      Return: Promise 객체; 로그아웃 처리 결과
+    */
+    const logout = () => {
+      setLoading(true); // 로딩 시작
+      return authAxios
+  //       .post("/api/logout", {}, { withCredentials: true })
+        .post("/api/donor/logout", {})
+        .then(() => {
+          localStorage.removeItem("token"); // sessionStorage에서 토큰 삭제
+  //         setUser(null); // 사용자 정보 초기화
+          setUser(initialUserState); // 사용자 정보 초기화
+          setIsAuthenticated(false); // 인증 상태 업데이트
+        })
+        .catch((error) => {
+          console.error("Logout failed:", error);
+          setError(error); // 오류 상태 설정
+        })
+        .finally(() => {
+          setLoading(false); // 로딩 종료
+        });
+    };
 
-  /*
+/*
     Function name: getUserInfo
     Summary: 사용자 정보 조회 함수
     Parameter: 없음
@@ -213,9 +226,9 @@ export const AuthProvider = ({ children }) => {
   */
   const getUserInfo = () => {
     setLoading(true); // 로딩 시작
-    return axios
+    return authAxios
 //       .get("/api/myinfo", { withCredentials: true })
-      .get("/api/myinfo")
+      .get("/api/donor/myinfo")
       .then((response) => {
         setUser(response.data); // 사용자 정보 설정
       })
@@ -227,6 +240,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false); // 로딩 종료
       });
   };
+
 
   /*
     Function name: updateUserInfo

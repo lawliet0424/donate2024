@@ -4,6 +4,7 @@ import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.dto.DonorLoginForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpValidationGroups;
+import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
 import com.hikdonate.donate.domain.donor.service.DonorSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ import org.springframework.ui.Model;
 @RequiredArgsConstructor
 @RequestMapping("/donor")
 @Slf4j
-@SessionAttributes("donorSignUpForm")
+//@SessionAttributes("donorSignUpForm")
 /*
 Class name: DonorController
 Summary: 기부자(Donor) 측 Controller
@@ -28,6 +29,7 @@ Written by: 양예현
 public class DonorController {
 
     private final DonorSignUpService donorSignUpService;
+    private final DonorDetailsService donorDetailsService;
 
     // DonorSignUpForm 가져오기
     @ModelAttribute("donorSignUpForm")
@@ -117,31 +119,12 @@ public class DonorController {
         return ResponseEntity.ok("SignUp step2 success");
     }
 
-    /*
-    Function name: donorSuccess
-    Summary: /signupSuccess에 대한 GET 요청을 처리하는 엔드포인트 함수
-             기부자(donor)가 회원가입에 성공했을 때 페이지를 제공
-    Parameter: 총 1개
-        donor; @ModelAttribute로 바인딩된 기부자 객체, 회원가입이 완료된 기부자의 정보를 전달
-    Date: 2024.09.21
-    Written by: 양예현
-     */
-//    @GetMapping("/signupSuccess")
-//    public String donorSuccess(@ModelAttribute("donor") Donor donor) {
-//        return "signup/donor_signup_success";
-//    }
+    @GetMapping("/myinfo")
+    public ResponseEntity<Donor> getDonorInfo() {
+        // 현재 인증된 사용자의 정보 가져오기
+        Donor donor = donorDetailsService.getDonorInfo();
 
-    /*
-    Function name: login
-    Summary: /login에 대한 GET 요청을 처리하는 엔드포인트 함수
-             기부자(donor)가 로그인하기 위한 페이지를 제공
-    Parameter: 총 0개
-    Date: 2024.09.21
-    Written by: 양예현
-     */
-//    @GetMapping("/login")
-//    public String donorLogin() {
-//        return "login/login";ㅠ
-//    }
+        return ResponseEntity.ok(donor);
+    }
 
 }
