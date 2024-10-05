@@ -7,6 +7,7 @@ import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.dto.PaymentRequest;
 import com.hikdonate.donate.domain.donor.service.DonateStateService;
 import com.hikdonate.donate.domain.donor.service.DonationBillService;
+import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,8 @@ public class DonationController {
     private final DonorRepository donorRepository;
     private final BeneficiaryRepository beneficiaryRepository;
 
+    private final DonorDetailsService donorDetailsService;
+
     /*
     Class name: savePaymentInfo
     Summary: 실제 결제하기 & 블록체인 트랜잭션 실행 로직
@@ -38,6 +41,8 @@ public class DonationController {
     @PostMapping("/payment/submit")
     public String savePaymentInfo(@RequestBody PaymentRequest paymentRequest){
         System.out.println("savePaymentInfo 시작");
+        paymentRequest.setDonorId(donorDetailsService.getCurrentDonorId());
+
         String donorId = paymentRequest.getDonorId();
         Long amount = paymentRequest.getPerPerson();
         Long[] beneficiariesId = paymentRequest.getBeneficiaryList();

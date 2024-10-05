@@ -1,12 +1,16 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { authAxios } from './AuthContext';
+import { AuthContext } from './AuthContext';  // AuthContext 임포트
+
 
 // 결제 관련 컨텍스트 생성
 export const PaymentContext = createContext();
 
 export const PaymentProvider = ({ children }) => {
   const [paymentStatus, setPaymentStatus] = useState(null); // 결제 상태
+  const { user } = useContext(AuthContext); // AuthContext에서 사용자 정보 가져오기
+
 
   /*
     Function name: submitPayment
@@ -29,7 +33,7 @@ export const PaymentProvider = ({ children }) => {
       personnel: numberOfPeople,
       perPerson: amountPerPerson,
       beneficiaryList: selectedBeneficiaryList,
-      donorId: "test1",
+      donorId: user.donorId
     };
 
     try {

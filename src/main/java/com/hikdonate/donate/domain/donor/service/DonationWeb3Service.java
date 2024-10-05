@@ -63,6 +63,7 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokenToDonor(String donor, Long total_amount) throws Exception {
+        System.out.println("TOKEN 전송 시작!!!!!!!!!!!!");
         String result = "";
         try {
             if (donateManagement.sendTokensToDonor(donor, BigInteger.valueOf((long) total_amount)).send().isStatusOK()){

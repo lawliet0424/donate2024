@@ -31,6 +31,7 @@ public class DonateStateService {
         updateState(donationId, result, PAYMENT_COMPLETED, PAYMENT_FAILED);
 
         // 스마트 컨트랙트 1단계 실행
+        System.out.println("SMART CONTRACT STEP 1");
         result = donationWeb3Service.sendTokenToDonor(donorId, divided_amount * beneficiaryId.length);
         updateState(donationId, result, TOKEN_SENT_TO_DONOR_SUCCESS, TOKEN_SENT_TO_DONOR_FAILED);
 

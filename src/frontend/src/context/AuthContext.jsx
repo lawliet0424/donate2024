@@ -6,7 +6,7 @@ const authAxios = axios.create();
 
 // 요청 인터셉트로 토큰 추가
 authAxios.interceptors.request.use((config) => {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if(token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
           getUserInfo()
             .then(() => setIsAuthenticated(true))
             .catch(() => {
-              sessionStorage.removeItem("token");
+              localStorage.removeItem("token");
               setIsAuthenticated(false);
             });
         }
@@ -163,11 +163,10 @@ export const AuthProvider = ({ children }) => {
       .then((response) => {
         // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
         const token = response.data.token; // 서버에서 반환된 토큰
-
-        // 토큰을 sessionStorage에 저장
         localStorage.setItem("token", token);
 
         const {
+          donorId,
           donorNickname,
           donorName,
           donorPhoneNumber,
@@ -175,6 +174,7 @@ export const AuthProvider = ({ children }) => {
 //           donorProfileImage,
         } = response.data;
         setUser({
+          donorId,
           donorNickname,
           donorName,
           donorPhoneNumber,
@@ -204,7 +204,7 @@ export const AuthProvider = ({ children }) => {
   //       .post("/api/logout", {}, { withCredentials: true })
         .post("/api/donor/logout", {})
         .then(() => {
-          localStorage.removeItem("token"); // sessionStorage에서 토큰 삭제
+          localStorage.removeItem("token");
   //         setUser(null); // 사용자 정보 초기화
           setUser(initialUserState); // 사용자 정보 초기화
           setIsAuthenticated(false); // 인증 상태 업데이트
@@ -227,11 +227,25 @@ export const AuthProvider = ({ children }) => {
   const getUserInfo = () => {
     setLoading(true); // 로딩 시작
     return authAxios
-//       .get("/api/myinfo", { withCredentials: true })
       .get("/api/donor/myinfo")
       .then((response) => {
-        setUser(response.data); // 사용자 정보 설정
-      })
+        const {
+                  donorId,
+                  donorNickname,
+                  donorName,
+                  donorPhoneNumber,
+                  donorEmail,
+                } = response.data;
+
+                // 필요한 필드로 user 상태 업데이트
+                setUser({
+                        donorId,              // donorId를 user에 저장
+                        donorNickname,
+                        donorName,
+                        donorPhoneNumber,
+                        donorEmail,
+                      });
+              })
       .catch((error) => {
         console.error("Failed to fetch user info:", error);
         setError(error); // 오류 상태 설정
