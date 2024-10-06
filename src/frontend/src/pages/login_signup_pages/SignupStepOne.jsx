@@ -8,6 +8,7 @@ import {
   validateEmail,
   validatePhoneNumber,
 } from "../../utils/FormatValidate"; // 유틸리티 함수 임포트
+import useAuth from "../../hooks/useAuth"; // 인증 관련 훅 임포트
 
 /*
 Function name: SignupStepOne
@@ -21,6 +22,7 @@ Write by: 길정수
 const SignupStepOne = () => {
   const navigate = useNavigate(); // navigate 함수 초기화
   const location = useLocation(); // 현재 위치 정보 가져오기
+  const { signupFirstPage } = useAuth(); // 인증 관련 기능 가져오기
 
   // 상태 관리
   const [signupName, setSignupName] = useState(""); // 이름 상태
@@ -116,7 +118,7 @@ const SignupStepOne = () => {
   Date: 2024-09-22
   Write by: 길정수
   */
-  const onNextButtonClicked = () => {
+  const onNextButtonClicked = async () => {
     const nameValidationError = validateName(signupName); // 이름 유효성 검사
     const emailValidationError = validateEmail(signupEmail); // 이메일 유효성 검사
     const phoneNumberValidationError = validatePhoneNumber(
@@ -139,14 +141,21 @@ const SignupStepOne = () => {
 
     const numbersOnly = signupPhoneNumber.replace(/\D/g, ""); // 숫자만 추출
 
-    navigate("/signup/step2", {
-      state: {
-        fromSignupFirst: true,
-        signupName: signupName,
-        signupEmail: signupEmail,
-        signupPhoneNumber: numbersOnly, // 다음 단계로 전달할 전화번호
-      },
-    });
+  try {
+        await signupFirstPage(signupName, signupEmail, numbersOnly);
+        navigate("/signup/step2", {
+          state: {
+            fromSignupFirst: true,
+            signupName: signupName,
+            signupEmail: signupEmail,
+            signupPhoneNumber: numbersOnly // 다음 단계로 전달할 전화번호
+          },
+        });
+      } catch (error) {
+        window.alert("오류가 발생하였습니다.");
+        navigate("/error"); // 오류 페이지로 이동
+        console.error("Signup failed", error);
+      }
   };
 
   /*

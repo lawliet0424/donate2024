@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /*
     Class name: DonorLoginForm
@@ -11,27 +12,28 @@ import lombok.Setter;
              사용자가 회원가입 시 입력하는 데이터(name, mail, phonenumber, nickname, Id, password)를 저장하고 유효성 검사를 함
     Written by: 양예현
 */
+@Slf4j
 @Getter
 @Setter
 public class DonorSignUpForm {
 
     @NotEmpty(message = "이름은 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep1.class)
-    private String donorName;
+    private String signupName;
 
     @NotEmpty(message = "이메일은 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep1.class)
     @Email
-    private String donorMail;
+    private String signupEmail;
 
     @NotEmpty(message = "전화번호는 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep1.class)
-    private String donorPhoneNumber;
+    private String signupPhoneNumber;
 
     @NotEmpty(message = "닉네임은 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep2.class)
-    private String donorNickname;
+    private String signupNickname;
 
     @NotEmpty(message = "id은 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep2.class)
-    private String donorId;
+    private String signupId;
 
     @NotEmpty(message = "비밀번호는 필수항목입니다.", groups = DonorSignUpValidationGroups.SignUpStep2.class)
-    private String donorPassword;
+    private String signupPassword;
 
 }

@@ -72,16 +72,18 @@ export const AuthProvider = ({ children }) => {
     Return: Promise 객체; 검증 처리 결과
   */
   const signupFirstPage = (signupName, signupEmail, signupPhoneNumber) => {
+      console.log('signupFirstPage called');
     setLoading(true); // 로딩 시작
     return axios
-      .post("/api/signup/step1", {
+      .post("/api/donor/signup/step1", {
         signupName,
         signupEmail,
         signupPhoneNumber,
       })
       .then((response) => {
+          console.log('서버 응답:', response.data); // 응답 내용을 확인
         // 성공적으로 회원가입했을 경우
-        if (response.data.success) {
+        if (response.data) {
           console.log("검증 성공");
         } else {
           console.log("검증 실패");
@@ -99,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   /*
-    Function name: signup
+    Function name: signupSecondPage
     Summary: 회원가입 처리 함수
     Parameter: 총 6개
                string signupName; 사용자 이름
@@ -120,7 +122,7 @@ export const AuthProvider = ({ children }) => {
   ) => {
     setLoading(true); // 로딩 시작
     return axios
-      .post("/api/signup/step2", {
+      .post("/api/donor/signup/step2", {
         signupName,
         signupEmail,
         signupPhoneNumber,
@@ -130,7 +132,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((response) => {
         // 성공적으로 회원가입했을 경우
-        if (response.data.success) {
+        if (response.status == 200) {
           console.log("회원가입 성공");
         } else {
           console.log("회원가입 실패");
@@ -297,10 +299,10 @@ export const AuthProvider = ({ children }) => {
   */
   const checkIdDuplicate = (signupId) => {
     return axios
-      .get("/api/check-id-duplicate", {
+      .get("/api/donor/check-id-duplicate", {
         params: { signupId },
       })
-      .then((response) => response.data.isDuplicate) // 중복 여부 반환
+      .then((response) => response.data) // 중복 여부 반환
       .catch((error) => {
         console.error("아이디 중복 확인 오류:", error);
         throw error; // 오류 발생 시 에러 던지기

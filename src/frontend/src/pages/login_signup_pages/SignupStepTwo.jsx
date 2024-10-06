@@ -21,7 +21,7 @@ Write by: 길정수
 const SignupStepTwo = () => {
   const navigate = useNavigate(); // navigate 함수 초기화
   const location = useLocation(); // 현재 위치 정보 가져오기
-  const { signup, checkIdDuplicate } = useAuth(); // 인증 관련 기능 가져오기
+  const { signupSecondPage, checkIdDuplicate } = useAuth(); // 인증 관련 기능 가져오기
 
   // 상태 관리
   const [signupNickname, setSignupNickname] = useState(""); // 닉네임 상태
@@ -101,8 +101,9 @@ const SignupStepTwo = () => {
           ...prevErrors,
           id: "이미 사용 중인 아이디입니다.",
         }));
+        setIsIdDuplicate(true); // 중복된 경우 상태를 true로 설정
       } else {
-        setIsIdDuplicate(false);
+        setIsIdDuplicate(false); // 중복되지 않은 경우 상태를 false로 설정
         alert("사용 가능한 아이디입니다.");
       }
     } catch (error) {
@@ -149,7 +150,7 @@ const SignupStepTwo = () => {
     }
 
     try {
-      await signup(
+      await signupSecondPage(
         signupName,
         signupEmail,
         signupPhoneNumber,

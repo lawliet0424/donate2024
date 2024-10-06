@@ -29,7 +29,6 @@ public class Donor {
     @Id
     private String donorId;
 
-    /* password는 spring security를 이용하여 재구성할 예정 */
     @Column(nullable = false)
     private String donorPassword;
 
@@ -48,7 +47,8 @@ public class Donor {
     private String donorAccount;
 
     //@Column(nullable = false)
-    private String donorWallet;
+    // 기본 값으로 ""가 되도록 임시 설정
+    private String donorWallet = "";
 
     @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Interest> likedBeneficiaries = new HashSet<>();

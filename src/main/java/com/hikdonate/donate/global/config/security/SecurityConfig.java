@@ -74,7 +74,7 @@ public class SecurityConfig {
                 // 요청 처리
                 .authorizeHttpRequests(authorize -> authorize
                         // 로그인, 회원가입 경로 허용
-                        .requestMatchers("/donor/login", "/donor/signup", "/donor/myinfo").permitAll()
+                        .requestMatchers("/donor/login", "/donor/signup/**", "/donor/check-id-duplicate", "/donor/myinfo").permitAll()
                         // 기부하기 경로 허용
                         .requestMatchers("/donation/step1", "/donation/step2", "/donation/step3").permitAll()
                         // 결제하기 경로 허용

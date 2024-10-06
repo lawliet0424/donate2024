@@ -21,6 +21,10 @@ public class DonorSignUpService {
     private final DonorRepository donorRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public boolean isDuplicateId(String signupId) {
+        return donorRepository.existsById(signupId);
+    }
+
     /*
     Function name: createDonor
     Summary: 사용자(기부자)가 입력한 내용(이름, 이메일, 전화번호, 닉네임, id, 비밀번호)에 따라 Donor를 생성하여 회원가입

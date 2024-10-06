@@ -13,4 +13,8 @@ Written by: 양예현
  */
 public interface DonorRepository extends JpaRepository<Donor, String> {
     Optional<Donor> findByDonorId(String donorId);
+
+    // 아이디 중복 확인을 위한 메서드
+    boolean existsByDonorId(String donorId);
+
 }
