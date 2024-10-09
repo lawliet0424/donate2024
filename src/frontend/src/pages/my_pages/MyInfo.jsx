@@ -55,7 +55,6 @@ const MyInfo = () => {
   });
 
   const [subInfoErrors, setSubInfoErrors] = useState({
-    donorPassword: "",
     donorName: "",
     donorPhonenumber: "",
     donorMail: "",
@@ -83,7 +82,6 @@ const MyInfo = () => {
     });
     setSubInfo({
       donorId: user.donorId,
-      donorPassword: user.donorPassword,
       donorName: user.donorName,
       donorPhonenumber: formatPhoneNumber(user.donorPhonenumber || ""),
       donorMail: user.donorMail,
@@ -105,7 +103,6 @@ const MyInfo = () => {
   // 가입 정보 유효성 검사
   const validateSubInfo = (data) => {
     let errors = {
-      donorPassword: validatePassword(data.donorPassword),
       donorName: validateName(data.donorName),
       donorPhonenumber: validatePhoneNumber(data.donorPhonenumber),
       donorMail: validateEmail(data.donorMail),
@@ -368,35 +365,20 @@ const MyInfo = () => {
         </div>
         <div className="my-info__content">
           <div className="my-info__text">
+              {/* 아이디 */}
+                <div className="my-info__line">
+                  <div className="my-info__line--left">아이디</div>
+                    <div className="my-info__line--right">
+                      <div>{user.donorId}</div>
+                    </div>
+                </div>
             {/* 비밀번호 */}
-            <div className="my-info__line">
-              <div className="my-info__line--left">비밀번호</div>
-              <div className="my-info__line--right">
-                {isEditingSubInfo ? (
-                  <>
-                    <input
-                      type="password"
-                      name="donorPassword"
-                      value={subInfo.donorPassword}
-                      onChange={(e) => handleInputChange(e, "sub")}
-                      className={
-                        subInfoErrors.donorPassword
-                          ? "my-info__input--invalid"
-                          : "my-info__input"
-                      }
-                    />
-                    {subInfoErrors.donorPassword && (
-                      <div className="my-info__message--error">
-                        {subInfoErrors.donorPassword}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div>********</div>
-                )}
-              </div>
-            </div>
-
+                <div className="my-info__line">
+                  <div className="my-info__line--left">아이디</div>
+                    <div className="my-info__line--right">
+                      <div>***********</div>
+                    </div>
+                </div>
             {/* 이름 */}
             <div className="my-info__line">
               <div className="my-info__line--left">이름</div>
