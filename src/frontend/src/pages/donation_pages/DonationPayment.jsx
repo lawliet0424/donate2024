@@ -112,9 +112,9 @@ const DonationPayment = () => {
               </div>
               <div className="donation-payment__info--right">
                 <div>{user.donorName}</div> {/* 기부자 이름 */}
-                <div>{formatPhoneNumber(user.donorPhoneNumber)}</div>{" "}
+                <div>{formatPhoneNumber(user.donorPhonenumber)}</div>{" "}
                 {/* 포맷된 전화번호 */}
-                <div>{user.donorEmail}</div> {/* 기부자 이메일 */}
+                <div>{user.donorMail}</div> {/* 기부자 이메일 */}
               </div>
             </div>
           </div>

@@ -21,11 +21,11 @@ const initialUserState = {
   donorNickname: "", // 기부자 닉네임
   donorPassword: "", // 기부자 비밀번호
   donorName: "", // 기부자 이름
-  donorEmail: "", // 기부자 이메일
-  donorPhoneNumber: "", // 기부자 전화번호
+  donorMail: "", // 기부자 이메일
+  donorPhonenumber: "", // 기부자 전화번호
   donorAge: null, // 기부자 나이
-  donorFinancialAccount: "", // 기부자 금융 계좌
-  donorWalletAddress: "", // 기부자 지갑 주소
+  donorAccount: "", // 기부자 금융 계좌
+  donorWallet: "", // 기부자 지갑 주소
 };
 
 // 인증 컨텍스트 생성
@@ -154,27 +154,32 @@ export const AuthProvider = ({ children }) => {
                string loginPassword; 로그인 비밀번호
     Return: Promise 객체; 로그인 처리 결과
   */
-  const login = (loginId, loginPassword) => {
-    setLoading(true); // 로딩 시작
-    return axios
-//       .post("/api/donor/login", { loginId, loginPassword }, { withCredentials: true })
-      .post ("/api/donor/login", { id: loginId, password: loginPassword })
-      .then((response) => {
-        // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
-        const token = response.data.token; // 서버에서 반환된 토큰
-        localStorage.setItem("token", token);
-        setIsAuthenticated(true); // 인증 상태 업데이트
-        console.log("login", user);
-      })
-      .catch((error) => {
-        console.error("Failed to login:", error);
-        window.alert("아이디 또는 비밀번호를 잘못 입력했습니다."); // 오류 메시지 표시
-        setError(error); // 오류 상태 설정
-      })
-      .finally(() => {
-        setLoading(false); // 로딩 종료
-      });
-  };
+const login = (loginId, loginPassword) => {
+  setLoading(true); // 로딩 시작
+  return axios
+    .post("/api/donor/login", { id: loginId, password: loginPassword })
+    .then((response) => {
+      // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
+      const token = response.data.token; // 서버에서 반환된 토큰
+      localStorage.setItem("token", token);
+      setIsAuthenticated(true); // 인증 상태 업데이트
+
+      // 사용자 정보 가져오기
+      return getUserInfo(); // getUserInfo 호출하여 사용자 상태 업데이트
+    })
+    .then(() => {
+      console.log("User info loaded successfully", user);
+    })
+    .catch((error) => {
+      console.error("Failed to login:", error);
+      window.alert("아이디 또는 비밀번호를 잘못 입력했습니다."); // 오류 메시지 표시
+      setError(error); // 오류 상태 설정
+    })
+    .finally(() => {
+      setLoading(false); // 로딩 종료
+    });
+};
+
 
    /*
       Function name: logout
@@ -218,11 +223,11 @@ export const AuthProvider = ({ children }) => {
                   donorPassword,
                   donorNickname,
                   donorName,
-                  donorEmail,
-                  donorPhoneNumber,
+                  donorMail,
+                  donorPhonenumber,
                   donorAge,
-                  donorFinancialAccount,
-                  donorWalletAddress,
+                  donorAccount,
+                  donorWallet,
                 } = response.data;
 
                 // 필요한 필드로 user 상태 업데이트
@@ -231,12 +236,12 @@ export const AuthProvider = ({ children }) => {
                   donorPassword,
                   donorNickname,
                   donorName,
-                  donorEmail,
-                  donorPhoneNumber,
+                  donorMail,
+                  donorPhonenumber,
                   donorAge,
-                  donorFinancialAccount,
-                  donorWalletAddress,
-                      });
+                  donorAccount,
+                  donorWallet,
+                  });
               })
       .catch((error) => {
         console.error("Failed to fetch user info:", error);
