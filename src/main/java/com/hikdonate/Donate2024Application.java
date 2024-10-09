@@ -22,11 +22,11 @@ Written by: 조현지
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class Donate2024Application {
 
-	@Value("${donateManagement.address}")
-	private String contractAddress;
-
-	private final BscScanAPI bscScanAPI;
-	private final Web3jWrapperGenerator web3jWrapperGenerator;
+//	@Value("${donateManagement.address}")
+//	private String contractAddress;
+//
+//	private final BscScanAPI bscScanAPI;
+//	private final Web3jWrapperGenerator web3jWrapperGenerator;
 
    /*
     Function name: main
@@ -49,19 +49,19 @@ public class Donate2024Application {
      Date: 2024.10.09 (Updated by 심민서)
      Written by: 조현지
      */
-	@PostConstruct
-	public void init() throws IOException {
-		// 초기화 작업 수행
-		System.out.println("Application has been initialized");
-
-		// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
-		String abiFile = "DonateManagement.json";
-
-		// Sepolia testnet에 verified된 스마트 컨트랙트를 순서대로 가져와서 로컬에 저장하기
-		bscScanAPI.getContractABI(contractAddress, "DonateManagement");
-
-		// 로컬에 저장할 json 파일을 토대로 java wrapper 파일을 로컬에 생성하기
-		web3jWrapperGenerator.generateWrapper(abiFile);
-	}
+//	@PostConstruct
+//	public void init() throws IOException {
+//		// 초기화 작업 수행
+//		System.out.println("Application has been initialized");
+//
+//		// 가져와야하는 스마트 컨트랙트 주소와 주소와 대응되는 json 파일명 지정
+//		String abiFile = "DonateManagement.json";
+//
+//		// Sepolia testnet에 verified된 스마트 컨트랙트를 순서대로 가져와서 로컬에 저장하기
+//		bscScanAPI.getContractABI(contractAddress, "DonateManagement");
+//
+//		// 로컬에 저장할 json 파일을 토대로 java wrapper 파일을 로컬에 생성하기
+//		web3jWrapperGenerator.generateWrapper(abiFile);
+//	}
 
 }

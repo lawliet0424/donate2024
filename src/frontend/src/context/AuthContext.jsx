@@ -2,8 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 
 import axios from "axios";
 
-const authAxios = axios.create({
-    timeout: 500000000 });
+const authAxios = axios.create();
 
 // 요청 인터셉트로 토큰 추가
 authAxios.interceptors.request.use((config) => {

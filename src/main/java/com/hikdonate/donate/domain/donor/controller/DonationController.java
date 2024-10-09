@@ -68,6 +68,7 @@ public class DonationController {
 
         try {
             donateStateService.executeDonationTransaction(donor_wallet_addr, beneficiaries_wallet_addr, amount);
+            System.out.println("ok");
             return "ok";
         } catch (Exception e){
             return String.valueOf(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()));

@@ -21,7 +21,7 @@ public class DonateStateService {
     private final DonationBillService donationBillService;
 
     // 금융거래와 블록체인 트랜잭션의 순차 실행 및 상태 저장 함수
-    public void executeDonationTransaction(String donorId, String[] beneficiaryId, Long divided_amount) throws Exception {
+    public boolean executeDonationTransaction(String donorId, String[] beneficiaryId, Long divided_amount) throws Exception {
         // donation ID 생성
         UUID donationId = createDonateState();
         String result = "";
@@ -36,12 +36,16 @@ public class DonateStateService {
         updateState(donationId, result, TOKEN_SENT_TO_DONOR_SUCCESS, TOKEN_SENT_TO_DONOR_FAILED);
 
         // 수혜자에게 기부금 전달
+        System.out.println("실결");
         result = donationBillService.processPayment();
         updateState(donationId, result, CONVEYED_TO_BENEFICIARY_SUCCESS, CONVEYED_TO_BENEFICIARY_FAILED);
 
         // 스마트 컨트랙트 2&3단계 실행
+        System.out.println("SMART CONTRACT STEP 2&3");
         result = donationWeb3Service.sendTokensToBeneficiaryAndDonateBank(donorId, beneficiaryId, divided_amount);
         updateState(donationId, result, TOKEN_RECLAIMED_BY_DONATEBANK_SUCCESS, TOKEN_RECLAIMED_BY_DONATEBANK_FAILED);
+
+        return true;
     }
 
     public void handleDonationError(UUID error_donationId) {
