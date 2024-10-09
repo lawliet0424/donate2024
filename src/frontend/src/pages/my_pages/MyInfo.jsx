@@ -24,7 +24,7 @@ Write by: 길정수
 */
 
 const MyInfo = () => {
-  const { user, updateUserInfo } = useAuth();
+  const { user, getUserInfo, updateUserInfo } = useAuth();
   const [image, setImage] = useState(defaultProfileImage); // 프로필 이미지 상태
   const [isEditingProfile, setIsEditingProfile] = useState(false); // 프로필 편집 상태
   const [isEditingSubInfo, setIsEditingSubInfo] = useState(false); // 가입 정보 편집 상태
@@ -33,9 +33,9 @@ const MyInfo = () => {
   const [profileData, setProfileData] = useState({
     donorNickname: user.donorNickname,
     donorAge: user.donorAge || null,
-    donorFinancialAccount: user.donorFinancialAccount || "",
-    walletAddressLink: `https://www.etherscan.io/address/${user.donorWalletAddress}`,
-    donorWalletAddress: user.donorWalletAddress,
+    donorAccount: user.donorAccount || "",
+    walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
+    donorWallet: user.donorWallet,
   });
 
   // 가입 정보 데이터 초기화
@@ -43,39 +43,50 @@ const MyInfo = () => {
     donorId: user.donorId,
     donorPassword: user.donorPassword,
     donorName: user.donorName,
-    donorPhoneNumber: formatPhoneNumber(user.donorPhoneNumber || ""),
-    donorEmail: user.donorEmail,
+    donorPhonenumber: formatPhoneNumber(user.donorPhonenumber || ""),
+    donorMail: user.donorMail,
   });
 
   // 에러 메시지 상태
   const [profileErrors, setProfileErrors] = useState({
     donorNickname: "",
     donorAge: "",
-    donorFinancialAccount: "",
+    donorAccount: "",
   });
 
   const [subInfoErrors, setSubInfoErrors] = useState({
     donorPassword: "",
     donorName: "",
-    donorPhoneNumber: "",
-    donorEmail: "",
+    donorPhonenumber: "",
+    donorMail: "",
   });
+
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        await getUserInfo(); // 사용자 정보 가져오기
+        console.log("user:", user);
+      } catch (err) {
+        console.error("Failed to fetch user info:", err); // 사용자 정보 가져오기 실패 시 에러 로그
+      }
+    initialize(); // 초기화 함수 실행
+  }}, []);
 
   useEffect(() => {
     // 사용자 정보 업데이트 시, 상태를 최신화
     setProfileData({
       donorNickname: user.donorNickname,
       donorAge: user.donorAge || null,
-      donorFinancialAccount: user.donorFinancialAccount || "",
-      walletAddressLink: `https://www.etherscan.io/address/${user.donorWalletAddress}`,
-      donorWalletAddress: user.donorWalletAddress,
+      donorAccount: user.donorAccount || "",
+      walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
+      donorWallet: user.donorWallet,
     });
     setSubInfo({
       donorId: user.donorId,
       donorPassword: user.donorPassword,
       donorName: user.donorName,
-      donorPhoneNumber: formatPhoneNumber(user.donorPhoneNumber || ""),
-      donorEmail: user.donorEmail,
+      donorPhonenumber: formatPhoneNumber(user.donorPhonenumber || ""),
+      donorMail: user.donorMail,
     });
   }, [user]);
 
@@ -84,8 +95,8 @@ const MyInfo = () => {
     let errors = {
       donorNickname: validateNickname(data.donorNickname),
       donorAge: validateAge(data.donorAge),
-      donorFinancialAccount: validateFinancialAccount(
-        data.donorFinancialAccount
+      donorAccount: validateFinancialAccount(
+        data.donorAccount
       ),
     };
     return errors;
@@ -96,8 +107,8 @@ const MyInfo = () => {
     let errors = {
       donorPassword: validatePassword(data.donorPassword),
       donorName: validateName(data.donorName),
-      donorPhoneNumber: validatePhoneNumber(data.donorPhoneNumber),
-      donorEmail: validateEmail(data.donorEmail),
+      donorPhonenumber: validatePhoneNumber(data.donorPhonenumber),
+      donorMail: validateEmail(data.donorMail),
     };
     return errors;
   };
@@ -291,19 +302,19 @@ const MyInfo = () => {
                   <>
                     <input
                       type="text"
-                      name="donorFinancialAccount"
+                      name="donorAccount"
                       placeholder="금융 계좌를 입력하세요"
-                      value={profileData.donorFinancialAccount}
+                      value={profileData.donorAccount}
                       onChange={(e) => handleInputChange(e, "profile")}
                       className={
-                        profileErrors.donorFinancialAccount
+                        profileErrors.donorAccount
                           ? "my-info__input--invalid"
                           : "my-info__input"
                       }
                     />
-                    {profileErrors.donorFinancialAccount && (
+                    {profileErrors.donorAccount && (
                       <div className="my-info__message--error">
-                        {profileErrors.donorFinancialAccount}
+                        {profileErrors.donorAccount}
                       </div>
                     )}
                   </>
@@ -311,12 +322,12 @@ const MyInfo = () => {
                   <div>
                     <div
                       className={
-                        profileData.donorFinancialAccount
+                        profileData.donorAccount
                           ? ""
                           : "my-info__text--default"
                       }
                     >
-                      {profileData.donorFinancialAccount ||
+                      {profileData.donorAccount ||
                         "(선택) 금융 계좌를 입력하세요"}
                     </div>
                   </div>
@@ -334,7 +345,7 @@ const MyInfo = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {profileData.donorWalletAddress}
+                  {profileData.donorWallet}
                 </a>
               </div>
             </div>
@@ -423,23 +434,23 @@ const MyInfo = () => {
                   <>
                     <input
                       type="text"
-                      name="donorPhoneNumber"
-                      value={subInfo.donorPhoneNumber}
+                      name="donorPhonenumber"
+                      value={subInfo.donorPhonenumber}
                       onChange={(e) => handleInputChange(e, "sub")}
                       className={
-                        subInfoErrors.donorPhoneNumber
+                        subInfoErrors.donorPhonenumber
                           ? "my-info__input--invalid"
                           : "my-info__input"
                       }
                     />
-                    {subInfoErrors.donorPhoneNumber && (
+                    {subInfoErrors.donorPhonenumber && (
                       <div className="my-info__message--error">
-                        {subInfoErrors.donorPhoneNumber}
+                        {subInfoErrors.donorPhonenumber}
                       </div>
                     )}
                   </>
                 ) : (
-                  <div>{subInfo.donorPhoneNumber}</div>
+                  <div>{subInfo.donorPhonenumber}</div>
                 )}
               </div>
             </div>
@@ -452,23 +463,23 @@ const MyInfo = () => {
                   <>
                     <input
                       type="text"
-                      name="donorEmail"
-                      value={subInfo.donorEmail}
+                      name="donorMail"
+                      value={subInfo.donorMail}
                       onChange={(e) => handleInputChange(e, "sub")}
                       className={
-                        subInfoErrors.donorEmail
+                        subInfoErrors.donorMail
                           ? "my-info__input--invalid"
                           : "my-info__input"
                       }
                     />
-                    {subInfoErrors.donorEmail && (
+                    {subInfoErrors.donorMail && (
                       <div className="my-info__message--error">
-                        {subInfoErrors.donorEmail}
+                        {subInfoErrors.donorMail}
                       </div>
                     )}
                   </>
                 ) : (
-                  <div>{subInfo.donorEmail}</div>
+                  <div>{subInfo.donorMail}</div>
                 )}
               </div>
             </div>
