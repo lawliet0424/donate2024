@@ -374,7 +374,7 @@ const MyInfo = () => {
                 </div>
             {/* 비밀번호 */}
                 <div className="my-info__line">
-                  <div className="my-info__line--left">아이디</div>
+                  <div className="my-info__line--left">비밀번호</div>
                     <div className="my-info__line--right">
                       <div>***********</div>
                     </div>
