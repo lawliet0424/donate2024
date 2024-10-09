@@ -40,7 +40,7 @@ const DonationStepThree = () => {
     };
 
     fetchBeneficiaries();
-  }, [location.state]);
+  }, []);
 
   const onNextButtonClicked = () => {
     navigate("/donation/payment", {
