@@ -67,8 +67,9 @@ const MyInfo = () => {
       } catch (err) {
         console.error("Failed to fetch user info:", err); // 사용자 정보 가져오기 실패 시 에러 로그
       }
+  }
     initialize(); // 초기화 함수 실행
-  }}, []);
+  }, []);
 
   useEffect(() => {
     // 사용자 정보 업데이트 시, 상태를 최신화

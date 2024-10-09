@@ -57,16 +57,10 @@ public class DonorDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(DonorRole.USER.getValue()));
         }
 
-//        return new User(donor.getDonorId(), donor.getDonorPassword(), authorities);
         return new DonorDetails(donor);
     }
 
     public Donor getDonorInfo() {
-//        // 현재 인증된 사용자 가져오기
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        // 인증 정보에서 사용자 이름(ID) 가져옴
-//        String donorId = authentication.getName();
         // 현재 사용자 id 가져오기
         String donorId = getCurrentDonorId();
 

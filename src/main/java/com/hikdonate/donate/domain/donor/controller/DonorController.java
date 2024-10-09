@@ -4,7 +4,9 @@ import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.dto.DonorLoginForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpForm;
 import com.hikdonate.donate.domain.donor.dto.DonorSignUpValidationGroups;
+import com.hikdonate.donate.domain.donor.dto.DonorUpdateDto;
 import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
+import com.hikdonate.donate.domain.donor.service.DonorInfoUpdateService;
 import com.hikdonate.donate.domain.donor.service.DonorSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,7 @@ public class DonorController {
 
     private final DonorSignUpService donorSignUpService;
     private final DonorDetailsService donorDetailsService;
+    private final DonorInfoUpdateService donorInfoUpdateService;
 
     // DonorSignUpForm 가져오기
     @ModelAttribute("donorSignUpForm")
@@ -113,4 +116,29 @@ public class DonorController {
         return ResponseEntity.ok(donor);
     }
 
+    @PutMapping("/myinfo")
+    public ResponseEntity<String> updateDonorInfo(@RequestBody DonorUpdateDto donorUpdateDto) {
+        log.info("Received update request for donor: {}", donorUpdateDto);
+
+        try {
+            Donor donor = donorInfoUpdateService.updateDonorInfo(
+                    donorUpdateDto.getDonorId(),
+                    donorUpdateDto.getDonorPassword(),
+                    donorUpdateDto.getDonorMail(),
+                    donorUpdateDto.getDonorName(),
+                    donorUpdateDto.getDonorNickname(),
+                    donorUpdateDto.getDonorAge(),
+                    donorUpdateDto.getDonorPhonenumber(),
+                    donorUpdateDto.getDonorAccount(),
+                    donorUpdateDto.getDonorWallet(),
+                    donorUpdateDto.getLikedBeneficiaries());
+
+            return ResponseEntity.ok("ok");
+        } catch (Exception e) {
+            log.error("Donor update error: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+
+        }
+
+    }
 }

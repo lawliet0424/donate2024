@@ -271,8 +271,9 @@ const login = (loginId, loginPassword) => {
 
     // 서버에 업데이트 요청
     authAxios
-      .post("/api/donor/myinfo", updatedData)
+      .put("/api/donor/myinfo", updatedData)
       .then((response) => {
+          console.log("Update successful, response data:", response.data);
         setUser(response.data); // 서버에서 받은 최신 데이터로 상태 업데이트
       })
       .catch((error) => {

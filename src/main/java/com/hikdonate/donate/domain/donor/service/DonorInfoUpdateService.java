@@ -3,8 +3,10 @@ package com.hikdonate.donate.domain.donor.service;
 import com.hikdonate.donate.domain.beneficiary.domain.Beneficiary;
 import com.hikdonate.donate.domain.donor.domain.Donor;
 import com.hikdonate.donate.domain.donor.repository.DonorRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +17,10 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class DonorInfoUpdateService {
 
-    DonorRepository donorRepository;
-    DonorDetailsService donorDetailsService;
+    private final DonorDetailsService donorDetailsService;
+    private final DonorRepository donorRepository;
 
+    @Transactional
     public Donor updateDonorInfo(String donorId,
                                  String donorPassword,
                                  String donorMail,
@@ -38,9 +41,9 @@ public class DonorInfoUpdateService {
         donor.setDonorPhonenumber(donorPhonenumber);
         donor.setDonorAccount(donorAccount);
 
+        donorRepository.save(donor);
+
         return donor;
     }
-
-
 
 }
