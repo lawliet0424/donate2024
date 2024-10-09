@@ -117,7 +117,7 @@ const BeneficiaryDetailPage = () => {
         </div>
       </div>
       <div className="beneficiary-detail-page__content">
-        {selectedBeneficiary.beneficiaryContent} {/* 수혜자 정보 표시 */}
+        {selectedBeneficiary.beneficiaryInfo} {/* 수혜자 정보 표시 */}
       </div>
     </div>
   );
