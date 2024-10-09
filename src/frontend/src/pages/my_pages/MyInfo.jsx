@@ -34,7 +34,6 @@ const MyInfo = () => {
     donorNickname: user.donorNickname,
     donorAge: user.donorAge || null,
     donorAccount: user.donorAccount || "",
-    walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
     donorWallet: user.donorWallet,
   });
 
@@ -55,7 +54,6 @@ const MyInfo = () => {
   });
 
   const [subInfoErrors, setSubInfoErrors] = useState({
-    donorPassword: "",
     donorName: "",
     donorPhonenumber: "",
     donorMail: "",
@@ -78,12 +76,10 @@ const MyInfo = () => {
       donorNickname: user.donorNickname,
       donorAge: user.donorAge || null,
       donorAccount: user.donorAccount || "",
-      walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
       donorWallet: user.donorWallet,
     });
     setSubInfo({
       donorId: user.donorId,
-      donorPassword: user.donorPassword,
       donorName: user.donorName,
       donorPhonenumber: formatPhoneNumber(user.donorPhonenumber || ""),
       donorMail: user.donorMail,
@@ -105,7 +101,6 @@ const MyInfo = () => {
   // 가입 정보 유효성 검사
   const validateSubInfo = (data) => {
     let errors = {
-      donorPassword: validatePassword(data.donorPassword),
       donorName: validateName(data.donorName),
       donorPhonenumber: validatePhoneNumber(data.donorPhonenumber),
       donorMail: validateEmail(data.donorMail),
@@ -120,7 +115,6 @@ const MyInfo = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-//         updateUserInfo({ profileImage: reader.result });
       };
       reader.readAsDataURL(file);
     }
@@ -147,25 +141,37 @@ const MyInfo = () => {
   };
 
   // 저장 버튼 클릭 시 유효성 검사 후 업데이트
-  const handleSaveClick = (section) => {
-    if (section === "profile") {
-      const errors = validateProfileData(profileData);
-      if (!Object.values(errors).some((error) => error)) {
-        updateUserInfo(profileData);
-        setIsEditingProfile(false);
-      } else {
-        setProfileErrors(errors);
-      }
-    } else if (section === "sub") {
-      const errors = validateSubInfo(subInfo);
-      if (!Object.values(errors).some((error) => error)) {
-        updateUserInfo(subInfo);
-        setIsEditingSubInfo(false);
-      } else {
-        setSubInfoErrors(errors);
-      }
+// 저장 버튼 클릭 시 유효성 검사 후 업데이트
+const handleSaveClick = (section) => {
+  if (section === "profile") {
+    const errors = validateProfileData(profileData);
+    if (!Object.values(errors).some((error) => error)) {
+      const updatedProfileData = {
+        ...user, // 기존 사용자 정보 복사
+        ...profileData, // 바뀐 프로필 데이터만 덮어쓰기
+      };
+      updateUserInfo(updatedProfileData);
+      console.log(updatedProfileData);
+      setIsEditingProfile(false);
+    } else {
+      setProfileErrors(errors);
     }
-  };
+  } else if (section === "sub") {
+    const errors = validateSubInfo(subInfo);
+    if (!Object.values(errors).some((error) => error)) {
+      const updatedSubInfo = {
+        ...user, // 기존 사용자 정보 복사
+        ...subInfo, // 바뀐 가입 정보만 덮어쓰기
+      };
+      updateUserInfo(updatedSubInfo);
+      console.log(updatedSubInfo);
+      setIsEditingSubInfo(false);
+    } else {
+      setSubInfoErrors(errors);
+    }
+  }
+};
+
 
   // 수정 버튼 클릭 시 편집 모드로 전환
   const handleEditClick = (section) => {
@@ -340,7 +346,8 @@ const MyInfo = () => {
               <div className="my-info__line--left">지갑 주소</div>
               <div className="my-info__line--right">
                 <a
-                  href={profileData.walletAddressLink}
+//                   href={profileData.walletAddressLink}
+href={`https://www.etherscan.io/address/${user.donorWallet}`}
                   className="my-info__wallet-link"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -368,35 +375,20 @@ const MyInfo = () => {
         </div>
         <div className="my-info__content">
           <div className="my-info__text">
+              {/* 아이디 */}
+                <div className="my-info__line">
+                  <div className="my-info__line--left">아이디</div>
+                    <div className="my-info__line--right">
+                      <div>{user.donorId}</div>
+                    </div>
+                </div>
             {/* 비밀번호 */}
-            <div className="my-info__line">
-              <div className="my-info__line--left">비밀번호</div>
-              <div className="my-info__line--right">
-                {isEditingSubInfo ? (
-                  <>
-                    <input
-                      type="password"
-                      name="donorPassword"
-                      value={subInfo.donorPassword}
-                      onChange={(e) => handleInputChange(e, "sub")}
-                      className={
-                        subInfoErrors.donorPassword
-                          ? "my-info__input--invalid"
-                          : "my-info__input"
-                      }
-                    />
-                    {subInfoErrors.donorPassword && (
-                      <div className="my-info__message--error">
-                        {subInfoErrors.donorPassword}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div>********</div>
-                )}
-              </div>
-            </div>
-
+                <div className="my-info__line">
+                  <div className="my-info__line--left">비밀번호</div>
+                    <div className="my-info__line--right">
+                      <div>***********</div>
+                    </div>
+                </div>
             {/* 이름 */}
             <div className="my-info__line">
               <div className="my-info__line--left">이름</div>
