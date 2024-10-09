@@ -80,7 +80,7 @@ public class SecurityConfig {
                         // 결제하기 경로 허용
                         .requestMatchers("/payment/submit").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers("/beneficiaries").permitAll()
+                        .requestMatchers("/beneficiary/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
