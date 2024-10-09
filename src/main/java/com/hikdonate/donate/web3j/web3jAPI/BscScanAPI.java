@@ -9,13 +9,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 
 /*
-Class name: EtherscanAPI
+Class name: BscScanAPI
 Summary: Sepolia testnet의 verified smart contract에 접속해서, ABI 파일 데이터를 가져온 뒤 json파일로 변환하기
-Date: 2024.07.26
+Date: 2024.10.09 (Updated by 심민서)
 Written by: 조현지
 */
 
-public class EtherscanAPI {
+public class BscScanAPI {
     // [하드코딩]이지만, DB나 클라우드와 연동하기 전까지는 하드코딩이 맞음
     @Value("${admin.api-key}")
     private String apiKey;
@@ -36,7 +36,7 @@ public class EtherscanAPI {
     */
     public void getContractABI(String contractAddress, String contractName) throws IOException {
         // Sepolia testnet에 verified된 스마트 컨트랙트 주소
-        String url = "https://api-sepolia.etherscan.io/api" +
+        String url = "https://api-testnet.bscscan.com/api" +
                 "?module=contract" +
                 "&action=getabi" +
                 "&address=" + contractAddress +

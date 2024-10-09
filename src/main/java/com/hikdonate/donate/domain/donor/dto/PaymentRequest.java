@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 public class PaymentRequest {
 
-//    private String sessionId;
     private Long personnel;
     private Long perPerson;
     private String donorId;

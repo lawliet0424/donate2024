@@ -1,7 +1,7 @@
 package com.hikdonate.donate.web3j.config;
 
 
-import com.hikdonate.donate.web3j.web3jAPI.EtherscanAPI;
+import com.hikdonate.donate.web3j.web3jAPI.BscScanAPI;
 import com.hikdonate.donate.web3j.web3jAPI.Web3jWrapperGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,8 +29,8 @@ public class Web3jConfig {
     private String adminPrivateKey;
 
     @Bean
-    public EtherscanAPI etherscanAPI() {
-        return new EtherscanAPI();
+    public BscScanAPI bscScanAPI() {
+        return new BscScanAPI();
     }
 
     @Bean

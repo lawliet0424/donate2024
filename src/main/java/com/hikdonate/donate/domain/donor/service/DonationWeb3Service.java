@@ -35,7 +35,6 @@ public class DonationWeb3Service {
     private final Credentials credentials;
     private DonateManagement donateManagement;
 
-
     /*
     Function name: init
     Summary: 스마트 컨트랙트 초기화
@@ -47,7 +46,8 @@ public class DonationWeb3Service {
     */
     @PostConstruct
     private void init() {
-        RawTransactionManager rawTransactionManager = new RawTransactionManager(web3j, credentials);
+        long chainId = 97;
+        RawTransactionManager rawTransactionManager = new RawTransactionManager(web3j, credentials, chainId);
 
         // Wrapper로 감싸진 스마트 컨트랙트(ABI 파일)를 통해, 테스트넷 상의 스마트 컨트랙트를 가져오기
         donateManagement = DonateManagement.load(donateManagement_addr, web3j, rawTransactionManager, new DefaultGasProvider());
@@ -63,12 +63,10 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokenToDonor(String donor, Long total_amount) throws Exception {
-        System.out.println("TOKEN 전송 시작!!!!!!!!!!!!");
         String result = "";
         try {
             if (donateManagement.sendTokensToDonor(donor, BigInteger.valueOf((long) total_amount)).send().isStatusOK()){
                 result = "success";
-                System.out.println("TOKEN 전송 끝!!!!!!!!!!!!");
             }
         } catch (Exception e)  {
             System.out.println("Revert: " + e.getMessage());
@@ -86,7 +84,6 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToBeneficiaryAndDonateBank(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
-        System.out.println("TOKEN 전송 시작 - 1!!!!!!!!!!!!");
         String result="";
 
         int num_of_beneficiaries = 0;
@@ -123,7 +120,6 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToBeneficiary(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
-        System.out.println("TOKEN 전송 시작-2!!!!!!!!!!!!");
         String result="";
 
         try {
@@ -146,7 +142,6 @@ public class DonationWeb3Service {
     Write by: 심민서
     */
     public String sendTokensToDonateBank(String donor, String[] beneficiaries, Long divided_amount) throws Exception {
-        System.out.println("TOKEN 전송 시작-3!!!!!!!!!!!!");
         String result="";
 
         try {

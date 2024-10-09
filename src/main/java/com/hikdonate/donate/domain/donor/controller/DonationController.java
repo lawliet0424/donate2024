@@ -25,7 +25,6 @@ Written by: 심민서
 @RequiredArgsConstructor
 public class DonationController {
 
-    private final DonationBillService donationBillService;
     private final DonateStateService donateStateService;
     private final DonorRepository donorRepository;
     private final BeneficiaryRepository beneficiaryRepository;
@@ -40,19 +39,19 @@ public class DonationController {
      */
     @PostMapping("/payment/submit")
     public String savePaymentInfo(@RequestBody PaymentRequest paymentRequest){
-        System.out.println("savePaymentInfo 시작");
+//        System.out.println("savePaymentInfo 시작");
         paymentRequest.setDonorId(donorDetailsService.getCurrentDonorId());
+        String current_donor_id = donorDetailsService.getCurrentDonorId();
 
-        String donorId = paymentRequest.getDonorId();
-        Long amount = paymentRequest.getPerPerson();
+        Long amount = 100 * paymentRequest.getPerPerson();
         Long[] beneficiariesId = paymentRequest.getBeneficiaryList();
-        System.out.println("Received Payment Info:" + paymentRequest);
-        System.out.println("DonorId: " + donorId);
-        System.out.println("Amount: " + amount);
+//        System.out.println("Received Payment Info:" + paymentRequest);
+//        System.out.println("DonorId: " + current_donor_id);
+//        System.out.println("Amount: " + amount);
 
         // donor Id -> donor wallet address로 변환
-        Donor donor = donorRepository.findByDonorId(donorId)
-                .orElseThrow(() -> new IllegalArgumentException("Donor with ID " + donorId + " not found."));
+        Donor donor = donorRepository.findByDonorId(current_donor_id)
+                .orElseThrow(() -> new IllegalArgumentException("Donor with ID " + current_donor_id + " not found."));
         String donor_wallet_addr = donor.getDonorWallet();
         System.out.println("Donor Wallet Address: " + donor_wallet_addr);
 
