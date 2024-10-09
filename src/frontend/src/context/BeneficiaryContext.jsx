@@ -100,10 +100,6 @@ export const BeneficiaryProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    getSelectedBeneficiaries();
-  }, []);
-
   const toggleInterestAboutBeneficiary = async (beneficiaryId) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화

@@ -41,7 +41,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
     Return: 없음
     Caller: BeneficiaryBox__button--interest
   */
-  const handleToggleInterest = useCallback(async () => {
+  const handleToggleInterest = async () => {
     const previousState = isInterested; // 이전 상태 저장
     const updatedState = !isInterested; // 토글된 상태
 
@@ -55,7 +55,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
       console.error("Failed to toggle interest:", error);
       setIsInterested(previousState); // 오류 발생 시 상태 롤백
     }
-  }, [beneficiaryId, isInterested, toggleInterestAboutBeneficiary]);
+  };
 
   // 수혜자 데이터 로딩 중일 때 화면에 표시되는 메시지 처리
   if (loading && !beneficiaryInfo[beneficiaryId]) {
