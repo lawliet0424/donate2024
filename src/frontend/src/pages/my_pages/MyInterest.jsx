@@ -13,7 +13,7 @@ Date: 2024-09-22
 Write by: 길정수 
 */
 const MyInterest = () => {
-  const { beneficiaryKeyInfo, getInterestBeneficiary } = useBeneficiary(); // 관심 수혜자 목록을 가져옴
+  const { beneficiaryInfo, getInterestBeneficiary } = useBeneficiary(); // 관심 수혜자 목록을 가져옴
 
   useEffect(() => {
     const fetchBeneficiaries = async () => {
@@ -35,7 +35,7 @@ const MyInterest = () => {
       <div className="my-interest__beneficiaryLists">
         {" "}
         {/* 수혜자 목록 래퍼 */}
-        {beneficiaryKeyInfo.map(
+        {beneficiaryInfo.map(
           (
             beneficiary // 관심 수혜자를 맵핑하여 BeneficiaryBox 생성
           ) => (

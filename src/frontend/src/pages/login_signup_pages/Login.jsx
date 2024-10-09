@@ -17,7 +17,7 @@ Write by: 길정수
 const Login = () => {
   const [loginId, setLoginId] = useState(""); // 로그인 ID 상태
   const [loginPassword, setLoginPassword] = useState(""); // 로그인 비밀번호 상태
-  const { login } = useAuth(); // 로그인 함수 가져오기
+  const { login, error } = useAuth(); // 로그인 함수 가져오기
   const navigate = useNavigate(); // navigate 함수 초기화
 
   // 로그인 버튼 클릭 시 실행되는 함수
@@ -26,7 +26,6 @@ const Login = () => {
       await login(loginId, loginPassword); // 로그인 시도
       navigate("/"); // 로그인 성공 시 홈으로 이동
     } catch (error) {
-      window.alert("아이디 또는 비밀번호를 잘못 입력했습니다."); // 오류 메시지 표시
       console.error("Login failed", error); // 콘솔에 오류 로그
     }
   };

@@ -17,8 +17,6 @@ export const InterestContext = createContext();
   Parameter: 총 1개
              node children; 자식 컴포넌트를 포함하는 JSX 요소
   Return: 총 1개; 관심 수혜자 상태를 제공하는 JSX Provider 컴포넌트
-  Date: 2024.09.21
-  Write by: 길정수
 */
 export const InterestProvider = ({ children }) => {
   const [userInterests, setUserInterests] = useState([]); // 사용자 관심 수혜자 목록
@@ -40,7 +38,7 @@ export const InterestProvider = ({ children }) => {
 
     try {
       // 서버에서 관심 수혜자 ID 리스트 요청
-      const response = await axios.get("/api/interest/get", {
+      const response = await authAxios.get("/api/interest/get", {
         withCredentials: true,
       });
       setUserInterests(response.data); // 서버로부터 받은 데이터 저장
@@ -76,7 +74,7 @@ export const InterestProvider = ({ children }) => {
         : [...userInterests, beneficiaryId]; // 관심 추가
 
       // 서버에 변경된 관심 목록 전체를 전송
-      await axios.post(
+      await authAxios.post(
         "/api/interest/toggle",
         { interests: updatedInterests },
         { withCredentials: true }

@@ -26,14 +26,12 @@ export const PaymentProvider = ({ children }) => {
     numberOfPeople,
     amountPerPerson,
     selectedBeneficiaryList,
-    donorId
   ) => {
     // 결제 요청 데이터 구성
     const paymentData = {
       personnel: numberOfPeople,
       perPerson: amountPerPerson,
       beneficiaryList: selectedBeneficiaryList,
-      donorId: user.donorId
     };
 
     try {

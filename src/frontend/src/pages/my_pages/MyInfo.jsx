@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import profileImage from "../../assets/defaultProfile.png";
+import defaultProfileImage from "../../assets/defaultProfile.png";
 import "./MyInfo.css";
 import {
   formatPhoneNumber,
@@ -25,7 +25,7 @@ Write by: 길정수
 
 const MyInfo = () => {
   const { user, updateUserInfo } = useAuth();
-  const [image, setImage] = useState(user.donorProfileImage || profileImage); // 프로필 이미지 상태
+  const [image, setImage] = useState(defaultProfileImage); // 프로필 이미지 상태
   const [isEditingProfile, setIsEditingProfile] = useState(false); // 프로필 편집 상태
   const [isEditingSubInfo, setIsEditingSubInfo] = useState(false); // 가입 정보 편집 상태
 
@@ -109,7 +109,7 @@ const MyInfo = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        updateUserInfo({ profileImage: reader.result });
+//         updateUserInfo({ profileImage: reader.result });
       };
       reader.readAsDataURL(file);
     }

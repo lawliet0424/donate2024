@@ -11,22 +11,18 @@ export const BeneficiaryContext = createContext();
   Parameter: 총 1개
              node children; 자식 컴포넌트를 포함하는 JSX 요소
   Return: 총 1개; 수혜자 상태를 제공하는 JSX Provider 컴포넌트
-  Date: 2024.09.21
-  Write by: 길정수
 */
 export const BeneficiaryProvider = ({ children }) => {
-  const [beneficiaryDetailInfo, setBeneficiaryDetailInfo] = useState({}); // 수혜자 상세 정보
-  const [beneficiaryKeyInfo, setBeneficiaryKeyInfo] = useState([]); // 수혜자 박스 랜더링을 위한 수혜자 정보 목록
+  const [beneficiaryInfo, setBeneficiaryInfo] = useState([]); // 수혜자 정보 통합 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
 
   /*
     Function name: getSelectedBeneficiaries
     Summary: 선택된 태그 리스트와 인원수, 1인당 수혜 금액을 서버에 전송하고 수혜자 정보를 받아오는 함수
-    Parameter: 총 3개
+    Parameter: 총 2개
                array selectedTagList; 선택된 태그 목록
                number numberOfPeople; 선택된 인원수
-               number amountPerPerson; 1인당 수혜 금액
     Return: 없음; 수혜자 데이터를 상태로 저장
   */
   const getSelectedBeneficiaries = async (
@@ -41,20 +37,19 @@ export const BeneficiaryProvider = ({ children }) => {
           tags: selectedTagList,
           personnel: numberOfPeople
         },
-          // paramsSerializer를 통해 배열을 'tags=1&tags=2' 형태로 처리
-          paramsSerializer: (params) => {
-            return Object.keys(params)
-              .map((key) => {
-                const value = params[key];
-                if (Array.isArray(value)) {
-                  return value.map((val) => `${key}=${encodeURIComponent(val)}`).join("&");
-                }
-                return `${key}=${encodeURIComponent(value)}`;
-              })
-              .join("&");
-          },
+        paramsSerializer: (params) => {
+          return Object.keys(params)
+            .map((key) => {
+              const value = params[key];
+              if (Array.isArray(value)) {
+                return value.map((val) => `${key}=${encodeURIComponent(val)}`).join("&");
+              }
+              return `${key}=${encodeURIComponent(value)}`;
+            })
+            .join("&");
+        },
       });
-      setBeneficiaryKeyInfo(response.data); // 서버로부터 받은 수혜자 데이터 저장
+      setBeneficiaryInfo(response.data);
 
     } catch (err) {
       console.error("Failed to load selected beneficiaries", err);
@@ -75,12 +70,8 @@ export const BeneficiaryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      // 서버로부터 수혜자 상세 정보 요청
-      const response = await authAxios.get(`/api/beneficiaries/${beneficiaryId}`);
-      setBeneficiaryDetailInfo((prev) => ({
-        ...prev,
-        [beneficiaryId]: response.data, // 각 수혜자 ID에 해당하는 데이터 저장
-      }));
+      const response = await authAxios.get(`/api/beneficiary/${beneficiaryId}`);
+      setBeneficiaryInfo([response.data]);
     } catch (err) {
       console.error("Failed to load beneficiary details", err);
       setError(err.message || "Failed to load beneficiary details"); // 오류 발생 시 처리
@@ -99,9 +90,8 @@ export const BeneficiaryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      // 서버로부터 관심 수혜자 정보 요청
       const response = await authAxios.get("/api/myinterest");
-      setBeneficiaryKeyInfo(response.data); // 서버로부터 받은 관심 수혜자 목록 저장
+      setBeneficiaryInfo(response.data);
     } catch (err) {
       console.error("Failed to load interest beneficiaries", err);
       setError(err.message || "Failed to load interest beneficiaries"); // 오류 발생 시 처리
@@ -110,18 +100,39 @@ export const BeneficiaryProvider = ({ children }) => {
     }
   };
 
-    useEffect(() => {
-      getSelectedBeneficiaries();
-    }, []);
+  useEffect(() => {
+    getSelectedBeneficiaries();
+  }, []);
+
+  const toggleInterestAboutBeneficiary = async (beneficiaryId) => {
+    setLoading(true); // 로딩 시작
+    setError(null); // 오류 초기화
+
+    try {
+      const response = await authAxios.post("/api/interest/toggle", { beneficiaryId });
+        setBeneficiaryInfo(prev =>
+        prev.map(beneficiary =>
+          beneficiary.beneficiaryId === beneficiaryId
+            ? { ...beneficiary, isInterested: response.data.isInterested } // 응답 데이터에서 isInterested를 사용
+            : beneficiary
+        )
+      );
+    } catch (error) {
+      console.error("Failed to toggle interest", error);
+      setError("Failed to toggle interest"); // 오류 발생 시 처리
+    } finally {
+      setLoading(false); // 로딩 종료
+    }
+  };
 
   return (
     <BeneficiaryContext.Provider
       value={{
-        beneficiaryDetailInfo, // 수혜자 상세 정보
-        beneficiaryKeyInfo, // 수혜자 박스 랜더링을 위한 수혜자 정보 목록
+        beneficiaryInfo, // 수혜자 정보 통합 상태
         getSelectedBeneficiaries, // 선택된 수혜자 정보를 가져오는 함수
         getBeneficiaryDetail, // 수혜자 상세 정보를 가져오는 함수
         getInterestBeneficiary, // 관심 수혜자 정보를 가져오는 함수
+        toggleInterestAboutBeneficiary,
         loading, // 로딩 상태
         error, // 오류 상태
       }}

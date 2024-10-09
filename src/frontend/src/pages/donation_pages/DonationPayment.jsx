@@ -79,7 +79,6 @@ const DonationPayment = () => {
         numberOfPeople,
         amountPerPerson,
         selectedBeneficiaryList,
-        user.donorId
       ); // 결제 처리 요청
       navigate("/donation/done", {
         state: {

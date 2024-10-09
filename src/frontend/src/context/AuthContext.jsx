@@ -23,7 +23,6 @@ const initialUserState = {
   donorName: "", // 기부자 이름
   donorEmail: "", // 기부자 이메일
   donorPhoneNumber: "", // 기부자 전화번호
-  donorProfileImage: "", // 기부자 프로필 이미지
   donorAge: null, // 기부자 나이
   donorFinancialAccount: "", // 기부자 금융 계좌
   donorWalletAddress: "", // 기부자 지갑 주소
@@ -38,9 +37,6 @@ export const AuthContext = createContext();
   Parameter: 총 1개
              node children; 자식 컴포넌트를 포함하는 JSX 요소
   Return: 총 1개; 인증 상태를 제공하는 JSX Provider 컴포넌트
-  Caller:
-  Date: 2024.09.21
-  Write by: 길정수
 */
 export const AuthProvider = ({ children }) => {
   // 사용자 상태 관리
@@ -54,7 +50,8 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem("token");
         if (token) {
           getUserInfo()
-            .then(() => setIsAuthenticated(true))
+            .then(() => {setIsAuthenticated(true);
+                console.log(user);})
             .catch(() => {
               localStorage.removeItem("token");
               setIsAuthenticated(false);
@@ -82,7 +79,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((response) => {
           console.log('서버 응답:', response.data); // 응답 내용을 확인
-        // 성공적으로 회원가입했을 경우
+        // 성공적으로 회원가입 했을 경우
         if (response.data) {
           console.log("검증 성공");
         } else {
@@ -166,27 +163,12 @@ export const AuthProvider = ({ children }) => {
         // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
         const token = response.data.token; // 서버에서 반환된 토큰
         localStorage.setItem("token", token);
-
-        const {
-          donorId,
-          donorNickname,
-          donorName,
-          donorPhoneNumber,
-          donorEmail,
-//           donorProfileImage,
-        } = response.data;
-        setUser({
-          donorId,
-          donorNickname,
-          donorName,
-          donorPhoneNumber,
-          donorEmail,
-//           donorProfileImage,
-        });
         setIsAuthenticated(true); // 인증 상태 업데이트
+        console.log("login", user);
       })
       .catch((error) => {
         console.error("Failed to login:", error);
+        window.alert("아이디 또는 비밀번호를 잘못 입력했습니다."); // 오류 메시지 표시
         setError(error); // 오류 상태 설정
       })
       .finally(() => {
@@ -233,19 +215,27 @@ export const AuthProvider = ({ children }) => {
       .then((response) => {
         const {
                   donorId,
+                  donorPassword,
                   donorNickname,
                   donorName,
-                  donorPhoneNumber,
                   donorEmail,
+                  donorPhoneNumber,
+                  donorAge,
+                  donorFinancialAccount,
+                  donorWalletAddress,
                 } = response.data;
 
                 // 필요한 필드로 user 상태 업데이트
                 setUser({
-                        donorId,              // donorId를 user에 저장
-                        donorNickname,
-                        donorName,
-                        donorPhoneNumber,
-                        donorEmail,
+                  donorId,
+                  donorPassword,
+                  donorNickname,
+                  donorName,
+                  donorEmail,
+                  donorPhoneNumber,
+                  donorAge,
+                  donorFinancialAccount,
+                  donorWalletAddress,
                       });
               })
       .catch((error) => {
@@ -275,11 +265,8 @@ export const AuthProvider = ({ children }) => {
     }));
 
     // 서버에 업데이트 요청
-    axios
+    authAxios
       .post("/api/donor/myinfo", updatedData)
-//       {
-//         withCredentials: true,
-//       })
       .then((response) => {
         setUser(response.data); // 서버에서 받은 최신 데이터로 상태 업데이트
       })

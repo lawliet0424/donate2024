@@ -1,11 +1,11 @@
 import "./BeneficiaryBox.css";
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import TransparentButton from "../components/TransparentButton";
 import defaultProfileImage from "../assets/defaultProfile.png";
 import filledHeart from "../assets/filledHeart.png";
 import emptyHeart from "../assets/emptyHeart.png";
 import useBeneficiary from "../hooks/useBeneficiary";
-import useInterest from "../hooks/useInterest";
+import Loading from "../pages/error_loading_pages/Loading.jsx";
 
 /*
   Function name: BeneficiaryBox
@@ -14,40 +14,25 @@ import useInterest from "../hooks/useInterest";
              string beneficiaryId; 수혜자 ID
              array selectedTags (선택); 선택된 태그 목록 (기본값: 빈 배열)
   Return: 총 1개; 수혜자 정보를 포함한 JSX 컴포넌트 반환
-  Caller: 다른 컴포넌트에서 호출 가능
-  Date: 2024.09.21
-  Write by: 길정수
 */
-const BeneficiaryBox = ({ beneficiaryId, selectedTags = [],  }) => {
+const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
   // 수혜자 데이터를 가져오는 custom hook 사용
-  const { beneficiaryKeyInfo, loading, error } =
+  const { beneficiaryInfo, loading, error, toggleInterestAboutBeneficiary } =
     useBeneficiary();
-  // 유저의 관심 태그를 관리하는 custom hook 사용
-  const { userInterests, getInterest, toggleInterest } = useInterest();
-  // 현재 수혜자가 관심 목록에 포함되어 있는지 확인
-//   const isInterested = userInterests.includes(beneficiaryId); // 관심 여부 확인
-      const isInterested = true; // 관심 여부 확인
 
-  /*
-    Function name: useEffect
-    Summary:
-    Parameter:
-    Return:
-    Caller:
-    Date:
-    Write by: 길정수
-  */
-//   useEffect(() => {
-//     const initialize = async () => {
-//       try {
-//         await getInterest(); // 관심정보 가져오기
-//       } catch (err) {
-//         console.error("Failed to fetch Interests Info:", err); // 실패 시 에러 로그
-//       }
-//     };
-//
-//     initialize(); // 초기화 함수 실행
-//   }, [location.state]);
+  // 관심 여부 상태를 관리하는 state
+  const [isInterested, setIsInterested] = useState(false); // 초기값은 false로 설정
+
+  // beneficiaryInfo에서 beneficiaryId에 해당하는 수혜자 정보를 찾아 초기 상태 설정
+  useEffect(() => {
+    const beneficiary = beneficiaryInfo.find(
+      (b) => b.beneficiaryId === parseInt(beneficiaryId)
+    );
+
+    if (beneficiary) {
+      setIsInterested(beneficiary.isInterested); // beneficiary 정보가 로드되면 isInterested 값 설정
+    }
+  }, [beneficiaryInfo, beneficiaryId]);
 
   /*
     Function name: handleToggleInterest
@@ -55,16 +40,26 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [],  }) => {
     Parameter: 없음
     Return: 없음
     Caller: BeneficiaryBox__button--interest
-    Date: 2024.09.21
-    Write by: 길정수
   */
-  const handleToggleInterest = useCallback(() => {
-    toggleInterest(beneficiaryId);
-  }, [beneficiaryId, toggleInterest]);
+  const handleToggleInterest = useCallback(async () => {
+    const previousState = isInterested; // 이전 상태 저장
+    const updatedState = !isInterested; // 토글된 상태
+
+    // UI 즉시 업데이트
+    setIsInterested(updatedState);
+
+    try {
+      // 서버에 요청 보내기
+      await toggleInterestAboutBeneficiary(beneficiaryId); // 서버 요청을 await
+    } catch (error) {
+      console.error("Failed to toggle interest:", error);
+      setIsInterested(previousState); // 오류 발생 시 상태 롤백
+    }
+  }, [beneficiaryId, isInterested, toggleInterestAboutBeneficiary]);
 
   // 수혜자 데이터 로딩 중일 때 화면에 표시되는 메시지 처리
-  if (loading && !beneficiaryKeyInfo[beneficiaryId]) {
-    return <p>Loading...</p>;
+  if (loading && !beneficiaryInfo[beneficiaryId]) {
+    return <Loading />;
   }
 
   // 에러 발생 시 화면에 표시되는 메시지 처리
@@ -73,18 +68,16 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = [],  }) => {
   }
 
   // 수혜자 정보가 없을 때 표시되는 메시지 처리
-  const beneficiary = beneficiaryKeyInfo.find(b => b.beneficiaryId === beneficiaryId);
+  const beneficiary = beneficiaryInfo.find(
+    (b) => b.beneficiaryId === parseInt(beneficiaryId)
+  );
   if (!beneficiary) {
     return <p>No beneficiary data available</p>;
   }
 
   // 수혜자 이미지가 없을 경우 기본 프로필 이미지 사용
-  const imageSrc =
-    beneficiary.beneficiaryProfileImg || defaultProfileImage;
+  const imageSrc = defaultProfileImage;
 
-  /*
-    JSX: 수혜자 정보를 화면에 표시하는 컴포넌트 구조
-  */
   return (
     <div className="BeneficiaryBox">
       {/* 수혜자 프로필 이미지 */}

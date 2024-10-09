@@ -18,7 +18,7 @@ Write by: 길정수
 const DonationStepThree = () => {
   const location = useLocation(); // 현재 위치 가져오기
   const navigate = useNavigate(); // navigate 훅 사용
-  const { beneficiaryKeyInfo, getSelectedBeneficiaries, loading, error } = useBeneficiary(); // 수혜자 관련 훅 사용
+  const { beneficiaryInfo, getSelectedBeneficiaries, loading, error } = useBeneficiary(); // 수혜자 관련 훅 사용
 
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const DonationStepThree = () => {
         numberOfPeople: location.state.numberOfPeople,
         amount: location.state.amount,
         amountPerPerson: location.state.amountPerPerson,
-        selectedBeneficiaryList: beneficiaryKeyInfo.map((b) => b.beneficiaryId), // beneficiaries에서 ID를 추출
+        selectedBeneficiaryList: beneficiaryInfo.map((b) => b.beneficiaryId), // beneficiaries에서 ID를 추출
       },
     });
   };
@@ -78,7 +78,7 @@ const DonationStepThree = () => {
     <div className="donation-step-three">
       <DonationStepsBar currentStep={3} /> {/* 현재 단계 표시 */}
       <div className="donation-step-three__beneficiaries">
-        {beneficiaryKeyInfo.map((beneficiary) => (
+        {beneficiaryInfo.map((beneficiary) => (
           <BeneficiaryBox
             key={beneficiary.beneficiaryId}
             beneficiaryId={beneficiary.beneficiaryId} // 수혜자 ID
