@@ -34,7 +34,6 @@ const MyInfo = () => {
     donorNickname: user.donorNickname,
     donorAge: user.donorAge || null,
     donorAccount: user.donorAccount || "",
-    walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
     donorWallet: user.donorWallet,
   });
 
@@ -77,7 +76,6 @@ const MyInfo = () => {
       donorNickname: user.donorNickname,
       donorAge: user.donorAge || null,
       donorAccount: user.donorAccount || "",
-      walletAddressLink: `https://www.etherscan.io/address/${user.donorWallet}`,
       donorWallet: user.donorWallet,
     });
     setSubInfo({
@@ -117,7 +115,6 @@ const MyInfo = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-//         updateUserInfo({ profileImage: reader.result });
       };
       reader.readAsDataURL(file);
     }
@@ -144,25 +141,37 @@ const MyInfo = () => {
   };
 
   // 저장 버튼 클릭 시 유효성 검사 후 업데이트
-  const handleSaveClick = (section) => {
-    if (section === "profile") {
-      const errors = validateProfileData(profileData);
-      if (!Object.values(errors).some((error) => error)) {
-        updateUserInfo(profileData);
-        setIsEditingProfile(false);
-      } else {
-        setProfileErrors(errors);
-      }
-    } else if (section === "sub") {
-      const errors = validateSubInfo(subInfo);
-      if (!Object.values(errors).some((error) => error)) {
-        updateUserInfo(subInfo);
-        setIsEditingSubInfo(false);
-      } else {
-        setSubInfoErrors(errors);
-      }
+// 저장 버튼 클릭 시 유효성 검사 후 업데이트
+const handleSaveClick = (section) => {
+  if (section === "profile") {
+    const errors = validateProfileData(profileData);
+    if (!Object.values(errors).some((error) => error)) {
+      const updatedProfileData = {
+        ...user, // 기존 사용자 정보 복사
+        ...profileData, // 바뀐 프로필 데이터만 덮어쓰기
+      };
+      updateUserInfo(updatedProfileData);
+      console.log(updatedProfileData);
+      setIsEditingProfile(false);
+    } else {
+      setProfileErrors(errors);
     }
-  };
+  } else if (section === "sub") {
+    const errors = validateSubInfo(subInfo);
+    if (!Object.values(errors).some((error) => error)) {
+      const updatedSubInfo = {
+        ...user, // 기존 사용자 정보 복사
+        ...subInfo, // 바뀐 가입 정보만 덮어쓰기
+      };
+      updateUserInfo(updatedSubInfo);
+      console.log(updatedSubInfo);
+      setIsEditingSubInfo(false);
+    } else {
+      setSubInfoErrors(errors);
+    }
+  }
+};
+
 
   // 수정 버튼 클릭 시 편집 모드로 전환
   const handleEditClick = (section) => {
@@ -337,7 +346,8 @@ const MyInfo = () => {
               <div className="my-info__line--left">지갑 주소</div>
               <div className="my-info__line--right">
                 <a
-                  href={profileData.walletAddressLink}
+//                   href={profileData.walletAddressLink}
+href={`https://www.etherscan.io/address/${user.donorWallet}`}
                   className="my-info__wallet-link"
                   target="_blank"
                   rel="noopener noreferrer"
