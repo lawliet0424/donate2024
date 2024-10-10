@@ -1,13 +1,16 @@
 package com.hikdonate.donate.domain.beneficiary.dto;
-import com.hikdonate.donate.domain.tag.domain.TagLink;
 import com.hikdonate.donate.domain.tag.dto.tagResponse.TagItem;
-import com.hikdonate.donate.domain.tag.dto.tagResponse.TagResponse;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
+/*
+ * Class name: BeneficiaryDetailResponse
+ * Summary: 수혜자 상세 페이지를 위한 정보 반환
+ * Date: 2024.10.10
+ * Write by: 심민서
+ */
 @Getter
 @Setter
 public class BeneficiaryDetailResponse {
@@ -16,8 +19,8 @@ public class BeneficiaryDetailResponse {
     private String beneficiaryName;
     private List<TagItem> beneficiaryTags;
     private String beneficiaryInfo;
-//    private String beneficiaryProfileImg;
-//    private String beneficiaryBackgroundImg;
+    private String beneficiaryProfileImg;
+    private String beneficiaryBackgroundImg;
     private boolean isInterested;
 }
 

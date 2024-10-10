@@ -90,7 +90,7 @@ export const BeneficiaryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      const response = await authAxios.get("/api/myinterest");
+      const response = await authAxios.get("/api/donor/myinterest");
       setBeneficiaryInfo(response.data);
     } catch (err) {
       console.error("Failed to load interest beneficiaries", err);
