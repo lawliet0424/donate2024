@@ -1,0 +1,50 @@
+.DonationStatusBox {
+  display: flex;
+  flex-direction: column;
+  width: 960px;
+  height: 95px;
+  padding: 15px 20px;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+}
+
+.DonationStatusBox__date {
+  color: #878787;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.DonationStatusBox__content {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+}
+
+.DonationStatusBox__img {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10%;
+}
+
+.DonationStatusBox__details {
+  flex-grow: 1;
+  padding-left: 12px;
+  padding-top: 0px;
+}
+
+.DonationStatusBox__beneficiary {
+    color: #878787;
+    font-size: 12px;
+    padding-bottom: 3px;
+}
+
+.DonationStatusBox__message {
+    font-size: 16px;
+}
+
+.DonationStatusBox .TransparentButton {
+    padding: 0;
+    color: #FEA801;
+}

@@ -1,4 +1,6 @@
 import "./MyStatus.css"; // 스타일시트 임포트
+import DonationStatusBox from "../../components/DonationStatusBox"; // 마이페이지 메뉴 박스 컴포넌트 임포트
+
 
 /*
 Function name: MyStatus
@@ -15,6 +17,7 @@ const MyStatus = () => {
       {" "}
       {/* 기부 현황 컴포넌트 래퍼 */}
       <div className="my-status__title">나의 기부 현황</div> {/* 제목 표시 */}
+      <DonationStatusBox numberOfPeople={1} totalAmount={1000} statusId={123} date={"2024.10.10"} beneficiaryList={["홍길동"]}  />
     </div>
   );
 };
