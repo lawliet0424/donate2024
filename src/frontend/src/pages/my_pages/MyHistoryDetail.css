@@ -1,11 +1,11 @@
-.my-status {
+.my-history-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px 40px;
 }
 
-.my-status__title {
+.my-history-detail__title {
   width: 100%;
   padding: 50px 0;
   font-size: 23px;

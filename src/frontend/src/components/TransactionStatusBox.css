@@ -1,0 +1,54 @@
+.TransactionStatusBox {
+  height: 10px;
+  padding : 5px 7px;
+  border-radius: 7px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+}
+
+.TransactionStatusBox__circle {
+  width : 5px;
+  height : 5px;
+  border-radius: 50%;
+  margin-right: 4px
+}
+
+.TransactionStatusBox__text {
+    margin-bottom: 2px;
+}
+
+/* Success 상태 */
+.TransactionStatusBox--Success {
+  background-color: #ECF5F3;
+    border: 1px solid #76C7B4;
+    color: #3DA48C;
+}
+
+.TransactionStatusBox--Success .TransactionStatusBox__circle {
+  background-color: #3DA48C;
+}
+
+/* Pending 상태 */
+.TransactionStatusBox--Pending {
+  background-color: #FFF3CD;
+  border: 1px solid #C8B06B;
+  color: #856404;
+}
+
+.TransactionStatusBox--Pending .TransactionStatusBox__circle {
+  background-color: #856404;
+}
+
+/* Error 상태 */
+.TransactionStatusBox--Error {
+  background-color: #FCE4E4;
+  border: 1px solid #F5A8A8;
+  color: #D9534F;
+}
+
+.TransactionStatusBox--Error .TransactionStatusBox__circle {
+  background-color: #D9534F;
+}

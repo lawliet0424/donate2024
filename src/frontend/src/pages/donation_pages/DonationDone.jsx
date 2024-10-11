@@ -19,8 +19,8 @@ const DonationDone = () => {
 
   const { numberOfPeople, amount, amountPerPerson } = location.state || {}; // 기부 정보 가져오기
 
-  const onStatusButtonClicked = () => {
-    navigate("/mystatus"); // 내역 조회 버튼 클릭 시 이동
+  const onHistoryButtonClicked = () => {
+    navigate("/myhistory"); // 내역 조회 버튼 클릭 시 이동
   };
 
   const onHomeButtonClicked = () => {
@@ -77,7 +77,7 @@ const DonationDone = () => {
         <ColoredButton
           text={"내역 조회"}
           colorScheme={"orange"}
-          onClick={onStatusButtonClicked} // 내역 조회 버튼 클릭 시 호출
+          onClick={onHistoryButtonClicked} // 내역 조회 버튼 클릭 시 호출
           className={"donation-done__button"}
         />
       </div>

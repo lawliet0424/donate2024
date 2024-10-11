@@ -207,7 +207,7 @@ const SignupStepTwo = () => {
       )}
       {!errors.nickname && (
         <div className="signup-step-two__message--default">
-          {"한글 또는 영문(대소문자)으로만 2~5자"}
+          {"한글 또는 영문(대소문자)으로 2~10자"}
         </div>
       )}
 

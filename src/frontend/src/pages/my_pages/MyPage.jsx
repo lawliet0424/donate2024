@@ -38,7 +38,7 @@ const MyPage = () => {
         {/* 마이페이지 메뉴 박스 */}
         <MyPageMenuBox menuName={"회원정보"} myPageLink={"/myinfo"} />
         <MyPageMenuBox menuName={"관심 수혜자"} myPageLink={"/myinterest"} />
-        <MyPageMenuBox menuName={"기부 현황"} myPageLink={"/mystatus"} />
+        <MyPageMenuBox menuName={"기부 현황"} myPageLink={"/myhistory"} />
       </div>
     </div>
   );

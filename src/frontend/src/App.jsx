@@ -19,7 +19,8 @@ import BeneficiaryDetailPage from "./pages/donation_pages/BeneficiaryDetailPage"
 import MyPage from "./pages/my_pages/MyPage";
 import MyInfo from "./pages/my_pages/MyInfo";
 import MyInterest from "./pages/my_pages/MyInterest";
-import MyStatus from "./pages/my_pages/MyStatus";
+import MyHistory from "./pages/my_pages/MyHistory";
+import MyHistoryDetail from "./pages/my_pages/MyHistoryDetail";
 import ErrorOccur from "./pages/error_loading_pages/ErrorOccur.jsx";
 import PageNotFound from "./pages/error_loading_pages/PageNotFound.jsx";
 import Loading from "./pages/error_loading_pages/Loading.jsx";
@@ -111,8 +112,12 @@ function App() {
                     element={<ProtectedRoute element={<MyInterest />} />}
                   />
                   <Route
-                    path="/mystatus"
-                    element={<ProtectedRoute element={<MyStatus />} />}
+                    path="/myhistory"
+                    element={<ProtectedRoute element={<MyHistory />} />}
+                  />
+                  <Route
+                    path="/myhistory/:historyId"
+                    element={<ProtectedRoute element={<MyHistoryDetail />} />}
                   />
                   <Route path="/error" element={<ErrorOccur />} />
                   <Route path="/loading" element={<Loading />} />

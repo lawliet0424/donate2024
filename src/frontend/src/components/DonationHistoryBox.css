@@ -1,4 +1,4 @@
-.DonationStatusBox {
+.DonationHistoryBox {
   display: flex;
   flex-direction: column;
   width: 960px;
@@ -9,42 +9,42 @@
   border-radius: 20px;
 }
 
-.DonationStatusBox__date {
+.DonationHistoryBox__date {
   color: #878787;
   font-size: 16px;
   padding-bottom: 10px;
 }
 
-.DonationStatusBox__content {
+.DonationHistoryBox__content {
   display: flex;
   flex-direction: row;
   align-items: top;
 }
 
-.DonationStatusBox__img {
+.DonationHistoryBox__img {
   width: 60px;
   height: 60px;
   border: 1px solid #d9d9d9;
   border-radius: 10%;
 }
 
-.DonationStatusBox__details {
+.DonationHistoryBox__details {
   flex-grow: 1;
   padding-left: 12px;
   padding-top: 0px;
 }
 
-.DonationStatusBox__beneficiary {
+.DonationHistoryBox__beneficiary {
     color: #878787;
     font-size: 12px;
     padding-bottom: 3px;
 }
 
-.DonationStatusBox__message {
+.DonationHistoryBox__message {
     font-size: 16px;
 }
 
-.DonationStatusBox .TransparentButton {
+.DonationHistoryBox .TransparentButton {
     padding: 0;
     color: #FEA801;
 }

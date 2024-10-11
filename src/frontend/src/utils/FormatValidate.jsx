@@ -107,9 +107,9 @@ Write by: 길정수
 export const validateNickname = (nickname) => {
   if (!nickname) {
     return "닉네임을 입력해주세요."; // 닉네임이 비어있을 경우 메시지 반환
-  } else if (!/^([ㄱ-ㅎ가-힣]{2,5}|[a-zA-Z]{2,5})$/.test(nickname)) {
+  } else if (!/^([ㄱ-ㅎ가-힣]{2,10}|[a-zA-Z]{2,10})$/.test(nickname)) {
     if (nickname.length < 2 || nickname.length > 5) {
-      return "닉네임은 2~5글자이어야 합니다."; // 길이 검사
+      return "닉네임은 2~10글자이어야 합니다."; // 길이 검사
     } else {
       return "닉네임은 한글로만 또는 영문(대소문자)으로만 이루어져야 합니다."; // 형식 검사
     }
