@@ -22,29 +22,28 @@ const BeneficiaryDetailPage = () => {
     useBeneficiary(); // 수혜자 상세 정보 가져오기
 
   const [isInterested, setIsInterested] = useState(false); // 관심 여부 상태
-  const [selectedBeneficiary, setSelectedBeneficiary] = useState(null); // 선택된 수혜자 상태
 
   useEffect(() => {
     const initialize = async () => {
       try {
         await getBeneficiaryDetail(beneficiaryId);
+        console.log("detail", beneficiaryInfo);
       } catch (err) {
         console.log("Failed to fetch Beneficiary Detail Info:", err);
       }
     };
     initialize();
-  }, []); // beneficiaryId가 변경될 때마다 호출
+  }, []);
 
   // 수혜자 상세 정보가 업데이트되면 관심 여부 상태 업데이트
   useEffect(() => {
     const beneficiary = beneficiaryInfo.find(
-      (beneficiary) => beneficiary.beneficiaryId === parseInt(beneficiaryId)
+      (b) => b.beneficiaryId === parseInt(beneficiaryId)
     );
-    setSelectedBeneficiary(beneficiary);
     if (beneficiary) {
       setIsInterested(beneficiary.isInterested); // 관심 여부 상태 업데이트
     }
-  }, [beneficiaryInfo, beneficiaryId]); // beneficiaryInfo가 변경될 때마다 호출
+  }, [beneficiaryInfo, beneficiaryId, isInterested]); // beneficiaryInfo가 변경될 때마다 호출
 
   // 로딩 상태 처리
   if (loading && !beneficiaryInfo.length) {
@@ -57,7 +56,10 @@ const BeneficiaryDetailPage = () => {
   }
 
   // 수혜자 상세 정보가 없는 경우 처리
-  if (!selectedBeneficiary) {
+ const beneficiary = beneficiaryInfo.find(
+      (b) => b.beneficiaryId === parseInt(beneficiaryId)
+    );
+  if (!beneficiary) {
     return <p>No beneficiary data available</p>; // 수혜자 데이터 없음 메시지
   }
 
@@ -72,6 +74,7 @@ const BeneficiaryDetailPage = () => {
     try {
       // 서버에 요청 보내기
       await toggleInterestAboutBeneficiary(beneficiaryId); // 서버 요청을 await
+      console.log("상세", beneficiaryInfo);
     } catch (error) {
       console.error("Failed to toggle interest:", error);
       setIsInterested(previousState); // 오류 발생 시 상태 롤백
@@ -94,7 +97,7 @@ const BeneficiaryDetailPage = () => {
         <div className="beneficiary-detail-page__text">
           <div className="beneficiary-detail-page__text--first">
             <div className="beneficiary-detail-page__name">
-              {selectedBeneficiary.beneficiaryName} {/* 수혜자 이름 표시 */}
+              {beneficiary.beneficiaryName} {/* 수혜자 이름 표시 */}
             </div>
             <div
               className="beneficiary-detail-page__button--interest"
@@ -108,7 +111,7 @@ const BeneficiaryDetailPage = () => {
             </div>
           </div>
           <div className="beneficiary-detail-page__tags">
-            {selectedBeneficiary.beneficiaryTags.map((tag) => (
+            {beneficiary.beneficiaryTags.map((tag) => (
               <div key={tag.id} className="tagItem">
                 #{tag.name} {/* 태그의 name 속성에 접근 */}
               </div>
@@ -117,7 +120,7 @@ const BeneficiaryDetailPage = () => {
         </div>
       </div>
       <div className="beneficiary-detail-page__content">
-        {selectedBeneficiary.beneficiaryInfo} {/* 수혜자 정보 표시 */}
+        {beneficiary.beneficiaryInfo} {/* 수혜자 정보 표시 */}
       </div>
     </div>
   );

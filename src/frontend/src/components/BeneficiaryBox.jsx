@@ -28,11 +28,10 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
     const beneficiary = beneficiaryInfo.find(
       (b) => b.beneficiaryId === parseInt(beneficiaryId)
     );
-
     if (beneficiary) {
       setIsInterested(beneficiary.isInterested); // beneficiary 정보가 로드되면 isInterested 값 설정
     }
-  }, [beneficiaryInfo, beneficiaryId]);
+  }, [beneficiaryInfo, beneficiaryId, isInterested]);
 
   /*
     Function name: handleToggleInterest
@@ -51,6 +50,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
     try {
       // 서버에 요청 보내기
       await toggleInterestAboutBeneficiary(beneficiaryId); // 서버 요청을 await
+      console.log("박스", beneficiaryInfo);
     } catch (error) {
       console.error("Failed to toggle interest:", error);
       setIsInterested(previousState); // 오류 발생 시 상태 롤백

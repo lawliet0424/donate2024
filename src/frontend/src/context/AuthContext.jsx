@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         if (token) {
           getUserInfo()
             .then(() => {setIsAuthenticated(true);
-                console.log(user);})
+            })
             .catch(() => {
               localStorage.removeItem("token");
               setIsAuthenticated(false);
@@ -168,7 +168,7 @@ const login = (loginId, loginPassword) => {
       return getUserInfo(); // getUserInfo 호출하여 사용자 상태 업데이트
     })
     .then(() => {
-      console.log("User info loaded successfully", user);
+      console.log("User info loaded successfully");
     })
     .catch((error) => {
       console.error("Failed to login:", error);

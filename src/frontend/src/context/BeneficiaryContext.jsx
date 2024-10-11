@@ -50,7 +50,6 @@ export const BeneficiaryProvider = ({ children }) => {
         },
       });
       setBeneficiaryInfo(response.data);
-
     } catch (err) {
       console.error("Failed to load selected beneficiaries", err);
       setError(err || "Failed to load selected beneficiaries"); // 오류 발생 시 처리
@@ -72,6 +71,8 @@ export const BeneficiaryProvider = ({ children }) => {
     try {
       const response = await authAxios.get(`/api/beneficiary/${beneficiaryId}`);
       setBeneficiaryInfo([response.data]);
+      console.log(response.data);
+      console.log(beneficiaryInfo);
     } catch (err) {
       console.error("Failed to load beneficiary details", err);
       setError(err.message || "Failed to load beneficiary details"); // 오류 발생 시 처리
@@ -105,6 +106,7 @@ export const BeneficiaryProvider = ({ children }) => {
     setError(null); // 오류 초기화
 
     try {
+        console.log("토글 클릭", beneficiaryId)
       const response = await authAxios.post("/api/interest/toggle", { beneficiaryId });
         setBeneficiaryInfo(prev =>
         prev.map(beneficiary =>
@@ -113,6 +115,9 @@ export const BeneficiaryProvider = ({ children }) => {
             : beneficiary
         )
       );
+              console.log("post 완료", response.data);
+              console.log("context:", beneficiaryInfo);
+
     } catch (error) {
       console.error("Failed to toggle interest", error);
       setError("Failed to toggle interest"); // 오류 발생 시 처리
