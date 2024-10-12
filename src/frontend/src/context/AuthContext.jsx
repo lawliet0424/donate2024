@@ -228,7 +228,7 @@ const login = (loginId, loginPassword) => {
                   donorAccount,
                   donorWallet,
                 } = response.data;
-            console.log("/api/donor/myinfo response.data:", response.data);
+            console.log("getUserInfo/response.data:", response.data);
                 // 필요한 필드로 user 상태 업데이트
                 setUser({
                   donorId,

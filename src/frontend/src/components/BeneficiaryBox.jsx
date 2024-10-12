@@ -15,7 +15,7 @@ import Loading from "../pages/error_loading_pages/Loading.jsx";
              array selectedTags (선택); 선택된 태그 목록 (기본값: 빈 배열)
   Return: 총 1개; 수혜자 정보를 포함한 JSX 컴포넌트 반환
 */
-const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
+const BeneficiaryBox = ({ beneficiaryId, selectedTags = [], onInterestChange }) => {
   // 수혜자 데이터를 가져오는 custom hook 사용
   const { beneficiaryInfo, loading, error, toggleInterestAboutBeneficiary } =
     useBeneficiary();
@@ -31,7 +31,7 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
     if (beneficiary) {
       setIsInterested(beneficiary.isInterested); // beneficiary 정보가 로드되면 isInterested 값 설정
     }
-  }, [beneficiaryInfo, beneficiaryId, isInterested]);
+  }, [beneficiaryInfo, beneficiaryId]);
 
   /*
     Function name: handleToggleInterest
@@ -50,7 +50,11 @@ const BeneficiaryBox = ({ beneficiaryId, selectedTags = []}) => {
     try {
       // 서버에 요청 보내기
       await toggleInterestAboutBeneficiary(beneficiaryId); // 서버 요청을 await
-      console.log("박스", beneficiaryInfo);
+
+      // 부모 컴포넌트에서 콜백이 전달된 경우에만 호출
+      if (onInterestChange) {
+        onInterestChange();
+      }
     } catch (error) {
       console.error("Failed to toggle interest:", error);
       setIsInterested(previousState); // 오류 발생 시 상태 롤백

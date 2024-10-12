@@ -33,7 +33,7 @@ const BeneficiaryDetailPage = () => {
       }
     };
     initialize();
-  }, []);
+  }, [isInterested]);
 
   // 수혜자 상세 정보가 업데이트되면 관심 여부 상태 업데이트
   useEffect(() => {
@@ -43,7 +43,7 @@ const BeneficiaryDetailPage = () => {
     if (beneficiary) {
       setIsInterested(beneficiary.isInterested); // 관심 여부 상태 업데이트
     }
-  }, [beneficiaryInfo, beneficiaryId, isInterested]); // beneficiaryInfo가 변경될 때마다 호출
+  }, [beneficiaryInfo, beneficiaryId, isInterested]);
 
   // 로딩 상태 처리
   if (loading && !beneficiaryInfo.length) {
