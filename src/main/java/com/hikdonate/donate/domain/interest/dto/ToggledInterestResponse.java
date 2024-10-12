@@ -1,5 +1,6 @@
 package com.hikdonate.donate.domain.interest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +13,7 @@ import lombok.Setter;
 @Getter
 public class ToggledInterestResponse {
     private Long beneficiaryId;
+
+    @JsonProperty("isInterested")
     private boolean isInterested;
 }

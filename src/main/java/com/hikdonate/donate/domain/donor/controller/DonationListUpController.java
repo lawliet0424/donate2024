@@ -1,7 +1,8 @@
 package com.hikdonate.donate.domain.donor.controller;
 
+import com.hikdonate.donate.domain.beneficiary.dto.BeneficiarySimpleResponse;
 import com.hikdonate.donate.domain.beneficiary.service.BeneficiaryInfoService;
-import com.hikdonate.donate.domain.tag.dto.TaggedBeneficiaryContainer;
+import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
 import com.hikdonate.donate.domain.tag.dto.tagResponse.TagInfo;
 import com.hikdonate.donate.domain.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ Written by: 심민서
 public class DonationListUpController {
     private final TagService tagService;
     private final BeneficiaryInfoService beneficiaryInfoService;
+    private final DonorDetailsService donorDetailsService;
+
 
 
     /*
@@ -43,15 +46,17 @@ public class DonationListUpController {
     Parameter: 총 1개
     Return: 총 1개
     Caller: 없음
-    Date: 2024.10.01
+    Date: 2024.10.12
     Write by: 심민서
 */
     @GetMapping("/step3")
-    public List<TaggedBeneficiaryContainer> getBeneficiariesByTags(@RequestParam List<Long> tags,
-                                                                   @RequestParam int personnel) {
+    public List<BeneficiarySimpleResponse> getBeneficiariesByTags(@RequestParam List<Long> tags,
+                                                                  @RequestParam int personnel) {
 //        System.out.println(" step3 시작 ");
 //        System.out.println(" tagIds: " + tags);
 //        System.out.println(" numberOfBeneficiaries: " + personnel);
-        return beneficiaryInfoService.selectedBeneficiariesList(tags, personnel);
+        String donor_id = donorDetailsService.getCurrentDonorId();
+
+        return beneficiaryInfoService.selectedBeneficiariesList(tags, personnel, donor_id);
     }
 }

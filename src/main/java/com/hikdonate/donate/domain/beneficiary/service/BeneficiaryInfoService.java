@@ -1,9 +1,9 @@
 package com.hikdonate.donate.domain.beneficiary.service;
 
 import com.hikdonate.donate.domain.beneficiary.domain.Beneficiary;
+import com.hikdonate.donate.domain.beneficiary.dto.BeneficiarySimpleResponse;
 import com.hikdonate.donate.domain.beneficiary.repository.BeneficiaryRepository;
 import com.hikdonate.donate.domain.tag.domain.TagLink;
-import com.hikdonate.donate.domain.tag.dto.TaggedBeneficiaryContainer;
 import com.hikdonate.donate.domain.tag.dto.tagResponse.TagItem;
 import com.hikdonate.donate.domain.tag.repository.TagLinkRepository;
 import com.hikdonate.donate.domain.transaction.repository.TransactionHistoryRepository;
@@ -25,6 +25,7 @@ public class BeneficiaryInfoService {
     private final TransactionHistoryRepository transactionHistoryRepository;
     private final BeneficiaryRepository beneficiaryRepository;
     private final TagLinkRepository tagLinkRepository;
+    private final ConvertService convertService;
 
     /*
     Function name: selectedBeneficiariesList
@@ -34,10 +35,10 @@ public class BeneficiaryInfoService {
         int numOfBeneficiaries : 선택하고자하는 N명의 수혜자
     Return: List<String>
     Caller: DonationListUpController
-    Date: 2024.09.30 (Updated by 심민서)
+    Date: 2024.10.12 (Updated by 심민서)
     Written by: 조현지
     */
-    public List<TaggedBeneficiaryContainer> selectedBeneficiariesList(List<Long> tagIds, int numOfBeneficiaries) {
+    public List<BeneficiarySimpleResponse> selectedBeneficiariesList(List<Long> tagIds, int numOfBeneficiaries, String donor_id) {
         System.out.println(" selectedBeneficiariesList 시작");
         // 현재 시각으로부터 2주 전의 시각
         String fromDate = calculateRecentTwoWeeks();
@@ -77,7 +78,7 @@ public class BeneficiaryInfoService {
         List<String> topBeneficiariesWalletAddress = sortedBeneficiariesWalletAddress.subList(0, numOfBeneficiaries);
         System.out.println("top N: " + topBeneficiariesWalletAddress);
 
-        List<TaggedBeneficiaryContainer> taggedBeneficiaries = new ArrayList<>();
+        List<BeneficiarySimpleResponse> taggedBeneficiaries = new ArrayList<>();
 
         for (String walletAddr : topBeneficiariesWalletAddress){
             Beneficiary beneficiary = beneficiaryRepository.findByBeneficiaryWallet(walletAddr);
@@ -91,8 +92,11 @@ public class BeneficiaryInfoService {
                         .map(tagLink -> new TagItem(tagLink.getTag().getTagId(), tagLink.getTag().getTagName()))
                         .collect(Collectors.toList());
 
+                boolean isInterested = convertService.convertToIsInterested(beneficiary, donor_id);
+                System.out.println("isInterested 세팅: " + isInterested);
+                System.out.println("tagIds = " + tagIds + ", numOfBeneficiaries = " + numOfBeneficiaries + ", donor_id = " + donor_id);
                 // 컨테이너에 추가
-                TaggedBeneficiaryContainer container = new TaggedBeneficiaryContainer(beneficiary, tags);
+                BeneficiarySimpleResponse container = new BeneficiarySimpleResponse(beneficiary, tags, isInterested);
                 taggedBeneficiaries.add(container);
                 System.out.println("container " + container);
             }
