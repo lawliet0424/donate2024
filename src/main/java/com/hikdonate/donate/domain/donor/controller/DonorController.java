@@ -8,6 +8,10 @@ import com.hikdonate.donate.domain.donor.dto.DonorSignUpValidationGroups;
 import com.hikdonate.donate.domain.donor.service.DonorDetailsService;
 import com.hikdonate.donate.domain.donor.service.DonorSignUpService;
 import com.hikdonate.donate.domain.interest.service.InterestedBeneficiariesService;
+//
+import com.hikdonate.donate.domain.donor.dto.DonorUpdateDto;
+import com.hikdonate.donate.domain.donor.service.DonorInfoUpdateService;
+//
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
@@ -37,6 +41,9 @@ public class DonorController {
     private final DonorSignUpService donorSignUpService;
     private final DonorDetailsService donorDetailsService;
     private final InterestedBeneficiariesService interestedBeneficiariesService;
+    //
+    private final DonorInfoUpdateService donorInfoUpdateService;
+    //
 
     // DonorSignUpForm 가져오기
     @ModelAttribute("donorSignUpForm")
@@ -116,6 +123,30 @@ public class DonorController {
 
         return ResponseEntity.ok(donor);
     }
+
+    //
+    @PutMapping("/myinfo")
+    public ResponseEntity<String> updateDonorInfo(@RequestBody DonorUpdateDto donorUpdateDto) {
+        log.info("Received update request for donor: {}", donorUpdateDto);
+        try {
+            Donor donor = donorInfoUpdateService.updateDonorInfo(
+                    donorUpdateDto.getDonorId(),
+                    donorUpdateDto.getDonorPassword(),
+                    donorUpdateDto.getDonorMail(),
+                    donorUpdateDto.getDonorName(),
+                    donorUpdateDto.getDonorNickname(),
+                    donorUpdateDto.getDonorAge(),
+                    donorUpdateDto.getDonorPhonenumber(),
+                    donorUpdateDto.getDonorAccount(),
+                    donorUpdateDto.getDonorWallet(),
+                    donorUpdateDto.getLikedBeneficiaries());
+            return ResponseEntity.ok("ok");
+        } catch (Exception e) {
+            log.error("Donor update error: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
+    //
 
 
     @GetMapping("/myinterest")
