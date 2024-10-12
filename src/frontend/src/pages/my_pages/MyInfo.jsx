@@ -59,17 +59,17 @@ const MyInfo = () => {
     donorMail: "",
   });
 
-  useEffect(() => {
-    const initialize = async () => {
-      try {
-        await getUserInfo(); // 사용자 정보 가져오기
-        console.log("user:", user);
-      } catch (err) {
-        console.error("Failed to fetch user info:", err); // 사용자 정보 가져오기 실패 시 에러 로그
-      }
-  }
-    initialize(); // 초기화 함수 실행
-  }, []);
+useEffect(() => {
+  const initialize = async () => {
+    try {
+      await getUserInfo(); // 사용자 정보 가져오기
+      console.log("user:", user);
+    } catch (err) {
+      console.error("Failed to fetch user info:", err); // 사용자 정보 가져오기 실패 시 에러 로그
+    }
+  };
+  initialize(); // 초기화 함수 실행
+}, []);
 
   useEffect(() => {
     // 사용자 정보 업데이트 시, 상태를 최신화
@@ -141,9 +141,8 @@ const MyInfo = () => {
     }
   };
 
-  // 저장 버튼 클릭 시 유효성 검사 후 업데이트
 // 저장 버튼 클릭 시 유효성 검사 후 업데이트
-const handleSaveClick = (section) => {
+const handleSaveClick = async (section) => {
   if (section === "profile") {
     const errors = validateProfileData(profileData);
     if (!Object.values(errors).some((error) => error)) {
@@ -151,9 +150,13 @@ const handleSaveClick = (section) => {
         ...user, // 기존 사용자 정보 복사
         ...profileData, // 바뀐 프로필 데이터만 덮어쓰기
       };
-      updateUserInfo(updatedProfileData);
-      console.log(updatedProfileData);
-      setIsEditingProfile(false);
+      try {
+        await updateUserInfo(updatedProfileData); // async/await 사용
+        await getUserInfo(); // 사용자 정보를 다시 가져와서 상태를 업데이트
+        setIsEditingProfile(false);
+      } catch (err) {
+        console.error("Failed to update user info:", err);
+      }
     } else {
       setProfileErrors(errors);
     }
@@ -164,14 +167,18 @@ const handleSaveClick = (section) => {
         ...user, // 기존 사용자 정보 복사
         ...subInfo, // 바뀐 가입 정보만 덮어쓰기
       };
-      updateUserInfo(updatedSubInfo);
-      console.log(updatedSubInfo);
-      setIsEditingSubInfo(false);
+      try {
+        await updateUserInfo(updatedSubInfo); // async/await 사용
+        setIsEditingSubInfo(false);
+      } catch (err) {
+        console.error("Failed to update user info:", err);
+      }
     } else {
       setSubInfoErrors(errors);
     }
   }
 };
+
 
 
   // 수정 버튼 클릭 시 편집 모드로 전환
@@ -428,7 +435,7 @@ href={`https://www.etherscan.io/address/${user.donorWallet}`}
                     <input
                       type="text"
                       name="donorPhonenumber"
-                      value={subInfo.donorPhonenumber}
+                      value={formatPhoneNumber(subInfo.donorPhonenumber)}
                       onChange={(e) => handleInputChange(e, "sub")}
                       className={
                         subInfoErrors.donorPhonenumber

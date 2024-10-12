@@ -87,6 +87,12 @@
 }
 
 .my-info__input--invalid {
+  width: 250px;
+  height: 30px;
+  padding: 3px 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
   border: 1px solid red;
 }
 

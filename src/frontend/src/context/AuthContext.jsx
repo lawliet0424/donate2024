@@ -273,7 +273,7 @@ const login = (loginId, loginPassword) => {
       .put("/api/donor/myinfo", updatedData)
       .then((response) => {
           console.log("Update successful, response data:", response.data);
-        setUser(response.data); // 서버에서 받은 최신 데이터로 상태 업데이트
+          getUserInfo();
       })
       .catch((error) => {
         console.error("Failed to update user info:", error);
