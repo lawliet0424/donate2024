@@ -218,8 +218,7 @@ const login = (loginId, loginPassword) => {
     return authAxios
       .get("/api/donor/myinfo")
       .then((response) => {
-        const {
-                  donorId,
+        const {   donorId,
                   donorPassword,
                   donorNickname,
                   donorName,
@@ -229,7 +228,7 @@ const login = (loginId, loginPassword) => {
                   donorAccount,
                   donorWallet,
                 } = response.data;
-
+            console.log("/api/donor/myinfo response.data:", response.data);
                 // 필요한 필드로 user 상태 업데이트
                 setUser({
                   donorId,

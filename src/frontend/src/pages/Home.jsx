@@ -1,11 +1,12 @@
 import "./Home.css";
 import React from "react";
-import homeIntroImage from "../assets/homeIntroImage.png";
+import HomeSwiper from "../components/HomeSwiper"; // 마이페이지 메뉴 박스 컴포넌트 임포트
+
 
 const Home = () => {
   return (
     <div className="home">
-      <img className="home__img" src={homeIntroImage} />
+      <HomeSwiper />
     </div>
   );
 };
