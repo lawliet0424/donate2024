@@ -14,7 +14,7 @@ import Loading from "../pages/error_loading_pages/Loading.jsx";
   Parameter:
   Return:
 */
-const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, walletFrom, walletTo, date }) => {
+const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, walletFrom, walletTo, date, txLink }) => {
 
 
 
@@ -33,15 +33,12 @@ const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, wall
            <div className="DonationTransactionBox__date">
                {`${date}`}
            </div>
-                       <TransparentButton
-                           text="블록체인에서 기부 내역 확인하기 >"
-                           onClick={() => {}}
-                         />
+           <TransparentButton
+             text="블록체인에서 기부 내역 확인하기 >"
+             onClick={() => window.open(`${txLink}`, "_blank")}
+           />
         </div>
-{/*             <TransparentButton */}
-{/*                 text="블록체인에서 기부 내역 확인하기 >" */}
-{/*                 onClick={() => {}} */}
-{/*               /> */}
+
     </div>
   );
 };
