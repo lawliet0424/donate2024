@@ -32,7 +32,7 @@ import Footer from "./layouts/Footer.jsx";
 // 컨텍스트 컴포넌트 임포트
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { BeneficiaryProvider } from "./context/BeneficiaryContext.jsx";
-import { InterestProvider } from "./context/InterestContext";
+import { HistoryProvider } from "./context/HistoryContext";
 import { TagProvider } from "./context/TagContext.jsx";
 import { PaymentProvider } from "./context/PaymentContext.jsx";
 
@@ -44,9 +44,10 @@ function App() {
   return (
     <AuthProvider>
       <BeneficiaryProvider>
-        <InterestProvider>
+
           <TagProvider>
             <PaymentProvider>
+                <HistoryProvider>
               <Header />
               <div className="content">
                 <Routes>
@@ -126,9 +127,10 @@ function App() {
                 </Routes>
               </div>
               <Footer />
+              </HistoryProvider>
             </PaymentProvider>
           </TagProvider>
-        </InterestProvider>
+
       </BeneficiaryProvider>
     </AuthProvider>
   );

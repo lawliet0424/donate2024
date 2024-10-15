@@ -354,8 +354,7 @@ const handleSaveClick = async (section) => {
               <div className="my-info__line--left">지갑 주소</div>
               <div className="my-info__line--right">
                 <a
-//                   href={profileData.walletAddressLink}
-href={`https://www.etherscan.io/address/${user.donorWallet}`}
+                  href={`https://testnet.bscscan.com/address/${user.donorWallet}#tokentxns`}
                   className="my-info__wallet-link"
                   target="_blank"
                   rel="noopener noreferrer"
