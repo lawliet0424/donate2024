@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 40px;
+  padding: 50px 40px;
 }
 
 .my-history-detail__title {
@@ -11,4 +11,9 @@
   font-size: 23px;
   font-weight: 600;
   text-align: left;
+}
+
+.my-history-detail__historyId {
+  font-size: 22px;
+    font-weight: 500;
 }

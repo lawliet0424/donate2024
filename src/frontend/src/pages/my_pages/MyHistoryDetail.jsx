@@ -30,7 +30,7 @@ const MyHistoryDetail = () => {
 
     return (
         <div className="my-history-detail">
-            <div className="my-history-detail__title">나의 기부 내역 > No.{historyId}</div> {/* 제목 표시 */}
+            <div className="my-history-detail__title">나의 기부 내역 <span className="my-history-detail__historyId"> {'>'} No.{historyId}</span></div> {/* 제목 표시 */}
 {/*             <div className="my-history-detail__DonationTransactionBox"> */}
 {/*                 {historyInfo.map((history) => ( */}
 {/*                     <DonationTransactionBox */}

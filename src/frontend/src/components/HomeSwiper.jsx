@@ -1,7 +1,10 @@
 import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import homeIntroImage from "../assets/homeIntroImage.png";
+import SwiperSlide1 from "../assets/SwiperSlide1.png";
+import SwiperSlide2 from "../assets/SwiperSlide2.png";
+import SwiperSlide3 from "../assets/SwiperSlide3.png";
+
 
 
 // Import Swiper styles
@@ -32,11 +35,9 @@ const HomeSwiper = () => {
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide><img className="home__img" src={homeIntroImage} /></SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide><img src={SwiperSlide1} /></SwiperSlide>
+        <SwiperSlide><img src={SwiperSlide2} /></SwiperSlide>
+        <SwiperSlide><img src={SwiperSlide3} /></SwiperSlide>
       </Swiper>
     </div>
   );
