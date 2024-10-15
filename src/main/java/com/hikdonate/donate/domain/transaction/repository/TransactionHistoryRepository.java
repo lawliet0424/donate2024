@@ -20,6 +20,10 @@ public interface TransactionHistoryRepository extends MongoRepository<Transactio
     Caller: BeneficiaryInfoService
     Date: 2024.10.1
     Written by: 조현지
+    
+    Edit by: 양예현
+    Edit date: 2024.10.13
+    Summary: 중복 함수 제거
     */
     @Aggregation(pipeline = {
             // 태그 해당자의 donation history 가져오기 (최근 2주간)
@@ -38,5 +42,5 @@ public interface TransactionHistoryRepository extends MongoRepository<Transactio
     @Query("{'donor_wallet': ?0}")
     List<Transaction> findAllDonorDonationHistory(String donorWalletAddress);
 
-    Transaction save(Transaction transaction);
+//    Transaction save(Transaction transaction);
 }

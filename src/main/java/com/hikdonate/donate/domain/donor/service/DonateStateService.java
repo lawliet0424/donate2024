@@ -1,8 +1,13 @@
 package com.hikdonate.donate.domain.donor.service;
 
 import com.hikdonate.donate.domain.donor.repository.DonateState;
+import com.hikdonate.donate.domain.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import org.bson.Document;
+import org.bson.json.JsonObject;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +24,13 @@ public class DonateStateService {
     private final ConcurrentHashMap<UUID, DonateState> donateStateMap = new ConcurrentHashMap<>();
     private final DonationWeb3Service donationWeb3Service;
     private final DonationBillService donationBillService;
+    private final TransactionService transactionService;
 
+    /*
+    Edit by: 양예현
+    Edit date: 2024.10.13
+    Summary: MongoDB에 트랜잭션 저장하는 기능 추가
+     */
     // 금융거래와 블록체인 트랜잭션의 순차 실행 및 상태 저장 함수
     public boolean executeDonationTransaction(String donorId, String[] beneficiaryId, Long divided_amount) throws Exception {
         // donation ID 생성
@@ -40,10 +51,23 @@ public class DonateStateService {
         result = donationBillService.processPayment();
         updateState(donationId, result, CONVEYED_TO_BENEFICIARY_SUCCESS, CONVEYED_TO_BENEFICIARY_FAILED);
 
+        /*
+        Edit by: 양예현
+        Edit date: 2024.10.13
+        Summary: bscScan
+         */
         // 스마트 컨트랙트 2&3단계 실행
         System.out.println("SMART CONTRACT STEP 2&3");
-        result = donationWeb3Service.sendTokensToBeneficiaryAndDonateBank(donorId, beneficiaryId, divided_amount);
+        TransactionReceipt transactionReceipt = donationWeb3Service.sendTokensToBeneficiaryAndDonateBank(donorId, beneficiaryId, divided_amount);
+//        result = donationWeb3Service.sendTokensToBeneficiaryAndDonateBank(donorId, beneficiaryId, divided_amount);
         updateState(donationId, result, TOKEN_RECLAIMED_BY_DONATEBANK_SUCCESS, TOKEN_RECLAIMED_BY_DONATEBANK_FAILED);
+
+        // BscScan API 호출을 통해 트랜잭션 정보 가져오기
+        JSONObject bscScanResponse = donationWeb3Service.getTransactionFromBscScan(donorId, beneficiaryId.length);
+        System.out.println(beneficiaryId.length + "명의 수혜자");
+        System.out.println(bscScanResponse);
+
+        transactionService.saveTransaction(String.valueOf(bscScanResponse));
 
         return true;
     }

@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /*
  * Class name: Transaction
@@ -16,20 +20,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *       MongoDB
  */
 @Data
-@Document(collection = "Transaction")
+@Document(collection = "transaction")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Slf4j
 public class Transaction {
     @Id
-    private String blockNumber;
-
-    private String timestamp;
-
-    private String donor_wallet;
-
-    private String beneficiary_wallet;
-
+    private String id;
+    private Long timeStamp;
+    private String donorWallet;
+    private String beneficiariesWallet;
     private int amount;
+    private String transactionHash;
+//    private String status;
 
 }
