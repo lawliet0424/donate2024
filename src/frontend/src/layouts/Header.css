@@ -36,8 +36,8 @@
 }
 
 .header__main--left img {
-  height: 80px;
-  cursor: pointer;
+  height: 85px;
+  cursor: pointer;S
 }
 
 .header__main--right {
@@ -50,7 +50,7 @@
 .header__donationButton {
   font-size: 17px;
   font-weight: 500;
-  height: 46px;
-  width: 110px;
+  height: 50px;
+  width: 120px;
   border-radius: 10px;
 }
