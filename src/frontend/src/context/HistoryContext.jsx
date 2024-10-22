@@ -34,7 +34,7 @@ export const HistoryProvider = ({ children }) => {
       setLoading(true); // 로딩 시작
       setError(null); // 오류 초기화
       try {
-        const response = await authAxios.get("/api/myhistory");
+        const response = await authAxios.get("/api/donor/myhistory");
         setHistoryInfo(response.data);
       } catch (err) {
         console.error("Failed to load donation history", err);
@@ -54,7 +54,7 @@ export const HistoryProvider = ({ children }) => {
     setLoading(true); // 로딩 시작
     setError(null); // 오류 초기화
     try {
-      const response = await authAxios.get(`/api/myhistory/${historyId}`);
+      const response = await authAxios.get(`/api/donor/myhistory/${historyId}`);
       setHistoryInfo([response.data]);
       console.log(response.data);
     } catch (err) {

@@ -122,11 +122,10 @@ public class BeneficiaryInfoService {
         // LocalDateTime을 Date 형식으로 변환
         Date fromDate = Date.from(twoWeeksAgo.atZone(ZoneId.systemDefault()).toInstant());
 
-        // Date를 ISO 8601 형식으로 변환
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        String fromDateString = twoWeeksAgo.atZone(ZoneId.systemDefault()).format(formatter);
-        System.out.println("Time limit: " + fromDateString);
-        return fromDateString;
+        // Date를 Unix 타임스탬프 형식으로 변환
+        long fromDateTimestamp = twoWeeksAgo.atZone(ZoneId.systemDefault()).toEpochSecond();
+        System.out.println("Time limit: " + fromDateTimestamp);
+        return String.valueOf(fromDateTimestamp);
     }
 
 

@@ -12,19 +12,19 @@ import com.hikdonate.donate.domain.interest.service.InterestedBeneficiariesServi
 import com.hikdonate.donate.domain.donor.dto.DonorUpdateDto;
 import com.hikdonate.donate.domain.donor.service.DonorInfoUpdateService;
 //
+import com.hikdonate.donate.domain.transaction.dto.DonationDetail;
+import com.hikdonate.donate.domain.transaction.dto.DonationSummary;
+import com.hikdonate.donate.domain.transaction.service.DonationDetailService;
+import com.hikdonate.donate.domain.transaction.service.DonationSummaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,9 +41,9 @@ public class DonorController {
     private final DonorSignUpService donorSignUpService;
     private final DonorDetailsService donorDetailsService;
     private final InterestedBeneficiariesService interestedBeneficiariesService;
-    //
     private final DonorInfoUpdateService donorInfoUpdateService;
-    //
+    private final DonationSummaryService donationSummaryService;
+    private final DonationDetailService donationDetailService;
 
     // DonorSignUpForm 가져오기
     @ModelAttribute("donorSignUpForm")
@@ -152,6 +152,27 @@ public class DonorController {
     @GetMapping("/myinterest")
     public List<BeneficiarySimpleResponse> donor_interests(){
         return interestedBeneficiariesService.getInterestedBeneficiaries();
+    }
+
+    /*
+    Function name: donorDonationSummaryHistory
+    Summary: 현재 로그인한 기부자의 전체 트랜잭션 id에 대한 요약 정보 가져오기
+    Parameter: None
+    Return: List<DonationSummary>
+    Date: 2024.10.22
+    Written by: 조현지
+    */
+    @GetMapping("/myhistory")
+    public List<DonationSummary> donorDonationSummaryHistory() {
+        //Donor donor = donorDetailsService.getDonorInfo();
+        //String donorWalletAddr = donor.getDonorWallet();
+        String donorWalletAddr = "0x6119f6f80e1460d8ebdf921f82c1ee782d3bd261";
+        return donationSummaryService.summaryDonorDonationHistory(donorWalletAddr);
+    }
+
+    @GetMapping("/myhistory/{historyId}")
+    public List<DonationDetail> donorDonationDetailHistory(@PathVariable String historyId) {
+        return donationDetailService.allTransactionDetailHistory(historyId);
     }
 
 }
