@@ -7,19 +7,21 @@ const useHistory = () => {
   // HistoryContext에서 가져오기
   const {
       historyInfo,
+       historyDetailInfo,
       getHistory,
     getHistoryDetail,
     loading, // 로딩 상태
-    error, // 에러 상태
+    error // 에러 상태
   } = useContext(HistoryContext); // HistoryContext 사용
 
   // 필요한 값들을 반환
   return {
       historyInfo,
+       historyDetailInfo,
     getHistory,
     getHistoryDetail,
     loading,
-    error,
+    error
   };
 };
 

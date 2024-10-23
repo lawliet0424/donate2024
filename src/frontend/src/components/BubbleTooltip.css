@@ -1,0 +1,38 @@
+.BubbleTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.BubbleTooltip__bubble {
+  position: absolute;
+  bottom: 120%; /* 툴팁을 요소 위로 띄움 */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #19293D;
+  color: #fff;
+  padding: 4px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 1000;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  border: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.BubbleTooltip:hover .BubbleTooltip__bubble {
+  opacity: 1;
+  visibility: visible;
+}
+
+.BubbleTooltip__bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 말풍선 아래에 삼각형을 추가 */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #19293D transparent transparent transparent;
+}

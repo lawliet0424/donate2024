@@ -38,7 +38,7 @@ const MyHistory = () => {
                          totalAmount={history.totalAmount}
                          historyId={history.historyId}
                          date={history.date}
-                         beneficiaryList={history.beneficiaryInfo}
+                         beneficiaryList={history.beneficiaryList}
                      />
                  ))}
              </div>

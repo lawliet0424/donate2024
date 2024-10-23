@@ -6,14 +6,32 @@
 }
 
 .my-history-detail__title {
-  width: 100%;
-  padding: 50px 0;
-  font-size: 23px;
-  font-weight: 600;
-  text-align: left;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    font-size: 23px;
 }
 
-.my-history-detail__historyId {
-  font-size: 22px;
-    font-weight: 500;
+.my-history-detail__title--main {
+  font-weight: 600;
+  text-align: left;
+  color: black;
+  text-decoration: underline solid black;
+}
+.my-history-detail__title--sign{
+    color: #878787;
+    margin-top: auto;
+}
+.my-history-detail__title--historyId {
+    color: #878787;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.my-history-detail__DonationTransactionBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
 }

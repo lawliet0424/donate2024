@@ -14,7 +14,7 @@
   color: #878787;
   font-size: 13px;
   margin-top: auto;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .DonationTransactionBox__firstLine,
@@ -26,13 +26,18 @@
 
 .DonationTransactionBox__wallet {
     color: #3A83BE;
+    cursor: pointer;
+     padding: 5pt;
 }
 
-.DonationTransactionBox__beneficiary {
-    color: #878787;
-    font-size: 12px;
-    padding-bottom: 3px;
+.DonationTransactionBox__wallet:hover {
+    border: dotted #F6C344 1pt;
+    border-radius: 7px;
+    background: #FEF6E3;
+    padding: 2pt;
+    margin: 2pt;
 }
+
 
 .DonationTransactionBox__message {
     font-size: 16px;

@@ -1,22 +1,14 @@
-import "./DonationTransactionBox.css";
-import React, { useEffect, useCallback, useState } from "react";
+import React from "react";
 import TransactionStatusBox from "../components/TransactionStatusBox";
 import TransparentButton from "../components/TransparentButton";
-import defaultProfileImage from "../assets/defaultProfile.png";
-import filledHeart from "../assets/filledHeart.png";
-import emptyHeart from "../assets/emptyHeart.png";
-import useBeneficiary from "../hooks/useBeneficiary";
-import Loading from "../pages/error_loading_pages/Loading.jsx";
+import BubbleTooltip from "../components/BubbleTooltip"; // 툴팁 컴포넌트 임포트
+import "./DonationTransactionBox.css";
 
-/*
-  Function name: DonationTransactionBox
-  Summary:
-  Parameter:
-  Return:
-*/
 const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, walletFrom, walletTo, date, txLink }) => {
 
-
+  const shortenWallet = (wallet) => {
+    return `${wallet.substring(0, 10)}...${wallet.substring(wallet.length - 10)}`;
+  };
 
   return (
     <div className="DonationTransactionBox">
@@ -28,7 +20,15 @@ const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, wall
         </div>
         <div className="DonationTransactionBox__secondLine">
            <div className="DonationTransactionBox__transaction">
-                From <span className="DonationTransactionBox__wallet">{walletFrom}</span> To <span className="DonationTransactionBox__wallet">{walletTo}</span> : For {amountPerPerson.toLocaleString()}
+                {"From"}
+                <BubbleTooltip content={walletFrom}>
+                  <span className="DonationTransactionBox__wallet">{shortenWallet(walletFrom)}</span>
+                </BubbleTooltip>
+                {"To"}
+                <BubbleTooltip content={walletTo}>
+                  <span className="DonationTransactionBox__wallet">{shortenWallet(walletTo)}</span>
+                </BubbleTooltip>
+                {": For "}{amountPerPerson.toLocaleString()}
            </div>
            <div className="DonationTransactionBox__date">
                {`${date}`}
@@ -38,7 +38,6 @@ const DonationTransactionBox = ({ beneficiaryName, amountPerPerson, status, wall
              onClick={() => window.open(`${txLink}`, "_blank")}
            />
         </div>
-
     </div>
   );
 };

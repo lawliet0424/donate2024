@@ -20,7 +20,9 @@ export const HistoryContext = createContext();
   Return: 총 1개; 관심 수혜자 상태를 제공하는 JSX Provider 컴포넌트
 */
 export const HistoryProvider = ({ children }) => {
-    const [historyInfo, setHistoryInfo] = useState([]); // 수혜자 정보 통합 상태
+    const [historyInfo, setHistoryInfo] = useState([]);
+        const [historyDetailInfo, setHistoryDetailInfo] = useState([]);
+
     const [loading, setLoading] = useState(false); // 로딩 상태
     const [error, setError] = useState(null); // 오류 상태
 
@@ -55,8 +57,7 @@ export const HistoryProvider = ({ children }) => {
     setError(null); // 오류 초기화
     try {
       const response = await authAxios.get(`/api/donor/myhistory/${historyId}`);
-      setHistoryInfo([response.data]);
-      console.log(response.data);
+      setHistoryDetailInfo(response.data);
     } catch (err) {
       console.error("Failed to load donation history detail", err);
       setError(err.message || "Failed to load donation history detail"); // 오류 발생 시 처리
@@ -69,10 +70,11 @@ export const HistoryProvider = ({ children }) => {
     <HistoryContext.Provider
       value={{
           historyInfo,
+          historyDetailInfo,
           getHistory,
           getHistoryDetail,
         loading, // 로딩 상태
-        error, // 오류 상태
+        error // 오류 상태
       }}
     >
       {children} {/* 자식 컴포넌트를 렌더링 */}
