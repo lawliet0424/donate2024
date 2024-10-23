@@ -24,7 +24,6 @@ const Login = () => {
   const onClickLoginButton = async () => {
     try {
       await login(loginId, loginPassword); // 로그인 시도
-      navigate("/"); // 로그인 성공 시 홈으로 이동
     } catch (error) {
       console.error("Login failed", error); // 콘솔에 오류 로그
     }

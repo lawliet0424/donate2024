@@ -168,7 +168,6 @@ const login = (loginId, loginPassword) => {
       return getUserInfo(); // getUserInfo 호출하여 사용자 상태 업데이트
     })
     .then(() => {
-      console.log("User info loaded successfully");
     })
     .catch((error) => {
       console.error("Failed to login:", error);
@@ -228,7 +227,6 @@ const login = (loginId, loginPassword) => {
                   donorAccount,
                   donorWallet,
                 } = response.data;
-            console.log("getUserInfo/response.data:", response.data);
                 // 필요한 필드로 user 상태 업데이트
                 setUser({
                   donorId,
@@ -272,7 +270,6 @@ const login = (loginId, loginPassword) => {
     authAxios
       .put("/api/donor/myinfo", updatedData)
       .then((response) => {
-          console.log("Update successful, response data:", response.data);
           getUserInfo();
       })
       .catch((error) => {

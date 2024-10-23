@@ -30,15 +30,14 @@ const DonationStepOne = () => {
       }
       try {
         await getTags(); // 태그 가져오기
-        const updatedCategories = getTagCategories(); // 카테고리 업데이트
+        const updatedCategories = await getTagCategories(); // 카테고리 업데이트
         setCategories(updatedCategories); // 카테고리 상태 업데이트
       } catch (err) {
         console.error("Failed to fetch tags:", err); // 태그 가져오기 실패 시 에러 로그
       }
     };
-
     initialize(); // 초기화 함수 실행
-  }, [location.state]);
+  }, []);
 
   const handleTagClick = (tagId) => {
     setSelectedTags((prevSelectedTags) => {

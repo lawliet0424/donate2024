@@ -20,7 +20,7 @@ const PublicRoute = ({ element, restricted }) => {
   useEffect(() => {
     // 인증 상태에 따라 라우팅 처리
     if (isAuthenticated && restricted) {
-      navigate("/", { replace: true }); // 인증된 경우 홈으로 리다이렉트
+     navigate("/", { replace: true }); // 인증된 경우 홈으로 리다이렉트
     }
   }, [isAuthenticated, restricted, navigate]); // 의존성 배열
 

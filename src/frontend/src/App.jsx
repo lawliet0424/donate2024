@@ -67,9 +67,24 @@ function App() {
                       />
                     }
                   />
-                  <Route path="/signup/step2" element={<SignupStepTwo />} />
-                  <Route path="/signup/done" element={<SignupDone />} />
-
+                  <Route
+                    path="/signup/step2"
+                    element={
+                      <PublicRoute
+                        restricted={true}
+                        element={<SignupStepTwo />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/signup/done"
+                    element={
+                      <PublicRoute
+                        restricted={true}
+                        element={<SignupDone />}
+                      />
+                    }
+                  />
                   <Route
                     path="/donation/step1"
                     element={<ProtectedRoute element={<DonationStepOne />} />}

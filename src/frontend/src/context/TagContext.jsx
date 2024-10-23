@@ -30,10 +30,10 @@ export const TagProvider = ({ children }) => {
     }
   };
 
-  // 컴포넌트가 마운트될 때 태그 데이터를 가져옴
-  useEffect(() => {
-    getTags();
-  }, []);
+//   // 컴포넌트가 마운트될 때 태그 데이터를 가져옴
+//   useEffect(() => {
+//     getTags();
+//   }, []);
 
   /*
     Function name: getTagCategories
