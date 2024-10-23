@@ -8,16 +8,16 @@ import Loading from "../error_loading_pages/Loading.jsx";
 const MyHistory = () => {
     const { historyInfo, getHistory, loading, error } = useHistory();
 
-//     useEffect(() => {
-//         const fetchHistory = async () => {
-//             try {
-//                 await getHistory();
-//             } catch (err) {
-//                 console.log(err);
-//             }
-//         };
-//         fetchHistory();
-//     }, []);
+     useEffect(() => {
+         const fetchHistory = async () => {
+             try {
+                 await getHistory();
+             } catch (err) {
+                 console.log(err);
+             }
+         };
+         fetchHistory();
+     }, []);
 
     if (loading) {
         return <Loading />; // 로딩 중 표시
@@ -30,27 +30,20 @@ const MyHistory = () => {
     return (
         <div className="my-history">
             <div className="my-history__title">나의 기부 내역</div>
-{/*             <div className="my-history__DonationHistoryBox"> */}
-{/*                 {historyInfo.map((history) => ( */}
-{/*                     <DonationHistoryBox */}
-{/*                         key={history.historyId} */}
-{/*                         numberOfPeople={history.numberOfPeople} */}
-{/*                         totalAmount={history.totalAmount} */}
-{/*                         historyId={history.historyId} */}
-{/*                         date={history.date} */}
-{/*                         beneficiaryList={history.beneficiaryInfo} */}
-{/*                     /> */}
-{/*                 ))} */}
-{/*             </div> */}
-            <DonationHistoryBox
-                numberOfPeople={1}
-                totalAmount={1000}
-                historyId={1}
-                date={"2024.10.10"}
-                beneficiaryList={["홍길동"]}
-            />
+             <div className="my-history__DonationHistoryBox">
+                 {historyInfo.map((history) => (
+                     <DonationHistoryBox
+                         key={history.historyId}
+                         numberOfPeople={history.numberOfPeople}
+                         totalAmount={history.totalAmount}
+                         historyId={history.historyId}
+                         date={history.date}
+                         beneficiaryList={history.beneficiaryInfo}
+                     />
+                 ))}
+             </div>
         </div>
     );
 };
 
-export default MyHistory; // MyHistory 컴포넌트 내보내기
+export default MyHistory;

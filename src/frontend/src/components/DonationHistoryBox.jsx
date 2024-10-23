@@ -18,7 +18,7 @@ const DonationHistoryBox = ({ numberOfPeople, totalAmount, historyId, date, bene
       const navigate = useNavigate();
 
       const handleHistoryDetailButtonClick = () => {
-        navigate(`/myhistory/${historyId}`);
+        navigate(`/donor/myhistory/${historyId}`);
       };
 
   // 수혜자 이미지가 없을 경우 기본 프로필 이미지 사용

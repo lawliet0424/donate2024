@@ -164,9 +164,8 @@ public class DonorController {
     */
     @GetMapping("/myhistory")
     public List<DonationSummary> donorDonationSummaryHistory() {
-        //Donor donor = donorDetailsService.getDonorInfo();
-        //String donorWalletAddr = donor.getDonorWallet();
-        String donorWalletAddr = "0x6119f6f80e1460d8ebdf921f82c1ee782d3bd261";
+        Donor donor = donorDetailsService.getDonorInfo();
+        String donorWalletAddr = donor.getDonorWallet();
         return donationSummaryService.summaryDonorDonationHistory(donorWalletAddr);
     }
 
